@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>Starter page | Upcube - Admin & Dashboard Template</title>
+    <title>@yield('page-title')</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
     <meta content="Themesdesign" name="author" />
@@ -16,6 +16,7 @@
     <link href="{{ asset('backend/assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
     <!-- App Css-->
     <link href="{{ asset('backend/assets/css/app.min.css') }}" id="app-style" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('backend/assets/libs/toastr/build/toastr.min.css') }}">
     @yield('css-link')
     @yield('custom-css')
 </head>
@@ -84,6 +85,23 @@
     <script src="{{ asset('backend/assets/libs/simplebar/simplebar.min.js') }}"></script>
     <script src="{{ asset('backend/assets/libs/node-waves/waves.min.js') }}"></script>
     <script src="{{ asset('backend/assets/js/app.js') }}"></script>
+    <!-- toastr plugin -->
+    <script src="{{ asset('backend/assets/libs/toastr/build/toastr.min.js') }}"></script>
+    <!-- toastr init -->
+    <script src="{{ asset('backend/assets/js/pages/toastr.init.js') }}"></script>
+    <script>
+        // Display toast messages from session with nullable titles
+        @if (Session::has('toast'))
+            @php
+                $toast = Session::get('toast');
+            @endphp
+            @if (!empty($toast['title']))
+                toastr.{{ $toast['type'] }}('{{ $toast['message'] }}', '{{ $toast['title'] }}');
+            @else
+                toastr.{{ $toast['type'] }}('{{ $toast['message'] }}');
+            @endif
+        @endif
+    </script>
     @yield('js-link')
     @yield('custom-js')
 </body>
