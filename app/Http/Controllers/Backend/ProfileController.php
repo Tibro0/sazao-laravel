@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
 {
@@ -44,6 +45,26 @@ class ProfileController extends Controller
             'type' => 'success',
             'title' => 'Success',
             'message' => 'Updated Successfully!'
+        ]);
+    }
+
+    public function updatePassword(Request $request)
+    {
+        $request->validate([
+            'current_password' => ['required', 'current_password'],
+            'password' => ['required', 'confirmed', 'min:8']
+        ], [
+            'current_password.current_password' => 'Current Password is invalid!',
+        ]);
+
+        $user = Auth::user();
+        $user->password = Hash::make($request->password);
+        $user->save();
+
+        return redirect()->back()->with('toast', [
+            'type' => 'success',
+            'title' => 'Success',
+            'message' => 'Password Updated Successfully!'
         ]);
     }
 }

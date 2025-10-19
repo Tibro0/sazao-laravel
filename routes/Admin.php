@@ -13,4 +13,5 @@ Route::controller(AdminController::class)->group(function () {
 Route::controller(ProfileController::class)->group(function () {
     Route::get('profile', 'index')->name('profile');
     Route::post('profile/update', 'updateProfile')->name('profile.update');
+    Route::post('profile/update/password', 'updatePassword')->name('password.update');
 });
