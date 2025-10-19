@@ -21,11 +21,19 @@
         {{-- breadcrumb End --}}
         <div class="col-md-12">
             <div class="card">
-                <form action="{{ route('admin.profile.update') }}" method="POST">
+                <form action="{{ route('admin.profile.update') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="card-body shadow">
                         <div class="mb-3">
-                            <label class="form-label">Name <span class="text-danger">*</span></label>
+                            <label>Preview</label><br>
+                            <img src="{{ asset(auth()->user()->image) }}" width="100">
+                        </div>
+                        <div class="mb-3">
+                            <label>Image <span class="text-danger">(2Mb File)</span></label>
+                            <input type="file" name="image" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label>Name <span class="text-danger">*</span></label>
                             <input type="text" name="name" value="{{ auth()->user()->name ?? old('name') }}"
                                 class="form-control @error('name') is-invalid @enderror" placeholder="Enter Your Name">
                             @error('name')
@@ -33,7 +41,7 @@
                             @enderror
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">Email <span class="text-danger">*</span></label>
+                            <label>Email <span class="text-danger">*</span></label>
                             <input type="email" name="email" value="{{ auth()->user()->email ?? old('email') }}"
                                 class="form-control @error('email') is-invalid @enderror" placeholder="Enter Your Email">
                             @error('email')

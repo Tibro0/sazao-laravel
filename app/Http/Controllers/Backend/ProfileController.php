@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 
 class ProfileController extends Controller
 {
@@ -16,11 +17,25 @@ class ProfileController extends Controller
     public function updateProfile(Request $request)
     {
         $request->validate([
+            'image' => ['nullable', 'image', 'max:2048'],
             'name' => ['required', 'max:255'],
             'email' => ['required', 'email', 'max:255', 'unique:users,email,' . Auth::user()->id],
         ]);
 
         $user = Auth::user();
+
+        if ($request->hasFile('image')) {
+            if (File::exists(public_path($user->image))) {
+                File::delete(public_path($user->image));
+            }
+            $image = $request->image;
+            $imageName = rand() . '-' . $image->getClientOriginalName();
+            $image->move(public_path('uploads/admin_profile'), $imageName);
+            $path = "/uploads/admin_profile/" . $imageName;
+
+            $user->image = $path;
+        }
+
         $user->name = $request->name;
         $user->email = $request->email;
         $user->save();
