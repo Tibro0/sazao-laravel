@@ -1,51 +1,3 @@
-{{-- <x-guest-layout>
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
-
-    <form method="POST" action="{{ route('login') }}">
-        @csrf
-
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
-
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
-
-        <!-- Remember Me -->
-        <div class="block mt-4">
-            <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
-                <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-            </label>
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
-                    {{ __('Forgot your password?') }}
-                </a>
-            @endif
-
-            <x-primary-button class="ms-3">
-                {{ __('Log in') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout> --}}
-
 @extends('frontend.layouts.master')
 
 @section('page-title')
@@ -138,32 +90,49 @@
                             <div class="tab-pane fade" id="pills-profiles" role="tabpanel"
                                 aria-labelledby="pills-profile-tab2">
                                 <div class="wsus__login">
-                                    <form>
+                                    <form method="POST" action="{{ route('register') }}">
+                                        @csrf
                                         <div class="wsus__login_input">
                                             <i class="fas fa-user-tie"></i>
-                                            <input type="text" placeholder="Name">
+                                            <input type="text" name="name" value="{{ old('name') }}"
+                                                placeholder="Name" class="@error('name') border border-danger @enderror">
                                         </div>
+                                        @error('name')
+                                            <div class="text-danger ms-5 ps-4">{{ $message }}</div>
+                                        @enderror
                                         <div class="wsus__login_input">
                                             <i class="far fa-envelope"></i>
-                                            <input type="text" placeholder="Email">
+                                            <input type="email" name="email" value="{{ old('email') }}"
+                                                placeholder="Email" class="@error('email') border border-danger @enderror">
                                         </div>
+                                        @error('email')
+                                            <div class="text-danger ms-5 ps-4">{{ $message }}</div>
+                                        @enderror
                                         <div class="wsus__login_input">
                                             <i class="fas fa-key"></i>
-                                            <input type="text" placeholder="Password">
+                                            <input type="password" name="password" placeholder="Password"
+                                                class="@error('password') border border-danger @enderror">
                                         </div>
+                                        @error('password')
+                                            <div class="text-danger ms-5 ps-4">{{ $message }}</div>
+                                        @enderror
                                         <div class="wsus__login_input">
                                             <i class="fas fa-key"></i>
-                                            <input type="text" placeholder="Confirm Password">
+                                            <input type="password" name="password_confirmation"
+                                                placeholder="Confirm Password" class="@error('password_confirmation') border border-danger @enderror">
                                         </div>
-                                        <div class="wsus__login_save">
+                                        @error('password_confirmation')
+                                            <div class="text-danger ms-5 ps-4">{{ $message }}</div>
+                                        @enderror
+                                        {{-- <div class="wsus__login_save">
                                             <div class="form-check form-switch">
                                                 <input class="form-check-input" type="checkbox"
                                                     id="flexSwitchCheckDefault03">
                                                 <label class="form-check-label" for="flexSwitchCheckDefault03">I consent
                                                     to the privacy policy</label>
                                             </div>
-                                        </div>
-                                        <button class="common_btn" type="submit">signup</button>
+                                        </div> --}}
+                                        <button class="common_btn mt-4" type="submit">signup</button>
                                     </form>
                                 </div>
                             </div>
