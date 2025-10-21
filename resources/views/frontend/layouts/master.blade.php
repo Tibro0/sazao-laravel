@@ -24,6 +24,8 @@
 
     <link rel="stylesheet" href="{{ asset('frontend/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/css/responsive.css') }}">
+    {{-- toastr Css --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
     <!-- <link rel="stylesheet" href="css/rtl.css"> -->
 </head>
 
@@ -112,9 +114,23 @@
     <script src="{{ asset('frontend/js/venobox.min.js') }}"></script>
     <!--classycountdown js-->
     <script src="{{ asset('frontend/js/jquery.classycountdown.js') }}"></script>
-
     <!--main/custom js-->
     <script src="{{ asset('frontend/js/main.js') }}"></script>
+    {{-- toastr js --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script>
+        // Display toast messages from session with nullable titles
+        @if (Session::has('toast'))
+            @php
+                $toast = Session::get('toast');
+            @endphp
+            @if (!empty($toast['title']))
+                toastr.{{ $toast['type'] }}('{{ $toast['message'] }}', '{{ $toast['title'] }}');
+            @else
+                toastr.{{ $toast['type'] }}('{{ $toast['message'] }}');
+            @endif
+        @endif
+    </script>
 </body>
 
 </html>
