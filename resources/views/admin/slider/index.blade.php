@@ -40,7 +40,7 @@
                         <tbody>
                             @foreach ($sliders as $item)
                                 <tr>
-                                    <td width="50">1</td>
+                                    <td width="50">{{ $loop->iteration }}</td>
                                     <td width="150"><img src="{{ asset($item->banner) }}" width="100"></td>
                                     <td>{{ $item->title }}</td>
                                     <td>{{ $item->serial }}</td>
@@ -53,9 +53,9 @@
                                     </td>
                                     <td width="100">
                                         <a href="{{ route('admin.slider.edit', $item->id) }}" class="btn btn-primary"><i
-                                                class="fas fa-pen"></i></a>
+                                                class="fas fa-pencil-alt"></i></a>
                                         <a href="{{ route('admin.slider.destroy', $item->id) }}" id="delete"
-                                            class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                                            class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
                                     </td>
                                 </tr>
                             @endforeach
