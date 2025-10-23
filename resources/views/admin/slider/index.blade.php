@@ -46,9 +46,13 @@
                                     <td>{{ $item->serial }}</td>
                                     <td>
                                         @if ($item->status === 1)
-                                            <span class="badge rounded-pill bg-primary">Active</span>
+                                            <div class="form-check form-switch mb-3">
+                                                <input type="checkbox" class="form-check-input change-status" data-id="{{ $item->id }}" checked>
+                                            </div>
                                         @elseif ($item->status === 0)
-                                            <span class="badge rounded-pill bg-danger">InActive</span>
+                                            <div class="form-check form-switch mb-3">
+                                                <input type="checkbox" class="form-check-input change-status" data-id="{{ $item->id }}">
+                                            </div>
                                         @endif
                                     </td>
                                     <td width="100">
@@ -124,6 +128,31 @@
                 })
             })
 
+        })
+    </script>
+    <!--Toggle Button script -->
+    <script>
+        $(document).ready(function() {
+            $('body').on('click', '.change-status', function() {
+                let isChecked = $(this).is(':checked');
+                let id = $(this).data('id');
+
+                $.ajax({
+                    url: "{{ route('admin.slider.change-status') }}",
+                    method: 'PUT',
+                    data: {
+                        status: isChecked,
+                        id: id
+                    },
+                    success: function(data) {
+                        toastr.success(data.message)
+                    },
+                    error: function(xhr, status, error) {
+                        console.log(error);
+                    }
+                })
+
+            })
         })
     </script>
 @endsection

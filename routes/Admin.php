@@ -26,6 +26,7 @@ Route::controller(SliderController::class)->group(function () {
     Route::get('slider/edit/{id}', 'edit')->name('slider.edit');
     Route::put('slider/{id}', 'update')->name('slider.update');
     Route::delete('slider/{id}', 'destroy')->name('slider.destroy');
+    Route::put('slider-change-status', 'changeStatus')->name('slider.change-status');
 });
 
 /** Category Route */
@@ -36,5 +37,5 @@ Route::controller(CategoryController::class)->group(function () {
     Route::get('category/edit/{id}', 'edit')->name('category.edit');
     Route::put('category/{id}', 'update')->name('category.update');
     Route::delete('category/{id}', 'destroy')->name('category.destroy');
-    Route::put('change-status', 'changeStatus')->name('category.change-status');
+    Route::put('category-change-status', 'changeStatus')->name('category.change-status');
 });
