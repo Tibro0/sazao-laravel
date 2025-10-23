@@ -17,7 +17,8 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('admin.slider.update', $slider->id) }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('admin.slider.update', $slider->id) }}" method="POST"
+                        enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="row g-3">
@@ -34,24 +35,26 @@
                                 @enderror
                             </div>
                             <div class="col-md-12">
-                                <label>Type</label>
-                                <input type="text" name="type" value="{{ old('type') ?? $slider->type }}" placeholder="Type"
-                                    class="form-control @error('type') is-invalid @enderror">
+                                <label>Type <span class="text-danger">*</span></label>
+                                <input type="text" name="type" value="{{ old('type') ?? $slider->type }}"
+                                    placeholder="Type" class="form-control @error('type') is-invalid @enderror">
                                 @error('type')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="col-md-12">
-                                <label>Title</label>
-                                <input type="text" name="title" value="{{ old('title') ?? $slider->title }}" placeholder="Title"
-                                    class="form-control @error('title') is-invalid @enderror">
+                                <label>Title <span class="text-danger">*</span></label>
+                                <input type="text" name="title" value="{{ old('title') ?? $slider->title }}"
+                                    placeholder="Title" class="form-control @error('title') is-invalid @enderror">
                                 @error('title')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="col-md-12">
                                 <label>Starting Price</label>
-                                <input type="text" name="starting_price" value="{{ old('starting_price') ?? $slider->starting_price }}" placeholder="Starting Price"
+                                <input type="text" name="starting_price"
+                                    value="{{ old('starting_price') ?? $slider->starting_price }}"
+                                    placeholder="Starting Price"
                                     class="form-control @error('starting_price') is-invalid @enderror">
                                 @error('starting_price')
                                     <div class="invalid-feedback">{{ $message }}</div>
@@ -59,16 +62,16 @@
                             </div>
                             <div class="col-md-12">
                                 <label>Btn Url</label>
-                                <input type="text" name="btn_url" value="{{ old('btn_url') ?? $slider->btn_url }}" placeholder="Btn Url"
-                                    class="form-control @error('btn_url') is-invalid @enderror">
+                                <input type="text" name="btn_url" value="{{ old('btn_url') ?? $slider->btn_url }}"
+                                    placeholder="Btn Url" class="form-control @error('btn_url') is-invalid @enderror">
                                 @error('btn_url')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="col-md-12">
-                                <label>Serial</label>
-                                <input type="number" name="serial" value="{{ old('serial') ?? $slider->serial }}" placeholder="Serial Number"
-                                    class="form-control @error('serial') is-invalid @enderror">
+                                <label>Serial <span class="text-danger">*</span></label>
+                                <input type="number" name="serial" value="{{ old('serial') ?? $slider->serial }}"
+                                    placeholder="Serial Number" class="form-control @error('serial') is-invalid @enderror">
                                 @error('serial')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror

@@ -21,7 +21,7 @@
                         @csrf
                         <div class="row g-3">
                             <div class="col-md-12">
-                                <label>Banner</label>
+                                <label>Banner <span class="text-danger">*</span></label>
                                 <input type="file" name="banner" placeholder="Banner"
                                     class="form-control @error('banner') is-invalid @enderror">
                                 @error('banner')
@@ -29,7 +29,7 @@
                                 @enderror
                             </div>
                             <div class="col-md-12">
-                                <label>Type</label>
+                                <label>Type <span class="text-danger">*</span></label>
                                 <input type="text" name="type" value="{{ old('type') }}" placeholder="Type"
                                     class="form-control @error('type') is-invalid @enderror">
                                 @error('type')
@@ -37,7 +37,7 @@
                                 @enderror
                             </div>
                             <div class="col-md-12">
-                                <label>Title</label>
+                                <label>Title <span class="text-danger">*</span></label>
                                 <input type="text" name="title" value="{{ old('title') }}" placeholder="Title"
                                     class="form-control @error('title') is-invalid @enderror">
                                 @error('title')
@@ -46,7 +46,8 @@
                             </div>
                             <div class="col-md-12">
                                 <label>Starting Price</label>
-                                <input type="text" name="starting_price" value="{{ old('starting_price') }}" placeholder="Starting Price"
+                                <input type="text" name="starting_price" value="{{ old('starting_price') }}"
+                                    placeholder="Starting Price"
                                     class="form-control @error('starting_price') is-invalid @enderror">
                                 @error('starting_price')
                                     <div class="invalid-feedback">{{ $message }}</div>
@@ -61,9 +62,9 @@
                                 @enderror
                             </div>
                             <div class="col-md-12">
-                                <label>Serial</label>
-                                <input type="number" name="serial" value="{{ old('serial') }}" placeholder="Serial Number"
-                                    class="form-control @error('serial') is-invalid @enderror">
+                                <label>Serial <span class="text-danger">*</span></label>
+                                <input type="number" name="serial" value="{{ old('serial') }}"
+                                    placeholder="Serial Number" class="form-control @error('serial') is-invalid @enderror">
                                 @error('serial')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror

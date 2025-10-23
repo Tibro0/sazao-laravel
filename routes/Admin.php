@@ -24,7 +24,6 @@ Route::controller(SliderController::class)->group(function () {
     Route::get('slider/create', 'create')->name('slider.create');
     Route::post('slider/store', 'store')->name('slider.store');
     Route::get('slider/edit/{id}', 'edit')->name('slider.edit');
-    Route::put('slider/{id}', 'Update')->name('slider.update');
+    Route::put('slider/{id}', 'update')->name('slider.update');
     Route::delete('slider/{id}', 'destroy')->name('slider.destroy');
 });
-// Route::resource('slider', SliderController::class);
