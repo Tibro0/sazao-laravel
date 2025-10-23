@@ -27,7 +27,7 @@
                                 <img src="{{ asset($slider->banner) }}" width="100">
                             </div>
                             <div class="col-md-12">
-                                <label>Banner</label>
+                                <label>Banner <span class="text-danger">(width:1300px, height:500px) 2MB Min</span></label>
                                 <input type="file" name="banner" placeholder="Banner"
                                     class="form-control @error('banner') is-invalid @enderror">
                                 @error('banner')

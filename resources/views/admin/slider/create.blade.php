@@ -21,7 +21,7 @@
                         @csrf
                         <div class="row g-3">
                             <div class="col-md-12">
-                                <label>Banner <span class="text-danger">*</span></label>
+                                <label>Banner <span class="text-danger">* (width:1300px, height:500px) 2MB Min</span></label>
                                 <input type="file" name="banner" placeholder="Banner"
                                     class="form-control @error('banner') is-invalid @enderror">
                                 @error('banner')
