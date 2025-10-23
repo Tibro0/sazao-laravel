@@ -17,6 +17,8 @@
             <ul class="sub-menu" aria-expanded="false">
                 <li class="{{ adminSidebarActive(['admin.category.*']) }}"><a
                         href="{{ route('admin.category.index') }}">Category</a></li>
+                <li class="{{ adminSidebarActive(['admin.sub-category.*']) }}"><a
+                        href="{{ route('admin.sub-category.index') }}">Sub Category</a></li>
             </ul>
         </li>
 

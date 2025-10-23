@@ -4,6 +4,7 @@ use App\Http\Controllers\Backend\AdminController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\ProfileController;
 use App\Http\Controllers\Backend\SliderController;
+use App\Http\Controllers\Backend\SubCategoryController;
 use Illuminate\Support\Facades\Route;
 
 // Admin Route
@@ -38,4 +39,15 @@ Route::controller(CategoryController::class)->group(function () {
     Route::put('category/{id}', 'update')->name('category.update');
     Route::delete('category/{id}', 'destroy')->name('category.destroy');
     Route::put('category-change-status', 'changeStatus')->name('category.change-status');
+});
+
+/** SubCategory Route */
+Route::controller(SubCategoryController::class)->group(function () {
+    Route::get('sub-category', 'index')->name('sub-category.index');
+    Route::get('sub-category/create', 'create')->name('sub-category.create');
+    Route::post('sub-category/store', 'store')->name('sub-category.store');
+    Route::get('sub-category/edit/{id}', 'edit')->name('sub-category.edit');
+    Route::put('sub-category/{id}', 'update')->name('sub-category.update');
+    Route::delete('sub-category/{id}', 'destroy')->name('sub-category.destroy');
+    Route::put('sub-category-change-status', 'changeStatus')->name('sub-category.change-status');
 });
