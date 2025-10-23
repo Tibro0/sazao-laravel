@@ -12,10 +12,22 @@
         <li>
             <a href="javascript: void(0);" class="has-arrow waves-effect">
                 <i class="ri-mail-send-line"></i>
+                <span>Manage Categories</span>
+            </a>
+            <ul class="sub-menu" aria-expanded="false">
+                <li class="{{ adminSidebarActive(['admin.category.*']) }}"><a
+                        href="{{ route('admin.category.index') }}">Category</a></li>
+            </ul>
+        </li>
+
+        <li>
+            <a href="javascript: void(0);" class="has-arrow waves-effect">
+                <i class="ri-mail-send-line"></i>
                 <span>Manage Website</span>
             </a>
             <ul class="sub-menu" aria-expanded="false">
-                <li class="{{ adminSidebarActive(['admin.slider.*']) }}"><a href="{{ route('admin.slider.index') }}">Slider</a></li>
+                <li class="{{ adminSidebarActive(['admin.slider.*']) }}"><a
+                        href="{{ route('admin.slider.index') }}">Slider</a></li>
             </ul>
         </li>
 
