@@ -15,7 +15,7 @@ class SliderSeeder extends Seeder
     {
         Slider::insert([
             [
-                'banner' => 'frontend/images/slider_1.jpg',
+                'banner' => 'frontend/images/main-image/slider_1.jpg',
                 'type' => 'new arrivals',
                 'title' => "men's fashion",
                 'starting_price' => '99',
@@ -26,7 +26,7 @@ class SliderSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'banner' => 'frontend/images/slider_2.jpg',
+                'banner' => 'frontend/images/main-image/slider_2.jpg',
                 'type' => 'new arrivals',
                 'title' => "kid's fashion",
                 'starting_price' => '99',
@@ -37,7 +37,7 @@ class SliderSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'banner' => 'frontend/images/slider_3.jpg',
+                'banner' => 'frontend/images/main-image/slider_3.jpg',
                 'type' => 'new arrivals',
                 'title' => "winter collection",
                 'starting_price' => '99',
