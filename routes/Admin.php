@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Backend\AdminController;
 use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\Backend\ChildCategoryController;
 use App\Http\Controllers\Backend\ProfileController;
 use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\SubCategoryController;
@@ -41,7 +42,7 @@ Route::controller(CategoryController::class)->group(function () {
     Route::put('category-change-status', 'changeStatus')->name('category.change-status');
 });
 
-/** SubCategory Route */
+/** Sub Category Route */
 Route::controller(SubCategoryController::class)->group(function () {
     Route::get('sub-category', 'index')->name('sub-category.index');
     Route::get('sub-category/create', 'create')->name('sub-category.create');
@@ -50,4 +51,16 @@ Route::controller(SubCategoryController::class)->group(function () {
     Route::put('sub-category/{id}', 'update')->name('sub-category.update');
     Route::delete('sub-category/{id}', 'destroy')->name('sub-category.destroy');
     Route::put('sub-category-change-status', 'changeStatus')->name('sub-category.change-status');
+});
+
+/** Child Category Route */
+Route::controller(ChildCategoryController::class)->group(function () {
+    Route::get('child-category', 'index')->name('child-category.index');
+    Route::get('child-category/create', 'create')->name('child-category.create');
+    Route::get('get-subcategories', 'getSubCategory')->name('get-subcategories');
+    Route::post('child-category/store', 'store')->name('child-category.store');
+    Route::get('child-category/edit/{id}', 'edit')->name('child-category.edit');
+    Route::put('child-category/{id}', 'update')->name('child-category.update');
+    Route::delete('child-category/{id}', 'destroy')->name('child-category.destroy');
+    Route::put('child-category-change-status', 'changeStatus')->name('child-category.change-status');
 });

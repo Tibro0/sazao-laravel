@@ -28,13 +28,13 @@
                         <div class="row g-3">
                             <div class="col-md-12">
                                 <label>Select a Category <span class="text-danger">*</span></label>
-                                <select name="category" class="form-select select2 @error('status') is-invalid @enderror">
+                                <select name="category" class="form-select select2 @error('category') is-invalid @enderror">
                                     <option value="">Select a Category</option>
                                     @foreach ($categories as $category)
                                         <option value="{{ $category->id }}">{{ $category->name }}</option>
                                     @endforeach
                                 </select>
-                                @error('category_id')
+                                @error('category')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>

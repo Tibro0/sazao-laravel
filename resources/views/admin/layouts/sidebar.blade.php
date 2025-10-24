@@ -19,6 +19,8 @@
                         href="{{ route('admin.category.index') }}">Category</a></li>
                 <li class="{{ adminSidebarActive(['admin.sub-category.*']) }}"><a
                         href="{{ route('admin.sub-category.index') }}">Sub Category</a></li>
+                <li class="{{ adminSidebarActive(['admin.child-category.*']) }}"><a
+                        href="{{ route('admin.child-category.index') }}">Child Category</a></li>
             </ul>
         </li>
 
