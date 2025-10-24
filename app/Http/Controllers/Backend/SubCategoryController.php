@@ -33,11 +33,16 @@ class SubCategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'category'=> ['required', 'integer'],
-            'name'=> ['required', 'max:200', 'unique:sub_categories,name'],
-            'status'=> ['required', 'boolean'],
-        ]);
+        $request->validate(
+            [
+                'category' => ['required', 'integer'],
+                'name' => ['required', 'max:200', 'unique:sub_categories,name'],
+                'status' => ['required', 'boolean'],
+            ],
+            [
+                'category.required' => 'Please Select a Category',
+            ]
+        );
 
         $subCategory = new SubCategory();
         $subCategory->category_id = $request->category;
@@ -68,7 +73,7 @@ class SubCategoryController extends Controller
     {
         $categories = Category::all();
         $subCategory = SubCategory::findOrFail($id);
-        return view('admin.sub-category.edit', compact('categories','subCategory'));
+        return view('admin.sub-category.edit', compact('categories', 'subCategory'));
     }
 
     /**
@@ -76,13 +81,18 @@ class SubCategoryController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $request->validate([
-            'category'=> ['required', 'integer'],
-            'name'=> ['required', 'max:200', 'unique:sub_categories,name,'.$id],
-            'status'=> ['required', 'boolean'],
-        ]);
+        $request->validate(
+            [
+                'category' => ['required', 'integer'],
+                'name' => ['required', 'max:200', 'unique:sub_categories,name,' . $id],
+                'status' => ['required', 'boolean'],
+            ],
+            [
+                'category.required' => 'Please Select a Category',
+            ]
+        );
 
-        $subCategory =SubCategory::findOrFail($id);
+        $subCategory = SubCategory::findOrFail($id);
         $subCategory->category_id = $request->category;
         $subCategory->name = $request->name;
         $subCategory->slug = Str::slug($request->name);
@@ -106,7 +116,8 @@ class SubCategoryController extends Controller
         return response(['status' => 'success', 'message' => 'Deleted Successfully!']);
     }
 
-    public function changeStatus(Request $request){
+    public function changeStatus(Request $request)
+    {
         $subCategory = SubCategory::findOrFail($request->id);
         $subCategory->status = $request->status == 'true' ? 1 : 0;
         $subCategory->save();

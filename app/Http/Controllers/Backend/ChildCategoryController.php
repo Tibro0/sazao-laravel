@@ -45,12 +45,18 @@ class ChildCategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'category' => ['required', 'integer'],
-            'sub_category' => ['required', 'integer'],
-            'name' => ['required', 'max:200', 'unique:child_categories,name'],
-            'status' => ['required', 'boolean'],
-        ]);
+        $request->validate(
+            [
+                'category' => ['required', 'integer'],
+                'sub_category' => ['required', 'integer'],
+                'name' => ['required', 'max:200', 'unique:child_categories,name'],
+                'status' => ['required', 'boolean'],
+            ],
+            [
+                'category.required' => 'Please Select a Category',
+                'sub_category.required' => 'Please Select a Sub Category'
+            ]
+        );
 
         $childCategory = new ChildCategory();
         $childCategory->category_id = $request->category;
@@ -91,14 +97,20 @@ class ChildCategoryController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $request->validate([
-            'category'=> ['required', 'integer'],
-            'sub_category'=> ['required', 'integer'],
-            'name'=> ['required', 'max:200', 'unique:child_categories,name,'.$id],
-            'status'=> ['required', 'boolean'],
-        ]);
+        $request->validate(
+            [
+                'category' => ['required', 'integer'],
+                'sub_category' => ['required', 'integer'],
+                'name' => ['required', 'max:200', 'unique:child_categories,name,' . $id],
+                'status' => ['required', 'boolean'],
+            ],
+            [
+                'category.required' => 'Please Select a Category',
+                'sub_category.required' => 'Please Select a Sub Category'
+            ]
+        );
 
-        $ChildCategory =ChildCategory::findOrFail($id);
+        $ChildCategory = ChildCategory::findOrFail($id);
         $ChildCategory->category_id = $request->category;
         $ChildCategory->sub_category_id = $request->sub_category;
         $ChildCategory->name = $request->name;
@@ -123,7 +135,8 @@ class ChildCategoryController extends Controller
         return response(['status' => 'success', 'message' => 'Deleted Successfully!']);
     }
 
-    public function changeStatus(Request $request){
+    public function changeStatus(Request $request)
+    {
         $ChildCategory = ChildCategory::findOrFail($request->id);
         $ChildCategory->status = $request->status == 'true' ? 1 : 0;
         $ChildCategory->save();
