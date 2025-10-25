@@ -27,6 +27,16 @@
         <li>
             <a href="javascript: void(0);" class="has-arrow waves-effect">
                 <i class="ri-mail-send-line"></i>
+                <span>Manage Products</span>
+            </a>
+            <ul class="sub-menu" aria-expanded="false">
+                <li class="{{ adminSidebarActive(['admin.brand.*']) }}"><a href="{{ route('admin.brand.index') }}">Brand</a></li>
+            </ul>
+        </li>
+
+        <li>
+            <a href="javascript: void(0);" class="has-arrow waves-effect">
+                <i class="ri-mail-send-line"></i>
                 <span>Manage Website</span>
             </a>
             <ul class="sub-menu" aria-expanded="false">

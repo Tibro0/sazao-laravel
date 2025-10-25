@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Backend\AdminController;
+use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\ChildCategoryController;
 use App\Http\Controllers\Backend\ProfileController;
@@ -63,4 +64,15 @@ Route::controller(ChildCategoryController::class)->group(function () {
     Route::put('child-category/{id}', 'update')->name('child-category.update');
     Route::delete('child-category/{id}', 'destroy')->name('child-category.destroy');
     Route::put('child-category-change-status', 'changeStatus')->name('child-category.change-status');
+});
+
+/** Brand Route */
+Route::controller(BrandController::class)->group(function () {
+    Route::get('brand', 'index')->name('brand.index');
+    Route::get('brand/create', 'create')->name('brand.create');
+    Route::post('brand/store', 'store')->name('brand.store');
+    Route::get('brand/edit/{id}', 'edit')->name('brand.edit');
+    Route::put('brand/{id}', 'update')->name('brand.update');
+    Route::delete('brand/{id}', 'destroy')->name('brand.destroy');
+    Route::put('brand-change-status', 'changeStatus')->name('brand.change-status');
 });
