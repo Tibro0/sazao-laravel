@@ -31,6 +31,7 @@
             </a>
             <ul class="sub-menu" aria-expanded="false">
                 <li class="{{ adminSidebarActive(['admin.brand.*']) }}"><a href="{{ route('admin.brand.index') }}">Brand</a></li>
+                <li class="{{ adminSidebarActive(['admin.brand.*']) }}"><a href="{{ route('admin.brand.index') }}">Products</a></li>
             </ul>
         </li>
 
