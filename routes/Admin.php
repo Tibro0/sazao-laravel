@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Backend\AdminController;
+use App\Http\Controllers\Backend\AdminVendorProfileController;
 use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\ChildCategoryController;
@@ -75,4 +76,10 @@ Route::controller(BrandController::class)->group(function () {
     Route::put('brand/{id}', 'update')->name('brand.update');
     Route::delete('brand/{id}', 'destroy')->name('brand.destroy');
     Route::put('brand-change-status', 'changeStatus')->name('brand.change-status');
+});
+
+/** Vendor Profile Route */
+Route::controller(AdminVendorProfileController::class)->group(function () {
+    Route::get('vendor-profile', 'index')->name('vendor-profile.index');
+    Route::post('vendor-profile/store', 'store')->name('vendor-profile.store');
 });

@@ -37,6 +37,16 @@
         <li>
             <a href="javascript: void(0);" class="has-arrow waves-effect">
                 <i class="ri-mail-send-line"></i>
+                <span>E-commerce</span>
+            </a>
+            <ul class="sub-menu" aria-expanded="false">
+                <li class="{{ adminSidebarActive(['admin.vendor-profile.*']) }}"><a href="{{ route('admin.vendor-profile.index') }}">Vendor Profile</a></li>
+            </ul>
+        </li>
+
+        <li>
+            <a href="javascript: void(0);" class="has-arrow waves-effect">
+                <i class="ri-mail-send-line"></i>
                 <span>Manage Website</span>
             </a>
             <ul class="sub-menu" aria-expanded="false">

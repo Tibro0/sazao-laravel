@@ -29,6 +29,7 @@ class DatabaseSeeder extends Seeder
             SubCategorySeeder::class,
             ChildCategorySeeder::class,
             BrandSeeder::class,
+            VendorSeeder::class,
         ]);
     }
 }
