@@ -5,6 +5,7 @@ use App\Http\Controllers\Backend\AdminVendorProfileController;
 use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\ChildCategoryController;
+use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\ProfileController;
 use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\SubCategoryController;
@@ -82,4 +83,18 @@ Route::controller(BrandController::class)->group(function () {
 Route::controller(AdminVendorProfileController::class)->group(function () {
     Route::get('vendor-profile', 'index')->name('vendor-profile.index');
     Route::post('vendor-profile/store', 'store')->name('vendor-profile.store');
+});
+
+
+/** Products Route */
+Route::controller(ProductController::class)->group(function () {
+    Route::get('products', 'index')->name('products.index');
+    Route::get('products/create', 'create')->name('products.create');
+    Route::post('products/store', 'store')->name('products.store');
+    Route::get('products/edit/{id}', 'edit')->name('products.edit');
+    Route::put('products/{id}', 'update')->name('products.update');
+    Route::delete('products/{id}', 'destroy')->name('products.destroy');
+    Route::get('product/get-subcategories', 'getSubCategories')->name('product.get-subcategories');
+    Route::get('product/get-child-categories', 'getChildCategories')->name('product.get-child-categories');
+    Route::put('products-change-status', 'changeStatus')->name('products.change-status');
 });

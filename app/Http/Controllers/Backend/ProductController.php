@@ -3,16 +3,25 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Brand;
+use App\Models\Category;
+use App\Models\ChildCategory;
+use App\Models\Product;
+use App\Models\SubCategory;
+use App\Traits\ImageUploadTrait;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
+    use ImageUploadTrait;
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        return view('admin.product.index');
     }
 
     /**
@@ -20,7 +29,9 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        $categories = Category::all();
+        $brands = Brand::all();
+        return view('admin.product.create', compact('categories','brands'));
     }
 
     /**
@@ -28,7 +39,62 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'image' => ['required', 'image', 'max:2048', 'dimensions:width=380,height=317'],
+            'name' => ['required', 'max:255'],
+            'category' => ['required', 'integer'],
+            'brand' => ['required', 'integer'],
+            'price' => ['required', 'integer'],
+            'qty' => ['required', 'integer'],
+            'short_description' => ['required', 'max:600'],
+            'long_description' => ['required'],
+            'seo_title' => ['max:255', 'nullable'],
+            'seo_description' => ['max:255', 'nullable'],
+
+            'sub_category' => ['nullable', 'integer'],
+            'child_category' => ['nullable', 'integer'],
+            'video_link' => ['nullable', 'url', 'max:255'],
+            'sku' => ['nullable',  'max:255'],
+            'offer_price' => ['nullable', 'integer'],
+            'offer_start_date' => ['nullable', 'date'],
+            'offer_end_date' => ['nullable', 'date'],
+            'product_type' => ['nullable', 'in:new_arrival,featured_product,top_product,best_product'],
+            'status' => ['required', 'boolean'],
+        ]);
+
+         /** Handle the image Upload */
+        $imagePath = $this->uploadImage($request, 'image', 'uploads/product_thumb_image');
+
+        $product = new Product();
+        $product->vendor_id = Auth::user()->vendor->id;
+        $product->category_id = $request->category;
+        $product->sub_category_id = $request->sub_category;
+        $product->child_category_id = $request->child_category;
+        $product->brand_id = $request->brand;
+        $product->thumb_image = $imagePath;
+        $product->name = $request->name;
+        $product->slug = Str::slug($request->name);
+        $product->qty = $request->qty;
+        $product->short_description = $request->short_description;
+        $product->long_description = $request->long_description;
+        $product->video_link = $request->video_link;
+        $product->sku = $request->sku;
+        $product->price = $request->price;
+        $product->offer_price = $request->offer_price;
+        $product->offer_start_date = $request->offer_start_date;
+        $product->offer_end_date = $request->offer_end_date;
+        $product->product_type = $request->product_type;
+        $product->is_approved = 1;
+        $product->status = $request->status;
+        $product->seo_title = $request->seo_title;
+        $product->seo_description = $request->seo_description;
+        $product->save();
+
+        return redirect()->route('admin.products.index')->with('toast', [
+            'type' => 'success',
+            'title' => 'Success',
+            'message' => 'Created Successfully!'
+        ]);
     }
 
     /**
@@ -61,5 +127,16 @@ class ProductController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+     public function getSubCategories(Request $request){
+        $subCategories = SubCategory::where('category_id', $request->id)->get();
+        return $subCategories;
+    }
+
+
+    public function getChildCategories(Request $request){
+        $childCategories = ChildCategory::where('sub_category_id', $request->id)->get();
+        return $childCategories;
     }
 }
