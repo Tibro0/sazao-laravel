@@ -21,7 +21,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return view('admin.product.index');
+        $products = Product::orderBy('id', 'DESC')->get();
+        return view('admin.product.index', compact('products'));
     }
 
     /**
@@ -31,7 +32,7 @@ class ProductController extends Controller
     {
         $categories = Category::all();
         $brands = Brand::all();
-        return view('admin.product.create', compact('categories','brands'));
+        return view('admin.product.create', compact('categories', 'brands'));
     }
 
     /**
@@ -62,7 +63,7 @@ class ProductController extends Controller
             'status' => ['required', 'boolean'],
         ]);
 
-         /** Handle the image Upload */
+        /** Handle the image Upload */
         $imagePath = $this->uploadImage($request, 'image', 'uploads/product_thumb_image');
 
         $product = new Product();
@@ -110,7 +111,12 @@ class ProductController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $product = Product::findOrFail($id);
+        $categories = Category::all();
+        $subCategories = SubCategory::where('category_id', $product->category_id)->get();
+        $childCategories = ChildCategory::where('sub_category_id', $product->sub_category_id)->get();
+        $brands = Brand::all();
+        return view('admin.product.edit', compact('product', 'categories', 'subCategories', 'childCategories', 'brands'));
     }
 
     /**
@@ -118,7 +124,62 @@ class ProductController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'image' => ['nullable', 'image', 'max:2048', 'dimensions:width=380,height=317'],
+            'name' => ['required', 'max:255'],
+            'category' => ['required', 'integer'],
+            'brand' => ['required', 'integer'],
+            'price' => ['required', 'integer'],
+            'qty' => ['required', 'integer'],
+            'short_description' => ['required', 'max:600'],
+            'long_description' => ['required'],
+            'seo_title' => ['max:255', 'nullable'],
+            'seo_description' => ['max:255', 'nullable'],
+
+            'sub_category' => ['nullable', 'integer'],
+            'child_category' => ['nullable', 'integer'],
+            'video_link' => ['nullable', 'url', 'max:255'],
+            'sku' => ['nullable',  'max:255'],
+            'offer_price' => ['nullable', 'integer'],
+            'offer_start_date' => ['nullable', 'date'],
+            'offer_end_date' => ['nullable', 'date'],
+            'product_type' => ['nullable', 'in:new_arrival,featured_product,top_product,best_product'],
+            'status' => ['required', 'boolean'],
+        ]);
+
+        $product = Product::findOrFail($id);
+        /** Handle the image Upload */
+        $imagePath = $this->updateImage($request, 'image', 'uploads/product_thumb_image', $product->thumb_image);
+
+        $product->vendor_id = Auth::user()->vendor->id;
+        $product->category_id = $request->category;
+        $product->sub_category_id = $request->sub_category;
+        $product->child_category_id = $request->child_category;
+        $product->brand_id = $request->brand;
+        $product->thumb_image = empty(!$imagePath) ? $imagePath : $product->thumb_image;
+        $product->name = $request->name;
+        $product->slug = Str::slug($request->name);
+        $product->qty = $request->qty;
+        $product->short_description = $request->short_description;
+        $product->long_description = $request->long_description;
+        $product->video_link = $request->video_link;
+        $product->sku = $request->sku;
+        $product->price = $request->price;
+        $product->offer_price = $request->offer_price;
+        $product->offer_start_date = $request->offer_start_date;
+        $product->offer_end_date = $request->offer_end_date;
+        $product->product_type = $request->product_type;
+        $product->is_approved = 1;
+        $product->status = $request->status;
+        $product->seo_title = $request->seo_title;
+        $product->seo_description = $request->seo_description;
+        $product->save();
+
+        return redirect()->route('admin.products.index')->with('toast', [
+            'type' => 'success',
+            'title' => 'Success',
+            'message' => 'Updated Successfully!'
+        ]);
     }
 
     /**
@@ -129,13 +190,15 @@ class ProductController extends Controller
         //
     }
 
-     public function getSubCategories(Request $request){
+    public function getSubCategories(Request $request)
+    {
         $subCategories = SubCategory::where('category_id', $request->id)->get();
         return $subCategories;
     }
 
 
-    public function getChildCategories(Request $request){
+    public function getChildCategories(Request $request)
+    {
         $childCategories = ChildCategory::where('sub_category_id', $request->id)->get();
         return $childCategories;
     }
