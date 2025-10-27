@@ -1,7 +1,7 @@
 @extends('admin.layouts.master')
 
 @section('page-title')
-    Sazao | All Products
+    Sazao | All Product Gallery Images
 @endsection
 
 @section('css-link')
@@ -18,11 +18,44 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between align-items-center">
-                        <h4 class="mb-0">All Products</h4>
+                        <h4 class="mb-0">Product : {{ $product->name }}</h4>
                         <div>
-                            <a href="{{ route('admin.products.create') }}" class="btn btn-primary px-5 rounded">Create
-                                New</a>
+                            {{-- <a href="{{ route('admin.products.create') }}" class="btn btn-primary px-5 rounded">Create
+                                New</a> --}}
                         </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <form action="{{ route('admin.products-image-gallery.store') }}" method="POST"
+                        enctype="multipart/form-data">
+                        @csrf
+                        <div class="row g-3">
+                            <div class="col-md-12">
+                                <label>Image <span class="text-danger">* (Multiple Image Support) (width:520px,
+                                        height:520px) 2MB Minimum</span></label>
+                                <input type="file" name="image[]"
+                                    class="form-control @error('image') is-invalid @enderror" multiple>
+                                <input type="hidden" name="product" value="{{ $product->id }}">
+                                @error('image')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-12">
+                                <button type="submit" class="btn btn-primary px-5">Save Changes</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div> <!-- end col -->
+    </div> <!-- end row -->
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h4 class="mb-0">All Images</h4>
                     </div>
                 </div>
                 <div class="card-body">
@@ -32,61 +65,17 @@
                             <tr>
                                 <th>SL</th>
                                 <th>Image</th>
-                                <th>Name</th>
-                                <th>Price</th>
-                                <th>Type</th>
-                                <th>Status</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($products as $item)
+                            @foreach ($productImageGalleries as $item)
                                 <tr>
                                     <td width="50">{{ $loop->iteration }}</td>
-                                    <td width="100"><img src="{{ asset($item->thumb_image) }}" width="100"></td>
-                                    <td>{{ $item->name }}</td>
-                                    <td>{{ $item->price }}</td>
-                                    <td>
-                                        @if ($item->product_type === 'new_arrival')
-                                            <span class="badge bg-success">New Arrival</span>
-                                        @elseif ($item->product_type === 'featured_product')
-                                            <span class="badge bg-warning">Featured Product</span>
-                                        @elseif ($item->product_type === 'top_product')
-                                            <span class="badge bg-info">Top Product</span>
-                                        @elseif ($item->product_type === 'best_product')
-                                            <span class="badge bg-danger">Best Product</span>
-                                        @else
-                                            <span class="badge bg-dark">None</span>
-                                        @endif
-                                    </td>
-                                    <td>
-                                        @if ($item->status === 1)
-                                            <div class="form-check form-switch mb-3">
-                                                <input type="checkbox" class="form-check-input change-status"
-                                                    data-id="{{ $item->id }}" checked>
-                                            </div>
-                                        @elseif ($item->status === 0)
-                                            <div class="form-check form-switch mb-3">
-                                                <input type="checkbox" class="form-check-input change-status"
-                                                    data-id="{{ $item->id }}">
-                                            </div>
-                                        @endif
-                                    </td>
+                                    <td width="100"><img src="{{ asset($item->image) }}" width="50"></td>
                                     <td width="100">
-                                        <a href="{{ route('admin.products.edit', $item->id) }}" class="btn btn-primary"><i
-                                                class="fas fa-pencil-alt"></i></a>
-                                        <a href="{{ route('admin.products.destroy', $item->id) }}" id="delete"
+                                        <a href="{{ route('admin.products-image-gallery.destroy', $item->id) }}" id="delete"
                                             class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
-                                            <div class="btn-group dropstart">
-                                                <button type="button" class="btn btn-info waves-effect waves-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                                                    <i class="mdi mdi-chevron-left"></i> <i class="fas fa-cog"></i>
-                                                </button>
-                                                <div class="dropdown-menu">
-                                                    <a class="dropdown-item" href="{{ route('admin.products-image-gallery.index', ['product' => $item->id]) }}"><i class="fas fa-images"></i> Image Gallery</a>
-                                                    <a class="dropdown-item" href="#">Another action</a>
-                                                    <a class="dropdown-item" href="#">Something else here</a>
-                                                </div>
-                                            </div>
                                     </td>
                                 </tr>
                             @endforeach

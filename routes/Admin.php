@@ -6,6 +6,7 @@ use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\ChildCategoryController;
 use App\Http\Controllers\Backend\ProductController;
+use App\Http\Controllers\Backend\ProductImageGalleryController;
 use App\Http\Controllers\Backend\ProfileController;
 use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\SubCategoryController;
@@ -97,4 +98,11 @@ Route::controller(ProductController::class)->group(function () {
     Route::get('product/get-subcategories', 'getSubCategories')->name('product.get-subcategories');
     Route::get('product/get-child-categories', 'getChildCategories')->name('product.get-child-categories');
     Route::put('products-change-status', 'changeStatus')->name('products.change-status');
+});
+
+/** Products Image Gallery Route */
+Route::controller(ProductImageGalleryController::class)->group(function () {
+    Route::get('products-image-gallery', 'index')->name('products-image-gallery.index');
+    Route::post('products-image-gallery/store', 'store')->name('products-image-gallery.store');
+    Route::delete('products-image-gallery/{id}', 'destroy')->name('products-image-gallery.destroy');
 });
