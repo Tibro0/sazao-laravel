@@ -20,8 +20,7 @@
                     <div class="d-flex justify-content-between align-items-center">
                         <h4 class="mb-0">Product : {{ $product->name }}</h4>
                         <div>
-                            {{-- <a href="{{ route('admin.products.create') }}" class="btn btn-primary px-5 rounded">Create
-                                New</a> --}}
+                            <a href="{{ route('admin.products.index') }}" class="btn btn-primary px-5 rounded">Back</a>
                         </div>
                     </div>
                 </div>

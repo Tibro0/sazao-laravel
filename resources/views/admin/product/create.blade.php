@@ -28,7 +28,7 @@
                         <div class="row g-3">
                             <div class="col-md-12">
                                 <label>Image <span class="text-danger">* (width:380px, height:317px) 2MB
-                                        Minimum</span></label>
+                                        Maximum</span></label>
                                 <input type="file" name="image" placeholder="Image"
                                     class="form-control @error('image') is-invalid @enderror">
                                 @error('image')

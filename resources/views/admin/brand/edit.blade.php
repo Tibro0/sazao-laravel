@@ -26,7 +26,7 @@
                                 <img src="{{ asset($brand->logo) }}" width="100">
                             </div>
                             <div class="col-md-12">
-                                <label>Logo <span class="text-danger">* (width:1280px, height:640px) 2MB Minimum</span></label>
+                                <label>Logo <span class="text-danger">* (width:1280px, height:640px) 2MB Maximum</span></label>
                                 <input type="file" name="logo" placeholder="Logo"
                                     class="form-control @error('logo') is-invalid @enderror">
                                 @error('logo')
