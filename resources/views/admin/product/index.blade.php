@@ -88,8 +88,7 @@
                                                     href="{{ route('admin.products-image-gallery.index', ['product' => $item->id]) }}"><i
                                                         class="fas fa-images"></i> Image Gallery</a>
                                                 <a class="dropdown-item"
-                                                    href="{{ route('admin.products-variant.index', ['product' => $item->id]) }}">Product Variant</a>
-                                                <a class="dropdown-item" href="#">Something else here</a>
+                                                    href="{{ route('admin.products-variant.index', ['product' => $item->id]) }}"><i class="fab fa-product-hunt"></i> Product Variant</a>
                                             </div>
                                         </div>
                                     </td>

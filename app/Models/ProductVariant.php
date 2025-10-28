@@ -7,4 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class ProductVariant extends Model
 {
     protected $guarded = [];
+
+    public function productVariantItems()
+    {
+        return $this->hasMany(ProductVariantItem::class);
+    }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\ProductVariant;
+use App\Models\ProductVariantItem;
 use Illuminate\Http\Request;
 
 class ProductVariantController extends Controller
@@ -96,6 +97,13 @@ class ProductVariantController extends Controller
     public function destroy(string $id)
     {
         $variant = ProductVariant::findOrFail($id);
+
+        $variantItemCheck = ProductVariantItem::where(['product_variant_id' => $variant->id])->count();
+
+        if ($variantItemCheck > 0) {
+            return response(['status' => 'error', 'message' => 'This Variant Contain items in it delete the Variant items First for delete this Variant!']);
+        }
+
         $variant->delete();
         return response(['status' => 'success', 'message' => 'Deleted Successfully!']);
     }

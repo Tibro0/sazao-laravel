@@ -16,7 +16,7 @@ class ProductImageGalleryController extends Controller
      */
     public function index(Request $request)
     {
-        $productImageGalleries = ProductImageGallery::orderBy('id', 'DESC')->get();
+        $productImageGalleries = ProductImageGallery::orderBy('id', 'DESC')->where(['product_id' => request()->product])->get();
         $product = Product::findOrFail($request->product);
         return view('admin.product.image-gallery.index', compact('productImageGalleries', 'product'));
     }
