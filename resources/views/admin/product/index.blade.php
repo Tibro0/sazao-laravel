@@ -77,16 +77,20 @@
                                                 class="fas fa-pencil-alt"></i></a>
                                         <a href="{{ route('admin.products.destroy', $item->id) }}" id="delete"
                                             class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
-                                            <div class="btn-group dropstart">
-                                                <button type="button" class="btn btn-info waves-effect waves-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                                                    <i class="mdi mdi-chevron-left"></i> <i class="fas fa-cog"></i>
-                                                </button>
-                                                <div class="dropdown-menu">
-                                                    <a class="dropdown-item" href="{{ route('admin.products-image-gallery.index', ['product' => $item->id]) }}"><i class="fas fa-images"></i> Image Gallery</a>
-                                                    <a class="dropdown-item" href="#">Another action</a>
-                                                    <a class="dropdown-item" href="#">Something else here</a>
-                                                </div>
+                                        <div class="btn-group dropstart">
+                                            <button type="button"
+                                                class="btn btn-info waves-effect waves-light dropdown-toggle"
+                                                data-bs-toggle="dropdown" aria-expanded="false">
+                                                <i class="mdi mdi-chevron-left"></i> <i class="fas fa-cog"></i>
+                                            </button>
+                                            <div class="dropdown-menu">
+                                                <a class="dropdown-item"
+                                                    href="{{ route('admin.products-image-gallery.index', ['product' => $item->id]) }}"><i
+                                                        class="fas fa-images"></i> Image Gallery</a>
+                                                <a class="dropdown-item" href="#">Another action</a>
+                                                <a class="dropdown-item" href="#">Something else here</a>
                                             </div>
+                                        </div>
                                     </td>
                                 </tr>
                             @endforeach

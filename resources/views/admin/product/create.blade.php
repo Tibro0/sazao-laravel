@@ -106,7 +106,7 @@
                             </div>
 
                             <div class="col-md-12">
-                                <label>price <span class="text-danger">*</span></label>
+                                <label>Price <span class="text-danger">*</span></label>
                                 <input type="text" name="price" value="{{ old('price') }}"
                                     class="form-control @error('price') is-invalid @enderror">
                                 @error('price')

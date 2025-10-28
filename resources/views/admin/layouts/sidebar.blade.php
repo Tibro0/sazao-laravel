@@ -31,7 +31,7 @@
             </a>
             <ul class="sub-menu" aria-expanded="false">
                 <li class="{{ adminSidebarActive(['admin.brand.*']) }}"><a href="{{ route('admin.brand.index') }}">Brand</a></li>
-                <li class="{{ adminSidebarActive(['admin.products.*']) }}"><a href="{{ route('admin.products.index') }}">Products</a></li>
+                <li class="{{ adminSidebarActive(['admin.products.*', 'admin.products-image-gallery.*']) }}"><a href="{{ route('admin.products.index') }}">Products</a></li>
             </ul>
         </li>
 
