@@ -7,6 +7,7 @@ use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\ChildCategoryController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\ProductImageGalleryController;
+use App\Http\Controllers\Backend\ProductVariantController;
 use App\Http\Controllers\Backend\ProfileController;
 use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\SubCategoryController;
@@ -105,4 +106,15 @@ Route::controller(ProductImageGalleryController::class)->group(function () {
     Route::get('products-image-gallery', 'index')->name('products-image-gallery.index');
     Route::post('products-image-gallery/store', 'store')->name('products-image-gallery.store');
     Route::delete('products-image-gallery/{id}', 'destroy')->name('products-image-gallery.destroy');
+});
+
+/** Product Variant Route */
+Route::controller(ProductVariantController::class)->group(function () {
+    Route::get('products-variant', 'index')->name('products-variant.index');
+    Route::get('products-variant/create', 'create')->name('products-variant.create');
+    Route::post('products-variant/store', 'store')->name('products-variant.store');
+    Route::get('products-variant/edit/{id}', 'edit')->name('products-variant.edit');
+    Route::put('products-variant/{id}', 'update')->name('products-variant.update');
+    Route::delete('products-variant/{id}', 'destroy')->name('products-variant.destroy');
+    Route::put('products-variant-change-status', 'changeStatus')->name('products-variant.change-status');
 });

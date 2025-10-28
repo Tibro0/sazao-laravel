@@ -1,7 +1,7 @@
 @extends('admin.layouts.master')
 
 @section('page-title')
-    Sazao | All Products
+    Sazao | All Product Variant
 @endsection
 
 @section('css-link')
@@ -14,14 +14,26 @@
 
 @section('content')
     <div class="row">
+        {{-- breadcrumb Start --}}
+        <div class="col-12">
+            <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                <h4 class="mb-sm-0 text-capitalize">Product : {{$product->name}}</h4>
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <a href="{{ route('admin.products.index') }}" class="btn btn-primary px-5">Back</a>
+                    </ol>
+                </div>
+
+            </div>
+        </div>
+        {{-- breadcrumb End --}}
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between align-items-center">
-                        <h4 class="mb-0">All Products</h4>
+                        <h4 class="mb-0">All Product Variants</h4>
                         <div>
-                            <a href="{{ route('admin.products.create') }}" class="btn btn-primary px-5 rounded">Create
-                                New</a>
+                            <a href="{{ route('admin.products-variant.create', ['product' => $product->id]) }}" class="btn btn-primary px-5 rounded">Create New</a>
                         </div>
                     </div>
                 </div>
@@ -31,67 +43,34 @@
                         <thead>
                             <tr>
                                 <th>SL</th>
-                                <th>Image</th>
                                 <th>Name</th>
-                                <th>Price</th>
-                                <th>Type</th>
                                 <th>Status</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($products as $item)
+                            @foreach ($variants as $item)
                                 <tr>
                                     <td width="50">{{ $loop->iteration }}</td>
-                                    <td width="100"><img src="{{ asset($item->thumb_image) }}" width="100"></td>
                                     <td>{{ $item->name }}</td>
-                                    <td>{{ $item->price }}</td>
-                                    <td>
-                                        @if ($item->product_type === 'new_arrival')
-                                            <span class="badge bg-success">New Arrival</span>
-                                        @elseif ($item->product_type === 'featured_product')
-                                            <span class="badge bg-warning">Featured Product</span>
-                                        @elseif ($item->product_type === 'top_product')
-                                            <span class="badge bg-info">Top Product</span>
-                                        @elseif ($item->product_type === 'best_product')
-                                            <span class="badge bg-danger">Best Product</span>
-                                        @else
-                                            <span class="badge bg-dark">None</span>
-                                        @endif
-                                    </td>
                                     <td>
                                         @if ($item->status === 1)
                                             <div class="form-check form-switch mb-3">
-                                                <input type="checkbox" class="form-check-input change-status"
-                                                    data-id="{{ $item->id }}" checked>
+                                                <input type="checkbox" class="form-check-input change-status" data-id="{{ $item->id }}" checked>
                                             </div>
                                         @elseif ($item->status === 0)
                                             <div class="form-check form-switch mb-3">
-                                                <input type="checkbox" class="form-check-input change-status"
-                                                    data-id="{{ $item->id }}">
+                                                <input type="checkbox" class="form-check-input change-status" data-id="{{ $item->id }}">
                                             </div>
                                         @endif
                                     </td>
                                     <td width="100">
-                                        <a href="{{ route('admin.products.edit', $item->id) }}" class="btn btn-primary"><i
+                                        <a href="#" class="btn btn-info"><i
+                                                class="fas fa-pencil-alt me-1"></i> Variant Item</a>
+                                        <a href="{{ route('admin.products-variant.edit', $item->id) }}" class="btn btn-primary"><i
                                                 class="fas fa-pencil-alt"></i></a>
-                                        <a href="{{ route('admin.products.destroy', $item->id) }}" id="delete"
+                                        <a href="{{ route('admin.products-variant.destroy', $item->id) }}" id="delete"
                                             class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
-                                        <div class="btn-group dropstart">
-                                            <button type="button"
-                                                class="btn btn-info waves-effect waves-light dropdown-toggle"
-                                                data-bs-toggle="dropdown" aria-expanded="false">
-                                                <i class="mdi mdi-chevron-left"></i> <i class="fas fa-cog"></i>
-                                            </button>
-                                            <div class="dropdown-menu">
-                                                <a class="dropdown-item"
-                                                    href="{{ route('admin.products-image-gallery.index', ['product' => $item->id]) }}"><i
-                                                        class="fas fa-images"></i> Image Gallery</a>
-                                                <a class="dropdown-item"
-                                                    href="{{ route('admin.products-variant.index', ['product' => $item->id]) }}">Product Variant</a>
-                                                <a class="dropdown-item" href="#">Something else here</a>
-                                            </div>
-                                        </div>
                                     </td>
                                 </tr>
                             @endforeach
@@ -170,7 +149,7 @@
                 let id = $(this).data('id');
 
                 $.ajax({
-                    url: "{{ route('admin.products.change-status') }}",
+                    url: "{{ route('admin.products-variant.change-status') }}",
                     method: 'PUT',
                     data: {
                         status: isChecked,

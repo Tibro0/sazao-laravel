@@ -32,6 +32,7 @@ class DatabaseSeeder extends Seeder
             VendorSeeder::class,
             ProductSeeder::class,
             ProductImageGallerySeeder::class,
+            ProductVariantSeeder::class,
         ]);
     }
 }
