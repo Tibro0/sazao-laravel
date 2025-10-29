@@ -24,7 +24,18 @@ class VendorSeeder extends Seeder
                 'description' => 'Shop Description',
                 'created_at' => now(),
                 'updated_at' => now(),
-            ]
+            ],
+            [
+                'user_id' => 2,
+                'shop_name' => 'Vendor Shop',
+                'banner' => 'frontend/images/main-image/vendor_profile_images/admin_banner.jpg',
+                'phone' => '01734449023',
+                'email' => 'vendor@gmail.com',
+                'address' => 'Gazipur',
+                'description' => 'Vendor Shop Description',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
         ]);
     }
 }
