@@ -16,6 +16,12 @@ class VendorProductImageGalleryController extends Controller
     {
         $productImageGalleries = ProductImageGallery::orderBy('id', 'DESC')->where(['product_id' => request()->product])->get();
         $product = Product::findOrFail($request->product);
+
+        /** Check Product Vendor */
+        if ($product->vendor_id !== Auth::user()->vendor->id) {
+            abort(404);
+        }
+
         return view('vendor.product.image-gallery.index', compact('productImageGalleries', 'product'));
     }
 
@@ -45,6 +51,12 @@ class VendorProductImageGalleryController extends Controller
     public function destroy(string $id)
     {
         $productImage = ProductImageGallery::findOrFail($id);
+
+        /** Check Product Vendor */
+        if ($productImage->product->vendor_id !== Auth::user()->vendor->id) {
+            abort(404);
+        }
+
         $this->deleteImage($productImage->image);
         $productImage->delete();
         return response(['status' => 'success', 'message' => 'Deleted Successfully!']);
