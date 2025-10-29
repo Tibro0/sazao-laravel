@@ -90,7 +90,7 @@
                                                         </button>
                                                         <div class="dropdown-menu">
                                                             <a class="dropdown-item"
-                                                                href="{{ route('admin.products-image-gallery.index', ['product' => $item->id]) }}"><i
+                                                                href="{{ route('vendor.products-image-gallery.index', ['product' => $item->id]) }}"><i
                                                                     class="fas fa-images"></i> Image Gallery</a>
                                                             <a class="dropdown-item"
                                                                 href="{{ route('admin.products-variant.index', ['product' => $item->id]) }}"><i

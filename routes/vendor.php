@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Vendor\VendorController;
 use App\Http\Controllers\Vendor\VendorProductController;
+use App\Http\Controllers\Vendor\VendorProductImageGalleryController;
 use App\Http\Controllers\Vendor\VendorProfileController;
 use App\Http\Controllers\Vendor\VendorShopProfileController;
 use Illuminate\Support\Facades\Route;
@@ -35,4 +36,11 @@ Route::controller(VendorProductController::class)->group(function () {
     Route::get('product/get-subcategories', 'getSubCategories')->name('product.get-subcategories');
     Route::get('product/get-child-categories', 'getChildCategories')->name('product.get-child-categories');
     Route::put('products-change-status', 'changeStatus')->name('products.change-status');
+});
+
+/** Vendor Products Image Gallery Route */
+Route::controller(VendorProductImageGalleryController::class)->group(function () {
+    Route::get('products-image-gallery', 'index')->name('products-image-gallery.index');
+    Route::post('products-image-gallery/store', 'store')->name('products-image-gallery.store');
+    Route::delete('products-image-gallery/{id}', 'destroy')->name('products-image-gallery.destroy');
 });
