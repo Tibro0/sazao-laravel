@@ -16,7 +16,7 @@ class ProductVariantController extends Controller
     public function index(Request $request)
     {
         $product = Product::findOrFail($request->product);
-        $variants = ProductVariant::orderBy('id', 'DESC')->get();
+        $variants = ProductVariant::orderBy('id', 'DESC')->where(['product_id' => request()->product])->get();
         return view('admin.product.product-variant.index', compact('product', 'variants'));
     }
 

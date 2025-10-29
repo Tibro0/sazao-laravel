@@ -21,7 +21,7 @@ class VendorProductVariantController extends Controller
         if ($product->vendor_id !== Auth::user()->vendor->id) {
             abort(404);
         }
-        $variants = ProductVariant::orderBy('id', 'DESC')->get();
+        $variants = ProductVariant::orderBy('id', 'DESC')->where(['product_id' => request()->product])->get();
         return view('vendor.product.product-variant.index', compact('product', 'variants'));
     }
 
