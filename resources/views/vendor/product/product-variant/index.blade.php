@@ -1,7 +1,7 @@
 @extends('vendor.layouts.master')
 
 @section('page-title')
-    Sazao | All Products
+    Sazao | All Variants
 @endsection
 
 @section('css-link')
@@ -22,12 +22,20 @@
                 <div class="col-xl-9 col-xxl-10 col-lg-9 ms-auto">
                     <div class="dashboard_content mt-2 mt-md-0">
                         <div class="wsus__dashboard_profile">
+
+                            <div class="d-flex justify-content-between mb-4">
+                                <h4>Product : {{ $product->name }}</h4>
+                                <div>
+                                    <a href="{{ route('vendor.products.index') }}" class="btn btn-primary px-5">Back</a>
+                                </div>
+                            </div>
+
                             <div class="wsus__dash_pro_area">
                                 <div class="d-flex justify-content-between mb-4">
-                                    <h4>All Products</h4>
+                                    <h4 class="mb-0">All Product Variants</h4>
                                     <div>
-                                        <a href="{{ route('vendor.products.create') }}" class="btn btn-primary px-5">Create
-                                            New</a>
+                                        <a href="{{ route('vendor.products-variant.create', ['product' => $product->id]) }}"
+                                            class="btn btn-primary px-5 rounded">Create New</a>
                                     </div>
                                 </div>
                                 <table id="datatable" class="table table-bordered dt-responsive nowrap"
@@ -35,43 +43,16 @@
                                     <thead>
                                         <tr>
                                             <th>SL</th>
-                                            <th>Image</th>
                                             <th>Name</th>
-                                            <th>Price</th>
-                                            <th>Approved</th>
-                                            <th>Type</th>
                                             <th>Status</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($products as $item)
+                                        @foreach ($variants as $item)
                                             <tr>
                                                 <td width="50">{{ $loop->iteration }}</td>
-                                                <td width="100"><img src="{{ asset($item->thumb_image) }}"
-                                                        width="100"></td>
                                                 <td>{{ $item->name }}</td>
-                                                <td>{{ $item->price }}</td>
-                                                <td>
-                                                    @if ($item->is_approved === 1)
-                                                        <span class="badge bg-primary">Yes</span>
-                                                    @elseif ($item->is_approved === 0)
-                                                    <span class="badge bg-danger">No</span>
-                                                    @endif
-                                                </td>
-                                                <td>
-                                                    @if ($item->product_type === 'new_arrival')
-                                                        <span class="badge bg-success">New Arrival</span>
-                                                    @elseif ($item->product_type === 'featured_product')
-                                                        <span class="badge bg-warning">Featured Product</span>
-                                                    @elseif ($item->product_type === 'top_product')
-                                                        <span class="badge bg-info">Top Product</span>
-                                                    @elseif ($item->product_type === 'best_product')
-                                                        <span class="badge bg-danger">Best Product</span>
-                                                    @else
-                                                        <span class="badge bg-dark">None</span>
-                                                    @endif
-                                                </td>
                                                 <td>
                                                     @if ($item->status === 1)
                                                         <div class="form-check form-switch mb-3">
@@ -86,26 +67,15 @@
                                                     @endif
                                                 </td>
                                                 <td width="100">
-                                                    <a href="{{ route('vendor.products.edit', $item->id) }}"
+                                                    {{-- <a href="{{ route('vendor.products-variant-item.index', ['productId' => request()->product, 'variantId' => $item->id]) }}"
+                                                        class="btn btn-info"><i class="fas fa-pencil-alt me-1"></i>
+                                                        Variant
+                                                        Item</a> --}}
+                                                    <a href="{{ route('vendor.products-variant.edit', $item->id) }}"
                                                         class="btn btn-primary"><i class="fas fa-pencil-alt"></i></a>
-                                                    <a href="{{ route('vendor.products.destroy', $item->id) }}"
+                                                    <a href="{{ route('vendor.products-variant.destroy', $item->id) }}"
                                                         id="delete" class="btn btn-danger"><i
                                                             class="fas fa-trash-alt"></i></a>
-                                                    <div class="btn-group dropstart">
-                                                        <button type="button"
-                                                            class="btn btn-info waves-effect waves-light dropdown-toggle"
-                                                            data-bs-toggle="dropdown" aria-expanded="false">
-                                                            <i class="mdi mdi-chevron-left"></i> <i class="fas fa-cog"></i>
-                                                        </button>
-                                                        <div class="dropdown-menu">
-                                                            <a class="dropdown-item"
-                                                                href="{{ route('vendor.products-image-gallery.index', ['product' => $item->id]) }}"><i
-                                                                    class="fas fa-images"></i> Image Gallery</a>
-                                                            <a class="dropdown-item"
-                                                                href="{{ route('vendor.products-variant.index', ['product' => $item->id]) }}"><i
-                                                                    class="fab fa-product-hunt"></i> Product Variant</a>
-                                                        </div>
-                                                    </div>
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -186,7 +156,7 @@
                 let id = $(this).data('id');
 
                 $.ajax({
-                    url: "{{ route('vendor.products.change-status') }}",
+                    url: "{{ route('vendor.products-variant.change-status') }}",
                     method: 'PUT',
                     data: {
                         status: isChecked,

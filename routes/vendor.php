@@ -3,6 +3,7 @@
 use App\Http\Controllers\Vendor\VendorController;
 use App\Http\Controllers\Vendor\VendorProductController;
 use App\Http\Controllers\Vendor\VendorProductImageGalleryController;
+use App\Http\Controllers\Vendor\VendorProductVariantController;
 use App\Http\Controllers\Vendor\VendorProfileController;
 use App\Http\Controllers\Vendor\VendorShopProfileController;
 use Illuminate\Support\Facades\Route;
@@ -43,4 +44,15 @@ Route::controller(VendorProductImageGalleryController::class)->group(function ()
     Route::get('products-image-gallery', 'index')->name('products-image-gallery.index');
     Route::post('products-image-gallery/store', 'store')->name('products-image-gallery.store');
     Route::delete('products-image-gallery/{id}', 'destroy')->name('products-image-gallery.destroy');
+});
+
+/** Vendor Product Variant Route */
+Route::controller(VendorProductVariantController::class)->group(function () {
+    Route::get('products-variant', 'index')->name('products-variant.index');
+    Route::get('products-variant/create', 'create')->name('products-variant.create');
+    Route::post('products-variant/store', 'store')->name('products-variant.store');
+    Route::get('products-variant/edit/{id}', 'edit')->name('products-variant.edit');
+    Route::put('products-variant/{id}', 'update')->name('products-variant.update');
+    Route::delete('products-variant/{id}', 'destroy')->name('products-variant.destroy');
+    Route::put('products-variant-change-status', 'changeStatus')->name('products-variant.change-status');
 });

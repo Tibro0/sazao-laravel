@@ -50,7 +50,7 @@ class VendorProductImageGalleryController extends Controller
 
     public function destroy(string $id)
     {
-        $productImage = ProductImageGallery::findOrFail($id);
+        $productImage = ProductImageGallery::with(['product'])->findOrFail($id);
 
         /** Check Product Vendor */
         if ($productImage->product->vendor_id !== Auth::user()->vendor->id) {
