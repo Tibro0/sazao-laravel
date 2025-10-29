@@ -112,6 +112,12 @@ class VendorProductController extends Controller
     public function edit(string $id)
     {
         $product = Product::findOrFail($id);
+        
+        /** Check if it's the owner of the Product */
+        if ($product->vendor_id !== Auth::user()->vendor->id) {
+            abort(404);
+        }
+
         $categories = Category::all();
         $subCategories = SubCategory::where('category_id', $product->category_id)->get();
         $childCategories = ChildCategory::where('sub_category_id', $product->sub_category_id)->get();
@@ -148,6 +154,12 @@ class VendorProductController extends Controller
         ]);
 
         $product = Product::findOrFail($id);
+
+        /** Check if it's the owner of the Product */
+        if ($product->vendor_id !== Auth::user()->vendor->id) {
+            abort(404);
+        }
+
         /** Handle the image Upload */
         $imagePath = $this->updateImage($request, 'image', 'uploads/product_thumb_image', $product->thumb_image);
 
