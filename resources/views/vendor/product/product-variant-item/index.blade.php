@@ -1,7 +1,7 @@
 @extends('vendor.layouts.master')
 
 @section('page-title')
-    Sazao | All Variants
+    Sazao | All Variant Items
 @endsection
 
 @section('css-link')
@@ -26,16 +26,15 @@
                             <div class="d-flex justify-content-between mb-4">
                                 <h4>Product : {{ $product->name }}</h4>
                                 <div>
-                                    <a href="{{ route('vendor.products.index') }}" class="btn btn-primary px-5">Back</a>
+                                     <a href="{{ route('vendor.products-variant.index', ['product' => $product->id]) }}" class="btn btn-primary px-5">Back</a>
                                 </div>
                             </div>
 
                             <div class="wsus__dash_pro_area">
                                 <div class="d-flex justify-content-between mb-4">
-                                    <h4 class="mb-0">All Product Variants</h4>
+                                    <h4 class="mb-0">All Product Variant Ttems</h4>
                                     <div>
-                                        <a href="{{ route('vendor.products-variant.create', ['product' => $product->id]) }}"
-                                            class="btn btn-primary px-5 rounded">Create New</a>
+                                        <a href="{{ route('vendor.products-variant-item.create', ['productId'=>$product->id, 'variantId' => $variant->id]) }}" class="btn btn-primary px-5 rounded">Create New</a>
                                     </div>
                                 </div>
                                 <table id="datatable" class="table table-bordered dt-responsive nowrap"
@@ -44,15 +43,27 @@
                                         <tr>
                                             <th>SL</th>
                                             <th>Name</th>
+                                            <th>Product Variant Name</th>
+                                            <th>Price</th>
+                                            <th>Is Default</th>
                                             <th>Status</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($variants as $item)
+                                        @foreach ($variantItems as $item)
                                             <tr>
                                                 <td width="50">{{ $loop->iteration }}</td>
                                                 <td>{{ $item->name }}</td>
+                                                <td>{{ $item->productVariant->name }}</td>
+                                                <td>{{ $item->price }}</td>
+                                                <td>
+                                                    @if ($item->is_default === 1)
+                                                        <span class="badge bg-primary">Yes</span>
+                                                    @elseif ($item->is_default === 0)
+                                                        <span class="badge bg-danger">No</span>
+                                                    @endif
+                                                </td>
                                                 <td>
                                                     @if ($item->status === 1)
                                                         <div class="form-check form-switch mb-3">
@@ -67,13 +78,9 @@
                                                     @endif
                                                 </td>
                                                 <td width="100">
-                                                    <a href="{{ route('vendor.products-variant-item.index', ['productId' => request()->product, 'variantId' => $item->id]) }}"
-                                                        class="btn btn-info text-white"><i class="fas fa-pencil-alt me-1"></i>
-                                                        Variant
-                                                        Item</a>
-                                                    <a href="{{ route('vendor.products-variant.edit', $item->id) }}"
+                                                    <a href="{{ route('vendor.products-variant-item.edit', $item->id) }}"
                                                         class="btn btn-primary"><i class="fas fa-pencil-alt"></i></a>
-                                                    <a href="{{ route('vendor.products-variant.destroy', $item->id) }}"
+                                                    <a href="{{ route('vendor.products-variant-item.destroy', $item->id) }}"
                                                         id="delete" class="btn btn-danger"><i
                                                             class="fas fa-trash-alt"></i></a>
                                                 </td>
@@ -156,7 +163,7 @@
                 let id = $(this).data('id');
 
                 $.ajax({
-                    url: "{{ route('vendor.products-variant.change-status') }}",
+                    url: "{{ route('vendor.products-variant-item.change-status') }}",
                     method: 'PUT',
                     data: {
                         status: isChecked,
