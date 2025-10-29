@@ -26,7 +26,8 @@
                                 <div class="d-flex justify-content-between mb-4">
                                     <h4>All Products</h4>
                                     <div>
-                                        <a href="{{ route('vendor.products.create') }}" class="btn btn-primary px-5">Create New</a>
+                                        <a href="{{ route('vendor.products.create') }}" class="btn btn-primary px-5">Create
+                                            New</a>
                                     </div>
                                 </div>
                                 <table id="datatable" class="table table-bordered dt-responsive nowrap"
@@ -37,6 +38,7 @@
                                             <th>Image</th>
                                             <th>Name</th>
                                             <th>Price</th>
+                                            <th>Approved</th>
                                             <th>Type</th>
                                             <th>Status</th>
                                             <th>Action</th>
@@ -50,6 +52,13 @@
                                                         width="100"></td>
                                                 <td>{{ $item->name }}</td>
                                                 <td>{{ $item->price }}</td>
+                                                <td>
+                                                    @if ($item->is_approved === 1)
+                                                        <span class="badge bg-primary">Yes</span>
+                                                    @elseif ($item->is_approved === 0)
+                                                    <span class="badge bg-danger">No</span>
+                                                    @endif
+                                                </td>
                                                 <td>
                                                     @if ($item->product_type === 'new_arrival')
                                                         <span class="badge bg-success">New Arrival</span>

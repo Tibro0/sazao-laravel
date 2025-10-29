@@ -178,7 +178,7 @@
                                             @enderror
                                         </div>
 
-                                        <div class="col-md-12">
+                                        {{-- <div class="col-md-12">
                                             <label class="form-label">Product Type</label>
                                             <select name="product_type"
                                                 class="form-select @error('product_type') is-invalid @enderror">
@@ -191,7 +191,7 @@
                                             @error('product_type')
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
-                                        </div>
+                                        </div> --}}
 
                                         <div class="col-md-12">
                                             <label class="form-label">Seo Title</label>
