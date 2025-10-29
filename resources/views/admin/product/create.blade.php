@@ -48,7 +48,7 @@
                             <div class="col-md-4">
                                 <label>Select a Category <span class="text-danger">*</span></label>
                                 <select name="category"
-                                    class="form-control main-category select2 @error('category') is-invalid @enderror">
+                                    class="form-select main-category select2 @error('category') is-invalid @enderror">
                                     <option value="">Select a Category</option>
                                     @foreach ($categories as $category)
                                         <option value="{{ $category->id }}">{{ $category->name }}</option>
@@ -62,7 +62,7 @@
                             <div class="col-md-4">
                                 <label>Select a Sub Category</label>
                                 <select name="sub_category"
-                                    class="form-control sub-category select2 @error('sub_category') is-invalid @enderror">
+                                    class="form-select sub-category select2 @error('sub_category') is-invalid @enderror">
                                     <option value="">Select a Sub Category</option>
                                 </select>
                                 @error('sub_category')
@@ -74,7 +74,7 @@
                                 <div class="form-group">
                                     <label>Select a Child Category</label>
                                     <select name="child_category"
-                                        class="form-control child-category select2 @error('child_category') is-invalid @enderror">
+                                        class="form-select child-category select2 @error('child_category') is-invalid @enderror">
                                         <option value="">Select a Child Category</option>
                                     </select>
                                     @error('child_category')
@@ -85,7 +85,7 @@
 
                             <div class="col-md-12">
                                 <label>Select a Brand <span class="text-danger">*</span></label>
-                                <select name="brand" class="form-control select2 @error('brand') is-invalid @enderror">
+                                <select name="brand" class="form-select select2 @error('brand') is-invalid @enderror">
                                     <option value="">Select a Brand</option>
                                     @foreach ($brands as $brand)
                                         <option value="{{ $brand->id }}">{{ $brand->name }}</option>
@@ -169,7 +169,8 @@
 
                             <div class="col-md-12">
                                 <label>Long Description <span class="text-danger">*</span></label>
-                                <textarea name="long_description" id="elm1" class="form-control @error('long_description') is-invalid @enderror">{!! old('long_description') !!}</textarea>
+                                <textarea name="long_description" id="elm1"
+                                    class="form-control @error('long_description') is-invalid @enderror">{!! old('long_description') !!}</textarea>
                                 @error('long_description')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -178,7 +179,7 @@
                             <div class="col-md-12">
                                 <label>Product Type</label>
                                 <select name="product_type"
-                                    class="form-control @error('product_type') is-invalid @enderror">
+                                    class="form-select @error('product_type') is-invalid @enderror">
                                     <option value="">Select</option>
                                     <option value="new_arrival">New Arrival</option>
                                     <option value="featured_product">Featured</option>

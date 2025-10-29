@@ -54,7 +54,7 @@
                             <div class="col-md-4">
                                 <label>Select a Category <span class="text-danger">*</span></label>
                                 <select name="category"
-                                    class="form-control main-category select2 @error('category') is-invalid @enderror">
+                                    class="form-select main-category select2 @error('category') is-invalid @enderror">
                                     <option value="">Select a Category</option>
                                     @foreach ($categories as $category)
                                         <option @selected($category->id == $product->category_id) value="{{ $category->id }}">
@@ -69,7 +69,7 @@
                             <div class="col-md-4">
                                 <label>Select a Sub Category</label>
                                 <select name="sub_category"
-                                    class="form-control sub-category select2 @error('sub_category') is-invalid @enderror">
+                                    class="form-select sub-category select2 @error('sub_category') is-invalid @enderror">
                                     <option value="">Select a Sub Category</option>
                                     @foreach ($subCategories as $subCategory)
                                         <option @selected($subCategory->id == $product->sub_category_id) value="{{ $subCategory->id }}">
@@ -86,7 +86,7 @@
                                 <div class="form-group">
                                     <label>Select a Child Category</label>
                                     <select name="child_category"
-                                        class="form-control child-category select2 @error('child_category') is-invalid @enderror">
+                                        class="form-select child-category select2 @error('child_category') is-invalid @enderror">
                                         <option value="">Select a Child Category</option>
                                         @foreach ($childCategories as $childCategory)
                                             <option @selected($childCategory->id == $product->child_category_id) value="{{ $childCategory->id }}">
@@ -102,7 +102,7 @@
 
                             <div class="col-md-12">
                                 <label>Select a Brand <span class="text-danger">*</span></label>
-                                <select name="brand" class="form-control select2 @error('brand') is-invalid @enderror">
+                                <select name="brand" class="form-select select2 @error('brand') is-invalid @enderror">
                                     <option value="">Select a Brand</option>
                                     @foreach ($brands as $brand)
                                         <option @selected($brand->id == $product->brand_id) value="{{ $brand->id }}">
@@ -202,7 +202,7 @@
                             <div class="col-md-12">
                                 <label>Product Type</label>
                                 <select name="product_type"
-                                    class="form-control @error('product_type') is-invalid @enderror">
+                                    class="form-select @error('product_type') is-invalid @enderror">
                                     <option value="">Select</option>
                                     <option {{ $product->product_type == 'new_arrival' ? 'selected' : '' }}
                                         value="new_arrival">New Arrival</option>

@@ -1,21 +1,19 @@
 <?php
 
-namespace App\Http\Controllers\Backend;
+namespace App\Http\Controllers\Vendor;
 
 use App\Http\Controllers\Controller;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\ChildCategory;
 use App\Models\Product;
-use App\Models\ProductImageGallery;
-use App\Models\ProductVariant;
 use App\Models\SubCategory;
 use App\Traits\ImageUploadTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
-class ProductController extends Controller
+class VendorProductController extends Controller
 {
     use ImageUploadTrait;
     /**
@@ -23,8 +21,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::orderBy('id', 'DESC')->get();
-        return view('admin.product.index', compact('products'));
+        $products = Product::orderBy('id', 'DESC')->where(['vendor_id' => Auth::user()->vendor->id])->get();
+        return view('vendor.product.index', compact('products'));
     }
 
     /**
@@ -34,7 +32,7 @@ class ProductController extends Controller
     {
         $categories = Category::all();
         $brands = Brand::all();
-        return view('admin.product.create', compact('categories', 'brands'));
+        return view('vendor.product.create', compact('categories', 'brands'));
     }
 
     /**
@@ -42,7 +40,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+         $request->validate([
             'image' => ['required', 'image', 'max:2048', 'dimensions:width=380,height=317'],
             'name' => ['required', 'max:255'],
             'category' => ['required', 'integer'],
@@ -87,13 +85,13 @@ class ProductController extends Controller
         $product->offer_start_date = $request->offer_start_date;
         $product->offer_end_date = $request->offer_end_date;
         $product->product_type = $request->product_type;
-        $product->is_approved = 1;
+        $product->is_approved = 0;
         $product->status = $request->status;
         $product->seo_title = $request->seo_title;
         $product->seo_description = $request->seo_description;
         $product->save();
 
-        return redirect()->route('admin.products.index')->with('toast', [
+        return redirect()->route('vendor.products.index')->with('toast', [
             'type' => 'success',
             'title' => 'Success',
             'message' => 'Created Successfully!'
@@ -118,7 +116,7 @@ class ProductController extends Controller
         $subCategories = SubCategory::where('category_id', $product->category_id)->get();
         $childCategories = ChildCategory::where('sub_category_id', $product->sub_category_id)->get();
         $brands = Brand::all();
-        return view('admin.product.edit', compact('product', 'categories', 'subCategories', 'childCategories', 'brands'));
+        return view('vendor.product.edit', compact('product', 'categories', 'subCategories', 'childCategories', 'brands'));
     }
 
     /**
@@ -177,7 +175,7 @@ class ProductController extends Controller
         $product->seo_description = $request->seo_description;
         $product->save();
 
-        return redirect()->route('admin.products.index')->with('toast', [
+        return redirect()->route('vendor.products.index')->with('toast', [
             'type' => 'success',
             'title' => 'Success',
             'message' => 'Updated Successfully!'
@@ -189,32 +187,10 @@ class ProductController extends Controller
      */
     public function destroy(string $id)
     {
-        $product = Product::findOrFail($id);
-
-        /** Delete Product Thumb Image */
-        $this->deleteImage($product->thumb_image);
-
-        /** Delete Product Gallery Image */
-        $galleryImages = ProductImageGallery::where('product_id', $product->id)->get();
-        foreach ($galleryImages as $image) {
-            $this->deleteImage($image->image);
-            $image->delete();
-        }
-
-        /** Delete Product variant if exist */
-        $variants = ProductVariant::where('product_id', $product->id)->get();
-
-        foreach ($variants as $variant) {
-            $variant->productVariantItems()->delete();
-            $variant->delete();
-        }
-
-        $product->delete();
-        return response(['status' => 'success', 'message' => 'Deleted Successfully!']);
+        //
     }
 
-    public function changeStatus(Request $request)
-    {
+    public function changeStatus(Request $request){
         $product = Product::findOrFail($request->id);
         $product->status = $request->status == 'true' ? 1 : 0;
         $product->save();
