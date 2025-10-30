@@ -31,7 +31,10 @@
             </a>
             <ul class="sub-menu" aria-expanded="false">
                 <li class="{{ adminSidebarActive(['admin.brand.*']) }}"><a href="{{ route('admin.brand.index') }}">Brand</a></li>
-                <li class="{{ adminSidebarActive(['admin.products.*', 'admin.products-image-gallery.*']) }}"><a href="{{ route('admin.products.index') }}">Products</a></li>
+                <li class="{{ adminSidebarActive(['admin.products.*', 'admin.products-image-gallery.*', 'admin.products-variant.*', 'admin.products-variant-item.*']) }}"><a href="{{ route('admin.products.index') }}">Products</a></li>
+                <li class="{{ adminSidebarActive(['admin.seller-products.index']) }}"><a href="{{ route('admin.seller-products.index') }}">Seller Products</a></li>
+                <li class="{{ adminSidebarActive(['admin.seller-pending-products.index']) }}"><a href="{{ route('admin.seller-pending-products.index') }}">Seller Pending Products</a></li>
+
             </ul>
         </li>
 

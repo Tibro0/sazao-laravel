@@ -70,7 +70,7 @@ class VendorProductVariantController extends Controller
      */
     public function edit(string $id)
     {
-        $variant = ProductVariant::findOrFail($id);
+        $variant = ProductVariant::with(['product'])->findOrFail($id);
         /** Check Product Vendor */
         if ($variant->product->vendor_id !== Auth::user()->vendor->id) {
             abort(404);

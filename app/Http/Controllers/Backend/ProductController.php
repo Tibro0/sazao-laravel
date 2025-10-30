@@ -23,7 +23,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::orderBy('id', 'DESC')->get();
+        $products = Product::orderBy('id', 'DESC')->where(['vendor_id' => Auth::user()->vendor->id])->get();
         return view('admin.product.index', compact('products'));
     }
 
@@ -153,7 +153,7 @@ class ProductController extends Controller
         /** Handle the image Upload */
         $imagePath = $this->updateImage($request, 'image', 'uploads/product_thumb_image', $product->thumb_image);
 
-        $product->vendor_id = Auth::user()->vendor->id;
+        // $product->vendor_id = Auth::user()->vendor->id;
         $product->category_id = $request->category;
         $product->sub_category_id = $request->sub_category;
         $product->child_category_id = $request->child_category;
