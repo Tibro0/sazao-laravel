@@ -232,9 +232,9 @@ class ProductVariantItemSeeder extends Seeder
             ],
             [
                 'product_variant_id' => 11,
-                'name' => 'Black Eclipse  Midnight Ocean',
+                'name' => 'Black Eclipse Midnight Ocean',
                 'price' => 10,
-                'is_default' => 1,
+                'is_default' => 0,
                 'status' => 1,
                 'created_at' => now(),
                 'updated_at' => now(),
