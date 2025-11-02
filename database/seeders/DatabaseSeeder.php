@@ -34,6 +34,7 @@ class DatabaseSeeder extends Seeder
             ProductImageGallerySeeder::class,
             ProductVariantSeeder::class,
             ProductVariantItemSeeder::class,
+            FlashSaleSeeder::class,
         ]);
     }
 }

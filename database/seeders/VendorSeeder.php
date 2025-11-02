@@ -28,7 +28,7 @@ class VendorSeeder extends Seeder
             [
                 'user_id' => 2,
                 'shop_name' => 'Vendor Shop',
-                'banner' => 'frontend/images/main-image/vendor_profile_images/admin_banner.jpg',
+                'banner' => 'frontend/images/main-image/vendor_profile_images/vendor_banner.jpg',
                 'phone' => '01734449023',
                 'email' => 'vendor@gmail.com',
                 'address' => 'Gazipur',

@@ -226,6 +226,223 @@ class ProductSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
+            [
+                'vendor_id' => 1,
+                'category_id' => 3,
+                'sub_category_id' => 8,
+                'child_category_id' => null,
+                'brand_id' => 1,
+                'name' => 'iPad mini 7',
+                'slug' => Str::slug('iPad mini 7'),
+                'thumb_image' => 'frontend/images/main-image/product_thumb_image/iPad-mini-Blue.png',
+                'qty' => 100,
+                'short_description' => 'USB Type-C 3.1 Gen2, DisplayPort, Apple Intelligence, Apple Pencil Pro support',
+                'long_description' => '<h2 dir="ltr"><strong>iPad mini 7</strong></h2>
+                <p dir="ltr">Introducing the new&nbsp;Apple iPad mini, it&rsquo;s powered by the A17 Pro chip that delivers outstanding performance along with advanced AI processing. Talking about AI, this device supports Apple Intelligence to make your life a little smarter and easier. It features a big display that makes doing productive and creative tasks convenient. Despite being a large device, it feels nice in the hand and looks dazzling in 4 different color options. It runs on the latest iPadOS 18, accessing you all the newest features. With a big battery and great optimization, this device can last all day long without any worry.</p>
+                <p><strong>&nbsp;</strong></p>
+                <h2 dir="ltr"><strong>iPad mini 7 Features</strong></h2>
+                <ul>
+                <li dir="ltr" role="presentation">Comes in a super slim design with improved aesthetics.</li>
+                <li dir="ltr" role="presentation">Has a large Liquid Retina display for breathtaking visuals.</li>
+                <li dir="ltr" role="presentation">Supports Apple Pencil Pro to let you unleash your creativity.&nbsp;</li>
+                <li dir="ltr" role="presentation">Powered by a mighty powerful processor that can handle any task.</li>
+                <li dir="ltr" role="presentation">Has Apple Intelligence support for all the advanced AI features.&nbsp;</li>
+                <li dir="ltr" role="presentation">Packs a big battery to provide longer productivity.&nbsp;</li>
+                </ul>',
+                'video_link' => 'https://www.youtube.com',
+                'sku' => 'IPAD-100',
+                'price' => '500',
+                'offer_price' => '450',
+                'offer_start_date' => now()->format('Y-m-d'),
+                'offer_end_date' => now()->addDays(9)->format('Y-m-d'),
+                'product_type' => 'top_product',
+                'is_approved' => 1,
+                'status' => 1,
+                'seo_title' => null,
+                'seo_description' => null,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'vendor_id' => 1,
+                'category_id' => 8,
+                'sub_category_id' => 15,
+                'child_category_id' => 10,
+                'brand_id' => 3,
+                'name' => 'WiWU Pilot Travel Pouch',
+                'slug' => Str::slug('WiWU Pilot Travel Pouch'),
+                'thumb_image' => 'frontend/images/main-image/product_thumb_image/WiWU Pilot Travel Pouch-black.png',
+                'qty' => 100,
+                'short_description' => 'Multiple compartments, secure zipper, stylish double deck design',
+                'long_description' => "<p dir='ltr'><strong>WiWU Pilot Travel Pouch</strong></p>
+                <p dir='ltr'>Meet the WiWU Pilot Travel Pouch, your trusty travel buddy. Made with solid materials and a fantastic double deck design. This pouch keeps your important stuff safe. It has many pockets for your passport, cards, and electronic gadgets, ensuring everything stays neat. It's small and light, so you can easily carry it in your bag or pocket. It is water resistant. Moreover, the durable YKK zipper keeps your things secure, so you don't have to worry.<br /><strong><br /></strong></p>
+                <p dir='ltr'><strong>Features Of WiWU Pilot Travel Pouch</strong></p>
+                <ul>
+                <li dir='ltr' role='presentation'>Compact and portable design</li>
+                <li dir='ltr' role='presentation'>Many compartments for organised storage</li>
+                <li dir='ltr' role='presentation'>Ideal for tech essentials like cables, chargers, and earphones</li>
+                <li dir='ltr' role='presentation'>Durable and lightweight water resistant material</li>
+                <li dir='ltr' role='presentation'>Secure storage with a zipper closure</li>
+                <li dir='ltr' role='presentation'>Perfect for travel or daily use</li>
+                </ul>",
+                'video_link' => 'https://www.youtube.com',
+                'sku' => 'WiWU-100',
+                'price' => '20',
+                'offer_price' => '15',
+                'offer_start_date' => now()->format('Y-m-d'),
+                'offer_end_date' => now()->addDays(6)->format('Y-m-d'),
+                'product_type' => 'new_arrival',
+                'is_approved' => 1,
+                'status' => 1,
+                'seo_title' => null,
+                'seo_description' => null,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'vendor_id' => 1,
+                'category_id' => 5,
+                'sub_category_id' => 10,
+                'child_category_id' => 8,
+                'brand_id' => 1,
+                'name' => 'Apple USB-C to Lightning Cable - 1m',
+                'slug' => Str::slug('Apple USB-C to Lightning Cable - 1m'),
+                'thumb_image' => 'frontend/images/main-image/product_thumb_image/Apple-USB.png',
+                'qty' => 100,
+                'short_description' => 'Apple USB-C Charge Cable - 1m',
+                'long_description' => "<h2 dir='ltr'><strong>Apple USB-C Charge Cable - 1m</strong></h2>
+                <p dir='ltr'>This Apple USB-C charging cable designed by Apple made specially for your versatile usage for people who need longer length cables and travel a lot. Designed by Apple, this 'USB-C To C'' cable is a must-have for those on the move. With an extended 2-meter length, it's perfect for distant wall plug usage. Lightweight and easy to carry in your backpack, this cable ensures hassle-free charging wherever you go. Compatible with iPhones, iPads, and MacBooks, it effortlessly handles the latest iPhone 15 series. Not just for charging, but also enables high-speed data transfer. The reversible design adds convenience, making charging in the dark worry-free. Elevate your charging experience with Apple's USB-C Charge Cable!<br /><br /></p>
+                <h2 dir='ltr'><strong>Apple USB-C Charge Cable - 1m Features</strong></h2>
+                <ul>
+                <li dir='ltr' role='presentation'>2 meters longer in length cable for distant wall plug usage;</li>
+                <li dir='ltr' role='presentation'>Lightweight material used for easy to carry in your backpack;</li>
+                <li dir='ltr' role='presentation'>Due to longer lengthy cable charge devices without any difficulty;</li>
+                <li dir='ltr' role='presentation'>Charge multiple Apple devices including your iPhones, iPad &amp; Macbooks;</li>
+                <li dir='ltr' role='presentation'>Enable to charge your latest iPhone 15 series and even data transfer;</li>
+                <li dir='ltr' role='presentation'>Reversible design makes charging easier to charge in the dark without any worries;</li>
+                <li dir='ltr' role='presentation'>Original &ldquo;USB-C To C&rdquo; charging cable designed by Apple.</li>
+                </ul>",
+                'video_link' => 'https://www.youtube.com',
+                'sku' => 'USB-100',
+                'price' => '10',
+                'offer_price' => '5',
+                'offer_start_date' => now()->format('Y-m-d'),
+                'offer_end_date' => now()->addDays(8)->format('Y-m-d'),
+                'product_type' => 'featured_product',
+                'is_approved' => 1,
+                'status' => 1,
+                'seo_title' => null,
+                'seo_description' => null,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'vendor_id' => 2,
+                'category_id' => 2,
+                'sub_category_id' => null,
+                'child_category_id' => null,
+                'brand_id' => 2,
+                'name' => 'Pixel 9 Pro Fold',
+                'slug' => Str::slug('Pixel 9 Pro Fold'),
+                'thumb_image' => 'frontend/images/main-image/product_thumb_image/Pixel-9-Pro-Fold-Obsidian.png',
+                'qty' => 100,
+                'short_description' => 'Fingerprint (side-mounted), accelerometer, gyro, proximity, compass, barometer | Ultra Wideband (UWB) support | Satellite SOS service',
+                'long_description' => "<h2 dir='ltr'><strong>Pixel 9 Pro Fold</strong></h2>
+                <p dir='ltr'>The Google Pixel 9 Pro Fold has the largest screen among foldable smartphones, offering a truly immersive experience. With exceptional AI capabilities, including seamless Gemini integration, this phone is engineered to excel in the era of Artificial Intelligence. Its slim design ensures a comfortable grip, while the enhanced folding flexibility adds to its convenience, enabling you to stay productive wherever you are. The 'Pro' designation is well-earned, reflecting its robust performance, extraordinary camera capabilities, and cutting-edge AI integration.</p>
+                <p><strong>&nbsp;</strong></p>
+                <h2 dir='ltr'><strong>Pixel 9 Pro Fold Features</strong></h2>
+                <ul>
+                <li dir='ltr' role='presentation'>Slim, sophisticated, and super durable fold pro with a scratch-free display and matte finish</li>
+                <li dir='ltr' role='presentation'>Largest display on a phone ever with a narrow bezel to immerse into a brighter &amp; stunning visual</li>
+                <li dir='ltr' role='presentation'>Redesigned camera bar with a sleek new look makes it a perfect foldable to grip with comfort</li>
+                <li dir='ltr' role='presentation'>The durable build quality with Aluminum frame and Victus protection&nbsp; stands up to slips and spills&nbsp;</li>
+                <li dir='ltr' role='presentation'>Stunning photos and videos are captured with different lenses at every angle and every lighting&nbsp;</li>
+                <li dir='ltr' role='presentation'>Editing is a dream on the larger screen with multiple features color correction and AI edit options</li>
+                <li dir='ltr' role='presentation'>Easily foldable on&nbsp; tabletop or other surfaces makes the handsfree viewing more fulfilling than ever</li>
+                <li dir='ltr' role='presentation'>Multitasking like watch, chat, and other stuff with the giant screen&nbsp; by using the split screen feature</li>
+                <li dir='ltr' role='presentation'>Tensor 4nm processor with great power &amp; optimization ability offers Game-changing performance</li>
+                <li dir='ltr' role='presentation'>A large battery and a quick charging method lets the power never go off after an extensive use</li>
+                </ul>",
+                'video_link' => 'https://www.youtube.com',
+                'sku' => 'PIXEL-100',
+                'price' => '100',
+                'offer_price' => '80',
+                'offer_start_date' => now()->format('Y-m-d'),
+                'offer_end_date' => now()->addDays(12)->format('Y-m-d'),
+                'product_type' => 'top_product',
+                'is_approved' => 1,
+                'status' => 1,
+                'seo_title' => null,
+                'seo_description' => null,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'vendor_id' => 2,
+                'category_id' => 7,
+                'sub_category_id' => 13,
+                'child_category_id' => null,
+                'brand_id' => 1,
+                'name' => 'Apple Pencil 2',
+                'slug' => Str::slug('Apple Pencil 2'),
+                'thumb_image' => 'frontend/images/main-image/product_thumb_image/Apple Pencil 2.png',
+                'qty' => 100,
+                'short_description' => 'Double Tapping | Magnetic Storing On Side of iPad | Supports Apple Pencil hover (iPad Pro 12.9-inch (6th generation) and iPad Pro 11-inch (4th generation))',
+                'long_description' => '<h2 style="font-weight: 600;"><strong style="font-weight: 800;">Apple Pencil 2</strong></h2>
+                <p style="font-weight: 400;">Apple Pencil 2- a more improved pencil to serve you better than ever. This second-generation Apple Pencil is excellent for sketching, coloring, taking notes, annotating PDFs, and more because it offers pixel-perfect accuracy and the lowest latency in the industry. And using it is as simple and natural as using a pencil. The second-generation Apple Pencils intuitive touch interface, which enables double-tapping, also makes it possible to switch tools without putting the device down. It has a flat edge that magnetically attaches for automated charging and pairing and is made specifically for iPad Pro, iPad Air, and iPad mini.</p>',
+                'video_link' => 'https://www.youtube.com',
+                'sku' => 'PEN-100',
+                'price' => '10',
+                'offer_price' => '5',
+                'offer_start_date' => now()->format('Y-m-d'),
+                'offer_end_date' => now()->addDays(10)->format('Y-m-d'),
+                'product_type' => 'featured_product',
+                'is_approved' => 1,
+                'status' => 1,
+                'seo_title' => null,
+                'seo_description' => null,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'vendor_id' => 2,
+                'category_id' => 2,
+                'sub_category_id' => 7,
+                'child_category_id' => null,
+                'brand_id' => 4,
+                'name' => 'OnePlus 13 5G',
+                'slug' => Str::slug('OnePlus 13 5G'),
+                'thumb_image' => 'frontend/images/main-image/product_thumb_image/OnePlus-13-5G-Arctic-Dawn.png',
+                'qty' => 100,
+                'short_description' => 'Options of 12GB, 16GB, or 24GB LPDDR5X; Storage options of 256GB, 512GB, or 1TB UFS 4.0',
+                'long_description' => '<h2 dir="ltr"><strong>OnePlus 13 5G</strong></h2>
+                <p dir="ltr">Looking for a smartphone that combines style, power, and great features? The Oneplus13 5G is what you need. This phone has a big 6.82-inch AMOLED display that makes everything look amazing. Inside it is packed with a mighty processor, Snapdragon 8 Elite. So, you don&rsquo;t have to face any lagging issues while playing games or doing something heavy on your phone.</p>
+                <p dir="ltr">One of the best things about the OnePlus 13 is its battery life. With a huge 6,000 mAh battery, it can last all day long, and it charges super quickly&mdash;up to 100% in just 36 minutes! The camera setup is also impressive, featuring three 50 MP cameras that take sharp and clear photos, although low-light performance could be better. Overall, the OnePlus 13 is a fantastic choice for anyone looking for a powerful phone at a more affordable price compared to other flagship models. It combines style, speed, and long battery life, making it a solid option for everyday users.</p>
+                <p dir="ltr">&nbsp;</p>
+                <h2 dir="ltr"><strong>OnePlus 13 5G Features</strong></h2>
+                <ul>
+                <li dir="ltr" role="presentation">Snapdragon 8 Elite Chipset ensures fast performance for gaming and multitasking.</li>
+                <li dir="ltr" role="presentation">Get an amazing viewing experience with a stunning 6.82-inch AMOLED Display.</li>
+                <li dir="ltr" role="presentation">120Hz Refresh Rate provides smooth scrolling and quick response times.</li>
+                <li dir="ltr" role="presentation">Three 50 MP lenses capture incredible photos in various lighting conditions.</li>
+                <li dir="ltr" role="presentation">Long-lasting 6000mAh Battery keeps you powered throughout the day, plus it supports super-fast 100W charging.</li>
+                <li dir="ltr" role="presentation">IP68 and IP69 Ratings make it resistant to dust and water, so you can use it worry-free.</li>
+                <li dir="ltr" role="presentation">Android 15 Operating System with OxygenOS delivers a user-friendly interface.</li>
+                </ul>',
+                'video_link' => 'https://www.youtube.com',
+                'sku' => 'ONEPLUS-100',
+                'price' => '10',
+                'offer_price' => '5',
+                'offer_start_date' => now()->format('Y-m-d'),
+                'offer_end_date' => now()->addDays(5)->format('Y-m-d'),
+                'product_type' => 'featured_product',
+                'is_approved' => 1,
+                'status' => 1,
+                'seo_title' => null,
+                'seo_description' => null,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
         ]);
     }
 }
