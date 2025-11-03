@@ -61,6 +61,13 @@
             </ul>
         </li>
 
+        <li class="{{ adminSidebarActive(['admin.settings.*']) }}">
+            <a href="{{ route('admin.settings.index') }}" class="waves-effect">
+                <i class="ri-dashboard-line"></i>
+                <span>General Setting</span>
+            </a>
+        </li>
+
         {{-- <li>
             <a href="#" class="waves-effect">
                 <i class="ri-dashboard-line"></i>
