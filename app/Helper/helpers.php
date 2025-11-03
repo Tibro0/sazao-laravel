@@ -1,4 +1,5 @@
 <?php
+
 use Illuminate\Support\Str;
 
 /** Set Sidebar Item Active Backend */
@@ -64,6 +65,7 @@ function productType($type)
 
 
 /** limit Text */
-function limitText($text, $limit = 20){
+function limitText($text, $limit = 20)
+{
     return Str::limit($text, $limit);
 }
