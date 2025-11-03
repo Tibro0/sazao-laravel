@@ -23,3 +23,39 @@ function setActive(array $route)
         }
     }
 }
+
+/** Check if Product Have Discount */
+function checkDiscount($product)
+{
+    $currentDate = date('Y-m-d');
+
+    if ($product->offer_price > 0 && $currentDate >= $product->offer_start_date && $currentDate <= $product->offer_end_date) {
+        return true;
+    }
+    return false;
+}
+
+/** calculate discount percent */
+function calculateDiscountPercent($originalPrice, $discountPrice)
+{
+    $discountAmount = $originalPrice - $discountPrice;
+    $discountPercent = ($discountAmount / $originalPrice) * 100;
+
+    return round($discountPercent);
+}
+
+/** check the Product Type */
+function productType($type)
+{
+    if ($type == 'new_arrival') {
+        return 'New';
+    } elseif ($type == 'featured_product') {
+        return 'Featured';
+    } elseif ($type == 'top_product') {
+        return 'Top';
+    } elseif ($type == 'best_product') {
+        return 'Best';
+    } else {
+        return '';
+    }
+}

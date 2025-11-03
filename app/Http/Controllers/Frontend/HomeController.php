@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\FlashSale;
+use App\Models\FlashSaleItem;
 use App\Models\Slider;
 use Illuminate\Http\Request;
 
@@ -13,6 +14,7 @@ class HomeController extends Controller
     {
         $sliders = Slider::where(['status' => 1])->orderBy('serial', 'ASC')->get();
         $flashSaleDate = FlashSale::first();
-        return view('frontend.home.home', compact('sliders', 'flashSaleDate'));
+        $flashSaleItems = FlashSaleItem::where(['show_at_home' => 1, 'status' => 1])->get();
+        return view('frontend.home.home', compact('sliders', 'flashSaleDate', 'flashSaleItems'));
     }
 }
