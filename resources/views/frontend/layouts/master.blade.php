@@ -131,6 +131,7 @@
             @endif
         @endif
     </script>
+    @yield('js-link')
 </body>
 
 </html>
