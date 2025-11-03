@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Backend\AdminController;
+use App\Http\Controllers\Frontend\FlashSaleController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\UserDashboardController;
 use App\Http\Controllers\Frontend\UserProfileController;
@@ -27,6 +28,10 @@ Route::group(['middleware' => 'guest'], function () {
     Route::controller(AdminController::class)->group(function () {
         Route::get('admin/login', 'login')->name('admin.login');
     });
+});
+
+Route::controller(FlashSaleController::class)->group(function () {
+    Route::get('flash-sale', 'index')->name('flash-sale');
 });
 
 Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'user', 'as' => 'user.'], function () {

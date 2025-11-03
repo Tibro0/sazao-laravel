@@ -6,7 +6,7 @@
                     <div class="wsus__flash_coundown">
                         <span class=" end_text">flash sell</span>
                         <div class="simply-countdown simply-countdown-one"></div>
-                        <a class="common_btn" href="#">see more <i class="fas fa-caret-right"></i></a>
+                        <a class="common_btn" href="{{ route('flash-sale') }}">see more <i class="fas fa-caret-right"></i></a>
                     </div>
                 </div>
             </div>
@@ -49,7 +49,7 @@
                                 <i class="fas fa-star-half-alt"></i>
                                 <span>(133 review)</span>
                             </p>
-                            <a class="wsus__pro_name" href="#">{{ $product->name }}</a>
+                            <a class="wsus__pro_name" href="#">{{ limitText($product->name, 30) }}</a>
                             @if (checkDiscount($product))
                                 <p class="wsus__price">${{ $product->offer_price }} <del>${{ $product->price }}</del>
                                 </p>
