@@ -44,6 +44,8 @@
                 <span>E-commerce</span>
             </a>
             <ul class="sub-menu" aria-expanded="false">
+                <li class="{{ adminSidebarActive(['admin.flash-sale.*']) }}"><a href="{{ route('admin.flash-sale.index') }}">Flash Sale</a></li>
+
                 <li class="{{ adminSidebarActive(['admin.vendor-profile.*']) }}"><a href="{{ route('admin.vendor-profile.index') }}">Vendor Profile</a></li>
             </ul>
         </li>

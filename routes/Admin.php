@@ -5,6 +5,7 @@ use App\Http\Controllers\Backend\AdminVendorProfileController;
 use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\ChildCategoryController;
+use App\Http\Controllers\Backend\FlashSaleController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\ProductImageGalleryController;
 use App\Http\Controllers\Backend\ProductVariantController;
@@ -137,4 +138,14 @@ Route::controller(SellerProductController::class)->group(function () {
     Route::get('seller-products', 'index')->name('seller-products.index');
     Route::get('seller-pending-products', 'pendingProducts')->name('seller-pending-products.index');
     Route::put('change-approve-status', 'changeApproveStatus')->name('change-approve-status');
+});
+
+/** Flash Sale Route */
+Route::controller(FlashSaleController::class)->group(function () {
+    Route::get('flash-sale', 'index')->name('flash-sale.index');
+    Route::put('flash-sale', 'update')->name('flash-sale.update');
+    Route::post('flash-sale/add-product', 'addProduct')->name('flash-sale.add-product');
+    Route::put('flash-sale/show-at-home/status-change', 'changeShowAtHomeStatus')->name('flash-sale.show-at-home.change-status');
+    Route::put('flash-sale-status', 'changeStatus')->name('flash-sale-status');
+    Route::delete('flash-sale/{id}', 'destroy')->name('flash-sale.destroy');
 });
