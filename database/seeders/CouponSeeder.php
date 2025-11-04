@@ -25,6 +25,8 @@ class CouponSeeder extends Seeder
                 'discount' => 10,
                 'total_used' => 0,
                 'status' => 1,
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
                 'name' => 'Amount 10',
@@ -37,6 +39,8 @@ class CouponSeeder extends Seeder
                 'discount' => 10,
                 'total_used' => 0,
                 'status' => 1,
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
                 'name' => 'Discount 50',
@@ -49,6 +53,8 @@ class CouponSeeder extends Seeder
                 'discount' => 50,
                 'total_used' => 0,
                 'status' => 1,
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
                 'name' => 'Amount 50',
@@ -61,6 +67,8 @@ class CouponSeeder extends Seeder
                 'discount' => 50,
                 'total_used' => 0,
                 'status' => 1,
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
         ]);
     }

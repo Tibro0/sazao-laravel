@@ -14,6 +14,7 @@ use App\Http\Controllers\Backend\ProductVariantItemController;
 use App\Http\Controllers\Backend\ProfileController;
 use App\Http\Controllers\Backend\SellerProductController;
 use App\Http\Controllers\Backend\SettingController;
+use App\Http\Controllers\Backend\ShippingRuleController;
 use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use Illuminate\Support\Facades\Route;
@@ -161,6 +162,17 @@ Route::controller(CouponController::class)->group(function () {
     Route::put('coupons/{id}', 'update')->name('coupons.update');
     Route::delete('coupons/{id}', 'destroy')->name('coupons.destroy');
     Route::put('coupons-change-status', 'changeStatus')->name('coupons.change-status');
+});
+
+/** Shipping Rule Route */
+Route::controller(ShippingRuleController::class)->group(function () {
+    Route::get('shipping-rule', 'index')->name('shipping-rule.index');
+    Route::get('shipping-rule/create', 'create')->name('shipping-rule.create');
+    Route::post('shipping-rule/store', 'store')->name('shipping-rule.store');
+    Route::get('shipping-rule/edit/{id}', 'edit')->name('shipping-rule.edit');
+    Route::put('shipping-rule/{id}', 'update')->name('shipping-rule.update');
+    Route::delete('shipping-rule/{id}', 'destroy')->name('shipping-rule.destroy');
+    Route::put('shipping-rule-change-status', 'changeStatus')->name('shipping-rule.change-status');
 });
 
 /**General Setting Route */

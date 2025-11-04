@@ -38,6 +38,7 @@ class DatabaseSeeder extends Seeder
             FlashSaleItemSeeder::class,
             GeneralSettingSeeder::class,
             CouponSeeder::class,
+            ShippingRuleSeeder::class
         ]);
     }
 }
