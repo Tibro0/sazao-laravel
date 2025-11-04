@@ -20,7 +20,8 @@
                     <div class="d-flex justify-content-between align-items-center">
                         <h4 class="mb-0">All Coupons</h4>
                         <div>
-                            <a href="{{ route('admin.coupons.create') }}" class="btn btn-primary px-5 rounded">Create New</a>
+                            <a href="{{ route('admin.coupons.create') }}" class="btn btn-primary px-5 rounded">Create
+                                New</a>
                         </div>
                     </div>
                 </div>
@@ -44,18 +45,27 @@
                                 <tr>
                                     <td width="50">{{ $loop->iteration }}</td>
                                     <td>{{ $item->name }}</td>
-                                    <td>{{$item->discount_type}}</td>
-                                    <td>{{ $settings->currency_icon }}{{$item->discount}}</td>
-                                    <td>{{$item->start_date}}</td>
-                                    <td>{{$item->end_date}}</td>
+                                    <td>
+                                        @if ($item->discount_type == 'amount')
+                                            <span class="badge bg-primary">Amount</span>
+                                        @elseif ($item->discount_type == 'percent')
+                                            <span class="badge bg-success">Percent</span>
+                                        @endif
+
+                                    </td>
+                                    <td>{{ $settings->currency_icon }}{{ $item->discount }}</td>
+                                    <td>{{ $item->start_date }}</td>
+                                    <td>{{ $item->end_date }}</td>
                                     <td>
                                         @if ($item->status === 1)
                                             <div class="form-check form-switch mb-3">
-                                                <input type="checkbox" class="form-check-input change-status" data-id="{{ $item->id }}" checked>
+                                                <input type="checkbox" class="form-check-input change-status"
+                                                    data-id="{{ $item->id }}" checked>
                                             </div>
                                         @elseif ($item->status === 0)
                                             <div class="form-check form-switch mb-3">
-                                                <input type="checkbox" class="form-check-input change-status" data-id="{{ $item->id }}">
+                                                <input type="checkbox" class="form-check-input change-status"
+                                                    data-id="{{ $item->id }}">
                                             </div>
                                         @endif
                                     </td>
