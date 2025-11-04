@@ -4,6 +4,7 @@ use App\Http\Controllers\Backend\AdminController;
 use App\Http\Controllers\Frontend\FlashSaleController;
 use App\Http\Controllers\Frontend\FrontendProductController;
 use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\Frontend\UserAddressController;
 use App\Http\Controllers\Frontend\UserDashboardController;
 use App\Http\Controllers\Frontend\UserProfileController;
 use App\Http\Controllers\ProfileController;
@@ -45,9 +46,20 @@ Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'user', 'as' => 
         Route::get('dashboard', 'index')->name('dashboard');
     });
 
+    /** User Profile Route */
     Route::controller(UserProfileController::class)->group(function () {
         Route::get('profile', 'index')->name('profile');
         Route::put('profile', 'updateProfile')->name('profile.update');
         Route::post('profile', 'updatePassword')->name('profile.update.password');
+    });
+
+    /** User Address Route */
+    Route::controller(UserAddressController::class)->group(function () {
+        Route::get('address', 'index')->name('address.index');
+        Route::get('address/create', 'create')->name('address.create');
+        Route::post('address/store', 'store')->name('address.store');
+        Route::get('address/edit/{id}', 'edit')->name('address.edit');
+        Route::put('address/{id}', 'update')->name('address.update');
+        Route::delete('address/{id}', 'destroy')->name('address.destroy');
     });
 });
