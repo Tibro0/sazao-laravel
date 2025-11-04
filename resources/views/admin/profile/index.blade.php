@@ -8,25 +8,22 @@
     <div class="row">
         {{-- breadcrumb Start --}}
         <div class="col-12">
-            <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                <h4 class="mb-sm-0">Profile</h4>
-                <div class="page-title-right">
-                    <ol class="breadcrumb m-0">
-                        <a href="{{ route('admin.dashboard') }}" class="btn btn-primary">Dashboard</a>
-                    </ol>
+            <div class="d-flex justify-content-between">
+                <h4 class="text-capitalize">Profile</h4>
+                <div class="mb-3">
+                    <a href="{{ route('admin.dashboard') }}" class="btn btn-primary px-5">Dashboard</a>
                 </div>
-
             </div>
         </div>
         {{-- breadcrumb End --}}
         <div class="col-md-12">
             <div class="card">
+                <div class="card-header">
+                    <h3 class="mb-0">Update Profile Information</h3>
+                </div>
                 <form action="{{ route('admin.profile.update') }}" method="POST" enctype="multipart/form-data">
                     @csrf
-                    <div class="card-header bg-white py-3">
-                        <h3 class="mb-0">Update Profile Information</h3>
-                    </div>
-                    <div class="card-body shadow">
+                    <div class="card-body">
                         <div class="mb-3">
                             <label>Preview</label><br>
                             <img src="{{ asset(auth()->user()->image) }}" width="100">
@@ -61,15 +58,16 @@
 
         <div class="col-md-12">
             <div class="card">
+                <div class="card-header">
+                    <h3 class="mb-0">Update Password</h3>
+                </div>
                 <form action="{{ route('admin.password.update') }}" method="POST" enctype="multipart/form-data">
                     @csrf
-                    <div class="card-header bg-white py-3">
-                        <h3 class="mb-0">Update Password</h3>
-                    </div>
                     <div class="card-body shadow">
                         <div class="mb-3">
                             <label>Current Password <span class="text-danger">*</span></label>
-                            <input type="password" name="current_password" class="form-control @error('current_password') is-invalid @enderror"
+                            <input type="password" name="current_password"
+                                class="form-control @error('current_password') is-invalid @enderror"
                                 placeholder="Enter Your Current Password">
                             @error('current_password')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -77,7 +75,8 @@
                         </div>
                         <div class="mb-3">
                             <label>New Password <span class="text-danger">*</span></label>
-                            <input type="password" name="password" class="form-control @error('password') is-invalid @enderror"
+                            <input type="password" name="password"
+                                class="form-control @error('password') is-invalid @enderror"
                                 placeholder="Enter Your New Password">
                             @error('password')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -85,7 +84,8 @@
                         </div>
                         <div class="mb-3">
                             <label>Confirm Password <span class="text-danger">*</span></label>
-                            <input type="password" name="password_confirmation" class="form-control @error('password_confirmation') is-invalid @enderror"
+                            <input type="password" name="password_confirmation"
+                                class="form-control @error('password_confirmation') is-invalid @enderror"
                                 placeholder="Enter Your New Password">
                             @error('password_confirmation')
                                 <div class="invalid-feedback">{{ $message }}</div>
