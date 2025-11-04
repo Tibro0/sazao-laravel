@@ -5,6 +5,7 @@ use App\Http\Controllers\Backend\AdminVendorProfileController;
 use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\ChildCategoryController;
+use App\Http\Controllers\Backend\CouponController;
 use App\Http\Controllers\Backend\FlashSaleController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\ProductImageGalleryController;
@@ -149,6 +150,17 @@ Route::controller(FlashSaleController::class)->group(function () {
     Route::put('flash-sale/show-at-home/status-change', 'changeShowAtHomeStatus')->name('flash-sale.show-at-home.change-status');
     Route::put('flash-sale-status', 'changeStatus')->name('flash-sale-status');
     Route::delete('flash-sale/{id}', 'destroy')->name('flash-sale.destroy');
+});
+
+/** Coupons Route */
+Route::controller(CouponController::class)->group(function () {
+    Route::get('coupons', 'index')->name('coupons.index');
+    Route::get('coupons/create', 'create')->name('coupons.create');
+    Route::post('coupons/store', 'store')->name('coupons.store');
+    Route::get('coupons/edit/{id}', 'edit')->name('coupons.edit');
+    Route::put('coupons/{id}', 'update')->name('coupons.update');
+    Route::delete('coupons/{id}', 'destroy')->name('coupons.destroy');
+    Route::put('coupons-change-status', 'changeStatus')->name('coupons.change-status');
 });
 
 /**General Setting Route */

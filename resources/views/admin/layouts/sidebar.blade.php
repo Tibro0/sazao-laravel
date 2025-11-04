@@ -30,10 +30,15 @@
                 <span>Manage Products</span>
             </a>
             <ul class="sub-menu" aria-expanded="false">
-                <li class="{{ adminSidebarActive(['admin.brand.*']) }}"><a href="{{ route('admin.brand.index') }}">Brand</a></li>
-                <li class="{{ adminSidebarActive(['admin.products.*', 'admin.products-image-gallery.*', 'admin.products-variant.*', 'admin.products-variant-item.*']) }}"><a href="{{ route('admin.products.index') }}">Products</a></li>
-                <li class="{{ adminSidebarActive(['admin.seller-products.index']) }}"><a href="{{ route('admin.seller-products.index') }}">Seller Products</a></li>
-                <li class="{{ adminSidebarActive(['admin.seller-pending-products.index']) }}"><a href="{{ route('admin.seller-pending-products.index') }}">Seller Pending Products</a></li>
+                <li class="{{ adminSidebarActive(['admin.brand.*']) }}"><a
+                        href="{{ route('admin.brand.index') }}">Brand</a></li>
+                <li
+                    class="{{ adminSidebarActive(['admin.products.*', 'admin.products-image-gallery.*', 'admin.products-variant.*', 'admin.products-variant-item.*']) }}">
+                    <a href="{{ route('admin.products.index') }}">Products</a></li>
+                <li class="{{ adminSidebarActive(['admin.seller-products.index']) }}"><a
+                        href="{{ route('admin.seller-products.index') }}">Seller Products</a></li>
+                <li class="{{ adminSidebarActive(['admin.seller-pending-products.index']) }}"><a
+                        href="{{ route('admin.seller-pending-products.index') }}">Seller Pending Products</a></li>
 
             </ul>
         </li>
@@ -44,9 +49,14 @@
                 <span>E-commerce</span>
             </a>
             <ul class="sub-menu" aria-expanded="false">
-                <li class="{{ adminSidebarActive(['admin.flash-sale.*']) }}"><a href="{{ route('admin.flash-sale.index') }}">Flash Sale</a></li>
+                <li class="{{ adminSidebarActive(['admin.flash-sale.*']) }}"><a
+                        href="{{ route('admin.flash-sale.index') }}">Flash Sale</a></li>
 
-                <li class="{{ adminSidebarActive(['admin.vendor-profile.*']) }}"><a href="{{ route('admin.vendor-profile.index') }}">Vendor Profile</a></li>
+                <li class="{{ adminSidebarActive(['admin.coupons.*']) }}"><a
+                        href="{{ route('admin.coupons.index') }}">Coupons</a></li>
+
+                <li class="{{ adminSidebarActive(['admin.vendor-profile.*']) }}"><a
+                        href="{{ route('admin.vendor-profile.index') }}">Vendor Profile</a></li>
             </ul>
         </li>
 
