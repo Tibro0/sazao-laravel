@@ -1,7 +1,7 @@
 @extends('frontend.dashboard.layouts.master')
 
 @section('page-title')
-    Sazao | User Dashboard
+    {{ $settings->site_name }} | User Dashboard
 @endsection
 
 @section('content')

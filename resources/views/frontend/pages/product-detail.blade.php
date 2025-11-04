@@ -1,7 +1,7 @@
 @extends('frontend.layouts.master')
 
 @section('page-title')
-    Sazao | {{ $product->name }}
+    {{ $settings->site_name }} | {{ $product->name }}
 @endsection
 
 @section('content')

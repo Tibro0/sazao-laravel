@@ -1,7 +1,7 @@
 @extends('vendor.layouts.master')
 
 @section('page-title')
-    Sazao | All Variants
+    {{ $settings->site_name }} | All Variants
 @endsection
 
 @section('css-link')

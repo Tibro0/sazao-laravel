@@ -1,7 +1,7 @@
 @extends('admin.layouts.master')
 
 @section('page-title')
-    Sazao | Create Slider
+    {{ $settings->site_name }} | Create Slider
 @endsection
 
 @section('content')

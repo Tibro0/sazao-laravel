@@ -1,7 +1,7 @@
 @extends('vendor.layouts.master')
 
 @section('page-title')
-    Sazao | Vendor Dashboard
+    {{ $settings->site_name }} | Vendor Dashboard
 @endsection
 
 @section('content')

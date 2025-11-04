@@ -1,7 +1,7 @@
 @extends('admin.layouts.master')
 
 @section('page-title')
-    Sazao | Create Product
+    {{ $settings->site_name }} | Create Product
 @endsection
 
 @section('css-link')

@@ -1,7 +1,7 @@
 @extends('frontend.layouts.master')
 
 @section('page-title')
-    Sazao || Home
+    {{ $settings->site_name }} | Home
 @endsection
 
 @section('content')

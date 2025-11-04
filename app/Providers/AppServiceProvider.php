@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Models\GeneralSetting;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\View;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -22,5 +23,12 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Paginator::useBootstrap();
+
+        $generalSetting = GeneralSetting::first();
+
+        /** Share variable at all view */
+        View::composer('*', function($view) use ($generalSetting){
+            $view->with(['settings' => $generalSetting,]);
+        });
     }
 }

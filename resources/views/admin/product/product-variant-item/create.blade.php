@@ -1,7 +1,7 @@
 @extends('admin.layouts.master')
 
 @section('page-title')
-    Sazao | Create Product Variant Item
+    {{ $settings->site_name }} | Create Product Variant Item
 @endsection
 
 @section('content')

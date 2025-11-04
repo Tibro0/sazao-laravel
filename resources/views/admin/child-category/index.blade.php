@@ -1,7 +1,7 @@
 @extends('admin.layouts.master')
 
 @section('page-title')
-    Sazao | All Child Categories
+    {{ $settings->site_name }} | All Child Categories
 @endsection
 
 @section('css-link')

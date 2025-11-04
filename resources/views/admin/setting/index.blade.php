@@ -1,7 +1,7 @@
 @extends('admin.layouts.master')
 
 @section('page-title')
-    Sazao | General Settings
+    {{ $settings->site_name }} | General Settings
 @endsection
 
 @section('css-link')

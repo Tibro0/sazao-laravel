@@ -1,7 +1,7 @@
 @extends('admin.layouts.master')
 
 @section('page-title')
-    Admin | Vendor Profile
+    {{ $settings->site_name }} | Vendor Profile
 @endsection
 
 @section('content')

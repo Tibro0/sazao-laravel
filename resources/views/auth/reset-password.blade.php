@@ -1,7 +1,7 @@
 @extends('frontend.layouts.master')
 
 @section('page-title')
-    Sazao | Reset Password
+    {{ $settings->site_name }} | Reset Password
 @endsection
 
 @section('content')

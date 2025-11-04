@@ -1,7 +1,7 @@
 @extends('admin.layouts.master')
 
 @section('page-title')
-    Sazao | Update Child Category
+    {{ $settings->site_name }} | Update Child Category
 @endsection
 
 @section('css-link')

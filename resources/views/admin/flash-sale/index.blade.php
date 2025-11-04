@@ -1,7 +1,7 @@
 @extends('admin.layouts.master')
 
 @section('page-title')
-    Admin | Flash Sale
+    {{ $settings->site_name }} | Flash Sale
 @endsection
 
 @section('css-link')

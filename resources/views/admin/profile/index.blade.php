@@ -1,7 +1,7 @@
 @extends('admin.layouts.master')
 
 @section('page-title')
-    Admin | Profile
+    {{ $settings->site_name }} | Profile
 @endsection
 
 @section('content')

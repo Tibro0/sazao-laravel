@@ -1,7 +1,7 @@
 @extends('vendor.layouts.master')
 
 @section('page-title')
-    Sazao | Update Variant
+    {{ $settings->site_name }} | Update Variant
 @endsection
 
 @section('content')

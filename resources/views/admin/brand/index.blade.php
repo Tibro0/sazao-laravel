@@ -1,7 +1,7 @@
 @extends('admin.layouts.master')
 
 @section('page-title')
-    Sazao | All Brands
+    {{ $settings->site_name }} | All Brands
 @endsection
 
 @section('css-link')

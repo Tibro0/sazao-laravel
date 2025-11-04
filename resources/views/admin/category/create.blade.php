@@ -1,7 +1,7 @@
 @extends('admin.layouts.master')
 
 @section('page-title')
-    Sazao | Create Category
+    {{ $settings->site_name }} | Create Category
 @endsection
 
 @section('content')

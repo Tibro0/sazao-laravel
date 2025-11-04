@@ -1,7 +1,7 @@
 @extends('frontend.layouts.master')
 
 @section('page-title')
-    Sazao | Flash Sale
+    {{ $settings->site_name }} | Flash Sale
 @endsection
 
 @section('content')

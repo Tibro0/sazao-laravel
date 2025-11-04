@@ -1,7 +1,7 @@
 @extends('admin.layouts.master')
 
 @section('page-title')
-    Sazao | Update Brand
+    {{ $settings->site_name }} | Update Brand
 @endsection
 
 @section('content')

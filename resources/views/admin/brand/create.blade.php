@@ -1,7 +1,7 @@
 @extends('admin.layouts.master')
 
 @section('page-title')
-    Sazao | Create Brand
+    {{ $settings->site_name }} | Create Brand
 @endsection
 
 @section('content')

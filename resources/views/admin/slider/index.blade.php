@@ -1,7 +1,7 @@
 @extends('admin.layouts.master')
 
 @section('page-title')
-    Sazao | All Sliders
+    {{ $settings->site_name }} | All Sliders
 @endsection
 
 @section('css-link')
