@@ -23,22 +23,26 @@
                                     <div class="row modal_slider">
                                         <div class="col-xl-12">
                                             <div class="modal_slider_img">
-                                                <img src="images/zoom1.jpg" alt="product" class="img-fluid w-100">
+                                                <img src="{{ asset('frontend/images/zoom1.jpg') }}" alt="product"
+                                                    class="img-fluid w-100">
                                             </div>
                                         </div>
                                         <div class="col-xl-12">
                                             <div class="modal_slider_img">
-                                                <img src="images/zoom2.jpg" alt="product" class="img-fluid w-100">
+                                                <img src="{{ asset('frontend/images/zoom2.jpg') }}" alt="product"
+                                                    class="img-fluid w-100">
                                             </div>
                                         </div>
                                         <div class="col-xl-12">
                                             <div class="modal_slider_img">
-                                                <img src="images/zoom3.jpg" alt="product" class="img-fluid w-100">
+                                                <img src="{{ asset('frontend/images/zoom3.jpg') }}" alt="product"
+                                                    class="img-fluid w-100">
                                             </div>
                                         </div>
                                         <div class="col-xl-12">
                                             <div class="modal_slider_img">
-                                                <img src="images/zoom4.jpg" alt="product" class="img-fluid w-100">
+                                                <img src="{{ asset('frontend/images/zoom4.jpg') }}" alt="product"
+                                                    class="img-fluid w-100">
                                             </div>
                                         </div>
                                     </div>
@@ -203,9 +207,11 @@
                             <a class="title" href="javascript:;">{{ $product->name }}</a>
                             <p class="wsus__stock_area"><span class="in_stock">in stock</span> (167 item)</p>
                             @if (checkDiscount($product))
-                                <h4>${{ $product->offer_price }} <del>${{ $product->price }}</del></h4>
+                                <h4>{{ $settings->currency_icon }}{{ $product->offer_price }}
+                                    <del>{{ $settings->currency_icon }}{{ $product->price }}</del>
+                                </h4>
                             @else
-                                <h4>${{ $product->price }}</h4>
+                                <h4>{{ $settings->currency_icon }}{{ $product->price }}</h4>
                             @endif
                             <p class="review">
                                 <i class="fas fa-star"></i>
@@ -222,38 +228,41 @@
                                 <div class="simply-countdown simply-countdown-one"></div>
                             </div>
 
-                            <div class="wsus__selectbox">
-                                <div class="row">
-                                    @foreach ($product->variants as $variant)
-                                        <div class="col-xl-6 col-sm-6">
-                                            <h5 class="mb-2">{{ $variant->name }}:</h5>
-                                            <select class="select_2" name="state">
-                                                @foreach ($variant->productVariantItems as $variantItem)
-                                                    <option @selected($variantItem->is_default == 1)>{{ $variantItem->name }}
-                                                        (${{ $variantItem->price }})
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    @endforeach
+                            <form class="shopping-cart-form">
+                                <div class="wsus__selectbox">
+                                    <div class="row">
+                                        <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                        @foreach ($product->variants as $variant)
+                                            <div class="col-xl-6 col-sm-6">
+                                                <h5 class="mb-2">{{ $variant->name }}:</h5>
+                                                <select class="select_2" name="variants_items[]">
+                                                    @foreach ($variant->productVariantItems as $variantItem)
+                                                        <option value="{{ $variantItem->id }}" @selected($variantItem->is_default == 1)>{{ $variantItem->name }}
+                                                            ({{ $settings->currency_icon }}{{ $variantItem->price }})
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        @endforeach
 
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="wsus__quentity">
-                                <h5>quentity :</h5>
-                                <form class="select_number">
-                                    <input class="number_area" type="text" min="1" max="100"
-                                        value="1" />
-                                </form>
-                            </div>
+                                <div class="wsus__quentity">
+                                    <h5>quentity :</h5>
+                                    <div class="select_number">
+                                        <input class="number_area" name="qty" type="text" min="1"
+                                            max="100" value="1" />
+                                    </div>
+                                </div>
 
-                            <ul class="wsus__button_area">
-                                <li><a class="add_cart" href="#">add to cart</a></li>
-                                <li><a class="buy_now" href="#">buy now</a></li>
-                                <li><a href="#"><i class="fal fa-heart"></i></a></li>
-                                <li><a href="#"><i class="far fa-random"></i></a></li>
-                            </ul>
+                                <ul class="wsus__button_area">
+                                    <li><button type="submit" class="add_cart">add to cart</button></li>
+                                    <li><a class="buy_now" href="#">buy now</a></li>
+                                    <li><a href="#"><i class="fal fa-heart"></i></a></li>
+                                    <li><a href="#"><i class="far fa-random"></i></a></li>
+                                </ul>
+                            </form>
                             <p class="brand_model"><span>brand :</span> {{ $product->brand->name }}</p>
                         </div>
                     </div>
@@ -379,8 +388,8 @@
                                                         <h4>Reviews <span>02</span></h4>
                                                         <div class="wsus__main_comment">
                                                             <div class="wsus__comment_img">
-                                                                <img src="images/client_img_3.jpg" alt="user"
-                                                                    class="img-fluid w-100">
+                                                                <img src="{{ asset('frontend/images/client_img_3.jpg') }}"
+                                                                    alt="user" class="img-fluid w-100">
                                                             </div>
                                                             <div class="wsus__comment_text reply">
                                                                 <h6>Shopnil mahadi <span>4 <i
@@ -391,12 +400,12 @@
                                                                     Cupiditate sint molestiae eos? Officia, fuga eaque.
                                                                 </p>
                                                                 <ul class="">
-                                                                    <li><img src="images/headphone_1.jpg" alt="product"
-                                                                            class="img-fluid w-100"></li>
-                                                                    <li><img src="images/headphone_2.jpg" alt="product"
-                                                                            class="img-fluid w-100"></li>
-                                                                    <li><img src="images/kids_1.jpg" alt="product"
-                                                                            class="img-fluid w-100"></li>
+                                                                    <li><img src="{{ asset('frontend/images/headphone_1.jpg') }}"
+                                                                            alt="product" class="img-fluid w-100"></li>
+                                                                    <li><img src="{{ asset('frontend/images/headphone_2.jpg') }}"
+                                                                            alt="product" class="img-fluid w-100"></li>
+                                                                    <li><img src="{{ asset('frontend/images/kids_1.jpg') }}"
+                                                                            alt="product" class="img-fluid w-100"></li>
                                                                 </ul>
                                                                 <a href="#" data-bs-toggle="collapse"
                                                                     data-bs-target="#flush-collapsetwo">reply</a>
@@ -425,8 +434,8 @@
                                                         </div>
                                                         <div class="wsus__main_comment">
                                                             <div class="wsus__comment_img">
-                                                                <img src="images/client_img_1.jpg" alt="user"
-                                                                    class="img-fluid w-100">
+                                                                <img src="{{ asset('frontend/images/client_img_1.jpg') }}"
+                                                                    alt="user" class="img-fluid w-100">
                                                             </div>
                                                             <div class="wsus__comment_text reply">
                                                                 <h6>Smith jhon <span>5 <i class="fas fa-star"></i></span>
@@ -550,7 +559,7 @@
 
 
     <!--============================RELATED PRODUCT START==============================-->
-    <section id="wsus__flash_sell">
+    {{-- <section id="wsus__flash_sell">
         <div class="container">
             <div class="row">
                 <div class="col-xl-12">
@@ -566,8 +575,8 @@
                         <span class="wsus__new">New</span>
                         <span class="wsus__minus">-20%</span>
                         <a class="wsus__pro_link" href="product_details.html">
-                            <img src="images/pro3.jpg" alt="product" class="img-fluid w-100 img_1" />
-                            <img src="images/pro3_3.jpg" alt="product" class="img-fluid w-100 img_2" />
+                            <img src="{{asset('frontend/images/pro3.jpg')}}" alt="product" class="img-fluid w-100 img_1" />
+                            <img src="{{asset('frontend/images/pro3_3.jpg')}}" alt="product" class="img-fluid w-100 img_2" />
                         </a>
                         <ul class="wsus__single_pro_icon">
                             <li><a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal2"><i
@@ -595,8 +604,8 @@
                     <div class="wsus__product_item">
                         <span class="wsus__new">New</span>
                         <a class="wsus__pro_link" href="product_details.html">
-                            <img src="images/pro4.jpg" alt="product" class="img-fluid w-100 img_1" />
-                            <img src="images/pro4_4.jpg" alt="product" class="img-fluid w-100 img_2" />
+                            <img src="{{asset('frontend/images/pro4.jpg')}}" alt="product" class="img-fluid w-100 img_1" />
+                            <img src="{{asset('frontend/images/pro4_4.jpg')}}" alt="product" class="img-fluid w-100 img_2" />
                         </a>
                         <ul class="wsus__single_pro_icon">
                             <li><a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal2"><i
@@ -624,8 +633,8 @@
                     <div class="wsus__product_item">
                         <span class="wsus__minus">-20%</span>
                         <a class="wsus__pro_link" href="product_details.html">
-                            <img src="images/pro9.jpg" alt="product" class="img-fluid w-100 img_1" />
-                            <img src="images/pro9_9.jpg" alt="product" class="img-fluid w-100 img_2" />
+                            <img src="{{asset('frontend/images/pro9.jpg')}}" alt="product" class="img-fluid w-100 img_1" />
+                            <img src="{{asset('frontend/images/pro9_9.jpg')}}" alt="product" class="img-fluid w-100 img_2" />
                         </a>
                         <ul class="wsus__single_pro_icon">
                             <li><a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal2"><i
@@ -654,8 +663,8 @@
                         <span class="wsus__new">New</span>
                         <span class="wsus__minus">-20%</span>
                         <a class="wsus__pro_link" href="product_details.html">
-                            <img src="images/pro2.jpg" alt="product" class="img-fluid w-100 img_1" />
-                            <img src="images/pro2_2.jpg" alt="product" class="img-fluid w-100 img_2" />
+                            <img src="{{asset('frontend/images/pro2.jpg')}}" alt="product" class="img-fluid w-100 img_1" />
+                            <img src="{{asset('frontend/images/pro2_2.jpg')}}" alt="product" class="img-fluid w-100 img_2" />
                         </a>
                         <ul class="wsus__single_pro_icon">
                             <li><a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal2"><i
@@ -683,8 +692,8 @@
                     <div class="wsus__product_item">
                         <span class="wsus__minus">-20%</span>
                         <a class="wsus__pro_link" href="product_details.html">
-                            <img src="images/pro4.jpg" alt="product" class="img-fluid w-100 img_1" />
-                            <img src="images/pro4_4.jpg" alt="product" class="img-fluid w-100 img_2" />
+                            <img src="{{asset('frontend/images/pro4.jpg')}}" alt="product" class="img-fluid w-100 img_1" />
+                            <img src="{{asset('frontend/images/pro4_4.jpg')}}" alt="product" class="img-fluid w-100 img_2" />
                         </a>
                         <ul class="wsus__single_pro_icon">
                             <li><a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal2"><i
@@ -711,11 +720,32 @@
 
             </div>
         </div>
-    </section>
+    </section> --}}
     <!--============================RELATED PRODUCT END==============================-->
 @endsection
 
 @section('js-link')
+    <script>
+        $(document).ready(function() {
+            $('.shopping-cart-form').on('submit', function(e) {
+                e.preventDefault();
+                let formData = $(this).serialize();
+
+                $.ajax({
+                    method: "POST",
+                    data: formData,
+                    url: "{{ route('add-to-cart') }}",
+                    success: function(data) {
+
+                    },
+                    error: function(data) {
+
+                    }
+                });
+            })
+        })
+    </script>
+
     <script>
         $(document).ready(function() {
             simplyCountdown('.simply-countdown-one', {

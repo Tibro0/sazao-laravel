@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Backend\AdminController;
+use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\FlashSaleController;
 use App\Http\Controllers\Frontend\FrontendProductController;
 use App\Http\Controllers\Frontend\HomeController;
@@ -9,6 +10,7 @@ use App\Http\Controllers\Frontend\UserDashboardController;
 use App\Http\Controllers\Frontend\UserProfileController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use Gloudemans\Shoppingcart\Facades\Cart;
 
 Route::controller(HomeController::class)->group(function () {
     Route::get('/', 'index')->name('home');
@@ -17,6 +19,12 @@ Route::controller(HomeController::class)->group(function () {
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');
+
+//////////////////////////////////
+Route::get('tibro', function () {
+    return Cart::content();
+});
+////////////////////////////////
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -39,6 +47,11 @@ Route::controller(FlashSaleController::class)->group(function () {
 /** Product Detail Route */
 Route::controller(FrontendProductController::class)->group(function () {
     Route::get('product-detail/{slug}', 'showProduct')->name('product-detail');
+});
+
+/** Add To Cart Route */
+Route::controller(CartController::class)->group(function () {
+    Route::post('add-to-cart', 'addToCart')->name('add-to-cart');
 });
 
 Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'user', 'as' => 'user.'], function () {

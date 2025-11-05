@@ -45,7 +45,7 @@
                                     <td width="50">{{ $loop->iteration }}</td>
                                     <td width="100"><img src="{{ asset($item->thumb_image) }}" width="100"></td>
                                     <td>{{ $item->name }}</td>
-                                    <td>{{ $item->price }}</td>
+                                    <td>{{ $settings->currency_icon }}{{ $item->price }}</td>
                                     <td>
                                         @if ($item->product_type === 'new_arrival')
                                             <span class="badge bg-success">New Arrival</span>
