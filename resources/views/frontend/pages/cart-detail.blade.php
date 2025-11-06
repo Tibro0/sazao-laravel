@@ -80,7 +80,7 @@
 
                                             <td class="wsus__pro_tk">
                                                 <h6 id="{{ $item->rowId }}">
-                                                    {{ $settings->currency_icon . ($item->price + $item->options->variants_total) * $item->qty}}
+                                                    {{ $settings->currency_icon . ($item->price + $item->options->variants_total) * $item->qty }}
                                                 </h6>
                                             </td>
 
@@ -88,7 +88,8 @@
                                                 <div class="d-flex" style="width: 140px">
                                                     <button class="btn btn-danger me-1 product-decrement">-</button>
                                                     <input class="form-control product-qty" data-rowid="{{ $item->rowId }}"
-                                                        type="number" min="1" max="100" value="{{ $item->qty }}" readonly/>
+                                                        type="number" min="1" max="100"
+                                                        value="{{ $item->qty }}" readonly />
                                                     <button class="btn btn-success ms-1 product-increment">+</button>
                                                 </div>
                                             </td>
@@ -163,6 +164,40 @@
                 let input = $(this).siblings('.product-qty');
                 let quantity = parseInt(input.val()) + 1;
                 let rowId = input.data('rowid');
+                input.val(quantity);
+
+                $.ajax({
+                    url: "{{ route('cart.update-quantity') }}",
+                    method: "POST",
+                    data: {
+                        rowId: rowId,
+                        quantity: quantity
+                    },
+                    success: function(data) {
+                        if (data.status === 'success') {
+                            let productId = '#' + rowId;
+                            let totalAmount = "{{ $settings->currency_icon }}" + data
+                                .product_total
+                            $(productId).text(totalAmount);
+                            toastr.success(data.message);
+                        }
+                    },
+                    error: function(data) {
+
+                    }
+                });
+            })
+
+            // decrement product quantity
+            $('.product-decrement').on('click', function() {
+                let input = $(this).siblings('.product-qty');
+                let quantity = parseInt(input.val()) - 1;
+                let rowId = input.data('rowid');
+
+                if (quantity < 1) {
+                    quantity = 1;
+                }
+                
                 input.val(quantity);
 
                 $.ajax({
