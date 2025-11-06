@@ -49,9 +49,10 @@ Route::controller(FrontendProductController::class)->group(function () {
     Route::get('product-detail/{slug}', 'showProduct')->name('product-detail');
 });
 
-/** Add To Cart Route */
+/** Cart Route */
 Route::controller(CartController::class)->group(function () {
     Route::post('add-to-cart', 'addToCart')->name('add-to-cart');
+    Route::get('cart-details', 'cartDetails')->name('cart-details');
 });
 
 Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'user', 'as' => 'user.'], function () {
