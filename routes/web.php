@@ -55,6 +55,7 @@ Route::controller(CartController::class)->group(function () {
     Route::get('cart-details', 'cartDetails')->name('cart-details');
     Route::post('cart/update-quantity', 'updateProductQty')->name('cart.update-quantity');
     Route::get('clear-cart', 'clearCart')->name('clear.cart');
+    Route::get('cart/remove-product/{rowId}', 'removeProduct')->name('cart.remove-product');
 });
 
 Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'user', 'as' => 'user.'], function () {

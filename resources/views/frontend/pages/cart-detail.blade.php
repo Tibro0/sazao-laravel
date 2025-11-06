@@ -44,7 +44,7 @@
                                             product item
                                         </th>
 
-                                        <th class="wsus__pro_name">
+                                        <th class="wsus__pro_name" style="width: 285px;">
                                             product details
                                         </th>
 
@@ -99,7 +99,7 @@
                                                 </div>
                                             </td>
                                             <td class="wsus__pro_icon">
-                                                <a href="#"><i class="far fa-times"></i></a>
+                                                <a href="{{ route('cart.remove-product', $item->rowId) }}"><i class="far fa-times"></i></a>
                                             </td>
                                         </tr>
                                     @endforeach

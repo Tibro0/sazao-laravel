@@ -76,11 +76,19 @@ class CartController extends Controller
         return $total;
     }
 
-    /** Clear Cart Product All */
+    /** Clear All Cart Product */
     public function clearCart()
     {
         Cart::destroy();
 
         return response(['status' => 'success', 'message' => 'Cart Cleared Successfully!']);
+    }
+
+    /** Remove Product From Cart */
+    public function removeProduct($rowId)
+    {
+        Cart::remove($rowId);
+
+        return redirect()->back();
     }
 }
