@@ -9553,15 +9553,6 @@ a:not([href]):not([class]):hover {
     transition: all linear 0.3s;
 }
 
-.product_qty_wrapper {
-    display: flex;
-}
-.product_qty_wrapper > .product-qty{
-    width: 43px;
-    height: 38px;
-    margin: 0px 5px;
-    padding-left: 16px;
-}
 .razorpay-payment-button{
     font-size: 14px;
     width: 100%;

@@ -68,28 +68,30 @@
                                                 <p>{!! $item->name !!}</p>
                                                 @foreach ($item->options->variants as $key => $variant)
                                                     <span>{{ $key }} : {{ $variant['name'] }}
-                                                        ({{ $settings->currency_icon . $variant['price'] }})</span>
+                                                        ({{ $settings->currency_icon . $variant['price'] }})
+                                                    </span>
                                                 @endforeach
 
                                             </td>
 
                                             <td class="wsus__pro_tk">
-                                                <h6>{{$settings->currency_icon . $item->price}}</h6>
+                                                <h6>{{ $settings->currency_icon . $item->price }}</h6>
                                             </td>
 
                                             <td class="wsus__pro_tk">
-                                                <h6>{{$settings->currency_icon . $item->price + $item->options->variants_total}}</h6>
+                                                <h6 id="{{ $item->rowId }}">
+                                                    {{ $settings->currency_icon . ($item->price + $item->options->variants_total) * $item->qty}}
+                                                </h6>
                                             </td>
 
                                             <td class="wsus__pro_select">
-                                                <form class="select_number">
-                                                    <input class="number_area" type="text" min="1" max="100"
-                                                        value="1" />
-                                                </form>
+                                                <div class="d-flex" style="width: 140px">
+                                                    <button class="btn btn-danger me-1 product-decrement">-</button>
+                                                    <input class="form-control product-qty" data-rowid="{{ $item->rowId }}"
+                                                        type="number" min="1" max="100" value="{{ $item->qty }}" readonly/>
+                                                    <button class="btn btn-success ms-1 product-increment">+</button>
+                                                </div>
                                             </td>
-
-
-
                                             <td class="wsus__pro_icon">
                                                 <a href="#"><i class="far fa-times"></i></a>
                                             </td>
@@ -151,4 +153,39 @@
         </div>
     </section>
     <!--============================CART VIEW PAGE END==============================-->
+@endsection
+
+@section('js-link')
+    <script>
+        $(document).ready(function() {
+            // increment product quantity
+            $('.product-increment').on('click', function() {
+                let input = $(this).siblings('.product-qty');
+                let quantity = parseInt(input.val()) + 1;
+                let rowId = input.data('rowid');
+                input.val(quantity);
+
+                $.ajax({
+                    url: "{{ route('cart.update-quantity') }}",
+                    method: "POST",
+                    data: {
+                        rowId: rowId,
+                        quantity: quantity
+                    },
+                    success: function(data) {
+                        if (data.status === 'success') {
+                            let productId = '#' + rowId;
+                            let totalAmount = "{{ $settings->currency_icon }}" + data
+                                .product_total
+                            $(productId).text(totalAmount);
+                            toastr.success(data.message);
+                        }
+                    },
+                    error: function(data) {
+
+                    }
+                });
+            })
+        });
+    </script>
 @endsection
