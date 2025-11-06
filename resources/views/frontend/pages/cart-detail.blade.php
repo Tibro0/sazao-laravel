@@ -4,6 +4,11 @@
     {{ $settings->site_name }} | Cart Details
 @endsection
 
+@section('css-link')
+    <!-- Sweet Alert-->
+    <link href="{{ asset('backend/assets/libs/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet" type="text/css" />
+@endsection
+
 @section('content')
     <!--============================BREADCRUMB START==============================-->
     <section id="wsus__breadcrumb">
@@ -55,7 +60,7 @@
                                         </th>
 
                                         <th class="wsus__pro_icon">
-                                            <a href="#" class="common_btn">clear cart</a>
+                                            <a href="javascript:;" class="common_btn clear_cart">clear cart</a>
                                         </th>
                                     </tr>
                                     @foreach ($cartItems as $item)
@@ -87,9 +92,9 @@
                                             <td class="wsus__pro_select">
                                                 <div class="d-flex" style="width: 140px">
                                                     <button class="btn btn-danger me-1 product-decrement">-</button>
-                                                    <input class="form-control product-qty" data-rowid="{{ $item->rowId }}"
-                                                        type="number" min="1" max="100"
-                                                        value="{{ $item->qty }}" readonly />
+                                                    <input class="form-control product-qty"
+                                                        data-rowid="{{ $item->rowId }}" type="number" min="1"
+                                                        max="100" value="{{ $item->qty }}" readonly />
                                                     <button class="btn btn-success ms-1 product-increment">+</button>
                                                 </div>
                                             </td>
@@ -98,6 +103,14 @@
                                             </td>
                                         </tr>
                                     @endforeach
+                                    @if (count($cartItems) === 0)
+                                        <tr class="d-flex">
+                                            <td class="wsus__pro_icon w-100" rowspan="2">
+                                                <div class="alert alert-primary w-100 text-center mb-0" role="alert">Cart
+                                                    Is Empty!</div>
+                                            </td>
+                                        </tr>
+                                    @endif
                                 </tbody>
                             </table>
                         </div>
@@ -157,6 +170,8 @@
 @endsection
 
 @section('js-link')
+    <!-- Sweet Alerts js -->
+    <script src="{{ asset('backend/assets/libs/sweetalert2/sweetalert2.min.js') }}"></script>
     <script>
         $(document).ready(function() {
             // increment product quantity
@@ -197,7 +212,7 @@
                 if (quantity < 1) {
                     quantity = 1;
                 }
-                
+
                 input.val(quantity);
 
                 $.ajax({
@@ -220,6 +235,37 @@
 
                     }
                 });
+            })
+
+            // Clear Cart
+            $('.clear_cart').on('click', function(e) {
+                e.preventDefault();
+
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "This Action Will Clear Your Cart!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, Clear it!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+
+                        $.ajax({
+                            type: 'GET',
+                            url: "{{ route('clear.cart') }}",
+                            success: function(data) {
+                                if (data.status === 'success') {
+                                    window.location.reload();
+                                }
+                            },
+                            error: function(xhr, status, error) {
+                                console.log(error);
+                            }
+                        })
+                    }
+                })
             })
         });
     </script>

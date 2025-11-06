@@ -54,6 +54,7 @@ Route::controller(CartController::class)->group(function () {
     Route::post('add-to-cart', 'addToCart')->name('add-to-cart');
     Route::get('cart-details', 'cartDetails')->name('cart-details');
     Route::post('cart/update-quantity', 'updateProductQty')->name('cart.update-quantity');
+    Route::get('clear-cart', 'clearCart')->name('clear.cart');
 });
 
 Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'user', 'as' => 'user.'], function () {
