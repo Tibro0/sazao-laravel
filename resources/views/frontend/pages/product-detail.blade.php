@@ -237,7 +237,8 @@
                                                 <h5 class="mb-2">{{ $variant->name }}:</h5>
                                                 <select class="select_2" name="variants_items[]">
                                                     @foreach ($variant->productVariantItems as $variantItem)
-                                                        <option value="{{ $variantItem->id }}" @selected($variantItem->is_default == 1)>{{ $variantItem->name }}
+                                                        <option value="{{ $variantItem->id }}"
+                                                            @selected($variantItem->is_default == 1)>{{ $variantItem->name }}
                                                             ({{ $settings->currency_icon }}{{ $variantItem->price }})
                                                         </option>
                                                     @endforeach
@@ -727,15 +728,16 @@
 @section('js-link')
     <script>
         $(document).ready(function() {
+            // Add Product into Cart
             $('.shopping-cart-form').on('submit', function(e) {
                 e.preventDefault();
                 let formData = $(this).serialize();
-
                 $.ajax({
                     method: "POST",
                     data: formData,
                     url: "{{ route('add-to-cart') }}",
                     success: function(data) {
+                        gatCartCount();
                         toastr.success(data.message);
                     },
                     error: function(data) {
@@ -743,6 +745,16 @@
                     }
                 });
             })
+
+            function gatCartCount() {
+                $.ajax({
+                    method: "GET",
+                    url: "{{ route('cart-count') }}",
+                    success: function(data) {
+                        $('#cart-count').text(data);
+                    }
+                });
+            }
         })
     </script>
 
