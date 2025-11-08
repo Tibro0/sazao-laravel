@@ -99,7 +99,8 @@
                                                 </div>
                                             </td>
                                             <td class="wsus__pro_icon">
-                                                <a href="{{ route('cart.remove-product', $item->rowId) }}"><i class="far fa-times"></i></a>
+                                                <a href="{{ route('cart.remove-product', $item->rowId) }}"><i
+                                                        class="far fa-times"></i></a>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -195,6 +196,8 @@
                                 .product_total
                             $(productId).text(totalAmount);
                             toastr.success(data.message);
+                        } else if (data.status === 'error') {
+                            toastr.error(data.message);
                         }
                     },
                     error: function(data) {
@@ -229,6 +232,8 @@
                                 .product_total
                             $(productId).text(totalAmount);
                             toastr.success(data.message);
+                        }else if (data.status === 'error') {
+                            toastr.error(data.message);
                         }
                     },
                     error: function(data) {

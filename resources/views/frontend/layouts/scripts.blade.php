@@ -9,10 +9,14 @@
                 data: formData,
                 url: "{{ route('add-to-cart') }}",
                 success: function(data) {
-                    gatCartCount();
-                    fetchSidebarCartProducts();
-                    $('.mini_cart_action').removeClass('d-none');
-                    toastr.success(data.message);
+                    if (data.status === 'success') {
+                        gatCartCount();
+                        fetchSidebarCartProducts();
+                        $('.mini_cart_action').removeClass('d-none');
+                        toastr.success(data.message);
+                    } else if (data.status == 'error') {
+                        toastr.error(data.message);
+                    }
                 },
                 error: function(data) {
 
