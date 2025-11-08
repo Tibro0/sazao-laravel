@@ -10,6 +10,22 @@ use Gloudemans\Shoppingcart\Facades\Cart;
 
 class CartController extends Controller
 {
+    /** Show Cart Page */
+    public function cartDetails()
+    {
+        $cartItems = Cart::content();
+
+        if (count($cartItems) === 0) {
+            return redirect()->route('home')->with('toast', [
+                'type' => 'warning',
+                'title' => 'Cart Is Empty!',
+                'message' => 'Please Add Some Products In Your Cart For View The Cart Page.'
+            ]);
+        }
+
+        return view('frontend.pages.cart-detail', compact('cartItems'));
+    }
+
     /** Add Item To Cart */
     public function addToCart(Request $request)
     {
@@ -59,19 +75,12 @@ class CartController extends Controller
         return response(['status' => 'success', 'message' => 'Added To Cart Successfully!']);
     }
 
-    /** Show Cart Page */
-    public function cartDetails()
-    {
-        $cartItems = Cart::content();
-        return view('frontend.pages.cart-detail', compact('cartItems'));
-    }
-
     /** Update Product Quantity */
     function updateProductQty(Request $request)
     {
         $productId = Cart::get($request->rowId)->id;
         $product = Product::findOrFail($productId);
-        
+
         /** Check Product Quantity */
         if ($product->qty === 0) {
             return response(['status' => 'error', 'message' => 'Product Stock Out.']);
@@ -118,7 +127,11 @@ class CartController extends Controller
     {
         Cart::remove($rowId);
 
-        return redirect()->back();
+        return redirect()->back()->with('toast', [
+            'type' => 'success',
+            'title' => 'Success',
+            'message' => 'Product Removed Successfully!'
+        ]);
     }
 
     /** Get Cart Count */
