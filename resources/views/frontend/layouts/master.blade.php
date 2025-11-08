@@ -144,6 +144,7 @@
             }
         });
     </script>
+    @include('frontend.layouts.scripts')
     @yield('js-link')
 </body>
 
