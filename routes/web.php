@@ -57,6 +57,9 @@ Route::controller(CartController::class)->group(function () {
     Route::get('clear-cart', 'clearCart')->name('clear.cart');
     Route::get('cart/remove-product/{rowId}', 'removeProduct')->name('cart.remove-product');
     Route::get('cart-count', 'gatCartCount')->name('cart-count');
+    Route::get('cart-products', 'gatCartProducts')->name('cart-products');
+    Route::post('cart/remove-sidebar-product', 'removeSidebarProduct')->name('cart.remove-sidebar-product');
+    Route::get('cart/sidebar-product-total', 'CartTotal')->name('cart.sidebar-product-total');
 });
 
 Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'user', 'as' => 'user.'], function () {

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Str;
+use Gloudemans\Shoppingcart\Facades\Cart;
 
 /** Set Sidebar Item Active Backend */
 function adminSidebarActive(array $route)
@@ -60,6 +61,16 @@ function productType($type)
     } else {
         return '';
     }
+}
+
+/** Get Total Cart Amount */
+function getCartTotal()
+{
+    $total = 0;
+    foreach (Cart::content() as $product) {
+        $total += ($product->price + $product->options->variants_total) * $product->qty;
+    }
+    return $total;
 }
 
 
