@@ -809,7 +809,7 @@
                             $('.mini_cart_action').addClass('d-none');
                             $('.mini_cart_wrapper').html(
                                 '<li class="text-center alert alert-primary">Cart Is Empty!</li>'
-                                );
+                            );
                         }
                         toastr.success(data.message);
                     },
