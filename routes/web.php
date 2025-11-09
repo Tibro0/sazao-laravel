@@ -10,7 +10,6 @@ use App\Http\Controllers\Frontend\UserDashboardController;
 use App\Http\Controllers\Frontend\UserProfileController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use Gloudemans\Shoppingcart\Facades\Cart;
 
 Route::controller(HomeController::class)->group(function () {
     Route::get('/', 'index')->name('home');
@@ -22,7 +21,7 @@ Route::controller(HomeController::class)->group(function () {
 
 //////////////////////////////////
 Route::get('tibro', function () {
-    return Cart::content();
+    return session()->all();;
 });
 ////////////////////////////////
 
@@ -60,6 +59,9 @@ Route::controller(CartController::class)->group(function () {
     Route::get('cart-products', 'gatCartProducts')->name('cart-products');
     Route::post('cart/remove-sidebar-product', 'removeSidebarProduct')->name('cart.remove-sidebar-product');
     Route::get('cart/sidebar-product-total', 'CartTotal')->name('cart.sidebar-product-total');
+
+    Route::get('apply-coupon', 'applyCoupon')->name('apply-coupon');
+    Route::get('coupon-calculation', 'couponCalculation')->name('coupon-calculation');
 });
 
 Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'user', 'as' => 'user.'], function () {
