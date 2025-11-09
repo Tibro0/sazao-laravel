@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Backend\AdminController;
 use App\Http\Controllers\Frontend\CartController;
+use App\Http\Controllers\Frontend\CheckOutController;
 use App\Http\Controllers\Frontend\FlashSaleController;
 use App\Http\Controllers\Frontend\FrontendProductController;
 use App\Http\Controllers\Frontend\HomeController;
@@ -84,5 +85,11 @@ Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'user', 'as' => 
         Route::get('address/edit/{id}', 'edit')->name('address.edit');
         Route::put('address/{id}', 'update')->name('address.update');
         Route::delete('address/{id}', 'destroy')->name('address.destroy');
+    });
+
+    /** Checkout Route */
+    Route::controller(CheckOutController::class)->group(function () {
+        Route::get('checkout', 'index')->name('checkout');
+        Route::post('checkout/address-create', 'createAddress')->name('checkout.address.create');
     });
 });
