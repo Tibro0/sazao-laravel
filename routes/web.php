@@ -6,6 +6,7 @@ use App\Http\Controllers\Frontend\CheckOutController;
 use App\Http\Controllers\Frontend\FlashSaleController;
 use App\Http\Controllers\Frontend\FrontendProductController;
 use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\Frontend\PaymentController;
 use App\Http\Controllers\Frontend\UserAddressController;
 use App\Http\Controllers\Frontend\UserDashboardController;
 use App\Http\Controllers\Frontend\UserProfileController;
@@ -91,5 +92,11 @@ Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'user', 'as' => 
     Route::controller(CheckOutController::class)->group(function () {
         Route::get('checkout', 'index')->name('checkout');
         Route::post('checkout/address-create', 'createAddress')->name('checkout.address.create');
+        Route::post('checkout/form-submit', 'checkOutFormSubmit')->name('checkout.form-submit');
+    });
+
+    /** Payment Routes */
+    Route::controller(PaymentController::class)->group(function () {
+        Route::get('payment', 'index')->name('payment');
     });
 });
