@@ -14,7 +14,6 @@
                         <h4>check out</h4>
                         <ul>
                             <li><a href="{{ route('home') }}">home</a></li>
-                            <li><a href="#">peoduct</a></li>
                             <li><a href="javascript:;">check out</a></li>
                         </ul>
                     </div>

@@ -19,7 +19,6 @@
                         <h4>cart View</h4>
                         <ul>
                             <li><a href="{{ route('home') }}">home</a></li>
-                            <li><a href="#">peoduct</a></li>
                             <li><a href="javascript:;">cart view</a></li>
                         </ul>
                     </div>

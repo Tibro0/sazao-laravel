@@ -109,7 +109,19 @@ function getCartDiscount()
     }
 }
 
+/** Get Selected Shipping Fee From Section */
+function getShippingFee(){
+    if (Session::has(('shipping_method'))) {
+        return Session::get('shipping_method')['cost'];
+    }else{
+        return 0;
+    }
+}
 
+/** get Payable Amount */
+function getFinalPayableAmount() {
+    return getMainCartTotal() + getShippingFee();
+}
 
 /** limit Text */
 function limitText($text, $limit = 20)
