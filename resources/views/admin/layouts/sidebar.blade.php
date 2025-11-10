@@ -53,12 +53,13 @@
                         href="{{ route('admin.flash-sale.index') }}">Flash Sale</a></li>
                 <li class="{{ adminSidebarActive(['admin.coupons.*']) }}"><a
                         href="{{ route('admin.coupons.index') }}">Coupons</a></li>
-
                 <li class="{{ adminSidebarActive(['admin.shipping-rule.*']) }}"><a
                         href="{{ route('admin.shipping-rule.index') }}">Shipping Rule</a></li>
-
                 <li class="{{ adminSidebarActive(['admin.vendor-profile.*']) }}"><a
                         href="{{ route('admin.vendor-profile.index') }}">Vendor Profile</a></li>
+
+                <li class="{{ adminSidebarActive(['admin.payment-settings.index']) }}"><a
+                        href="{{ route('admin.payment-settings.index') }}">Payment Settings</a></li>
             </ul>
         </li>
 

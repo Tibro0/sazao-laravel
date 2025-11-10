@@ -40,6 +40,7 @@ class DatabaseSeeder extends Seeder
             CouponSeeder::class,
             ShippingRuleSeeder::class,
             UserAddressSeeder::class,
+            PaypalSettingSeeder::class,
         ]);
     }
 }
