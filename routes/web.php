@@ -98,5 +98,10 @@ Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'user', 'as' => 
     /** Payment Routes */
     Route::controller(PaymentController::class)->group(function () {
         Route::get('payment', 'index')->name('payment');
+        Route::get('payment-success', 'paymentSuccess')->name('payment.success');
+        /** Paypal Payment */
+        Route::get('paypal/payment', 'payWithPaypal')->name('paypal.payment');
+        Route::get('paypal/success', 'paypalSuccess')->name('paypal.success');
+        Route::get('paypal/cancel', 'paypalCancel')->name('paypal.cancel');
     });
 });
