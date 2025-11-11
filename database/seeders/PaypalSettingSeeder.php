@@ -20,8 +20,8 @@ class PaypalSettingSeeder extends Seeder
                 'country_name' => 'United States',
                 'currency_name' => 'USD',
                 'currency_rate' => 1,
-                'client_id' => 'client_id',
-                'secret_key' => 'secret_key',
+                'client_id' => 'Paypal Client Id',
+                'secret_key' => 'PayPal Secret Key',
                 'created_at' => now(),
                 'updated_at' => now(),
             ]

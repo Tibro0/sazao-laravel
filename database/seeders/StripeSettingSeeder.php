@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\StripeSetting;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -12,6 +13,18 @@ class StripeSettingSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        StripeSetting::insert([
+            [
+                'status' => 1,
+                'mode' => 0,
+                'country_name' => 'United States',
+                'currency_name' => 'USD',
+                'currency_rate' => 1,
+                'client_id' => 'Stripe Client ID',
+                'secret_key' => 'Stripe Secret Key',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]
+        ]);
     }
 }
