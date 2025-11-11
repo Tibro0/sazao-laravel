@@ -41,6 +41,7 @@ class DatabaseSeeder extends Seeder
             ShippingRuleSeeder::class,
             UserAddressSeeder::class,
             PaypalSettingSeeder::class,
+            StripeSettingSeeder::class,
         ]);
     }
 }

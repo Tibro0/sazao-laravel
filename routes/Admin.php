@@ -18,6 +18,7 @@ use App\Http\Controllers\Backend\SellerProductController;
 use App\Http\Controllers\Backend\SettingController;
 use App\Http\Controllers\Backend\ShippingRuleController;
 use App\Http\Controllers\Backend\SliderController;
+use App\Http\Controllers\Backend\StripeSettingController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use Illuminate\Support\Facades\Route;
 
@@ -184,10 +185,14 @@ Route::controller(SettingController::class)->group(function () {
 });
 
 /** Payment Setting Route */
-Route::controller(PaymentSettingController::class)->group(function(){
+Route::controller(PaymentSettingController::class)->group(function () {
     Route::get('payment-settings', 'index')->name('payment-settings.index');
 });
 
 Route::controller(PaypalSettingController::class)->group(function () {
     Route::put('paypal-setting/{id}', 'update')->name('paypal-setting.update');
+});
+
+Route::controller(StripeSettingController::class)->group(function () {
+    Route::put('stripe-setting/{id}', 'update')->name('stripe-setting.update');
 });

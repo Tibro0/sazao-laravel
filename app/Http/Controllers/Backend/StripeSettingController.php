@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
-use App\Models\PaypalSetting;
+use App\Models\StripeSetting;
 use Illuminate\Http\Request;
 
-class PaypalSettingController extends Controller
+class StripeSettingController extends Controller
 {
     public function update(Request $request, string $id)
     {
@@ -21,12 +21,12 @@ class PaypalSettingController extends Controller
                 'secret_key' => ['required'],
             ],
             [
-                'client_id.required' => 'The PayPal Client Id Field is Required',
-                'client_id.required' => 'The PayPal Secret Key Field is Required',
+                'client_id.required' => 'The Stripe Client Id Field is Required',
+                'client_id.required' => 'The Stripe Secret Key Field is Required',
             ]
         );
 
-        PaypalSetting::updateOrCreate(
+        StripeSetting::updateOrCreate(
             ['id' => $id],
             [
                 'status' => $request->status,
