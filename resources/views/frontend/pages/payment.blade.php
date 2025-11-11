@@ -94,26 +94,9 @@
                                 </div>
                             </div> --}}
 
-                            <div class="tab-pane fade show active" id="v-pills-paypal" role="tabpanel"
-                                aria-labelledby="v-pills-home-tab">
-                                <div class="row">
-                                    <div class="col-xl-12 m-auto">
-                                        <div class="wsus__payment_area">
-                                            <a href="{{ route('user.paypal.payment') }}" class="nav-link common_btn text-center">Pay With PayPal</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tab-pane fade show" id="v-pills-stripe" role="tabpanel"
-                                aria-labelledby="v-pills-home-tab">
-                                <div class="row">
-                                    <div class="col-xl-12 m-auto">
-                                        <div class="wsus__payment_area">
-                                            <button class="nav-link common_btn">Pay With Stripe</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            @include('frontend.pages.payment-gateway.paypal')
+
+                            @include('frontend.pages.payment-gateway.stripe')
                         </div>
                     </div>
                     <div class="col-xl-4 col-lg-4">
@@ -122,7 +105,7 @@
                             <p>subtotal: <span>{{ $settings->currency_icon }}{{ getCartTotal() }}</span></p>
                             <p>shipping fee(+): <span>{{ $settings->currency_icon }}{{ getShippingFee() }} </span></p>
                             <p>coupon(-): <span>{{ $settings->currency_icon }}{{ getCartDiscount() }}</span></p>
-                            <h6>total <span>{{ $settings->currency_icon }}{{getFinalPayableAmount()}}</span></h6>
+                            <h6>total <span>{{ $settings->currency_icon }}{{ getFinalPayableAmount() }}</span></h6>
                         </div>
                     </div>
                 </div>

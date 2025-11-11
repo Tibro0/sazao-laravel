@@ -99,9 +99,11 @@ Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'user', 'as' => 
     Route::controller(PaymentController::class)->group(function () {
         Route::get('payment', 'index')->name('payment');
         Route::get('payment-success', 'paymentSuccess')->name('payment.success');
-        /** Paypal Payment */
+        /** PayPal Payment */
         Route::get('paypal/payment', 'payWithPaypal')->name('paypal.payment');
         Route::get('paypal/success', 'paypalSuccess')->name('paypal.success');
         Route::get('paypal/cancel', 'paypalCancel')->name('paypal.cancel');
+        /** Stripe Route */
+        Route::post('stripe/payment', 'payWithStripe')->name('stripe.payment');
     });
 });
