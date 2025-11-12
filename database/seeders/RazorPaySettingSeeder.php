@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\RazorPaySetting;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -12,6 +13,17 @@ class RazorPaySettingSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        RazorPaySetting::insert([
+            [
+                'status' => 1,
+                'country_name' => 'India',
+                'currency_name' => 'INR',
+                'currency_rate' => 81,
+                'client_id' => 'RazorPay Client Id',
+                'secret_key' => 'RazorPay Secret Key',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]
+        ]);
     }
 }

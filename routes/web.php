@@ -105,5 +105,7 @@ Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'user', 'as' => 
         Route::get('paypal/cancel', 'paypalCancel')->name('paypal.cancel');
         /** Stripe Route */
         Route::post('stripe/payment', 'payWithStripe')->name('stripe.payment');
+        /** Razorpay Route */
+        Route::post('razorpay/payment', 'payWithRazorpay')->name('razorpay.payment');
     });
 });

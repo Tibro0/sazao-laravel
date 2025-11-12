@@ -8,6 +8,7 @@ use App\Models\Order;
 use App\Models\OrderProduct;
 use App\Models\PaypalSetting;
 use App\Models\Product;
+use App\Models\RazorPaySetting;
 use App\Models\StripeSetting;
 use App\Models\Transaction;
 use Gloudemans\Shoppingcart\Facades\Cart;
@@ -17,6 +18,7 @@ use Illuminate\Support\Facades\Session;
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
 use Stripe\Charge;
 use Stripe\Stripe;
+use Razorpay\Api\Api;
 
 class PaymentController extends Controller
 {
@@ -221,6 +223,38 @@ class PaymentController extends Controller
                 'title' => 'Error',
                 'message' => 'Something Went Wrong Please Try Again Later!'
             ]);
+        }
+    }
+
+    /** Razorpay Payment */
+    public function payWithRazorpay(Request $request)
+    {
+        $razorPaySetting = RazorPaySetting::first();
+        $api = new Api($razorPaySetting->razorpay_key, $razorPaySetting->razorpay_secret_key);
+        // Amount Calculation
+        $total = getFinalPayableAmount();
+        $payableAmount = round($total * $razorPaySetting->currency_rate, 2);
+        $payableAmountInPaisa = $payableAmount * 100;
+
+        if ($request->has('razorpay_payment_id') && $request->filled('razorpay_payment_id')) {
+            try {
+                $response = $api->payment->fetch($request->razorpay_payment_id)->capture(['amount' => $payableAmountInPaisa]);
+            } catch (\Exception $e) {
+                return redirect()->back()->with('toast', [
+                    'type' => 'error',
+                    'title' => 'Error',
+                    'message' => $e->getMessage()
+                ]);
+            }
+        }
+
+        if ($response['status'] === 'captured') {
+            $this->storeOrder('razorpay', 1, $response['id'], $payableAmount, $razorPaySetting->currency_name);
+
+            // Clear Session
+            $this->clearSession();
+
+            return redirect()->route('user.payment.success');
         }
     }
 }
