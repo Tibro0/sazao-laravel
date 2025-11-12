@@ -14,6 +14,7 @@ use App\Http\Controllers\Backend\ProductImageGalleryController;
 use App\Http\Controllers\Backend\ProductVariantController;
 use App\Http\Controllers\Backend\ProductVariantItemController;
 use App\Http\Controllers\Backend\ProfileController;
+use App\Http\Controllers\Backend\RazorPaySettingController;
 use App\Http\Controllers\Backend\SellerProductController;
 use App\Http\Controllers\Backend\SettingController;
 use App\Http\Controllers\Backend\ShippingRuleController;
@@ -195,4 +196,8 @@ Route::controller(PaypalSettingController::class)->group(function () {
 
 Route::controller(StripeSettingController::class)->group(function () {
     Route::put('stripe-setting/{id}', 'update')->name('stripe-setting.update');
+});
+
+Route::controller(RazorPaySettingController::class)->group(function () {
+    Route::put('razorpay-setting/{id}', 'update')->name('razorpay-setting.update');
 });

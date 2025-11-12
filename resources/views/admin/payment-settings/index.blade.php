@@ -28,12 +28,16 @@
                                 <a class="nav-link mb-2" id="v-pills-home-tab" data-bs-toggle="pill"
                                     href="#stripe-setting" role="tab" aria-controls="v-pills-home"
                                     aria-selected="true">Stripe</a>
+                                <a class="nav-link mb-2" id="v-pills-home-tab" data-bs-toggle="pill"
+                                    href="#razorpay-setting" role="tab" aria-controls="v-pills-home"
+                                    aria-selected="true">Razorpay</a>
                             </div>
                         </div>
                         <div class="col-md-10">
                             <div class="tab-content text-muted mt-4 mt-md-0" id="v-pills-tabContent">
                                 @include('admin.payment-settings.sections.paypal-setting')
                                 @include('admin.payment-settings.sections.stripe-setting')
+                                @include('admin.payment-settings.sections.razorpay-setting')
                             </div>
                         </div>
                     </div>
