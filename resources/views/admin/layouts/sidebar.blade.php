@@ -38,8 +38,14 @@
                 <li class="{{ adminSidebarActive(['admin.out-for-delivery-orders']) }}"><a href="{{ route('admin.out-for-delivery-orders') }}">All Out For Delivery Orders</a></li>
                 <li class="{{ adminSidebarActive(['admin.delivered-orders']) }}"><a href="{{ route('admin.delivered-orders') }}">All Delivered Orders</a></li>
                 <li class="{{ adminSidebarActive(['admin.canceled-orders']) }}"><a href="{{ route('admin.canceled-orders') }}">All Canceled Orders</a></li>
-
             </ul>
+        </li>
+
+        <li class="{{ adminSidebarActive(['admin.transaction']) }}">
+            <a href="{{ route('admin.transaction') }}" class="waves-effect">
+                <i class="ri-dashboard-line"></i>
+                <span>Transaction</span>
+            </a>
         </li>
 
         <li>
@@ -75,7 +81,6 @@
                         href="{{ route('admin.shipping-rule.index') }}">Shipping Rule</a></li>
                 <li class="{{ adminSidebarActive(['admin.vendor-profile.*']) }}"><a
                         href="{{ route('admin.vendor-profile.index') }}">Vendor Profile</a></li>
-
                 <li class="{{ adminSidebarActive(['admin.payment-settings.index']) }}"><a
                         href="{{ route('admin.payment-settings.index') }}">Payment Settings</a></li>
             </ul>

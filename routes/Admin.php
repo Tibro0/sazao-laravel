@@ -22,6 +22,7 @@ use App\Http\Controllers\Backend\ShippingRuleController;
 use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\StripeSettingController;
 use App\Http\Controllers\Backend\SubCategoryController;
+use App\Http\Controllers\Backend\TransactionController;
 use Illuminate\Support\Facades\Route;
 
 // Admin Route
@@ -194,6 +195,11 @@ Route::controller(OrderController::class)->group(function () {
     Route::delete('order/{id}', 'destroy')->name('order.destroy');
     Route::get('payment-status', 'changePaymentStatus')->name('payment.status');
     Route::get('order-status', 'changeOrderStatus')->name('order.status');
+});
+
+/**Order Transaction Route */
+Route::controller(TransactionController::class)->group(function(){
+    Route::get('transaction', 'index')->name('transaction');
 });
 
 /**General Setting Route */
