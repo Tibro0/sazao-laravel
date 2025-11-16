@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('currency_icon');
             $table->integer('product_qty');
             $table->string('payment_method');
-            $table->integer('payment_status');
+            $table->boolean('payment_status')->comment('0=Pending,1=Completed');
             $table->text('order_address');
             $table->text('shipping_method');
             $table->text('coupon');

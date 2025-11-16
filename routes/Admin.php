@@ -185,6 +185,7 @@ Route::controller(OrderController::class)->group(function () {
     Route::get('order', 'index')->name('order.index');
     Route::get('order/{id}', 'show')->name('order.show');
     Route::delete('order/{id}', 'destroy')->name('order.destroy');
+    Route::get('payment-status','changePaymentStatus')->name('payment.status');
     Route::get('order-status', 'changeOrderStatus')->name('order.status');
 });
 

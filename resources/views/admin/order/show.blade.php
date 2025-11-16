@@ -16,6 +16,8 @@
                 <h4 class="mb-sm-0">Invoice</h4>
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
+                        <button type="button" class="btn btn-outline-primary waves-effect waves-light px-5 me-2"
+                            data-bs-toggle="modal" data-bs-target=".bs-example-modal-xl">Change Status</button>
                         <a href="{{ route('admin.order.index') }}" class="btn btn-primary px-5">Back</a>
                     </ol>
                 </div>
@@ -203,51 +205,94 @@
             </div>
         </div> <!-- end col -->
     </div>
+@endsection
 
-    <div class="row g-3">
-        <div class="card">
-            <div class="card-body">
-                <form action="">
-                    <div class="col-md-12">
-                        <label>Order Status</label>
-                        <select name="order_status" data-id="{{ $order->id }}" id="order_status" class="form-select">
-                            @foreach (config('order_status.order_status_admin') as $key => $orderStatus)
-                                <option @selected($order->order_status === $key) value="{{ $key }}">
-                                    {{ $orderStatus['status'] }}
+@section('modal')
+    <div class="modal fade bs-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="myExtraLargeModalLabel">Change Status</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row g-3">
+                        <div class="col-md-12">
+                            <label>Payment Status</label>
+                            <select name="payment_status" data-id="{{ $order->id }}" id="payment_status"
+                                class="form-select">
+                                <option @selected($order->payment_status === 0) value="0">Pending
                                 </option>
-                            @endforeach
-                        </select>
+                                <option @selected($order->payment_status === 1) value="1">Completed
+                                </option>
+                            </select>
+                        </div>
+                        <div class="col-md-12">
+                            <label>Order Status</label>
+                            <select name="order_status" data-id="{{ $order->id }}" id="order_status"
+                                class="form-select">
+                                @foreach (config('order_status.order_status_admin') as $key => $orderStatus)
+                                    <option @selected($order->order_status === $key) value="{{ $key }}">
+                                        {{ $orderStatus['status'] }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
                     </div>
-                </form>
-            </div>
-        </div>
-    </div>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 @endsection
 
 @section('js-link')
-<script>
-    $(document).ready(function () {
-        $('#order_status').on('change', function(){
-            let status = $(this).val();
-            let id = $(this).data('id');
+    <script>
+        $(document).ready(function() {
+            // payment status change
+            $('#payment_status').on('change', function() {
+                let status = $(this).val();
+                let id = $(this).data('id');
 
-            $.ajax({
-                method: "GET",
-                url: "{{ route('admin.order.status') }}",
-                data: {
-                    status:status,
-                    id: id
-                },
-                success: function (data) {
-                    if (data.status === 'success') {
-                        toastr.success(data.message)
+                $.ajax({
+                    method: 'GET',
+                    url: "{{ route('admin.payment.status') }}",
+                    data: {
+                        status: status,
+                        id: id
+                    },
+                    success: function(data) {
+                        if (data.status === 'success') {
+                            toastr.success(data.message)
+                        }
+                    },
+                    error: function(data) {
+                        console.log(data);
                     }
-                },
-                error:function(data){
+                })
+            })
+            // order status change
+            $('#order_status').on('change', function() {
+                let status = $(this).val();
+                let id = $(this).data('id');
 
-                }
-            });
-        })
-    });
-</script>
+                $.ajax({
+                    method: "GET",
+                    url: "{{ route('admin.order.status') }}",
+                    data: {
+                        status: status,
+                        id: id
+                    },
+                    success: function(data) {
+                        if (data.status === 'success') {
+                            toastr.success(data.message)
+                        }
+                    },
+                    error: function(data) {
+
+                    }
+                });
+            })
+        });
+    </script>
 @endsection

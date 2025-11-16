@@ -47,7 +47,23 @@
                                     <td>{{ date('j-F-Y', strtotime($item->created_at)) }}</td>
                                     <td>{{ $item->product_qty }}</td>
                                     <td>{{ $settings->currency_icon }}{{ $item->amount }}</td>
-                                    <td>{{ $item->order_status }}</td>
+                                    <td>
+                                        @if ($item->order_status === 'pending')
+                                            <span class='badge bg-warning'>Pending</span>
+                                        @elseif ($item->order_status === 'processed_and_ready_to_ship')
+                                            <span class='badge bg-info'>Processed</span>
+                                        @elseif ($item->order_status === 'dropped_off')
+                                            <span class='badge bg-secondary'>Dropped Off</span>
+                                        @elseif ($item->order_status === 'shipped')
+                                            <span class='badge bg-dark'>Shipped</span>
+                                        @elseif ($item->order_status === 'out_for_delivery')
+                                            <span class='badge bg-primary'>Out For Delivery</span>
+                                        @elseif ($item->order_status === 'delivered')
+                                            <span class='badge bg-success'>Delivered</span>
+                                        @elseif ($item->order_status === 'canceled')
+                                            <span class='badge bg-danger'>Canceled</span>
+                                        @endif
+                                    </td>
                                     <td>
                                         @if ($item->payment_status === 1)
                                             <span class="badge bg-primary">Complete</span>
@@ -55,7 +71,7 @@
                                             <span class="badge bg-danger">UnPaid</span>
                                         @endif
                                     </td>
-                                    <td>{{ $item->payment_method }}</td>
+                                    <td>{{ Str::ucfirst($item->payment_method) }}</td>
                                     <td width="100">
                                         <a href="{{ route('admin.order.show', $item->id) }}" class="btn btn-primary"><i
                                                 class="fas fa-eye"></i></a>
