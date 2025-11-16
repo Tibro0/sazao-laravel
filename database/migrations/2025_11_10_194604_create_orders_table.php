@@ -25,7 +25,7 @@ return new class extends Migration
             $table->text('order_address');
             $table->text('shipping_method');
             $table->text('coupon');
-            $table->string('order_status');
+            $table->string('order_status')->comment('Accept Only=pending,processed_and_ready_to_ship,dropped_off,shipped,out_for_delivery,delivered,canceled');
             $table->timestamps();
         });
     }

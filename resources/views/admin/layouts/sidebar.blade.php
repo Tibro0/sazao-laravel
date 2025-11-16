@@ -27,6 +27,16 @@
         <li>
             <a href="javascript: void(0);" class="has-arrow waves-effect">
                 <i class="ri-mail-send-line"></i>
+                <span>Orders</span>
+            </a>
+            <ul class="sub-menu" aria-expanded="false">
+                <li class="{{ adminSidebarActive(['admin.order.*']) }}"><a href="{{ route('admin.order.index') }}">All Orders</a></li>
+            </ul>
+        </li>
+
+        <li>
+            <a href="javascript: void(0);" class="has-arrow waves-effect">
+                <i class="ri-mail-send-line"></i>
                 <span>Manage Products</span>
             </a>
             <ul class="sub-menu" aria-expanded="false">
@@ -98,6 +108,5 @@
                 <li><a href="email-read.html">Read Email</a></li>
             </ul>
         </li> --}}
-
     </ul>
 </div>

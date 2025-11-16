@@ -7,6 +7,7 @@ use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\ChildCategoryController;
 use App\Http\Controllers\Backend\CouponController;
 use App\Http\Controllers\Backend\FlashSaleController;
+use App\Http\Controllers\Backend\OrderController;
 use App\Http\Controllers\Backend\PaymentSettingController;
 use App\Http\Controllers\Backend\PaypalSettingController;
 use App\Http\Controllers\Backend\ProductController;
@@ -179,6 +180,14 @@ Route::controller(ShippingRuleController::class)->group(function () {
     Route::put('shipping-rule-change-status', 'changeStatus')->name('shipping-rule.change-status');
 });
 
+/** Order Routs */
+Route::controller(OrderController::class)->group(function () {
+    Route::get('order', 'index')->name('order.index');
+    Route::get('order/{id}', 'show')->name('order.show');
+    Route::delete('order/{id}', 'destroy')->name('order.destroy');
+    Route::get('order-status', 'changeOrderStatus')->name('order.status');
+});
+
 /**General Setting Route */
 Route::controller(SettingController::class)->group(function () {
     Route::get('settings', 'index')->name('settings.index');
@@ -189,15 +198,12 @@ Route::controller(SettingController::class)->group(function () {
 Route::controller(PaymentSettingController::class)->group(function () {
     Route::get('payment-settings', 'index')->name('payment-settings.index');
 });
-
 Route::controller(PaypalSettingController::class)->group(function () {
     Route::put('paypal-setting/{id}', 'update')->name('paypal-setting.update');
 });
-
 Route::controller(StripeSettingController::class)->group(function () {
     Route::put('stripe-setting/{id}', 'update')->name('stripe-setting.update');
 });
-
 Route::controller(RazorPaySettingController::class)->group(function () {
     Route::put('razorpay-setting/{id}', 'update')->name('razorpay-setting.update');
 });

@@ -15,7 +15,9 @@
                 </div>
             </div>
         </div>
-        {{-- breadcrumb End --}}
+    </div>
+    {{-- breadcrumb End --}}
+    <div class="row">
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
@@ -24,38 +26,47 @@
                 <form action="{{ route('admin.profile.update') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="card-body">
-                        <div class="mb-3">
-                            <label>Preview</label><br>
-                            <img src="{{ asset(auth()->user()->image) }}" width="100">
-                        </div>
-                        <div class="mb-3">
-                            <label>Image <span class="text-danger">(Max 2MB)</span></label>
-                            <input type="file" name="image" class="form-control">
-                        </div>
-                        <div class="mb-3">
-                            <label>Name <span class="text-danger">*</span></label>
-                            <input type="text" name="name" value="{{ auth()->user()->name ?? old('name') }}"
-                                class="form-control @error('name') is-invalid @enderror" placeholder="Enter Your Name">
-                            @error('name')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="mb-3">
-                            <label>Email <span class="text-danger">*</span></label>
-                            <input type="email" name="email" value="{{ auth()->user()->email ?? old('email') }}"
-                                class="form-control @error('email') is-invalid @enderror" placeholder="Enter Your Email">
-                            @error('email')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="mb-3">
-                            <button type="submit" class="btn btn-primary px-5">Save Changes</button>
+                        <div class="row g-3">
+                            <div class="col-md-12">
+                                <label>Preview</label><br>
+                                <img src="{{ asset(auth()->user()->image) }}" width="100">
+                            </div>
+                            <div class="col-md-12">
+                                <label>Image <span class="text-danger">(Max 2MB)</span></label>
+                                <input type="file" name="image"
+                                    class="form-control @error('image')is-invalid @enderror">
+                                @error('image')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-12">
+                                <label>Name <span class="text-danger">*</span></label>
+                                <input type="text" name="name" value="{{ auth()->user()->name ?? old('name') }}"
+                                    class="form-control @error('name') is-invalid @enderror" placeholder="Enter Your Name">
+                                @error('name')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-12">
+                                <label>Email <span class="text-danger">*</span></label>
+                                <input type="email" name="email" value="{{ auth()->user()->email ?? old('email') }}"
+                                    class="form-control @error('email') is-invalid @enderror"
+                                    placeholder="Enter Your Email">
+                                @error('email')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-12">
+                                <button type="submit" class="btn btn-primary px-5">Save Changes</button>
+                            </div>
                         </div>
                     </div>
                 </form>
             </div>
         </div>
+    </div>
 
+    <div class="row">
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
@@ -63,41 +74,42 @@
                 </div>
                 <form action="{{ route('admin.password.update') }}" method="POST" enctype="multipart/form-data">
                     @csrf
-                    <div class="card-body shadow">
-                        <div class="mb-3">
-                            <label>Current Password <span class="text-danger">*</span></label>
-                            <input type="password" name="current_password"
-                                class="form-control @error('current_password') is-invalid @enderror"
-                                placeholder="Enter Your Current Password">
-                            @error('current_password')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="mb-3">
-                            <label>New Password <span class="text-danger">*</span></label>
-                            <input type="password" name="password"
-                                class="form-control @error('password') is-invalid @enderror"
-                                placeholder="Enter Your New Password">
-                            @error('password')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="mb-3">
-                            <label>Confirm Password <span class="text-danger">*</span></label>
-                            <input type="password" name="password_confirmation"
-                                class="form-control @error('password_confirmation') is-invalid @enderror"
-                                placeholder="Enter Your New Password">
-                            @error('password_confirmation')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="mb-3">
-                            <button type="submit" class="btn btn-primary px-5">Save Changes</button>
+                    <div class="card-body">
+                        <div class="row g-3">
+                            <div class="col-md-12">
+                                <label>Current Password <span class="text-danger">*</span></label>
+                                <input type="password" name="current_password"
+                                    class="form-control @error('current_password') is-invalid @enderror"
+                                    placeholder="Enter Your Current Password">
+                                @error('current_password')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-12">
+                                <label>New Password <span class="text-danger">*</span></label>
+                                <input type="password" name="password"
+                                    class="form-control @error('password') is-invalid @enderror"
+                                    placeholder="Enter Your New Password">
+                                @error('password')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-12">
+                                <label>Confirm Password <span class="text-danger">*</span></label>
+                                <input type="password" name="password_confirmation"
+                                    class="form-control @error('password_confirmation') is-invalid @enderror"
+                                    placeholder="Enter Your New Password">
+                                @error('password_confirmation')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-12">
+                                <button type="submit" class="btn btn-primary px-5">Save Changes</button>
+                            </div>
                         </div>
                     </div>
                 </form>
             </div>
         </div>
-
     </div>
 @endsection

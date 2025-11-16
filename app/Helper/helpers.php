@@ -88,7 +88,7 @@ function getMainCartTotal()
             $total = $subTotal - $discount;
             return $total;
         }
-    }else{
+    } else {
         return getCartTotal();
     }
 }
@@ -104,22 +104,24 @@ function getCartDiscount()
             $discount = $subTotal - ($subTotal * $coupon['discount'] / 100);
             return $discount;
         }
-    }else{
+    } else {
         return 0;
     }
 }
 
 /** Get Selected Shipping Fee From Section */
-function getShippingFee(){
+function getShippingFee()
+{
     if (Session::has(('shipping_method'))) {
         return Session::get('shipping_method')['cost'];
-    }else{
+    } else {
         return 0;
     }
 }
 
 /** get Payable Amount */
-function getFinalPayableAmount() {
+function getFinalPayableAmount()
+{
     return getMainCartTotal() + getShippingFee();
 }
 

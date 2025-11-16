@@ -19,8 +19,8 @@ class RazorPaySettingSeeder extends Seeder
                 'country_name' => 'India',
                 'currency_name' => 'INR',
                 'currency_rate' => 81,
-                'client_id' => 'RazorPay Client Id',
-                'secret_key' => 'RazorPay Secret Key',
+                'razorpay_key' => 'RazorPay Client Id',
+                'razorpay_secret_key' => 'RazorPay Secret Key',
                 'created_at' => now(),
                 'updated_at' => now(),
             ]
