@@ -183,9 +183,16 @@ Route::controller(ShippingRuleController::class)->group(function () {
 /** Order Routs */
 Route::controller(OrderController::class)->group(function () {
     Route::get('order', 'index')->name('order.index');
+    Route::get('pending-orders', 'pendingOrders')->name('pending-orders');
+    Route::get('processed-orders',  'processedOrders')->name('processed-orders');
+    Route::get('dropped-off-orders',  'DroppedOffOrders')->name('dropped-off-orders');
+    Route::get('shipped-orders', 'shippedOrders')->name('shipped-orders');
+    Route::get('out-for-delivery-orders', 'outForDeliveryOrders')->name('out-for-delivery-orders');
+    Route::get('delivered-orders', 'deliveredOrders')->name('delivered-orders');
+    Route::get('canceled-orders', 'canceledOrders')->name('canceled-orders');
     Route::get('order/{id}', 'show')->name('order.show');
     Route::delete('order/{id}', 'destroy')->name('order.destroy');
-    Route::get('payment-status','changePaymentStatus')->name('payment.status');
+    Route::get('payment-status', 'changePaymentStatus')->name('payment.status');
     Route::get('order-status', 'changeOrderStatus')->name('order.status');
 });
 
