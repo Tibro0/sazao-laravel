@@ -57,17 +57,17 @@ class OrderController extends Controller
         return view('admin.order.canceled-order', compact('orders'));
     }
 
-    // public function destroy(string $id)
-    // {
-    //     $order = Order::findOrFail($id);
-    //     // delete order products
-    //     $order->orderProducts()->delete();
-    //     // delete transaction
-    //     $order->transaction()->delete();
-    //     $order->delete();
+    public function destroy(string $id)
+    {
+        $order = Order::with(['orderProducts', 'transaction'])->findOrFail($id);
+        // Delete Order Products
+        $order->orderProducts()->delete();
+        // Delete Transaction
+        $order->transaction()->delete();
+        $order->delete();
 
-    //     return response(['status' => 'success', 'message' => 'Deleted Successfully!']);
-    // }
+        return response(['status' => 'success', 'message' => 'Deleted Successfully!']);
+    }
 
 
     public function changeOrderStatus(Request $request)
