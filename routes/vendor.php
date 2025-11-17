@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Vendor\VendorController;
+use App\Http\Controllers\Vendor\VendorOrderController;
 use App\Http\Controllers\Vendor\VendorProductController;
 use App\Http\Controllers\Vendor\VendorProductImageGalleryController;
 use App\Http\Controllers\Vendor\VendorProductVariantController;
@@ -67,4 +68,11 @@ Route::controller(VendorProductVariantItemController::class)->group(function () 
     Route::put('products-variant-item-update/{variantItemId}', 'update')->name('products-variant-item.update');
     Route::delete('products-variant-item/{variantItemId}', 'destroy')->name('products-variant-item.destroy');
     Route::put('products-variant-item-change-status', 'changeStatus')->name('products-variant-item.change-status');
+});
+
+/** Orders Route */
+Route::controller(VendorOrderController::class)->group(function () {
+    Route::get('orders', 'index')->name('orders.index');
+    Route::get('orders/show/{id}', 'show')->name('orders.show');
+    Route::get('orders/status/{id}', 'orderStatus')->name('orders.status');
 });
