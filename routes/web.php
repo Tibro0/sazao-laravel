@@ -9,6 +9,7 @@ use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\PaymentController;
 use App\Http\Controllers\Frontend\UserAddressController;
 use App\Http\Controllers\Frontend\UserDashboardController;
+use App\Http\Controllers\Frontend\UserOrderController;
 use App\Http\Controllers\Frontend\UserProfileController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -86,6 +87,12 @@ Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'user', 'as' => 
         Route::get('address/edit/{id}', 'edit')->name('address.edit');
         Route::put('address/{id}', 'update')->name('address.update');
         Route::delete('address/{id}', 'destroy')->name('address.destroy');
+    });
+
+    /** Orders Route */
+    Route::controller(UserOrderController::class)->group(function () {
+        Route::get('orders', 'index')->name('orders.index');
+        Route::get('orders/show/{id}', 'show')->name('orders.show');
     });
 
     /** Checkout Route */
