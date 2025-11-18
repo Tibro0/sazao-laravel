@@ -17,10 +17,11 @@
         {{-- breadcrumb Start --}}
         <div class="col-12">
             <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                <h4 class="mb-sm-0 text-capitalize">Product Variant : {{$variant->name}}</h4>
+                <h4 class="mb-sm-0 text-capitalize">Product Variant : {{ $variant->name }}</h4>
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
-                        <a href="{{ route('admin.products-variant.index', ['product' => $product->id]) }}" class="btn btn-primary px-5">Back</a>
+                        <a href="{{ route('admin.products-variant.index', ['product' => $product->id]) }}"
+                            class="btn btn-primary px-5">Back</a>
                     </ol>
                 </div>
 
@@ -33,7 +34,8 @@
                     <div class="d-flex justify-content-between align-items-center">
                         <h4 class="mb-0">All Product Variant Items</h4>
                         <div>
-                            <a href="{{ route('admin.products-variant-item.create', ['productId'=>$product->id, 'variantId' => $variant->id]) }}" class="btn btn-primary px-5 rounded">Create New</a>
+                            <a href="{{ route('admin.products-variant-item.create', ['productId' => $product->id, 'variantId' => $variant->id]) }}"
+                                class="btn btn-primary px-5 rounded">Create New</a>
                         </div>
                     </div>
                 </div>
@@ -57,30 +59,32 @@
                                     <td width="50">{{ $loop->iteration }}</td>
                                     <td>{{ $item->name }}</td>
                                     <td>{{ $item->productVariant->name }}</td>
-                                    <td>{{ $item->price }}</td>
+                                    <td>{{ $settings->currency_icon . $item->price }}</td>
                                     <td>
                                         @if ($item->is_default === 1)
-                                        <span class="badge bg-primary">Yes</span>
+                                            <span class="badge bg-primary">Yes</span>
                                         @elseif ($item->is_default === 0)
-                                        <span class="badge bg-danger">No</span>
+                                            <span class="badge bg-danger">No</span>
                                         @endif
                                     </td>
                                     <td>
                                         @if ($item->status === 1)
                                             <div class="form-check form-switch mb-3">
-                                                <input type="checkbox" class="form-check-input change-status" data-id="{{ $item->id }}" checked>
+                                                <input type="checkbox" class="form-check-input change-status"
+                                                    data-id="{{ $item->id }}" checked>
                                             </div>
                                         @elseif ($item->status === 0)
                                             <div class="form-check form-switch mb-3">
-                                                <input type="checkbox" class="form-check-input change-status" data-id="{{ $item->id }}">
+                                                <input type="checkbox" class="form-check-input change-status"
+                                                    data-id="{{ $item->id }}">
                                             </div>
                                         @endif
                                     </td>
                                     <td width="100">
-                                        <a href="{{ route('admin.products-variant-item.edit', $item->id) }}" class="btn btn-primary"><i
-                                                class="fas fa-pencil-alt"></i></a>
-                                        <a href="{{ route('admin.products-variant-item.destroy', $item->id) }}" id="delete"
-                                            class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+                                        <a href="{{ route('admin.products-variant-item.edit', $item->id) }}"
+                                            class="btn btn-primary"><i class="fas fa-pencil-alt"></i></a>
+                                        <a href="{{ route('admin.products-variant-item.destroy', $item->id) }}"
+                                            id="delete" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
                                     </td>
                                 </tr>
                             @endforeach

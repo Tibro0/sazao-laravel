@@ -7,6 +7,7 @@ use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\ChildCategoryController;
 use App\Http\Controllers\Backend\CouponController;
 use App\Http\Controllers\Backend\FlashSaleController;
+use App\Http\Controllers\Backend\HomePageSettingController;
 use App\Http\Controllers\Backend\OrderController;
 use App\Http\Controllers\Backend\PaymentSettingController;
 use App\Http\Controllers\Backend\PaypalSettingController;
@@ -206,6 +207,12 @@ Route::controller(TransactionController::class)->group(function(){
 Route::controller(SettingController::class)->group(function () {
     Route::get('settings', 'index')->name('settings.index');
     Route::put('general-setting-update', 'generalSettingUpdate')->name('general-setting-update');
+});
+
+/** Home Page Setting Route */
+Route::controller(HomePageSettingController::class)->group(function () {
+    Route::get('home-page-setting', 'index')->name('home-page-setting');
+    Route::put('popular-category-section', 'updatePopularCategorySection')->name('popular-category-section');
 });
 
 /** Payment Setting Route */

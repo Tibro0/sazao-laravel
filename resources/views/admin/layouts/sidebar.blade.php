@@ -94,6 +94,8 @@
             <ul class="sub-menu" aria-expanded="false">
                 <li class="{{ adminSidebarActive(['admin.slider.*']) }}"><a
                         href="{{ route('admin.slider.index') }}">Slider</a></li>
+                <li class="{{ adminSidebarActive(['admin.home-page-setting']) }}"><a
+                        href="{{ route('admin.home-page-setting') }}">Home Page Setting</a></li>
             </ul>
         </li>
 
