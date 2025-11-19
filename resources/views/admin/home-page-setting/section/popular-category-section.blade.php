@@ -255,51 +255,58 @@
             $('body').on('change', '#main-category', function(e) {
                 let id = $(this).val();
                 let row = $(this).closest('.row');
-                $.ajax({
-                    method: 'GET',
-                    url: "{{ route('admin.get-subcategories') }}",
-                    data: {
-                        id: id
-                    },
-                    success: function(data) {
-                        let selector = row.find('#sub-category');
-                        selector.html('<option value="">Select a Child Category</option>')
-                        selector.html(
-                            '<option value="">Select a Sub Category</option>')
-                        $.each(data, function(i, item) {
-                            selector.append(
-                                `<option value="${item.id}">${item.name}</option>`)
-                        })
-                    },
-                    error: function(xhr, status, error) {
-                        console.log(error);
-                    }
-                })
+                // Sub Category and Child Category reset
+                row.find('#sub-category').html('<option value="">Select a Sub Category</option>');
+                row.find('#child-category').html('<option value="">Select a Child Category</option>');
+
+                if (id) {
+                    $.ajax({
+                        method: 'GET',
+                        url: "{{ route('admin.get-subcategories') }}",
+                        data: {
+                            id: id
+                        },
+                        success: function(data) {
+                            let selector = row.find('#sub-category');
+                            $.each(data, function(i, item) {
+                                selector.append(
+                                    `<option value="${item.id}">${item.name}</option>`
+                                )
+                            })
+                        },
+                        error: function(xhr, status, error) {
+                            console.log(error);
+                        }
+                    })
+                }
             })
 
-            // get Child Categories
             $('body').on('change', '#sub-category', function(e) {
                 let id = $(this).val();
                 let row = $(this).closest('.row');
-                $.ajax({
-                    method: 'GET',
-                    url: "{{ route('admin.product.get-child-categories') }}",
-                    data: {
-                        id: id
-                    },
-                    success: function(data) {
-                        let selector = row.find('#child-category');
-                        selector.html(
-                            '<option value="">Select a Child Category</option>')
-                        $.each(data, function(i, item) {
-                            selector.append(
-                                `<option value="${item.id}">${item.name}</option>`)
-                        })
-                    },
-                    error: function(xhr, status, error) {
-                        console.log(error);
-                    }
-                })
+                // Child Category Reset
+                row.find('#child-category').html('<option value="">Select a Child Category</option>');
+
+                if (id) {
+                    $.ajax({
+                        method: 'GET',
+                        url: "{{ route('admin.product.get-child-categories') }}",
+                        data: {
+                            id: id
+                        },
+                        success: function(data) {
+                            let selector = row.find('#child-category');
+                            $.each(data, function(i, item) {
+                                selector.append(
+                                    `<option value="${item.id}">${item.name}</option>`
+                                )
+                            })
+                        },
+                        error: function(xhr, status, error) {
+                            console.log(error);
+                        }
+                    })
+                }
             })
         })
     </script>

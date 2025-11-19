@@ -26,8 +26,8 @@
                                     href="#popular-category-section" role="tab" aria-controls="v-pills-profile"
                                     aria-selected="false">Popular Category Section</a>
                                 <a class="nav-link mb-2" id="v-pills-messages-tab" data-bs-toggle="pill"
-                                    href="#v-pills-messages" role="tab" aria-controls="v-pills-messages"
-                                    aria-selected="false">Messages</a>
+                                    href="#product-slider-section-one" role="tab" aria-controls="v-pills-messages"
+                                    aria-selected="false">Product Slider Section One</a>
                                 <a class="nav-link" id="v-pills-settings-tab" data-bs-toggle="pill" href="#v-pills-settings"
                                     role="tab" aria-controls="v-pills-settings" aria-selected="false">Settings</a>
                             </div>
@@ -35,20 +35,7 @@
                         <div class="col-md-10">
                             <div class="tab-content text-muted mt-4 mt-md-0" id="v-pills-tabContent">
                                 @include('admin.home-page-setting.section.popular-category-section')
-                                <div class="tab-pane fade" id="v-pills-messages" role="tabpanel"
-                                    aria-labelledby="v-pills-messages-tab">
-                                    <p>
-                                        Etsy mixtape wayfarers, ethical wes anderson tofu before they
-                                        sold out mcsweeney's organic lomo retro fanny pack lo-fi
-                                        farm-to-table readymade. Messenger bag gentrify pitchfork
-                                        tattooed craft beer, iphone skateboard locavore carles etsy
-                                        salvia banksy hoodie helvetica. DIY synth PBR banksy irony.
-                                        Leggings gentrify squid 8-bit cred.
-                                    </p>
-                                    <p class="mb-0">DIY synth PBR banksy irony.
-                                        Leggings gentrify squid 8-bit cred pitchfork. Williamsburg banh
-                                        mi whatever gluten-free.</p>
-                                </div>
+                                @include('admin.home-page-setting.section.product-slider-section-one')
                                 <div class="tab-pane fade" id="v-pills-settings" role="tabpanel"
                                     aria-labelledby="v-pills-settings-tab">
                                     <p>

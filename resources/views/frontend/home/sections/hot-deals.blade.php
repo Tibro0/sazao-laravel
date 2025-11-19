@@ -266,7 +266,7 @@
             </div>
         </section>
 
-        <div class="wsus__hot_small_item wsus__hot_small_item_2">
+        {{-- <div class="wsus__hot_small_item wsus__hot_small_item_2">
             <div class="row">
                 <div class="col-xl-2 col-6 col-sm-6 col-md-4 col-lg-3">
                     <a class="wsus__hot_deals__single" href="#">
@@ -497,7 +497,7 @@
                     </a>
                 </div>
             </div>
-        </div>
+        </div> --}}
     </div>
 </section>
 
