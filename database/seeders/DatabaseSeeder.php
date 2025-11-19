@@ -43,6 +43,7 @@ class DatabaseSeeder extends Seeder
             PaypalSettingSeeder::class,
             StripeSettingSeeder::class,
             RazorPaySettingSeeder::class,
+            HomePageSettingSeeder::class,
         ]);
     }
 }

@@ -2,8 +2,11 @@
 
 namespace Database\Seeders;
 
+use App\Models\HomePageSetting;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+
+use function Symfony\Component\Clock\now;
 
 class HomePageSettingSeeder extends Seeder
 {
@@ -12,6 +15,13 @@ class HomePageSettingSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        HomePageSetting::insert([
+            [
+                'key' => 'popular_category_section',
+                'value' => '[{"category":"1","sub_category":null,"child_category":null},{"category":"4","sub_category":null,"child_category":null},{"category":"2","sub_category":null,"child_category":null},{"category":"8","sub_category":null,"child_category":null}]',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]
+        ]);
     }
 }
