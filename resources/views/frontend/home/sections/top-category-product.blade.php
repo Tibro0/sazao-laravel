@@ -70,7 +70,8 @@
                                         ->get();
                                 }
                             @endphp
-                            <button class="{{ $loop->index === 0 ? 'auto_click active' : '' }}" data-filter=".category-{{ $loop->index }}">{{ $category->name }}</button>
+                            <button class="{{ $loop->index === 0 ? 'auto_click active' : '' }}"
+                                data-filter=".category-{{ $loop->index }}">{{ $category->name }}</button>
                         @endforeach
                     </div>
                 </div>
@@ -82,7 +83,7 @@
                     @foreach ($products as $key => $product)
                         @foreach ($product as $item)
                             <div class="col-xl-2 col-6 col-sm-6 col-md-4 col-lg-3 category-{{ $key }}">
-                                <a class="wsus__hot_deals__single" href="#">
+                                <a class="wsus__hot_deals__single" href="{{ route('product-detail', $item->slug) }}">
                                     <div class="wsus__hot_deals__single_img">
                                         <img src="{{ asset($item->thumb_image) }}" alt="bag"
                                             class="img-fluid w-100">

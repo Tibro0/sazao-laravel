@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Brand;
 use App\Models\FlashSale;
 use App\Models\FlashSaleItem;
 use App\Models\HomePageSetting;
@@ -15,8 +16,9 @@ class HomeController extends Controller
     {
         $sliders = Slider::where(['status' => 1])->orderBy('serial', 'ASC')->get();
         $flashSaleDate = FlashSale::first();
-        $flashSaleItems = FlashSaleItem::where(['show_at_home' => 1, 'status' => 1])->get();
+        $flashSaleItems = FlashSaleItem::where(['show_at_home' => 1, 'status' => 1])->orderBy('id', 'DESC')->get();
         $popularCategorySection = HomePageSetting::where(['key' => 'popular_category_section'])->first();
-        return view('frontend.home.home', compact('sliders', 'flashSaleDate', 'flashSaleItems', 'popularCategorySection'));
+        $brands = Brand::where(['is_featured' => 1, 'status' => 1])->orderBy('id', 'DESC')->get();
+        return view('frontend.home.home', compact('sliders', 'flashSaleDate', 'flashSaleItems', 'popularCategorySection', 'brands'));
     }
 }
