@@ -11,9 +11,10 @@
     if (array_keys($lastKey)[0] === 'category') {
         // Category model
         $category = App\Models\Category::find($lastKey['category']);
-        $products = App\Models\Product::where([
+        $products = App\Models\Product::with(['category', 'productImageGalleries'])->where([
             'category_id' => $category->id,
             'status' => 1,
+            'is_approved' => 1,
         ])
             ->orderBy('id', 'DESC')
             ->take(12)
@@ -21,9 +22,10 @@
     } elseif (array_keys($lastKey)[0] === 'sub_category') {
         // Sub Category model
         $category = App\Models\SubCategory::find($lastKey['sub_category']);
-        $products = App\Models\Product::where([
+        $products = App\Models\Product::with(['category', 'productImageGalleries'])->where([
             'sub_category_id' => $category->id,
             'status' => 1,
+            'is_approved' => 1,
         ])
             ->orderBy('id', 'DESC')
             ->take(12)
@@ -31,9 +33,10 @@
     } else {
         // Child Category model
         $category = App\Models\ChildCategory::find($lastKey['child_category']);
-        $products = App\Models\Product::where([
+        $products = App\Models\Product::with(['category', 'productImageGalleries'])->where([
             'child_category_id' => $category->id,
             'status' => 1,
+            'is_approved' => 1,
         ])
             ->orderBy('id', 'DESC')
             ->take(12)

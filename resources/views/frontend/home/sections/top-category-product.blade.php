@@ -44,6 +44,7 @@
                                     $products[] = App\Models\Product::where([
                                         'category_id' => $category->id,
                                         'status' => 1,
+                                        'is_approved' => 1,
                                     ])
                                         ->orderBy('id', 'DESC')
                                         ->take(12)
@@ -54,6 +55,7 @@
                                     $products[] = App\Models\Product::where([
                                         'sub_category_id' => $category->id,
                                         'status' => 1,
+                                        'is_approved' => 1,
                                     ])
                                         ->orderBy('id', 'DESC')
                                         ->take(12)
@@ -64,6 +66,7 @@
                                     $products[] = App\Models\Product::where([
                                         'child_category_id' => $category->id,
                                         'status' => 1,
+                                        'is_approved' => 1,
                                     ])
                                         ->orderBy('id', 'DESC')
                                         ->take(12)
