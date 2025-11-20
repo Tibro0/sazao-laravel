@@ -4,6 +4,70 @@
     {{ $settings->site_name }} | Flash Sale
 @endsection
 
+@section('css-link')
+    <style>
+        /* Pagination Css Start */
+        .pagination {
+            place-content: center;
+        }
+
+        .page-item.disabled>.page-link {
+            width: 35px;
+            height: 35px;
+            padding: 0;
+            text-align: center;
+            line-height: 35px;
+            font-size: 13px;
+            font-weight: 400;
+            transition: all linear 0.3s;
+            -webkit-transition: all linear 0.3s;
+            -moz-transition: all linear 0.3s;
+            -ms-transition: all linear 0.3s;
+            -o-transition: all linear 0.3s;
+            border-radius: 50%;
+            border: 1px solid #08C;
+            margin-right: 10px;
+        }
+
+        .page-item.active>.page-link {
+            width: 35px;
+            height: 35px;
+            padding: 0;
+            text-align: center;
+            line-height: 35px;
+            font-size: 13px;
+            font-weight: 400;
+            transition: all linear 0.3s;
+            -webkit-transition: all linear 0.3s;
+            -moz-transition: all linear 0.3s;
+            -ms-transition: all linear 0.3s;
+            -o-transition: all linear 0.3s;
+            border-radius: 50%;
+            border: 1px solid #08C;
+            margin-right: 10px;
+        }
+
+        .page-item>.page-link {
+            width: 35px;
+            height: 35px;
+            padding: 0;
+            text-align: center;
+            line-height: 35px;
+            font-size: 13px;
+            font-weight: 400;
+            transition: all linear 0.3s;
+            -webkit-transition: all linear 0.3s;
+            -moz-transition: all linear 0.3s;
+            -ms-transition: all linear 0.3s;
+            -o-transition: all linear 0.3s;
+            border-radius: 100% !important;
+            border: 1px solid #08C;
+            margin-right: 10px;
+        }
+        /* Pagination Css End */
+    </style>
+@endsection
+
 @section('content')
     <!--============================BREADCRUMB START==============================-->
     <section id="wsus__breadcrumb">
@@ -108,7 +172,8 @@
                                         <i class="fas fa-star-half-alt"></i>
                                         <span>(133 review)</span>
                                     </p>
-                                    <a class="wsus__pro_name" href="{{ route('product-detail', $product->slug) }}">{{ limitText($product->name, 30) }}</a>
+                                    <a class="wsus__pro_name"
+                                        href="{{ route('product-detail', $product->slug) }}">{{ limitText($product->name, 30) }}</a>
                                     @if (checkDiscount($product))
                                         <p class="wsus__price">{{ $settings->currency_icon }}{{ $product->offer_price }}
                                             <del>{{ $settings->currency_icon }}{{ $product->price }}</del>
