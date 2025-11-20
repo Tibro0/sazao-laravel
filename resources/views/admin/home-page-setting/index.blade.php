@@ -28,30 +28,15 @@
                                 <a class="nav-link mb-2" id="v-pills-messages-tab" data-bs-toggle="pill"
                                     href="#product-slider-section-one" role="tab" aria-controls="v-pills-messages"
                                     aria-selected="false">Product Slider Section One</a>
-                                <a class="nav-link" id="v-pills-settings-tab" data-bs-toggle="pill" href="#v-pills-settings"
-                                    role="tab" aria-controls="v-pills-settings" aria-selected="false">Settings</a>
+                                <a class="nav-link" id="v-pills-settings-tab" data-bs-toggle="pill" href="#product-slider-section-two"
+                                    role="tab" aria-controls="v-pills-settings" aria-selected="false">Product Slider Section Two</a>
                             </div>
                         </div>
                         <div class="col-md-10">
                             <div class="tab-content text-muted mt-4 mt-md-0" id="v-pills-tabContent">
                                 @include('admin.home-page-setting.section.popular-category-section')
                                 @include('admin.home-page-setting.section.product-slider-section-one')
-                                <div class="tab-pane fade" id="v-pills-settings" role="tabpanel"
-                                    aria-labelledby="v-pills-settings-tab">
-                                    <p>
-                                        Trust fund seitan letterpress, keytar raw denim keffiyeh etsy
-                                        art party before they sold out master cleanse gluten-free squid
-                                        scenester freegan cosby sweater. Fanny pack portland seitan DIY,
-                                        art party locavore wolf cliche high life echo park Austin. Cred
-                                        vinyl keffiyeh DIY salvia PBR, banh mi before they sold out
-                                        farm-to-table.
-                                    </p>
-                                    <p class="mb-0">Fanny pack portland seitan DIY,
-                                        art party locavore wolf cliche high life echo park Austin. Cred
-                                        vinyl keffiyeh DIY salvia PBR, banh mi before they sold out
-                                        farm-to-table.
-                                    </p>
-                                </div>
+                                @include('admin.home-page-setting.section.product-slider-section-two')
                             </div>
                         </div>
                     </div>
