@@ -215,6 +215,7 @@ Route::controller(HomePageSettingController::class)->group(function () {
     Route::put('popular-category-section', 'updatePopularCategorySection')->name('popular-category-section');
     Route::put('product-slider-section-one', 'updateProductSliderSectionOne')->name('product-slider-section-one');
     Route::put('product-slider-section-two', 'updateProductSliderSectionTwo')->name('product-slider-section-two');
+    Route::put('product-slider-section-three', 'updateProductSliderSectionThree')->name('product-slider-section-three');
 });
 
 /** Payment Setting Route */

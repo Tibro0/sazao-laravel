@@ -30,6 +30,8 @@
                                     aria-selected="false">Product Slider Section One</a>
                                 <a class="nav-link" id="v-pills-settings-tab" data-bs-toggle="pill" href="#product-slider-section-two"
                                     role="tab" aria-controls="v-pills-settings" aria-selected="false">Product Slider Section Two</a>
+                                <a class="nav-link" id="v-pills-settings-tab" data-bs-toggle="pill" href="#product-slider-section-three"
+                                    role="tab" aria-controls="v-pills-settings" aria-selected="false">Product Slider Section Three</a>
                             </div>
                         </div>
                         <div class="col-md-10">
@@ -37,6 +39,7 @@
                                 @include('admin.home-page-setting.section.popular-category-section')
                                 @include('admin.home-page-setting.section.product-slider-section-one')
                                 @include('admin.home-page-setting.section.product-slider-section-two')
+                                @include('admin.home-page-setting.section.product-slider-section-three')
                             </div>
                         </div>
                     </div>

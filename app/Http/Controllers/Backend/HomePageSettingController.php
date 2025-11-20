@@ -15,7 +15,8 @@ class HomePageSettingController extends Controller
         $popularCategorySection = HomePageSetting::where(['key' => 'popular_category_section'])->first();
         $sliderSectionOne = HomePageSetting::where(['key' => 'product_slider_section_one'])->first();
         $sliderSectionTwo = HomePageSetting::where(['key' => 'product_slider_section_two'])->first();
-        return view('admin.home-page-setting.index', compact('categories', 'popularCategorySection', 'sliderSectionOne', 'sliderSectionTwo'));
+        $sliderSectionThree = HomePageSetting::where('key', 'product_slider_section_three')->first();
+        return view('admin.home-page-setting.index', compact('categories', 'popularCategorySection', 'sliderSectionOne', 'sliderSectionTwo', 'sliderSectionThree'));
     }
 
     public function updatePopularCategorySection(Request $request)
@@ -134,6 +135,51 @@ class HomePageSettingController extends Controller
         HomePageSetting::updateOrCreate(
             [
                 'key' => 'product_slider_section_two',
+            ],
+            [
+                'value' => json_encode($data),
+            ]
+        );
+
+        return redirect()->back()->with('toast', [
+            'type' => 'success',
+            'title' => 'Success',
+            'message' => 'Updated Successfully!'
+        ]);
+    }
+
+    public function updateProductSliderSectionThree(Request $request)
+    {
+        $request->validate([
+            'cat_one' => ['required', 'integer'],
+            'cat_two' => ['required', 'integer'],
+
+            'sub_cat_one' => ['nullable', 'integer'],
+            'sub_cat_two' => ['nullable', 'integer'],
+
+            'child_cat_one' => ['nullable', 'integer'],
+            'child_cat_two' => ['nullable', 'integer'],
+        ], [
+            'cat_one.required' => 'Part 1 Category Filed is Required',
+            'cat_two.required' => 'Part 2 Category Filed is Required',
+        ]);
+
+        $data = [
+            [
+                'category' => $request->cat_one,
+                'sub_category' => $request->sub_cat_one,
+                'child_category' => $request->child_cat_one,
+            ],
+            [
+                'category' => $request->cat_two,
+                'sub_category' => $request->sub_cat_two,
+                'child_category' => $request->child_cat_two,
+            ]
+        ];
+
+        HomePageSetting::updateOrCreate(
+            [
+                'key' => 'product_slider_section_three',
             ],
             [
                 'value' => json_encode($data),
