@@ -214,7 +214,6 @@ Route::controller(HomePageSettingController::class)->group(function () {
     Route::get('home-page-setting', 'index')->name('home-page-setting');
     Route::put('popular-category-section', 'updatePopularCategorySection')->name('popular-category-section');
     Route::put('product-slider-section-one', 'updateProductSliderSectionOne')->name('product-slider-section-one');
-
     Route::put('product-slider-section-two', 'updateProductSliderSectionTwo')->name('product-slider-section-two');
 });
 
