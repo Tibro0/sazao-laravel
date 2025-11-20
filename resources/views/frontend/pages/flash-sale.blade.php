@@ -64,6 +64,7 @@
             border: 1px solid #08C;
             margin-right: 10px;
         }
+
         /* Pagination Css End */
     </style>
 @endsection

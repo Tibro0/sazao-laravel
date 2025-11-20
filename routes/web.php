@@ -46,8 +46,9 @@ Route::controller(FlashSaleController::class)->group(function () {
     Route::get('flash-sale', 'index')->name('flash-sale');
 });
 
-/** Product Detail Route */
+/** Product Route */
 Route::controller(FrontendProductController::class)->group(function () {
+    Route::get('products', 'productsIndex')->name('products.index');
     Route::get('product-detail/{slug}', 'showProduct')->name('product-detail');
 });
 

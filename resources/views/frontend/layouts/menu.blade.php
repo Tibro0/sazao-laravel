@@ -23,7 +23,7 @@
                     <ul class="wsus_menu_cat_item show_home toggle_menu">
                         @foreach ($categories as $category)
                             <li><a class="{{ count($category->subCategories) > 0 ? 'wsus__droap_arrow' : '' }}"
-                                    href="#"><i class="{{ $category->icon }}"></i>
+                                    href="{{ route('products.index', ['category' => $category->slug]) }}"><i class="{{ $category->icon }}"></i>
                                     {{ $category->name }}
                                 </a>
                                 @if (count($category->subCategories) > 0)
