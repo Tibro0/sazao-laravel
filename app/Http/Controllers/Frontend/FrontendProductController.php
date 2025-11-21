@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\FlashSale;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class FrontendProductController extends Controller
 {
@@ -25,5 +26,10 @@ class FrontendProductController extends Controller
         $flashSaleDate = FlashSale::first();
         $product = Product::with(['vendor', 'category', 'productImageGalleries', 'variants', 'brand'])->where(['slug' => $slug, 'status' => 1, 'is_approved' => 1])->first();
         return view('frontend.pages.product-detail', compact('product', 'flashSaleDate'));
+    }
+
+    public function changeListView(Request $request)
+    {
+        Session::put('product_list_style', $request->style);
     }
 }

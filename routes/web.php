@@ -50,6 +50,7 @@ Route::controller(FlashSaleController::class)->group(function () {
 Route::controller(FrontendProductController::class)->group(function () {
     Route::get('products', 'productsIndex')->name('products.index');
     Route::get('product-detail/{slug}', 'showProduct')->name('product-detail');
+    Route::get('change-product-list-view', 'changeListView')->name('change-product-list-view');
 });
 
 /** Cart Route */
