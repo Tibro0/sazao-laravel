@@ -147,7 +147,7 @@
     </section>
 @endsection
 
-@section('js-link')
+@push('js-link')
     <script>
         $('.print_invoice').on('click', function() {
             let printBody = $('.invoice-print');
@@ -160,4 +160,4 @@
             $('body').html(originalContents);
         })
     </script>
-@endsection
+@endpush

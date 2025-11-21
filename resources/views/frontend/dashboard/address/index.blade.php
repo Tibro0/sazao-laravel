@@ -4,10 +4,10 @@
     {{ $settings->site_name }} | User Address
 @endsection
 
-@section('css-link')
+@push('css-link')
     <!-- Sweet Alert-->
     <link href="{{ asset('backend/assets/libs/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet" type="text/css" />
-@endsection
+@endpush
 
 @section('content')
     <section id="wsus__dashboard">
@@ -59,7 +59,7 @@
     </section>
 @endsection
 
-@section('js-link')
+@push('js-link')
     <!-- Sweet Alerts js -->
     <script src="{{ asset('backend/assets/libs/sweetalert2/sweetalert2.min.js') }}"></script>
     <script>
@@ -111,4 +111,4 @@
 
         })
     </script>
-@endsection
+@endpush

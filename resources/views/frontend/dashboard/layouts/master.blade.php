@@ -28,7 +28,7 @@
     {{-- toastr Css --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
     <!-- <link rel="stylesheet" href="css/rtl.css"> -->
-    @yield('css-link')
+    @stack('css-link')
 </head>
 
 <body>
@@ -115,7 +115,7 @@
             }
         });
     </script>
-    @yield('js-link')
+    @stack('js-link')
 </body>
 
 </html>
