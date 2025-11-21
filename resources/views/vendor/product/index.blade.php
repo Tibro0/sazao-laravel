@@ -4,13 +4,13 @@
     {{ $settings->site_name }} | All Products
 @endsection
 
-@section('css-link')
+@push('css-link')
     <!-- DataTables Css -->
     <link href="{{ asset('backend/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet"
         type="text/css" />
     <!-- Sweet Alert-->
     <link href="{{ asset('backend/assets/libs/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet" type="text/css" />
-@endsection
+@endpush
 
 @section('content')
     <section id="wsus__dashboard">
@@ -120,7 +120,7 @@
     </section>
 @endsection
 
-@section('js-link')
+@push('js-link')
     <!-- Datatable js -->
     <script src="{{ asset('backend/assets/libs/datatables.net/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('backend/assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
@@ -203,4 +203,4 @@
             })
         })
     </script>
-@endsection
+@endpush

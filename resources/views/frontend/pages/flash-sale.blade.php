@@ -4,7 +4,7 @@
     {{ $settings->site_name }} | Flash Sale
 @endsection
 
-@section('css-link')
+@push('css-link')
     <style>
         /* Pagination Css Start */
         .pagination {
@@ -67,7 +67,7 @@
 
         /* Pagination Css End */
     </style>
-@endsection
+@endpush
 
 @section('content')
     <!--============================BREADCRUMB START==============================-->
@@ -216,7 +216,7 @@
     <!--============================DAILY DEALS DETAILS END==============================-->
 @endsection
 
-@section('model')
+@push('model')
     <!--==========================PRODUCT MODAL VIEW START===========================-->
     @foreach ($flashSaleItems as $item)
         @php
@@ -343,9 +343,9 @@
         </section>
     @endforeach
     <!--==========================PRODUCT MODAL VIEW END===========================-->
-@endsection
+@endpush
 
-@section('js-link')
+@push('js-link')
     <script>
         $(document).ready(function() {
             simplyCountdown('.simply-countdown-one', {
@@ -355,4 +355,4 @@
             });
         })
     </script>
-@endsection
+@endpush

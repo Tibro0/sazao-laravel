@@ -16,7 +16,7 @@
 @php
     $stripeSetting = App\Models\StripeSetting::first();
 @endphp
-@section('js-link')
+@push('js-link')
     <script src="https://js.stripe.com/v3/"></script>
     <script>
         var stripe = Stripe("{{ $stripeSetting->client_id }}");
@@ -42,4 +42,4 @@
             });
         }
     </script>
-@endsection
+@endpush

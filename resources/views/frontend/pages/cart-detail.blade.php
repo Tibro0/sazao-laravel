@@ -4,10 +4,10 @@
     {{ $settings->site_name }} | Cart Details
 @endsection
 
-@section('css-link')
+@push('css-link')
     <!-- Sweet Alert-->
     <link href="{{ asset('backend/assets/libs/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet" type="text/css" />
-@endsection
+@endpush
 
 @section('content')
     <!--============================BREADCRUMB START==============================-->
@@ -169,7 +169,7 @@
     <!--============================CART VIEW PAGE END==============================-->
 @endsection
 
-@section('js-link')
+@push('js-link')
     <!-- Sweet Alerts js -->
     <script src="{{ asset('backend/assets/libs/sweetalert2/sweetalert2.min.js') }}"></script>
     <script>
@@ -331,4 +331,4 @@
             }
         });
     </script>
-@endsection
+@endpush

@@ -736,7 +736,7 @@
     <!--============================RELATED PRODUCT END==============================-->
 @endsection
 
-@section('js-link')
+@push('js-link')
     <script>
         $(document).ready(function() {
             simplyCountdown('.simply-countdown-one', {
@@ -746,4 +746,4 @@
             });
         })
     </script>
-@endsection
+@endpush

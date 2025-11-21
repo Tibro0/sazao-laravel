@@ -114,7 +114,7 @@
     <!--============================CHECK OUT PAGE END==============================-->
 @endsection
 
-@section('model')
+@push('model')
     <div class="wsus__popup_address">
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -231,9 +231,9 @@
             </div>
         </div>
     </div>
-@endsection
+@endpush
 
-@section('js-link')
+@push('js-link')
     <script>
         $(document).ready(function() {
             $('input[type="radio"]').prop('checked', false);
@@ -286,4 +286,4 @@
             })
         });
     </script>
-@endsection
+@endpush

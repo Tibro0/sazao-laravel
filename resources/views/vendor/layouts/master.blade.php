@@ -28,7 +28,7 @@
     {{-- toastr Css --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
     <!-- <link rel="stylesheet" href="css/rtl.css"> -->
-    @yield('css-link')
+    @stack('css-link')
 </head>
 
 <body>
@@ -48,7 +48,7 @@
     @yield('content')
     <!--=============================DASHBOARD START==============================-->
 
-    @yield('modal')
+    @stack('modal')
     <!--============================SCROLL BUTTON START==============================-->
     <div class="wsus__scroll_btn">
         <i class="fas fa-chevron-up"></i>
@@ -115,7 +115,7 @@
             }
         });
     </script>
-    @yield('js-link')
+    @stack('js-link')
 </body>
 
 </html>

@@ -459,7 +459,7 @@
     <!--============================PRODUCT PAGE END==============================-->
 @endsection
 
-@section('model')
+@push('model')
     <!--==========================PRODUCT MODAL VIEW START===========================-->
     @foreach ($products as $product)
         <section class="product_popup_modal">
@@ -583,9 +583,9 @@
         </section>
     @endforeach
     <!--==========================PRODUCT MODAL VIEW END===========================-->
-@endsection
+@endpush
 
-@section('js-link')
+@push('js-link')
     <script>
         $(document).ready(function() {
             $('.list-view').on('click', function() {
@@ -604,4 +604,4 @@
             })
         });
     </script>
-@endsection
+@endpush

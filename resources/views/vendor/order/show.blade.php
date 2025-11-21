@@ -144,7 +144,7 @@
     </section>
 @endsection
 
-@section('modal')
+@push('modal')
     <div class="wsus__popup_address">
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -178,9 +178,9 @@
             </div>
         </div>
     </div>
-@endsection
+@endpush
 
-@section('js-link')
+@push('js-link')
     <script>
         $('.print_invoice').on('click', function() {
             let printBody = $('.invoice-print');
@@ -193,4 +193,4 @@
             $('body').html(originalContents);
         })
     </script>
-@endsection
+@endpush
