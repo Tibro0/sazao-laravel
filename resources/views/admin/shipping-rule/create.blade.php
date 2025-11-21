@@ -82,7 +82,7 @@
     </div>
 @endsection
 
-@section('js-link')
+@push('js-link')
     <script>
         $(document).ready(function() {
             $('body').on('change', '.shipping-type', function() {
@@ -96,4 +96,4 @@
             })
         })
     </script>
-@endsection
+@endpush

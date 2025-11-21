@@ -246,7 +246,7 @@
     </div><!-- /.modal -->
 @endsection
 
-@section('js-link')
+@push('js-link')
     <script>
         $(document).ready(function() {
             // payment status change
@@ -295,4 +295,4 @@
             })
         });
     </script>
-@endsection
+@endpush

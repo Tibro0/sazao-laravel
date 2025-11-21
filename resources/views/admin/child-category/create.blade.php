@@ -4,11 +4,11 @@
     {{ $settings->site_name }} | Create Child Category
 @endsection
 
-@section('css-link')
+@push('css-link')
     {{-- select2 Css Link --}}
     <link href="{{ asset('backend/assets/libs/select2/css/select2.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('backend/assets/css/app.min.css') }}" id="app-style" rel="stylesheet" type="text/css" />
-@endsection
+@endpush
 
 @section('content')
     <div class="row">
@@ -78,11 +78,10 @@
     </div>
 @endsection
 
-@section('js-link')
+@push('js-link')
     {{-- select2 JS Link --}}
     <script src="{{ asset('backend/assets/libs/select2/js/select2.min.js') }}"></script>
     <script src="{{ asset('backend/assets/js/pages/form-advanced.init.js') }}"></script>
-
     <script>
         $(document).ready(function() {
             $('body').on('change', '.main-category', function(e) {
@@ -107,4 +106,4 @@
             })
         })
     </script>
-@endsection
+@endpush

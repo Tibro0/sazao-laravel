@@ -4,11 +4,11 @@
     {{ $settings->site_name }} | Update Product
 @endsection
 
-@section('css-link')
+@push('css-link')
     {{-- select2 Css Link --}}
     <link href="{{ asset('backend/assets/libs/select2/css/select2.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('backend/assets/css/app.min.css') }}" id="app-style" rel="stylesheet" type="text/css" />
-@endsection
+@endpush
 
 @section('content')
     <div class="row">
@@ -256,63 +256,64 @@
                 </div>
             </div>
         </div>
-    @endsection
+    </div>
+@endsection
 
-    @section('js-link')
-        {{-- select2 JS Link --}}
-        <script src="{{ asset('backend/assets/libs/select2/js/select2.min.js') }}"></script>
-        <script src="{{ asset('backend/assets/js/pages/form-advanced.init.js') }}"></script>
-        <!--tinymce js-->
-        <script src="{{ asset('backend/assets/libs/tinymce/tinymce.min.js') }}"></script>
-        <script src="{{ asset('backend/assets/js/pages/form-editor.init.js') }}"></script>
-        <!-- Get Sub Categories -->
-        <script>
-            $(document).ready(function() {
-                $('body').on('change', '.main-category', function(e) {
-                    $('.child-category').html('<option value="">Select a Child Category</option>')
-                    let id = $(this).val();
-                    $.ajax({
-                        method: 'GET',
-                        url: "{{ route('admin.product.get-subcategories') }}",
-                        data: {
-                            id: id
-                        },
-                        success: function(data) {
-                            $('.sub-category').html(
-                                '<option value="">Select a Sub Category</option>')
-                            $.each(data, function(i, item) {
-                                $('.sub-category').append(
-                                    `<option value="${item.id}">${item.name}</option>`)
-                            })
-                        },
-                        error: function(xhr, status, error) {
-                            console.log(error);
-                        }
-                    })
-                })
-
-                // get Child Categories
-                $('body').on('change', '.sub-category', function(e) {
-                    let id = $(this).val();
-                    $.ajax({
-                        method: 'GET',
-                        url: "{{ route('admin.product.get-child-categories') }}",
-                        data: {
-                            id: id
-                        },
-                        success: function(data) {
-                            $('.child-category').html(
-                                '<option value="">Select a Child Category</option>')
-                            $.each(data, function(i, item) {
-                                $('.child-category').append(
-                                    `<option value="${item.id}">${item.name}</option>`)
-                            })
-                        },
-                        error: function(xhr, status, error) {
-                            console.log(error);
-                        }
-                    })
+@push('js-link')
+    {{-- select2 JS Link --}}
+    <script src="{{ asset('backend/assets/libs/select2/js/select2.min.js') }}"></script>
+    <script src="{{ asset('backend/assets/js/pages/form-advanced.init.js') }}"></script>
+    <!--tinymce js-->
+    <script src="{{ asset('backend/assets/libs/tinymce/tinymce.min.js') }}"></script>
+    <script src="{{ asset('backend/assets/js/pages/form-editor.init.js') }}"></script>
+    <!-- Get Sub Categories -->
+    <script>
+        $(document).ready(function() {
+            $('body').on('change', '.main-category', function(e) {
+                $('.child-category').html('<option value="">Select a Child Category</option>')
+                let id = $(this).val();
+                $.ajax({
+                    method: 'GET',
+                    url: "{{ route('admin.product.get-subcategories') }}",
+                    data: {
+                        id: id
+                    },
+                    success: function(data) {
+                        $('.sub-category').html(
+                            '<option value="">Select a Sub Category</option>')
+                        $.each(data, function(i, item) {
+                            $('.sub-category').append(
+                                `<option value="${item.id}">${item.name}</option>`)
+                        })
+                    },
+                    error: function(xhr, status, error) {
+                        console.log(error);
+                    }
                 })
             })
-        </script>
-    @endsection
+
+            // get Child Categories
+            $('body').on('change', '.sub-category', function(e) {
+                let id = $(this).val();
+                $.ajax({
+                    method: 'GET',
+                    url: "{{ route('admin.product.get-child-categories') }}",
+                    data: {
+                        id: id
+                    },
+                    success: function(data) {
+                        $('.child-category').html(
+                            '<option value="">Select a Child Category</option>')
+                        $.each(data, function(i, item) {
+                            $('.child-category').append(
+                                `<option value="${item.id}">${item.name}</option>`)
+                        })
+                    },
+                    error: function(xhr, status, error) {
+                        console.log(error);
+                    }
+                })
+            })
+        })
+    </script>
+@endpush
