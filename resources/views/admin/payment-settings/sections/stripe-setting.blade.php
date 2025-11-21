@@ -1,4 +1,4 @@
-<div class="tab-pane fade show" id="stripe-setting" role="tabpanel" aria-labelledby="v-pills-home-tab">
+<div class="tab-pane fade {{ Session::has('admin_payment_setting_list_style') && Session::get('admin_payment_setting_list_style') == 'stripe' ? 'show active' : '' }}" id="stripe-setting" role="tabpanel" aria-labelledby="v-pills-home-tab">
     <div class="card-body">
         <form action="{{ route('admin.stripe-setting.update', 1) }}" method="POST">
             @csrf

@@ -221,6 +221,7 @@ Route::controller(HomePageSettingController::class)->group(function () {
 /** Payment Setting Route */
 Route::controller(PaymentSettingController::class)->group(function () {
     Route::get('payment-settings', 'index')->name('payment-settings.index');
+    Route::get('admin-payment-setting-list-style', 'adminPaymentSettingListStyle')->name('admin-payment-setting-list-style');
 });
 Route::controller(PaypalSettingController::class)->group(function () {
     Route::put('paypal-setting/{id}', 'update')->name('paypal-setting.update');

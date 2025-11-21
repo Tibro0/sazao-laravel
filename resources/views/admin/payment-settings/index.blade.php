@@ -22,15 +22,15 @@
                         <div class="col-md-2">
                             <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist"
                                 aria-orientation="vertical">
-                                <a class="nav-link mb-2 active" id="v-pills-home-tab" data-bs-toggle="pill"
-                                    href="#paypal-setting" role="tab" aria-controls="v-pills-home"
-                                    aria-selected="true">PayPal</a>
-                                <a class="nav-link mb-2" id="v-pills-home-tab" data-bs-toggle="pill"
-                                    href="#stripe-setting" role="tab" aria-controls="v-pills-home"
-                                    aria-selected="true">Stripe</a>
-                                <a class="nav-link mb-2" id="v-pills-home-tab" data-bs-toggle="pill"
-                                    href="#razorpay-setting" role="tab" aria-controls="v-pills-home"
-                                    aria-selected="true">Razorpay</a>
+                                <a class="nav-link mb-2 list-view {{ Session::has('admin_payment_setting_list_style') && Session::get('admin_payment_setting_list_style') == 'paypal' ? 'active' : '' }} {{ !Session::has('admin_payment_setting_list_style') ? 'active' : '' }}"
+                                    data-id="paypal" id="v-pills-home-tab" data-bs-toggle="pill" href="#paypal-setting"
+                                    role="tab" aria-controls="v-pills-home" aria-selected="true">PayPal</a>
+                                <a class="nav-link mb-2 list-view {{ Session::has('admin_payment_setting_list_style') && Session::get('admin_payment_setting_list_style') == 'stripe' ? 'active' : '' }}"
+                                    data-id="stripe" id="v-pills-home-tab" data-bs-toggle="pill" href="#stripe-setting"
+                                    role="tab" aria-controls="v-pills-home" aria-selected="true">Stripe</a>
+                                <a class="nav-link mb-2 list-view {{ Session::has('admin_payment_setting_list_style') && Session::get('admin_payment_setting_list_style') == 'razorpay' ? 'active' : '' }}"
+                                    data-id="razorpay" id="v-pills-home-tab" data-bs-toggle="pill" href="#razorpay-setting"
+                                    role="tab" aria-controls="v-pills-home" aria-selected="true">Razorpay</a>
                             </div>
                         </div>
                         <div class="col-md-10">
@@ -51,4 +51,22 @@
     {{-- select2 JS Link --}}
     <script src="{{ asset('backend/assets/libs/select2/js/select2.min.js') }}"></script>
     <script src="{{ asset('backend/assets/js/pages/form-advanced.init.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            $('.list-view').on('click', function() {
+                let style = $(this).data('id');
+
+                $.ajax({
+                    method: "GET",
+                    url: "{{ route('admin.admin-payment-setting-list-style') }}",
+                    data: {
+                        style: style
+                    },
+                    success: function(data) {
+
+                    }
+                });
+            })
+        });
+    </script>
 @endsection

@@ -1,4 +1,4 @@
-<div class="tab-pane fade active show" id="paypal-setting" role="tabpanel" aria-labelledby="v-pills-home-tab">
+<div class="tab-pane fade {{ Session::has('admin_payment_setting_list_style') && Session::get('admin_payment_setting_list_style') == 'paypal' ? 'show active' : '' }} {{ !Session::has('admin_payment_setting_list_style') ? 'show active' : '' }}" id="paypal-setting" role="tabpanel" aria-labelledby="v-pills-home-tab">
     <div class="card-body">
         <form action="{{ route('admin.paypal-setting.update', 1) }}" method="POST">
             @csrf
