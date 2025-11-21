@@ -4,11 +4,11 @@
     {{ $settings->site_name }} | Home Page Settings
 @endsection
 
-@section('css-link')
+@push('css-link')
     {{-- select2 Css Link --}}
     <link href="{{ asset('backend/assets/libs/select2/css/select2.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('backend/assets/css/app.min.css') }}" id="app-style" rel="stylesheet" type="text/css" />
-@endsection
+@endpush
 
 @section('content')
     <div class="row">
