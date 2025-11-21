@@ -127,15 +127,11 @@
                                     data-bs-parent="#accordionExample">
                                     <div class="accordion-body">
                                         <ul>
-                                            <li><a href="#">Accessories</a></li>
-                                            <li><a href="#">Babies</a></li>
-                                            <li><a href="#">Babies</a></li>
-                                            <li><a href="#">Beauty</a></li>
-                                            <li><a href="#">Decoration</a></li>
-                                            <li><a href="#">Electronics</a></li>
-                                            <li><a href="#">Fashion</a></li>
-                                            <li><a href="#">Food</a></li>
-                                            <li><a href="#">Furniture</a></li>
+                                            @foreach ($categories as $category)
+                                                <li><a
+                                                        href="{{ route('products.index', ['category' => $category->slug]) }}">{{ $category->name }}</a>
+                                                </li>
+                                            @endforeach
                                         </ul>
                                     </div>
                                 </div>
@@ -151,8 +147,17 @@
                                     data-bs-parent="#accordionExample">
                                     <div class="accordion-body">
                                         <div class="price_ranger">
-                                            <input type="hidden" id="slider_range" class="flat-slider" />
-                                            <button type="submit" class="common_btn">filter</button>
+                                            <form action="{{ url()->current() }}">
+                                                @foreach (request()->query() as $key => $value)
+                                                    @if ($key != 'range')
+                                                        <input type="hidden" name="{{ $key }}"
+                                                            value="{{ $value }}" />
+                                                    @endif
+                                                @endforeach
+                                                <input type="hidden" id="slider_range" name="range"
+                                                    class="flat-slider" />
+                                                <button type="submit" class="common_btn">filter</button>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
@@ -641,6 +646,28 @@
                     }
                 });
             })
+        });
+    </script>
+    <script>
+        @php
+            if (request()->has('range')) {
+                $price = explode(';', request()->range);
+                $from = $price[0];
+                $to = $price[1];
+            } else {
+                $from = 0;
+                $to = 10000;
+            }
+        @endphp
+        jQuery(function() {
+            jQuery("#slider_range").flatslider({
+                min: 0,
+                max: 10000,
+                step: 100,
+                values: [{{ $from }}, {{ $to }}],
+                range: true,
+                einheit: '{{ $settings->currency_icon }}'
+            });
         });
     </script>
 @endpush
