@@ -1,7 +1,7 @@
 @php
     $sliderSectionThree = json_decode($sliderSectionThree->value, true);
 @endphp
-<div class="tab-pane fade" id="product-slider-section-three" role="tabpanel" aria-labelledby="v-pills-settings-tab">
+<div class="tab-pane fade {{ Session::has('admin_home_page_setting_list_style') && Session::get('admin_home_page_setting_list_style') == 'section_four' ? 'show active' : '' }}" id="product-slider-section-three" role="tabpanel" aria-labelledby="v-pills-settings-tab">
     <div class="card-body">
         <form action="{{ route('admin.product-slider-section-three') }}" method="POST">
             @csrf

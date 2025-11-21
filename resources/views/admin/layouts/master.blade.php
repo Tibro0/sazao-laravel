@@ -18,7 +18,7 @@
     <!-- App Css-->
     <link href="{{ asset('backend/assets/css/app.min.css') }}" id="app-style" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" type="text/css" href="{{ asset('backend/assets/libs/toastr/build/toastr.min.css') }}">
-    @yield('css-link')
+    @stack('css-link')
 </head>
 
 <body data-topbar="dark">
@@ -97,7 +97,7 @@
             }
         });
     </script>
-    @yield('js-link')
+    @stack('js-link')
 </body>
 
 </html>

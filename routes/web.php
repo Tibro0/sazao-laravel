@@ -24,7 +24,8 @@ Route::controller(HomeController::class)->group(function () {
 
 //////////////////////////////////
 Route::get('tibro', function () {
-    return session()->all();;
+    // return session()->flush();
+    return session()->all();
 });
 ////////////////////////////////
 

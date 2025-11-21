@@ -216,6 +216,8 @@ Route::controller(HomePageSettingController::class)->group(function () {
     Route::put('product-slider-section-one', 'updateProductSliderSectionOne')->name('product-slider-section-one');
     Route::put('product-slider-section-two', 'updateProductSliderSectionTwo')->name('product-slider-section-two');
     Route::put('product-slider-section-three', 'updateProductSliderSectionThree')->name('product-slider-section-three');
+
+    Route::get('admin-home-page-setting-list-style', 'adminHomePageSettingListStyle')->name('admin-home-page-setting-list-style');
 });
 
 /** Payment Setting Route */

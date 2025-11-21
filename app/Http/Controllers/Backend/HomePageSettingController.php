@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\HomePageSetting;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class HomePageSettingController extends Controller
 {
@@ -191,5 +192,10 @@ class HomePageSettingController extends Controller
             'title' => 'Success',
             'message' => 'Updated Successfully!'
         ]);
+    }
+
+    public function adminHomePageSettingListStyle(Request $request)
+    {
+        Session::put('admin_home_page_setting_list_style', $request->style);
     }
 }

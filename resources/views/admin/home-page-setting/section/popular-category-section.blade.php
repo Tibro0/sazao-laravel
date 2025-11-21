@@ -1,7 +1,7 @@
 @php
     $popularCategorySection = json_decode($popularCategorySection->value);
 @endphp
-<div class="tab-pane fade active show" id="popular-category-section" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+<div class="tab-pane fade {{ Session::has('admin_home_page_setting_list_style') && Session::get('admin_home_page_setting_list_style') == 'section_one' ? 'show active' : '' }} {{ !Session::has('admin_home_page_setting_list_style') ? 'show active' : '' }}" id="popular-category-section" role="tabpanel" aria-labelledby="v-pills-profile-tab">
     <div class="card-body">
         <form action="{{ route('admin.popular-category-section') }}" method="POST">
             @csrf
@@ -249,7 +249,7 @@
         </form>
     </div>
 </div>
-@section('js-link')
+@push('js-link')
     <script>
         $(document).ready(function() {
             $('body').on('change', '#main-category', function(e) {
@@ -310,4 +310,4 @@
             })
         })
     </script>
-@endsection
+@endpush

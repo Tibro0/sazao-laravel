@@ -22,16 +22,22 @@
                         <div class="col-md-2">
                             <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist"
                                 aria-orientation="vertical">
-                                <a class="nav-link mb-2 active" id="v-pills-profile-tab" data-bs-toggle="pill"
+                                <a class="nav-link mb-2 list-view {{ Session::has('admin_home_page_setting_list_style') && Session::get('admin_home_page_setting_list_style') == 'section_one' ? 'active' : '' }} {{ !Session::has('admin_home_page_setting_list_style') ? 'active' : '' }}"
+                                    data-id="section_one" id="v-pills-profile-tab" data-bs-toggle="pill"
                                     href="#popular-category-section" role="tab" aria-controls="v-pills-profile"
                                     aria-selected="false">Popular Category Section</a>
-                                <a class="nav-link mb-2" id="v-pills-messages-tab" data-bs-toggle="pill"
+                                <a class="nav-link mb-2 list-view {{ Session::has('admin_home_page_setting_list_style') && Session::get('admin_home_page_setting_list_style') == 'section_two' ? 'active' : '' }}"
+                                    data-id="section_two" id="v-pills-messages-tab" data-bs-toggle="pill"
                                     href="#product-slider-section-one" role="tab" aria-controls="v-pills-messages"
                                     aria-selected="false">Product Slider Section One</a>
-                                <a class="nav-link" id="v-pills-settings-tab" data-bs-toggle="pill" href="#product-slider-section-two"
-                                    role="tab" aria-controls="v-pills-settings" aria-selected="false">Product Slider Section Two</a>
-                                <a class="nav-link" id="v-pills-settings-tab" data-bs-toggle="pill" href="#product-slider-section-three"
-                                    role="tab" aria-controls="v-pills-settings" aria-selected="false">Product Slider Section Three</a>
+                                <a class="nav-link mb-2 list-view {{ Session::has('admin_home_page_setting_list_style') && Session::get('admin_home_page_setting_list_style') == 'section_three' ? 'active' : '' }}"
+                                    data-id="section_three" id="v-pills-settings-tab" data-bs-toggle="pill"
+                                    href="#product-slider-section-two" role="tab" aria-controls="v-pills-settings"
+                                    aria-selected="false">Product Slider Section Two</a>
+                                <a class="nav-link mb-2 list-view {{ Session::has('admin_home_page_setting_list_style') && Session::get('admin_home_page_setting_list_style') == 'section_four' ? 'active' : '' }}"
+                                    data-id="section_four" id="v-pills-settings-tab" data-bs-toggle="pill"
+                                    href="#product-slider-section-three" role="tab" aria-controls="v-pills-settings"
+                                    aria-selected="false">Product Slider Section Three</a>
                             </div>
                         </div>
                         <div class="col-md-10">
@@ -49,8 +55,26 @@
     </div>
 @endsection
 
-@section('js-link')
+@push('js-link')
     {{-- select2 JS Link --}}
     <script src="{{ asset('backend/assets/libs/select2/js/select2.min.js') }}"></script>
     <script src="{{ asset('backend/assets/js/pages/form-advanced.init.js') }}"></script>
-@endsection
+    {{-- List Link Active --}}
+    <script>
+        $(document).ready(function() {
+            $('.list-view').on('click', function() {
+                let style = $(this).data('id');
+                $.ajax({
+                    method: "GET",
+                    url: "{{ route('admin.admin-home-page-setting-list-style') }}",
+                    data: {
+                        style: style
+                    },
+                    success: function(data) {
+
+                    }
+                });
+            })
+        });
+    </script>
+@endpush
