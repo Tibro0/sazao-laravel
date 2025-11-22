@@ -81,6 +81,7 @@
                     let productId = '#mini_cart_' + rowId;
                     $(productId).remove();
                     getSidebarCartSubtotal();
+                    gatCartCount();
                     if ($('.mini_cart_wrapper').find('li').length === 0) {
                         $('.mini_cart_action').addClass('d-none');
                         $('.mini_cart_wrapper').html(
