@@ -44,6 +44,7 @@ class DatabaseSeeder extends Seeder
             StripeSettingSeeder::class,
             RazorPaySettingSeeder::class,
             HomePageSettingSeeder::class,
+            WishlistSeeder::class,
         ]);
     }
 }
