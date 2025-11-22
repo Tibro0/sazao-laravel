@@ -21,7 +21,25 @@ class HomePageSettingSeeder extends Seeder
                 'value' => '[{"category":"1","sub_category":null,"child_category":null},{"category":"4","sub_category":null,"child_category":null},{"category":"2","sub_category":null,"child_category":null},{"category":"8","sub_category":null,"child_category":null}]',
                 'created_at' => now(),
                 'updated_at' => now(),
-            ]
+            ],
+            [
+                'key' => 'product_slider_section_one',
+                'value' => '{"category":"5","sub_category":null,"child_category":null}',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'key' => 'product_slider_section_two',
+                'value' => '{"category":"6","sub_category":null,"child_category":null}',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'key' => 'product_slider_section_three',
+                'value' => '[{"category":"7","sub_category":null,"child_category":null},{"category":"8","sub_category":null,"child_category":null}]',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
         ]);
     }
 }
