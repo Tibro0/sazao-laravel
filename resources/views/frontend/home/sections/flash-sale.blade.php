@@ -83,7 +83,8 @@
     </div>
 </section>
 
-@section('model')
+
+@push('model')
     <!--==========================PRODUCT MODAL VIEW START===========================-->
     @foreach ($flashSaleItems as $item)
         @php
@@ -210,9 +211,9 @@
         </section>
     @endforeach
     <!--==========================PRODUCT MODAL VIEW END===========================-->
-@endsection
+@endpush
 
-@section('js-link')
+@push('js-link')
     <script>
         $(document).ready(function() {
             simplyCountdown('.simply-countdown-one', {
@@ -222,4 +223,4 @@
             });
         })
     </script>
-@endsection
+@endpush

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Brand;
 use App\Models\Category;
 use App\Models\ChildCategory;
 use App\Models\FlashSale;
@@ -30,17 +31,28 @@ class FrontendProductController extends Controller
         } elseif ($request->has('subcategory')) {
             $category = SubCategory::where(['slug' => $request->subcategory])->firstOrFail();
             $products = Product::with(['category', 'productImageGalleries'])->where(['sub_category_id' => $category->id, 'status' => 1, 'is_approved' => 1])
-            ->when($request->has('range'), function ($query) use ($request) {
+                ->when($request->has('range'), function ($query) use ($request) {
                     $price = explode(';', $request->range);
                     $from = $price[0];
                     $to = $price[1];
 
                     return $query->where('price', '>=', $from)->where('price', '<=', $to);
                 })
-            ->paginate(12);
+                ->paginate(12);
         } elseif ($request->has('childcategory')) {
             $category = ChildCategory::where(['slug' => $request->childcategory])->firstOrFail();
             $products = Product::with(['category', 'productImageGalleries'])->where(['child_category_id' => $category->id, 'status' => 1, 'is_approved' => 1])
+                ->when($request->has('range'), function ($query) use ($request) {
+                    $price = explode(';', $request->range);
+                    $from = $price[0];
+                    $to = $price[1];
+
+                    return $query->where('price', '>=', $from)->where('price', '<=', $to);
+                })
+                ->paginate(12);
+        } elseif ($request->has('brand')) {
+            $brand = Brand::where(['slug' => $request->brand])->firstOrFail();
+            $products = Product::with(['category', 'productImageGalleries'])->where(['brand_id' => $brand->id, 'status' => 1, 'is_approved' => 1])
             ->when($request->has('range'), function ($query) use ($request) {
                     $price = explode(';', $request->range);
                     $from = $price[0];
@@ -52,7 +64,8 @@ class FrontendProductController extends Controller
         }
 
         $categories = Category::where(['status' => 1])->orderBy('id', 'DESC')->get();
-        return view('frontend.pages.product', compact('products', 'categories'));
+        $brands = Brand::where(['status' => 1])->orderBy('id', 'DESC')->get();
+        return view('frontend.pages.product', compact('products', 'categories', 'brands'));
     }
 
     /** Show Product detail Page */
