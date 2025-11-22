@@ -23,18 +23,23 @@
                     <ul class="wsus_menu_cat_item show_home toggle_menu">
                         @foreach ($categories as $category)
                             <li><a class="{{ count($category->subCategories) > 0 ? 'wsus__droap_arrow' : '' }}"
-                                    href="{{ route('products.index', ['category' => $category->slug]) }}"><i class="{{ $category->icon }}"></i>
+                                    href="{{ route('products.index', ['category' => $category->slug]) }}"><i
+                                        class="{{ $category->icon }}"></i>
                                     {{ $category->name }}
                                 </a>
                                 @if (count($category->subCategories) > 0)
                                     <ul class="wsus_menu_cat_droapdown">
                                         @foreach ($category->subCategories as $subCategory)
-                                            <li><a href="{{ route('products.index', ['subcategory' => $subCategory->slug]) }}">{{ $subCategory->name }} <i
+                                            <li><a
+                                                    href="{{ route('products.index', ['subcategory' => $subCategory->slug]) }}">{{ $subCategory->name }}
+                                                    <i
                                                         class="{{ count($subCategory->childCategories) > 0 ? 'fas fa-angle-right' : '' }}"></i></a>
                                                 @if (count($subCategory->childCategories) > 0)
                                                     <ul class="wsus__sub_category">
                                                         @foreach ($subCategory->childCategories as $childCategory)
-                                                            <li><a href="{{ route('products.index', ['childcategory' => $childCategory->slug]) }}">{{ $childCategory->name }}</a> </li>
+                                                            <li><a
+                                                                    href="{{ route('products.index', ['childcategory' => $childCategory->slug]) }}">{{ $childCategory->name }}</a>
+                                                            </li>
                                                         @endforeach
                                                     </ul>
                                                 @endif
@@ -161,7 +166,7 @@
 
         <li><a href="compare.html"><i class="far fa-random"></i> </i><span>3</span></a></li>
     </ul>
-    <form>
+    <form action="" method="GET">
         <input type="text" placeholder="Search">
         <button type="submit"><i class="far fa-search"></i></button>
     </form>
