@@ -246,6 +246,7 @@ Route::controller(FooterGridTwoController::class)->group(function () {
     Route::put('footer-grid-two/{id}', 'update')->name('footer-grid-two.update');
     Route::delete('footer-grid-two/{id}', 'destroy')->name('footer-grid-two.destroy');
     Route::put('footer-grid-two-change-status', 'changeStatus')->name('footer-grid-two.change-status');
+    Route::post('footer-grid-two/change-title', 'changeTitle')->name('footer-grid-two.change-title');
 });
 
 /** Payment Setting Route */

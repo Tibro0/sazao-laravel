@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\FooterGridTwo;
+use App\Models\FooterTitle;
 use Illuminate\Http\Request;
 
 class FooterGridTwoController extends Controller
@@ -13,9 +14,9 @@ class FooterGridTwoController extends Controller
      */
     public function index()
     {
-        // $footerTitle = FooterTitle::first();
+        $footerTitle = FooterTitle::first();
         $footerGridTwos = FooterGridTwo::orderBy('id', 'DESC')->get();
-        return view('admin.footer.footer-grid-two.index', compact('footerGridTwos'));
+        return view('admin.footer.footer-grid-two.index', compact('footerTitle', 'footerGridTwos'));
     }
 
     /**
@@ -104,21 +105,22 @@ class FooterGridTwoController extends Controller
     }
 
 
-    // public function changeTitle(Request $request)
-    // {
-    //     $request->validate([
-    //         'title' => ['required', 'max:200'],
-    //     ]);
+    public function changeTitle(Request $request)
+    {
+        // dd($request->all());
+        $request->validate([
+            'title' => ['required', 'max:255'],
+        ]);
 
-    //     FooterTitle::updateOrCreate(
-    //         ['id' => 1],
-    //         ['footer_grid_two_title' => $request->title],
-    //     );
+        FooterTitle::updateOrCreate(
+            ['id' => 1],
+            ['footer_grid_two_title' => $request->title],
+        );
 
-    //     return redirect()->back()->with('toast', [
-    //         'type' => 'success',
-    //         'title' => 'Success',
-    //         'message' => 'Updated Successfully!'
-    //     ]);
-    // }
+        return redirect()->back()->with('toast', [
+            'type' => 'success',
+            'title' => 'Success',
+            'message' => 'Updated Successfully!'
+        ]);
+    }
 }

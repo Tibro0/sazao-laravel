@@ -20,6 +20,8 @@
                     <div class="d-flex justify-content-between align-items-center">
                         <h4 class="mb-0">All Footer Grid Two</h4>
                         <div>
+                            <button type="button" class="btn btn-outline-primary waves-effect waves-light px-5"
+                                data-bs-toggle="modal" data-bs-target="#myModal">Footer Grid Two Title</button>
                             <a href="{{ route('admin.footer-grid-two.create') }}"
                                 class="btn btn-primary px-5 rounded">Create
                                 New</a>
@@ -58,8 +60,8 @@
                                         @endif
                                     </td>
                                     <td width="100">
-                                        <a href="{{ route('admin.footer-grid-two.edit', $item->id) }}" class="btn btn-primary"><i
-                                                class="fas fa-pencil-alt"></i></a>
+                                        <a href="{{ route('admin.footer-grid-two.edit', $item->id) }}"
+                                            class="btn btn-primary"><i class="fas fa-pencil-alt"></i></a>
                                         <a href="{{ route('admin.footer-grid-two.destroy', $item->id) }}" id="delete"
                                             class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
                                     </td>
@@ -71,6 +73,39 @@
             </div>
         </div> <!-- end col -->
     </div> <!-- end row -->
+@endsection
+
+@section('modal')
+    <!-- sample modal content -->
+    <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="myModalLabel">Footer Grid Two Title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ route('admin.footer-grid-two.change-title') }}" method="POST">
+                        @csrf
+                        <div class="row g-3">
+                            <div class="col-md-12">
+                                <label>Title <span class="text-danger">*</span></label>
+                                <input type="text" name="title"
+                                    value="{{ old('title') ?? @$footerTitle->footer_grid_two_title }}" placeholder="Title"
+                                    class="form-control @error('title') is-invalid @enderror">
+                                @error('title')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-12">
+                                <button type="submit" class="btn btn-primary px-5">Save Changes</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 @endsection
 
 @push('js-link')
