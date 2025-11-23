@@ -99,10 +99,20 @@
             </ul>
         </li>
 
+        <li>
+            <a href="javascript: void(0);" class="has-arrow waves-effect">
+                <i class="ri-mail-send-line"></i>
+                <span>Footer</span>
+            </a>
+            <ul class="sub-menu" aria-expanded="false">
+                <li class="{{ adminSidebarActive(['admin.footer-info.index']) }}"><a href="{{route('admin.footer-info.index')}}">Footer Info</a></li>
+            </ul>
+        </li>
+
         <li class="{{ adminSidebarActive(['admin.settings.*']) }}">
             <a href="{{ route('admin.settings.index') }}" class="waves-effect">
                 <i class="ri-dashboard-line"></i>
-                <span>General Setting</span>
+                <span>Settings</span>
             </a>
         </li>
 

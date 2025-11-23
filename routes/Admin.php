@@ -7,6 +7,7 @@ use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\ChildCategoryController;
 use App\Http\Controllers\Backend\CouponController;
 use App\Http\Controllers\Backend\FlashSaleController;
+use App\Http\Controllers\Backend\FooterInfoController;
 use App\Http\Controllers\Backend\HomePageSettingController;
 use App\Http\Controllers\Backend\OrderController;
 use App\Http\Controllers\Backend\PaymentSettingController;
@@ -216,8 +217,13 @@ Route::controller(HomePageSettingController::class)->group(function () {
     Route::put('product-slider-section-one', 'updateProductSliderSectionOne')->name('product-slider-section-one');
     Route::put('product-slider-section-two', 'updateProductSliderSectionTwo')->name('product-slider-section-two');
     Route::put('product-slider-section-three', 'updateProductSliderSectionThree')->name('product-slider-section-three');
-
     Route::get('admin-home-page-setting-list-style', 'adminHomePageSettingListStyle')->name('admin-home-page-setting-list-style');
+});
+
+/** Footer Route */
+Route::controller(FooterInfoController::class)->group(function () {
+    Route::get('footer-info', 'index')->name('footer-info.index');
+    Route::put('footer-info/{id}', 'update')->name('footer-info.update');
 });
 
 /** Payment Setting Route */
