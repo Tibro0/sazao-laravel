@@ -45,7 +45,8 @@ class DatabaseSeeder extends Seeder
             RazorPaySettingSeeder::class,
             HomePageSettingSeeder::class,
             WishlistSeeder::class,
-            FooterInfoSeeder::class
+            FooterInfoSeeder::class,
+            FooterSocialSeeder::class,
         ]);
     }
 }

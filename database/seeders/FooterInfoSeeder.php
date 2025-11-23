@@ -20,6 +20,8 @@ class FooterInfoSeeder extends Seeder
                 'email' => 'example@gmail.com',
                 'address' => 'San Francisco City Hall, San Francisco, CA',
                 'copyright' => 'Copyright © 2025 Sazao Shop. All Rights Reserved.',
+                'created_at' => now(),
+                'updated_at' => now(),
             ]
         ]);
     }
