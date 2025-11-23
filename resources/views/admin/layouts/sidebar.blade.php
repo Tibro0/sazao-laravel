@@ -106,6 +106,7 @@
             </a>
             <ul class="sub-menu" aria-expanded="false">
                 <li class="{{ adminSidebarActive(['admin.footer-info.index']) }}"><a href="{{route('admin.footer-info.index')}}">Footer Info</a></li>
+                <li class="{{ adminSidebarActive(['admin.footer-socials.*']) }}"><a href="{{route('admin.footer-socials.index')}}">Footer Socials</a></li>
             </ul>
         </li>
 

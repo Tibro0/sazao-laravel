@@ -33,7 +33,14 @@
                         </div>
                     </div>
                     <ul class="wsus__icon_area">
-                        <li><a href="{{ route('user.wishlist.index') }}"><i class="fal fa-heart"></i><span id="wishlist_count">{{App\Models\Wishlist::where(['user_id' => @Auth::user()->id])->count()}}</span></a></li>
+                        <li><a href="{{ route('user.wishlist.index') }}"><i class="fal fa-heart"></i><span
+                                    id="wishlist_count">
+                                    @if (Auth::check())
+                                        {{ App\Models\Wishlist::where(['user_id' => Auth::user()->id])->count() }}
+                                    @else
+                                        0
+                                    @endif
+                                </span></a></li>
                         {{-- <li><a href="compare.html"><i class="fal fa-random"></i><span>03</span></a></li> --}}
                         <li><a class="wsus__cart_icon" href="javascript:;"><i class="fal fa-shopping-bag"></i><span
                                     id="cart-count">{{ Cart::content()->count() }}</span></a></li>
@@ -58,8 +65,9 @@
                         <a class="wsus__cart_title"
                             href="{{ route('product-detail', $sidebarProduct->options->slug) }}">{{ $sidebarProduct->name }}</a>
                         <p>{{ $settings->currency_icon }}{{ $sidebarProduct->price }}</p>
-                        <small>Variants Total:{{ $settings->currency_icon }}{{$sidebarProduct->options->variants_total}}</small><br>
-                        <small>Qty:{{$sidebarProduct->qty}}</small>
+                        <small>Variants
+                            Total:{{ $settings->currency_icon }}{{ $sidebarProduct->options->variants_total }}</small><br>
+                        <small>Qty:{{ $sidebarProduct->qty }}</small>
                     </div>
                 </li>
             @endforeach
@@ -68,7 +76,7 @@
             @endif
         </ul>
         <div class="mini_cart_action {{ Cart::content()->count() === 0 ? 'd-none' : '' }}">
-            <h5>sub total <span id="mini_cart_subtotal">{{ $settings->currency_icon }}{{getCartTotal()}}</span></h5>
+            <h5>sub total <span id="mini_cart_subtotal">{{ $settings->currency_icon }}{{ getCartTotal() }}</span></h5>
             <div class="wsus__minicart_btn_area">
                 <a class="common_btn" href="{{ route('cart-details') }}">view cart</a>
                 <a class="common_btn" href="check_out.html">checkout</a>

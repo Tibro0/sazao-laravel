@@ -8,6 +8,7 @@ use App\Http\Controllers\Backend\ChildCategoryController;
 use App\Http\Controllers\Backend\CouponController;
 use App\Http\Controllers\Backend\FlashSaleController;
 use App\Http\Controllers\Backend\FooterInfoController;
+use App\Http\Controllers\Backend\FooterSocialController;
 use App\Http\Controllers\Backend\HomePageSettingController;
 use App\Http\Controllers\Backend\OrderController;
 use App\Http\Controllers\Backend\PaymentSettingController;
@@ -224,6 +225,16 @@ Route::controller(HomePageSettingController::class)->group(function () {
 Route::controller(FooterInfoController::class)->group(function () {
     Route::get('footer-info', 'index')->name('footer-info.index');
     Route::put('footer-info/{id}', 'update')->name('footer-info.update');
+});
+
+Route::controller(FooterSocialController::class)->group(function () {
+    Route::get('footer-socials', 'index')->name('footer-socials.index');
+    Route::get('footer-socials/create', 'create')->name('footer-socials.create');
+    Route::post('footer-socials/store', 'store')->name('footer-socials.store');
+    Route::get('footer-socials/edit/{id}', 'edit')->name('footer-socials.edit');
+    Route::put('footer-socials/{id}', 'update')->name('footer-socials.update');
+    Route::delete('footer-socials/{id}', 'destroy')->name('footer-socials.destroy');
+    Route::put('footer-socials-change-status', 'changeStatus')->name('footer-socials.change-status');
 });
 
 /** Payment Setting Route */
