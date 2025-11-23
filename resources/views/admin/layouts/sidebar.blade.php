@@ -30,14 +30,22 @@
                 <span>Orders</span>
             </a>
             <ul class="sub-menu" aria-expanded="false">
-                <li class="{{ adminSidebarActive(['admin.order.index', 'admin.order.show']) }}"><a href="{{ route('admin.order.index') }}">All Orders</a></li>
-                <li class="{{ adminSidebarActive(['admin.pending-orders']) }}"><a href="{{ route('admin.pending-orders') }}">All Pending Orders</a></li>
-                <li class="{{ adminSidebarActive(['admin.processed-orders']) }}"><a href="{{ route('admin.processed-orders') }}">All Processed Orders</a></li>
-                <li class="{{ adminSidebarActive(['admin.dropped-off-orders']) }}"><a href="{{ route('admin.dropped-off-orders') }}">All Dropped Off Orders</a></li>
-                <li class="{{ adminSidebarActive(['admin.shipped-orders']) }}"><a href="{{ route('admin.shipped-orders') }}">All Shipped Orders</a></li>
-                <li class="{{ adminSidebarActive(['admin.out-for-delivery-orders']) }}"><a href="{{ route('admin.out-for-delivery-orders') }}">All Out For Delivery Orders</a></li>
-                <li class="{{ adminSidebarActive(['admin.delivered-orders']) }}"><a href="{{ route('admin.delivered-orders') }}">All Delivered Orders</a></li>
-                <li class="{{ adminSidebarActive(['admin.canceled-orders']) }}"><a href="{{ route('admin.canceled-orders') }}">All Canceled Orders</a></li>
+                <li class="{{ adminSidebarActive(['admin.order.index', 'admin.order.show']) }}"><a
+                        href="{{ route('admin.order.index') }}">All Orders</a></li>
+                <li class="{{ adminSidebarActive(['admin.pending-orders']) }}"><a
+                        href="{{ route('admin.pending-orders') }}">All Pending Orders</a></li>
+                <li class="{{ adminSidebarActive(['admin.processed-orders']) }}"><a
+                        href="{{ route('admin.processed-orders') }}">All Processed Orders</a></li>
+                <li class="{{ adminSidebarActive(['admin.dropped-off-orders']) }}"><a
+                        href="{{ route('admin.dropped-off-orders') }}">All Dropped Off Orders</a></li>
+                <li class="{{ adminSidebarActive(['admin.shipped-orders']) }}"><a
+                        href="{{ route('admin.shipped-orders') }}">All Shipped Orders</a></li>
+                <li class="{{ adminSidebarActive(['admin.out-for-delivery-orders']) }}"><a
+                        href="{{ route('admin.out-for-delivery-orders') }}">All Out For Delivery Orders</a></li>
+                <li class="{{ adminSidebarActive(['admin.delivered-orders']) }}"><a
+                        href="{{ route('admin.delivered-orders') }}">All Delivered Orders</a></li>
+                <li class="{{ adminSidebarActive(['admin.canceled-orders']) }}"><a
+                        href="{{ route('admin.canceled-orders') }}">All Canceled Orders</a></li>
             </ul>
         </li>
 
@@ -58,7 +66,8 @@
                         href="{{ route('admin.brand.index') }}">Brand</a></li>
                 <li
                     class="{{ adminSidebarActive(['admin.products.*', 'admin.products-image-gallery.*', 'admin.products-variant.*', 'admin.products-variant-item.*']) }}">
-                    <a href="{{ route('admin.products.index') }}">Products</a></li>
+                    <a href="{{ route('admin.products.index') }}">Products</a>
+                </li>
                 <li class="{{ adminSidebarActive(['admin.seller-products.index']) }}"><a
                         href="{{ route('admin.seller-products.index') }}">Seller Products</a></li>
                 <li class="{{ adminSidebarActive(['admin.seller-pending-products.index']) }}"><a
@@ -105,8 +114,12 @@
                 <span>Footer</span>
             </a>
             <ul class="sub-menu" aria-expanded="false">
-                <li class="{{ adminSidebarActive(['admin.footer-info.index']) }}"><a href="{{route('admin.footer-info.index')}}">Footer Info</a></li>
-                <li class="{{ adminSidebarActive(['admin.footer-socials.*']) }}"><a href="{{route('admin.footer-socials.index')}}">Footer Socials</a></li>
+                <li class="{{ adminSidebarActive(['admin.footer-info.index']) }}"><a
+                        href="{{ route('admin.footer-info.index') }}">Footer Info</a></li>
+                <li class="{{ adminSidebarActive(['admin.footer-socials.*']) }}"><a
+                        href="{{ route('admin.footer-socials.index') }}">Footer Socials</a></li>
+                <li class="{{ adminSidebarActive(['admin.footer-grid-two.*']) }}"><a
+                        href="{{ route('admin.footer-grid-two.index') }}">Footer Grid Two</a></li>
             </ul>
         </li>
 

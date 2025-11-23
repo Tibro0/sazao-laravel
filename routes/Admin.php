@@ -7,6 +7,7 @@ use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\ChildCategoryController;
 use App\Http\Controllers\Backend\CouponController;
 use App\Http\Controllers\Backend\FlashSaleController;
+use App\Http\Controllers\Backend\FooterGridTwoController;
 use App\Http\Controllers\Backend\FooterInfoController;
 use App\Http\Controllers\Backend\FooterSocialController;
 use App\Http\Controllers\Backend\HomePageSettingController;
@@ -235,6 +236,16 @@ Route::controller(FooterSocialController::class)->group(function () {
     Route::put('footer-socials/{id}', 'update')->name('footer-socials.update');
     Route::delete('footer-socials/{id}', 'destroy')->name('footer-socials.destroy');
     Route::put('footer-socials-change-status', 'changeStatus')->name('footer-socials.change-status');
+});
+
+Route::controller(FooterGridTwoController::class)->group(function () {
+    Route::get('footer-grid-two', 'index')->name('footer-grid-two.index');
+    Route::get('footer-grid-two/create', 'create')->name('footer-grid-two.create');
+    Route::post('footer-grid-two/store', 'store')->name('footer-grid-two.store');
+    Route::get('footer-grid-two/edit/{id}', 'edit')->name('footer-grid-two.edit');
+    Route::put('footer-grid-two/{id}', 'update')->name('footer-grid-two.update');
+    Route::delete('footer-grid-two/{id}', 'destroy')->name('footer-grid-two.destroy');
+    Route::put('footer-grid-two-change-status', 'changeStatus')->name('footer-grid-two.change-status');
 });
 
 /** Payment Setting Route */

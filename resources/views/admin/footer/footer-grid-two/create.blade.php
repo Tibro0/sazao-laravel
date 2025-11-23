@@ -1,7 +1,7 @@
 @extends('admin.layouts.master')
 
 @section('page-title')
-    {{ $settings->site_name }} | Create Footer Social
+    {{ $settings->site_name }} | Create Footer Grid Two
 @endsection
 
 @section('content')
@@ -10,25 +10,16 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between align-items-center">
-                        <h4 class="mb-0">Create Footer Social</h4>
+                        <h4 class="mb-0">Create Footer Grid Two</h4>
                         <div>
-                            <a href="{{ route('admin.footer-socials.index') }}" class="btn btn-primary px-5">Back</a>
+                            <a href="{{ route('admin.footer-grid-two.index') }}" class="btn btn-primary px-5">Back</a>
                         </div>
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('admin.footer-socials.store') }}" method="POST">
+                    <form action="{{ route('admin.footer-grid-two.store') }}" method="POST">
                         @csrf
                         <div class="row g-3">
-                            <div class="col-md-12">
-                                <label>Icon <span class="text-danger">* <a target="_blank"
-                                            href="https://fontawesome.com/v5/search?o=r">https://fontawesome.com</a></span></label>
-                                <input type="text" name="icon" value="{{ old('icon') }}" placeholder="fas fa-star"
-                                    class="form-control @error('icon') is-invalid @enderror">
-                                @error('icon')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
                             <div class="col-md-12">
                                 <label>Name <span class="text-danger">*</span></label>
                                 <input type="text" name="name" value="{{ old('name') }}" placeholder="Name"
@@ -47,7 +38,7 @@
                             </div>
                             <div class="col-md-12">
                                 <label>Status</label>
-                                <select name="status" class="form-select @error('status') is-invalid @enderror">
+                                <select name="status" class="form-control @error('status') is-invalid @enderror">
                                     <option value="1">Active</option>
                                     <option value="0">Inactive</option>
                                 </select>

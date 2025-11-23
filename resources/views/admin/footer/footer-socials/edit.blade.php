@@ -31,7 +31,7 @@
                                 @enderror
                             </div>
                             <div class="col-md-12">
-                                <label>Name</label>
+                                <label>Name <span class="text-danger">*</span></label>
                                 <input type="text" name="name" value="{{ old('name') ?? $footer->name }}"
                                     placeholder="Name" class="form-control @error('name') is-invalid @enderror">
                                 @error('name')
@@ -39,7 +39,7 @@
                                 @enderror
                             </div>
                             <div class="col-md-12">
-                                <label>Url</label>
+                                <label>Url <span class="text-danger">*</span></label>
                                 <input type="text" name="url" value="{{ old('url') ?? $footer->url }}"
                                     placeholder="URL" class="form-control @error('url') is-invalid @enderror">
                                 @error('url')
