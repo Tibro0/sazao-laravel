@@ -16,7 +16,7 @@ class FooterTitleSeeder extends Seeder
         FooterTitle::insert([
             [
                 'footer_grid_two_title' => 'Quick Links',
-                'footer_grid_three_title' => 'Quick Links',
+                'footer_grid_three_title' => 'Other Links',
                 'created_at' => now(),
                 'updated_at' => now(),
             ]

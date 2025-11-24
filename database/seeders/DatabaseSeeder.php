@@ -49,6 +49,7 @@ class DatabaseSeeder extends Seeder
             FooterSocialSeeder::class,
             FooterGridTwoSeeder::class,
             FooterTitleSeeder::class,
+            FooterGridThreeSeeder::class,
         ]);
     }
 }
