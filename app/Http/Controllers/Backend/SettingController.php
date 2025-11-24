@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\EmailConfiguration;
 use App\Models\GeneralSetting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -12,7 +13,8 @@ class SettingController extends Controller
     public function index()
     {
         $generalSettings = GeneralSetting::first();
-        return view('admin.setting.index', compact('generalSettings'));
+        $emailSettings = EmailConfiguration::first();
+        return view('admin.setting.index', compact('generalSettings', 'emailSettings'));
     }
 
     public function adminGeneralSettingListStyle(Request $request)
@@ -43,6 +45,37 @@ class SettingController extends Controller
                 'currency_name' => $request->currency_name,
                 'currency_icon' => $request->currency_icon,
                 'time_zone' => $request->time_zone,
+            ]
+        );
+
+        return redirect()->back()->with('toast', [
+            'type' => 'success',
+            'title' => 'Success',
+            'message' => 'Updated Successfully!'
+        ]);
+    }
+
+    public function emailConfigSettingUpdate(Request $request)
+    {
+        $request->validate([
+            'email' => ['required', 'email', 'max:255'],
+            'host' => ['required', 'max:255'],
+            'username' => ['required', 'max:255'],
+            'password' => ['required', 'max:255'],
+            'port' => ['required', 'max:255'],
+            'encryption' => ['required', 'max:255', 'in:tls,ssl'],
+        ]);
+
+        EmailConfiguration::updateOrCreate(
+            ['id' => 1],
+
+            [
+                'email' => $request->email,
+                'host' => $request->host,
+                'username' => $request->username,
+                'password' => $request->password,
+                'port' => $request->port,
+                'encryption' => $request->encryption,
             ]
         );
 
