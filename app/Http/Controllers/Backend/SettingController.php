@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Models\GeneralSetting;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class SettingController extends Controller
 {
@@ -12,6 +13,11 @@ class SettingController extends Controller
     {
         $generalSettings = GeneralSetting::first();
         return view('admin.setting.index', compact('generalSettings'));
+    }
+
+    public function adminGeneralSettingListStyle(Request $request)
+    {
+        Session::put('admin_general_setting_list_style', $request->style);
     }
 
     public function generalSettingUpdate(Request $request)

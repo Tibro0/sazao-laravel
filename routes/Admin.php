@@ -210,6 +210,7 @@ Route::controller(TransactionController::class)->group(function () {
 /**General Setting Route */
 Route::controller(SettingController::class)->group(function () {
     Route::get('settings', 'index')->name('settings.index');
+    Route::get('admin-general-setting-list-style', 'adminGeneralSettingListStyle')->name('admin-general-setting-list-style');
     Route::put('general-setting-update', 'generalSettingUpdate')->name('general-setting-update');
 });
 

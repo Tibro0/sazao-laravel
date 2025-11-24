@@ -1,4 +1,5 @@
-<div class="tab-pane fade active show" id="general-setting" role="tabpanel" aria-labelledby="v-pills-home-tab">
+<div class="tab-pane fade {{ Session::has('admin_general_setting_list_style') && Session::get('admin_general_setting_list_style') == 'section_one' ? 'show active' : '' }} {{ !Session::has('admin_general_setting_list_style') ? 'show active' : '' }}"
+    id="general-setting" role="tabpanel" aria-labelledby="v-pills-home-tab">
     <div class="card-body">
         <form action="{{ route('admin.general-setting-update') }}" method="POST">
             @csrf
@@ -37,7 +38,7 @@
                     <label>Contact Phone</label>
                     <input type="text" name="contact_phone" value="{{ @$generalSettings->contact_phone }}"
                         class="form-control @error('contact_phone') is-invalid @enderror">
-                        @error('contact_phone')
+                    @error('contact_phone')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
@@ -45,13 +46,14 @@
                     <label>Contact Address</label>
                     <input type="text" name="contact_address" value="{{ @$generalSettings->contact_address }}"
                         class="form-control @error('contact_address') is-invalid @enderror">
-                        @error('contact_address')
+                    @error('contact_address')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
                 <div class="col-md-12">
                     <label>Google Map Url</label>
-                    <input type="text" name="map" value="{{ @$generalSettings->map }}" class="form-control @error('map') is-invalid @enderror">
+                    <input type="text" name="map" value="{{ @$generalSettings->map }}"
+                        class="form-control @error('map') is-invalid @enderror">
                     @error('map')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -59,7 +61,8 @@
 
                 <div class="col-md-12">
                     <label>Default Currency Name <span class="text-danger">*</span></label>
-                    <select name="currency_name" class="form-select select2 @error('currency_name') is-invalid @enderror">
+                    <select name="currency_name"
+                        class="form-select select2 @error('currency_name') is-invalid @enderror">
                         <option value="">Select</option>
                         @foreach (config('settings.currency_list') as $currency)
                             <option {{ @$generalSettings->currency_name == $currency ? 'selected' : '' }}
@@ -74,7 +77,7 @@
                     <label>Currency Icon <span class="text-danger">*</span></label>
                     <input type="text" name="currency_icon" value="{{ @$generalSettings->currency_icon }}"
                         class="form-control @error('currency_icon') is-invalid @enderror">
-                        @error('currency_icon')
+                    @error('currency_icon')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
