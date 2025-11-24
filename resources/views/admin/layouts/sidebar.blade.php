@@ -120,6 +120,8 @@
                         href="{{ route('admin.footer-socials.index') }}">Footer Socials</a></li>
                 <li class="{{ adminSidebarActive(['admin.footer-grid-two.*']) }}"><a
                         href="{{ route('admin.footer-grid-two.index') }}">Footer Grid Two</a></li>
+                <li class="{{ adminSidebarActive(['admin.footer-grid-three.*']) }}"><a
+                        href="{{ route('admin.footer-grid-three.index') }}">Footer Grid Three</a></li>
             </ul>
         </li>
 

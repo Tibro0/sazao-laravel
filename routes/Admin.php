@@ -7,6 +7,7 @@ use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\ChildCategoryController;
 use App\Http\Controllers\Backend\CouponController;
 use App\Http\Controllers\Backend\FlashSaleController;
+use App\Http\Controllers\Backend\FooterGridThreeController;
 use App\Http\Controllers\Backend\FooterGridTwoController;
 use App\Http\Controllers\Backend\FooterInfoController;
 use App\Http\Controllers\Backend\FooterSocialController;
@@ -202,7 +203,7 @@ Route::controller(OrderController::class)->group(function () {
 });
 
 /**Order Transaction Route */
-Route::controller(TransactionController::class)->group(function(){
+Route::controller(TransactionController::class)->group(function () {
     Route::get('transaction', 'index')->name('transaction');
 });
 
@@ -247,6 +248,17 @@ Route::controller(FooterGridTwoController::class)->group(function () {
     Route::delete('footer-grid-two/{id}', 'destroy')->name('footer-grid-two.destroy');
     Route::put('footer-grid-two-change-status', 'changeStatus')->name('footer-grid-two.change-status');
     Route::post('footer-grid-two/change-title', 'changeTitle')->name('footer-grid-two.change-title');
+});
+
+Route::controller(FooterGridThreeController::class)->group(function () {
+    Route::get('footer-grid-three', 'index')->name('footer-grid-three.index');
+    Route::get('footer-grid-three/create', 'create')->name('footer-grid-three.create');
+    Route::post('footer-grid-three/store', 'store')->name('footer-grid-three.store');
+    Route::get('footer-grid-three/edit/{id}', 'edit')->name('footer-grid-three.edit');
+    Route::put('footer-grid-three/{id}', 'update')->name('footer-grid-three.update');
+    Route::delete('footer-grid-three/{id}', 'destroy')->name('footer-grid-three.destroy');
+    Route::put('footer-grid-three-change-status', 'changeStatus')->name('footer-grid-three.change-status');
+    Route::post('footer-grid-three/change-title', 'changeTitle')->name('footer-grid-three.change-title');
 });
 
 /** Payment Setting Route */
