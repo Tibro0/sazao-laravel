@@ -50,6 +50,7 @@ class DatabaseSeeder extends Seeder
             FooterGridTwoSeeder::class,
             FooterTitleSeeder::class,
             FooterGridThreeSeeder::class,
+            EmailConfigurationSeeder::class,
         ]);
     }
 }

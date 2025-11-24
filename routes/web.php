@@ -6,6 +6,7 @@ use App\Http\Controllers\Frontend\CheckOutController;
 use App\Http\Controllers\Frontend\FlashSaleController;
 use App\Http\Controllers\Frontend\FrontendProductController;
 use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\Frontend\NewsletterController;
 use App\Http\Controllers\Frontend\PaymentController;
 use App\Http\Controllers\Frontend\UserAddressController;
 use App\Http\Controllers\Frontend\UserDashboardController;
@@ -66,9 +67,13 @@ Route::controller(CartController::class)->group(function () {
     Route::get('cart-products', 'gatCartProducts')->name('cart-products');
     Route::post('cart/remove-sidebar-product', 'removeSidebarProduct')->name('cart.remove-sidebar-product');
     Route::get('cart/sidebar-product-total', 'CartTotal')->name('cart.sidebar-product-total');
-
     Route::get('apply-coupon', 'applyCoupon')->name('apply-coupon');
     Route::get('coupon-calculation', 'couponCalculation')->name('coupon-calculation');
+});
+
+/** Newsletter Route */
+Route::controller(NewsletterController::class)->group(function(){
+    Route::post('newsletter-request', 'newsLetterRequest')->name('newsletter-request');
 });
 
 Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'user', 'as' => 'user.'], function () {
