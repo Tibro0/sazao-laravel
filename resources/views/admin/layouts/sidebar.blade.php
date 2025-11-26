@@ -125,6 +125,13 @@
             </ul>
         </li>
 
+        <li class="{{ adminSidebarActive(['admin.subscribers.*']) }}">
+            <a href="{{ route('admin.subscribers.index') }}" class="waves-effect">
+                <i class="ri-dashboard-line"></i>
+                <span>Subscribers</span>
+            </a>
+        </li>
+
         <li class="{{ adminSidebarActive(['admin.settings.*']) }}">
             <a href="{{ route('admin.settings.index') }}" class="waves-effect">
                 <i class="ri-dashboard-line"></i>

@@ -27,6 +27,7 @@ use App\Http\Controllers\Backend\ShippingRuleController;
 use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\StripeSettingController;
 use App\Http\Controllers\Backend\SubCategoryController;
+use App\Http\Controllers\Backend\SubscribersController;
 use App\Http\Controllers\Backend\TransactionController;
 use Illuminate\Support\Facades\Route;
 
@@ -223,6 +224,13 @@ Route::controller(HomePageSettingController::class)->group(function () {
     Route::put('product-slider-section-two', 'updateProductSliderSectionTwo')->name('product-slider-section-two');
     Route::put('product-slider-section-three', 'updateProductSliderSectionThree')->name('product-slider-section-three');
     Route::get('admin-home-page-setting-list-style', 'adminHomePageSettingListStyle')->name('admin-home-page-setting-list-style');
+});
+
+/** Subscriber Route */
+Route::controller(SubscribersController::class)->group(function () {
+    Route::get('subscribers', 'index')->name('subscribers.index');
+    Route::post('subscribers-send-mail', 'sendMail')->name('subscribers-send-mail');
+    Route::delete('subscribers/{id}', 'destroy')->name('subscribers.destroy');
 });
 
 /** Footer Route */
