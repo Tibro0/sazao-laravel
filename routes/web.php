@@ -74,6 +74,7 @@ Route::controller(CartController::class)->group(function () {
 /** Newsletter Route */
 Route::controller(NewsletterController::class)->group(function(){
     Route::post('newsletter-request', 'newsLetterRequest')->name('newsletter-request');
+    Route::get('newsletter-verify/{token}',  'newsLetterEmailVerify')->name('newsletter-verify');
 });
 
 Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'user', 'as' => 'user.'], function () {

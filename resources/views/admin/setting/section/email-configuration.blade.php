@@ -5,7 +5,7 @@
         @method('PUT')
         <div class="row g-3">
             <div class="col-md-12">
-                <label>Email</label>
+                <label>Email <span class="text-danger">*</span></label>
                 <input type="text" name="email" value="{{ @$emailSettings->email ?? old('email') }}"
                     placeholder="Email" class="form-control @error('email') is-invalid @enderror">
                 @error('email')
@@ -13,7 +13,7 @@
                 @enderror
             </div>
             <div class="col-md-12">
-                <label>Mail Host</label>
+                <label>Mail Host <span class="text-danger">*</span></label>
                 <input type="text" name="host" value="{{ @$emailSettings->host ?? old('host') }}"
                     placeholder="Mail Host" class="form-control @error('host') is-invalid @enderror">
                 @error('host')
@@ -21,7 +21,7 @@
                 @enderror
             </div>
             <div class="col-md-6">
-                <label>Smtp Username</label>
+                <label>Smtp Username <span class="text-danger">*</span></label>
                 <input type="text" name="username" value="{{ @$emailSettings->username ?? old('username') }}"
                     placeholder="Smtp Username" class="form-control @error('username') is-invalid @enderror">
                 @error('username')
@@ -29,7 +29,7 @@
                 @enderror
             </div>
             <div class="col-md-6">
-                <label>Smtp Password</label>
+                <label>Smtp Password <span class="text-danger">*</span></label>
                 <input type="text" name="password" value="{{ @$emailSettings->password ?? old('password') }}"
                     placeholder="Smtp Password" class="form-control @error('password') is-invalid @enderror">
                 @error('password')
@@ -37,7 +37,7 @@
                 @enderror
             </div>
             <div class="col-md-6">
-                <label>Mail Port</label>
+                <label>Mail Port <span class="text-danger">*</span></label>
                 <input type="text" name="port" value="{{ @$emailSettings->port ?? old('port') }}"
                     placeholder="Mail Port" class="form-control @error('port') is-invalid @enderror">
                 @error('port')
@@ -45,7 +45,7 @@
                 @enderror
             </div>
             <div class="col-md-6">
-                <label>Mail Encryption</label>
+                <label>Mail Encryption <span class="text-danger">*</span></label>
                 <select name="encryption" class="form-select @error('encryption') is-invalid @enderror">
                     <option @selected(@$emailSettings->encryption === 'tls') value="tls">TLS
                     </option>
