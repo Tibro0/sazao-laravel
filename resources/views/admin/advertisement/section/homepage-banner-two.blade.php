@@ -19,15 +19,22 @@
             </div>
             <div class="col-md-12">
                 <label>Banner Image</label>
-                <input type="file" name="banner_one_image" value="" class="form-control">
+                <input type="file" name="banner_one_image"
+                    class="form-control @error('banner_one_image') is-invalid @enderror">
                 <input type="hidden" name="banner_one_old_image"
                     value="{{ @$homepage_section_banner_two->banner_one->banner_image }}" class="form-control">
+                @error('banner_one_image')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
             </div>
             <div class="col-md-12">
                 <label>Banner Url</label>
                 <input type="text" name="banner_one_url"
                     value="{{ @$homepage_section_banner_two->banner_one->banner_url }}" placeholder="Banner Url"
-                    class="form-control">
+                    class="form-control @error('banner_one_url') is-invalid @enderror">
+                @error('banner_one_url')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
             </div>
         </div>
         <hr>
@@ -47,15 +54,22 @@
             </div>
             <div class="col-md-12">
                 <label>Banner Image</label>
-                <input type="file" name="banner_two_image" value="" class="form-control">
+                <input type="file" name="banner_two_image"
+                    class="form-control @error('banner_two_image') is-invalid @enderror">
                 <input type="hidden" name="banner_two_old_image"
                     value="{{ @$homepage_section_banner_two->banner_two->banner_image }}" class="form-control">
+                @error('banner_two_image')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
             </div>
             <div class="col-md-12">
                 <label>Banner Url</label>
                 <input type="text" name="banner_two_url"
                     value="{{ @$homepage_section_banner_two->banner_two->banner_url }}" placeholder="Banner Url"
-                    class="form-control">
+                    class="form-control @error('banner_two_url') is-invalid @enderror">
+                    @error('banner_two_url')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
             </div>
             <div class="col-md-12">
                 <button type="submit" class="btn btn-primary px-5">Save Changes</button>
