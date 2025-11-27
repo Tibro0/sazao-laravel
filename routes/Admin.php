@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Backend\AdminController;
 use App\Http\Controllers\Backend\AdminVendorProfileController;
+use App\Http\Controllers\Backend\AdvertisementController;
 use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\ChildCategoryController;
@@ -231,6 +232,14 @@ Route::controller(SubscribersController::class)->group(function () {
     Route::get('subscribers', 'index')->name('subscribers.index');
     Route::post('subscribers-send-mail', 'sendMail')->name('subscribers-send-mail');
     Route::delete('subscribers/{id}', 'destroy')->name('subscribers.destroy');
+});
+
+/** Advertisement Route */
+Route::controller(AdvertisementController::class)->group(function () {
+    Route::get('advertisement', 'index')->name('advertisement.index');
+    Route::put('advertisement/homepage-banner-section-one', 'homepageBannerSectionOne')->name('homepage-banner-section-one');
+
+    Route::get('admin-advertisement-list-style', 'adminAdvertisementListStyle')->name('admin-advertisement-list-style');
 });
 
 /** Footer Route */

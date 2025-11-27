@@ -125,6 +125,13 @@
             </ul>
         </li>
 
+        <li class="{{ adminSidebarActive(['admin.advertisement.index']) }}">
+            <a href="{{ route('admin.advertisement.index') }}" class="waves-effect">
+                <i class="ri-dashboard-line"></i>
+                <span>Advertisement</span>
+            </a>
+        </li>
+
         <li class="{{ adminSidebarActive(['admin.subscribers.*']) }}">
             <a href="{{ route('admin.subscribers.index') }}" class="waves-effect">
                 <i class="ri-dashboard-line"></i>
