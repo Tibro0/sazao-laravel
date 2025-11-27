@@ -1,6 +1,5 @@
 @php
     $popularCategories = json_decode($popularCategorySection->value, true);
-    // dd($popularCategories)
 @endphp
 <section id="wsus__monthly_top" class="wsus__monthly_top_2">
     <div class="container">

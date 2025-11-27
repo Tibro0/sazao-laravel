@@ -26,11 +26,16 @@
                                     data-id="section_one" id="v-pills-home-tab" data-bs-toggle="pill"
                                     href="#home-page-banner-section-one" role="tab" aria-controls="v-pills-home"
                                     aria-selected="true">HomePage Banner Section One</a>
+                                <a class="nav-link mb-2 list-view {{ Session::has('admin_advertisement_list_style') && Session::get('admin_advertisement_list_style') == 'section_two' ? 'active' : '' }}"
+                                    data-id="section_two" id="v-pills-home-tab" data-bs-toggle="pill"
+                                    href="#home-page-banner-section-two" role="tab" aria-controls="v-pills-home"
+                                    aria-selected="true">HomePage Banner Section Two</a>
                             </div>
                         </div>
                         <div class="col-md-10">
                             <div class="tab-content text-muted mt-4 mt-md-0" id="v-pills-tabContent">
                                 @include('admin.advertisement.section.homepage-banner-one')
+                                @include('admin.advertisement.section.homepage-banner-two')
                             </div>
                         </div>
                     </div>
