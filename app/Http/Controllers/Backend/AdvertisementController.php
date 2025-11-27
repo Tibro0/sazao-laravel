@@ -24,7 +24,7 @@ class AdvertisementController extends Controller
     public function homepageBannerSectionOne(Request $request)
     {
         $request->validate([
-            'banner_image' => ['nullable', 'image', 'max:2048',],
+            'banner_image' => ['nullable', 'image', 'max:2048', 'dimensions:width=1900,height=500'],
             'banner_url' => ['required', 'url'],
         ]);
 
@@ -64,10 +64,10 @@ class AdvertisementController extends Controller
     public function homepageBannerSectionTwo(Request $request)
     {
         $request->validate([
-            'banner_one_image' => ['nullable', 'image', 'max:2048',],
+            'banner_one_image' => ['nullable', 'image', 'max:2048', 'dimensions:width=780,height=273'],
             'banner_one_url' => ['required', 'url'],
 
-            'banner_two_image' => ['nullable', 'image', 'max:2048',],
+            'banner_two_image' => ['nullable', 'image', 'max:2048', 'dimensions:width=630,height=270'],
             'banner_two_url' => ['required', 'url'],
         ]);
 

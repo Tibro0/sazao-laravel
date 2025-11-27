@@ -18,7 +18,7 @@
                 <img src="{{ asset(@$homepage_section_banner_two->banner_one->banner_image) }}" width="100">
             </div>
             <div class="col-md-12">
-                <label>Banner Image</label>
+                <label>Banner Image <span class="text-danger">(width:780px, height:273px) 2MB Maximum</span></label>
                 <input type="file" name="banner_one_image"
                     class="form-control @error('banner_one_image') is-invalid @enderror">
                 <input type="hidden" name="banner_one_old_image"
@@ -53,7 +53,7 @@
                 <img src="{{ asset(@$homepage_section_banner_two->banner_two->banner_image) }}" width="100">
             </div>
             <div class="col-md-12">
-                <label>Banner Image</label>
+                <label>Banner Image <span class="text-danger">(width:630px, height:270px) 2MB Maximum</span></label>
                 <input type="file" name="banner_two_image"
                     class="form-control @error('banner_two_image') is-invalid @enderror">
                 <input type="hidden" name="banner_two_old_image"
