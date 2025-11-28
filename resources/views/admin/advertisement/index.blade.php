@@ -30,10 +30,14 @@
                                     data-id="section_two" id="v-pills-home-tab" data-bs-toggle="pill"
                                     href="#home-page-banner-section-two" role="tab" aria-controls="v-pills-home"
                                     aria-selected="true">HomePage Banner Section Two</a>
-
                                 <a class="nav-link mb-2 list-view {{ Session::has('admin_advertisement_list_style') && Session::get('admin_advertisement_list_style') == 'section_three' ? 'active' : '' }}"
                                     data-id="section_three" id="v-pills-home-tab" data-bs-toggle="pill"
                                     href="#home-page-banner-section-three" role="tab" aria-controls="v-pills-home"
+                                    aria-selected="true">HomePage Banner Section Three</a>
+
+                                <a class="nav-link mb-2 list-view {{ Session::has('admin_advertisement_list_style') && Session::get('admin_advertisement_list_style') == 'section_four' ? 'active' : '' }}"
+                                    data-id="section_four" id="v-pills-home-tab" data-bs-toggle="pill"
+                                    href="#home-page-banner-section-four" role="tab" aria-controls="v-pills-home"
                                     aria-selected="true">HomePage Banner Section Three</a>
                             </div>
                         </div>
@@ -42,6 +46,7 @@
                                 @include('admin.advertisement.section.homepage-banner-one')
                                 @include('admin.advertisement.section.homepage-banner-two')
                                 @include('admin.advertisement.section.homepage-banner-three')
+                                @include('admin.advertisement.section.homepage-banner-four')
                             </div>
                         </div>
                     </div>

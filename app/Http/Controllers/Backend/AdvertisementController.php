@@ -21,7 +21,10 @@ class AdvertisementController extends Controller
 
         $homepage_section_banner_three = Advertisement::where('key', 'homepage_section_banner_three')->first();
         $homepage_section_banner_three = json_decode($homepage_section_banner_three?->value);
-        return view('admin.advertisement.index', compact('homepage_section_banner_one', 'homepage_section_banner_two', 'homepage_section_banner_three'));
+
+        $homepage_section_banner_four = Advertisement::where('key', 'homepage_section_banner_four')->first();
+        $homepage_section_banner_four = json_decode($homepage_section_banner_four?->value);
+        return view('admin.advertisement.index', compact('homepage_section_banner_one', 'homepage_section_banner_two', 'homepage_section_banner_three', 'homepage_section_banner_four'));
     }
 
     public function homepageBannerSectionOne(Request $request)
@@ -199,6 +202,45 @@ class AdvertisementController extends Controller
 
         Advertisement::updateOrCreate(
             ['key' => 'homepage_section_banner_three'],
+            ['value' => $value]
+        );
+
+        return redirect()->back()->with('toast', [
+            'type' => 'success',
+            'title' => 'Success',
+            'message' => 'Updated Successfully!'
+        ]);
+    }
+
+    public function homepageBannerSectionFour(Request $request)
+    {
+        $request->validate([
+            'banner_image' => ['nullable', 'image', 'max:2048', 'dimensions:width=1650,height=381'],
+            'banner_url' => ['required', 'url'],
+        ]);
+
+        /** Banner image handel */
+        $imagePath = $this->updateImage($request, 'banner_image', 'uploads/advertisement/homepage_banner_section_four_image');
+        // 'banner_image' =>  empty(!$imagePath) ? $imagePath : $brand->logo;
+
+        $value = [
+            'banner_one' => [
+                'banner_url' => $request->banner_url,
+                'status' => $request->status == 'on' ? 1 : 0,
+            ]
+        ];
+
+        if (!empty($imagePath)) {
+            $value['banner_one']['banner_image'] = $imagePath;
+        } else {
+
+            $value['banner_one']['banner_image'] = $request->banner_old_image;
+        }
+
+        $value = json_encode($value);
+
+        Advertisement::updateOrCreate(
+            ['key' => 'homepage_section_banner_four'],
             ['value' => $value]
         );
 
