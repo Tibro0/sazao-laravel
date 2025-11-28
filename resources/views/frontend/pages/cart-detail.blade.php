@@ -120,11 +120,15 @@
                     <div class="wsus__cart_list_footer_button" id="sticky_sidebar">
                         <h6>total cart</h6>
                         <p>subtotal: <span id="sub_total">{{ $settings->currency_icon }}{{ getCartTotal() }}</span></p>
-                        <p>Coupon(-): <span id="discount">{{ $settings->currency_icon }}{{getCartDiscount()}}</span></p>
-                        <p class="total"><span>total:</span> <span id="cart_total">{{ $settings->currency_icon }}{{getMainCartTotal()}}</span></p>
+                        <p>Coupon(-): <span id="discount">{{ $settings->currency_icon }}{{ getCartDiscount() }}</span>
+                        </p>
+                        <p class="total"><span>total:</span> <span
+                                id="cart_total">{{ $settings->currency_icon }}{{ getMainCartTotal() }}</span></p>
 
                         <form id="coupon_form">
-                            <input type="text" name="coupon_code" value="{{ session()->has('coupon') ? session()->get('coupon')['coupon_code'] : ''}}" placeholder="Coupon Code">
+                            <input type="text" name="coupon_code"
+                                value="{{ session()->has('coupon') ? session()->get('coupon')['coupon_code'] : '' }}"
+                                placeholder="Coupon Code">
                             <button type="submit" class="common_btn">apply</button>
                         </form>
                         <div class="text-danger" id="coupon_form_error_message_show"></div>
@@ -136,13 +140,15 @@
             </div>
         </div>
     </section>
+
     <section id="wsus__single_banner">
         <div class="container">
             <div class="row">
                 <div class="col-xl-6 col-lg-6">
                     <div class="wsus__single_banner_content">
                         <div class="wsus__single_banner_img">
-                            <img src="images/single_banner_2.jpg" alt="banner" class="img-fluid w-100">
+                            <img src="{{ asset('frontend/images/single_banner_2.jpg') }}" alt="banner"
+                                class="img-fluid w-100">
                         </div>
                         <div class="wsus__single_banner_text">
                             <h6>sell on <span>35% off</span></h6>
@@ -154,7 +160,8 @@
                 <div class="col-xl-6 col-lg-6">
                     <div class="wsus__single_banner_content single_banner_2">
                         <div class="wsus__single_banner_img">
-                            <img src="images/single_banner_3.jpg" alt="banner" class="img-fluid w-100">
+                            <img src="{{ asset('frontend/images/single_banner_3.jpg') }}" alt="banner"
+                                class="img-fluid w-100">
                         </div>
                         <div class="wsus__single_banner_text">
                             <h6>New Collection</h6>
@@ -282,7 +289,7 @@
                     method: "GET",
                     url: "{{ route('cart.sidebar-product-total') }}",
                     success: function(data) {
-                        $('#sub_total').text("{{ $settings->currency_icon }}"+data);
+                        $('#sub_total').text("{{ $settings->currency_icon }}" + data);
                     },
                     error: function(data) {
                         console.log(data);
@@ -291,40 +298,40 @@
             }
 
             // Apply Coupon Coupon
-            $('#coupon_form').on('submit', function(e){
+            $('#coupon_form').on('submit', function(e) {
                 e.preventDefault();
                 let formData = $(this).serialize();
                 $.ajax({
                     method: "GET",
                     url: "{{ route('apply-coupon') }}",
-                    data:formData,
-                    success: function (data) {
+                    data: formData,
+                    success: function(data) {
                         if (data.status === 'error') {
                             // toastr.error(data.message);
                             $('#coupon_form_error_message_show').text(data.message);
                             $("input[name='coupon_code']").addClass('border-danger');
-                        }else if(data.status === 'success'){
+                        } else if (data.status === 'success') {
                             calculateCouponDiscount();
                             toastr.success(data.message);
                         }
                     },
-                    error:function(data){
+                    error: function(data) {
 
                     }
                 });
             })
             // calculate Discount Amount
-            function calculateCouponDiscount(){
+            function calculateCouponDiscount() {
                 $.ajax({
                     method: "GET",
                     url: "{{ route('coupon-calculation') }}",
-                    success: function (data) {
+                    success: function(data) {
                         if (data.status === 'success') {
-                            $('#discount').text('{{ $settings->currency_icon }}'+data.discount);
-                            $('#cart_total').text('{{ $settings->currency_icon }}'+data.cart_total);
+                            $('#discount').text('{{ $settings->currency_icon }}' + data.discount);
+                            $('#cart_total').text('{{ $settings->currency_icon }}' + data.cart_total);
                         }
                     },
-                    error:function(data){
+                    error: function(data) {
 
                     }
                 });

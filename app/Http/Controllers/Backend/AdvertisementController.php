@@ -27,7 +27,10 @@ class AdvertisementController extends Controller
 
         $productpage_banner_section = Advertisement::where('key', 'productpage_banner_section')->first();
         $productpage_banner_section = json_decode($productpage_banner_section?->value);
-        return view('admin.advertisement.index', compact('homepage_section_banner_one', 'homepage_section_banner_two', 'homepage_section_banner_three', 'homepage_section_banner_four', 'productpage_banner_section'));
+
+        $cartpage_banner_section = Advertisement::where('key', 'cartpage_banner_section')->first();
+        $cartpage_banner_section = json_decode($cartpage_banner_section?->value);
+        return view('admin.advertisement.index', compact('homepage_section_banner_one', 'homepage_section_banner_two', 'homepage_section_banner_three', 'homepage_section_banner_four', 'productpage_banner_section', 'cartpage_banner_section'));
     }
 
     public function homepageBannerSectionOne(Request $request)
@@ -287,6 +290,67 @@ class AdvertisementController extends Controller
 
         Advertisement::updateOrCreate(
             ['key' => 'productpage_banner_section'],
+            ['value' => $value]
+        );
+
+        return redirect()->back()->with('toast', [
+            'type' => 'success',
+            'title' => 'Success',
+            'message' => 'Updated Successfully!'
+        ]);
+    }
+
+    public function cartPageBanner(Request $request)
+    {
+        $request->validate([
+            'banner_one_image' => ['nullable', 'image', 'max:2048', 'dimensions:width=780,height=273'],
+            'banner_one_url' => ['required', 'url'],
+
+            'banner_two_image' => ['nullable', 'image', 'max:2048', 'dimensions:width=780,height=273'],
+            'banner_two_url' => ['required', 'url'],
+        ]);
+
+        /** Banner one image handel */
+        $imagePath = $this->updateImage($request, 'banner_one_image', 'uploads/advertisement/cart_page_banner_section/part_one');
+
+        /** Banner two image handel */
+        $imagePathTwo = $this->updateImage($request, 'banner_two_image', 'uploads/advertisement/cart_page_banner_section/part_two');
+
+        $value = [
+            'banner_one' => [
+                'banner_url' => $request->banner_one_url,
+                'status' => $request->banner_one_status == 'on' ? 1 : 0,
+            ],
+            'banner_two' => [
+                'banner_url' => $request->banner_two_url,
+                'status' => $request->banner_two_status == 'on' ? 1 : 0,
+            ]
+        ];
+
+        /** Banner one image handel */
+        if (!empty($imagePath)) {
+            if (isset($request->banner_one_old_image)) {
+                unlink($request->banner_one_old_image);
+            }
+            $value['banner_one']['banner_image'] = $imagePath;
+        } else {
+            $value['banner_one']['banner_image'] = $request->banner_one_old_image;
+        }
+
+        /** Banner two image handel */
+        if (!empty($imagePathTwo)) {
+            if ($request->banner_two_old_image) {
+                unlink($request->banner_two_old_image);
+            }
+            $value['banner_two']['banner_image'] = $imagePathTwo;
+        } else {
+            $value['banner_two']['banner_image'] = $request->banner_two_old_image;
+        }
+
+        $value = json_encode($value);
+
+        Advertisement::updateOrCreate(
+            ['key' => 'cartpage_banner_section'],
             ['value' => $value]
         );
 
