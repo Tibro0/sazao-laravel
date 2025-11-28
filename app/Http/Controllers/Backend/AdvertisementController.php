@@ -24,7 +24,10 @@ class AdvertisementController extends Controller
 
         $homepage_section_banner_four = Advertisement::where('key', 'homepage_section_banner_four')->first();
         $homepage_section_banner_four = json_decode($homepage_section_banner_four?->value);
-        return view('admin.advertisement.index', compact('homepage_section_banner_one', 'homepage_section_banner_two', 'homepage_section_banner_three', 'homepage_section_banner_four'));
+
+        $productpage_banner_section = Advertisement::where('key', 'productpage_banner_section')->first();
+        $productpage_banner_section = json_decode($productpage_banner_section?->value);
+        return view('admin.advertisement.index', compact('homepage_section_banner_one', 'homepage_section_banner_two', 'homepage_section_banner_three', 'homepage_section_banner_four', 'productpage_banner_section'));
     }
 
     public function homepageBannerSectionOne(Request $request)
@@ -231,9 +234,11 @@ class AdvertisementController extends Controller
         ];
 
         if (!empty($imagePath)) {
+            if (isset($request->banner_old_image)) {
+                unlink($request->banner_old_image);
+            }
             $value['banner_one']['banner_image'] = $imagePath;
         } else {
-
             $value['banner_one']['banner_image'] = $request->banner_old_image;
         }
 
@@ -241,6 +246,47 @@ class AdvertisementController extends Controller
 
         Advertisement::updateOrCreate(
             ['key' => 'homepage_section_banner_four'],
+            ['value' => $value]
+        );
+
+        return redirect()->back()->with('toast', [
+            'type' => 'success',
+            'title' => 'Success',
+            'message' => 'Updated Successfully!'
+        ]);
+    }
+
+    public function productPageBanner(Request $request)
+    {
+        $request->validate([
+            'banner_image' => ['nullable', 'image', 'max:2048', 'dimensions:width=1240,height=300'],
+            'banner_url' => ['required', 'url'],
+        ]);
+
+        /** Banner image handel */
+        $imagePath = $this->updateImage($request, 'banner_image', 'uploads/advertisement/product_page_banner_section_image');
+        // 'banner_image' =>  empty(!$imagePath) ? $imagePath : $brand->logo;
+
+        $value = [
+            'banner_one' => [
+                'banner_url' => $request->banner_url,
+                'status' => $request->status == 'on' ? 1 : 0,
+            ]
+        ];
+
+        if (!empty($imagePath)) {
+            if (isset($request->banner_old_image)) {
+                unlink($request->banner_old_image);
+            }
+            $value['banner_one']['banner_image'] = $imagePath;
+        } else {
+            $value['banner_one']['banner_image'] = $request->banner_old_image;
+        }
+
+        $value = json_encode($value);
+
+        Advertisement::updateOrCreate(
+            ['key' => 'productpage_banner_section'],
             ['value' => $value]
         );
 

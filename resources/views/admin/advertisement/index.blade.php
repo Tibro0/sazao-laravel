@@ -34,11 +34,15 @@
                                     data-id="section_three" id="v-pills-home-tab" data-bs-toggle="pill"
                                     href="#home-page-banner-section-three" role="tab" aria-controls="v-pills-home"
                                     aria-selected="true">HomePage Banner Section Three</a>
-
                                 <a class="nav-link mb-2 list-view {{ Session::has('admin_advertisement_list_style') && Session::get('admin_advertisement_list_style') == 'section_four' ? 'active' : '' }}"
                                     data-id="section_four" id="v-pills-home-tab" data-bs-toggle="pill"
                                     href="#home-page-banner-section-four" role="tab" aria-controls="v-pills-home"
                                     aria-selected="true">HomePage Banner Section Three</a>
+
+                                <a class="nav-link mb-2 list-view {{ Session::has('admin_advertisement_list_style') && Session::get('admin_advertisement_list_style') == 'section_five' ? 'active' : '' }}"
+                                    data-id="section_five" id="v-pills-home-tab" data-bs-toggle="pill"
+                                    href="#product-page-banner" role="tab" aria-controls="v-pills-home"
+                                    aria-selected="true">Product Page Banner</a>
                             </div>
                         </div>
                         <div class="col-md-10">
@@ -47,6 +51,7 @@
                                 @include('admin.advertisement.section.homepage-banner-two')
                                 @include('admin.advertisement.section.homepage-banner-three')
                                 @include('admin.advertisement.section.homepage-banner-four')
+                                @include('admin.advertisement.section.product-page-banner')
                             </div>
                         </div>
                     </div>
