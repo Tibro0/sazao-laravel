@@ -239,6 +239,7 @@ Route::controller(AdvertisementController::class)->group(function () {
     Route::get('advertisement', 'index')->name('advertisement.index');
     Route::put('advertisement/homepage-banner-section-one', 'homepageBannerSectionOne')->name('homepage-banner-section-one');
     Route::put('advertisement/homepage-banner-section-two', 'homepageBannerSectionTwo')->name('homepage-banner-section-two');
+    Route::put('advertisement/homepage-banner-section-three', 'homepageBannerSectionThree')->name('homepage-banner-section-three');
 
     Route::get('admin-advertisement-list-style', 'adminAdvertisementListStyle')->name('admin-advertisement-list-style');
 });
