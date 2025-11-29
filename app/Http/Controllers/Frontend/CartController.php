@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Advertisement;
 use App\Models\Coupon;
 use App\Models\Product;
 use App\Models\ProductVariantItem;
@@ -25,8 +26,10 @@ class CartController extends Controller
                 'message' => 'Please Add Some Products In Your Cart For View The Cart Page.'
             ]);
         }
-
-        return view('frontend.pages.cart-detail', compact('cartItems'));
+        // banner add
+        $cartpage_banner_section = Advertisement::where('key', 'cartpage_banner_section')->first();
+        $cartpage_banner_section = json_decode($cartpage_banner_section?->value);
+        return view('frontend.pages.cart-detail', compact('cartItems', 'cartpage_banner_section'));
     }
 
     /** Add Item To Cart */

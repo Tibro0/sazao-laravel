@@ -94,17 +94,21 @@
         <div class="container">
             <div class="row">
                 <div class="col-xl-12">
-                    <div class="wsus__pro_page_bammer">
-                        <img src="{{ asset('frontend/images/pro_banner_1.jpg') }}" alt="banner" class="img-fluid w-100">
-                        <div class="wsus__pro_page_bammer_text">
-                            <div class="wsus__pro_page_bammer_text_center">
-                                <p>up to <span>70% off</span></p>
-                                <h5>wemen's jeans Collection</h5>
-                                <h3>fashion for wemen's</h3>
-                                <a href="#" class="add_cart">Discover Now</a>
+                    @if ($productpage_banner_section->banner_one->status == 1)
+                        <div class="wsus__pro_page_bammer">
+                            <img src="{{ asset($productpage_banner_section->banner_one->banner_image) }}" alt="banner"
+                                class="img-fluid w-100">
+                            <div class="wsus__pro_page_bammer_text">
+                                <div class="wsus__pro_page_bammer_text_center">
+                                    <p>up to <span>70% off</span></p>
+                                    <h5>wemen's jeans Collection</h5>
+                                    <h3>fashion for wemen's</h3>
+                                    <a href="{{ $productpage_banner_section->banner_one->banner_url }}"
+                                        class="add_cart">Discover Now</a>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    @endif
                 </div>
                 <div class="col-xl-3 col-lg-4">
                     <div class="wsus__sidebar_filter ">
