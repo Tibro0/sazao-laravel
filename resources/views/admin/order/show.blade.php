@@ -166,7 +166,7 @@
                                                         <strong>Coupon(-)</strong>
                                                     </td>
                                                     <td class="thick-line text-end">
-                                                        @if ($coupon->discount_type === 'percent')
+                                                        @if (@$coupon->discount_type === 'percent')
                                                             {{ @$coupon->discount ? @$coupon->discount : 0 }}%
                                                         @else
                                                             {{ $settings->currency_icon }}{{ @$coupon->discount ? @$coupon->discount : 0 }}
@@ -193,7 +193,6 @@
                                             <a href="javascript:window.print()"
                                                 class="btn btn-success waves-effect waves-light"><i
                                                     class="fa fa-print"></i></a>
-
                                         </div>
                                     </div>
                                 </div>

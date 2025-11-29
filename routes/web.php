@@ -8,6 +8,7 @@ use App\Http\Controllers\Frontend\FrontendProductController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\NewsletterController;
 use App\Http\Controllers\Frontend\PaymentController;
+use App\Http\Controllers\Frontend\ReviewController;
 use App\Http\Controllers\Frontend\UserAddressController;
 use App\Http\Controllers\Frontend\UserDashboardController;
 use App\Http\Controllers\Frontend\UserOrderController;
@@ -54,6 +55,7 @@ Route::controller(FrontendProductController::class)->group(function () {
     Route::get('products', 'productsIndex')->name('products.index');
     Route::get('product-detail/{slug}', 'showProduct')->name('product-detail');
     Route::get('change-product-list-view', 'changeListView')->name('change-product-list-view');
+    Route::get('frontend-product-details-tab-list-style', 'frontendProductDetailsTabListStyle')->name('frontend-product-details-tab-list-style');
 });
 
 /** Cart Route */
@@ -72,7 +74,7 @@ Route::controller(CartController::class)->group(function () {
 });
 
 /** Newsletter Route */
-Route::controller(NewsletterController::class)->group(function(){
+Route::controller(NewsletterController::class)->group(function () {
     Route::post('newsletter-request', 'newsLetterRequest')->name('newsletter-request');
     Route::get('newsletter-verify/{token}',  'newsLetterEmailVerify')->name('newsletter-verify');
 });
@@ -106,10 +108,15 @@ Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'user', 'as' => 
     });
 
     /** Wishlist Route */
-    Route::controller(WishlistController::class)->group(function(){
+    Route::controller(WishlistController::class)->group(function () {
         Route::get('wishlist', 'index')->name('wishlist.index');
         Route::get('wishlist/add-product', 'addToWishlist')->name('wishlist.store');
         Route::get('wishlist/remove-product/{id}', 'destroy')->name('wishlist.destroy');
+    });
+
+    /** Product Review Route */
+    Route::controller(ReviewController::class)->group(function () {
+        Route::post('review', 'create')->name('review.create');
     });
 
     /** Checkout Route */

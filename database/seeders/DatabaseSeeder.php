@@ -53,6 +53,9 @@ class DatabaseSeeder extends Seeder
             EmailConfigurationSeeder::class,
             NewsletterSubscribeSeeder::class,
             AdvertisementSeeder::class,
+
+            ProductReviewSeeder::class,
+            ProductReviewGallerySeeder::class,
         ]);
     }
 }

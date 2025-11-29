@@ -9,6 +9,7 @@ use App\Models\Category;
 use App\Models\ChildCategory;
 use App\Models\FlashSale;
 use App\Models\Product;
+use App\Models\ProductReview;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -89,11 +90,17 @@ class FrontendProductController extends Controller
     {
         $flashSaleDate = FlashSale::first();
         $product = Product::with(['vendor', 'category', 'productImageGalleries', 'variants', 'brand'])->where(['slug' => $slug, 'status' => 1, 'is_approved' => 1])->first();
-        return view('frontend.pages.product-detail', compact('product', 'flashSaleDate'));
+        $reviews = ProductReview::with(['user', 'productReviewGalleries'])->where(['product_id' => $product->id, 'status' => 1])->paginate(10);
+        return view('frontend.pages.product-detail', compact('product', 'flashSaleDate', 'reviews'));
     }
 
     public function changeListView(Request $request)
     {
         Session::put('product_list_style', $request->style);
+    }
+
+    public function frontendProductDetailsTabListStyle(Request $request)
+    {
+        Session::put('frontend_product_details_tab_list_style', $request->style);
     }
 }
