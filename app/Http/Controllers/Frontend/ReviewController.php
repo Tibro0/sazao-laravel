@@ -12,6 +12,12 @@ use Illuminate\Support\Facades\Auth;
 class ReviewController extends Controller
 {
     use ImageUploadTrait;
+    public function index()
+    {
+        $reviews = ProductReview::with(['product'])->orderby('id', 'DESC')->get();
+        return view('frontend.dashboard.review.index', compact('reviews'));
+    }
+
     public function create(Request $request)
     {
         $request->validate([
