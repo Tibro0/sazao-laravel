@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Backend\AdminController;
+use App\Http\Controllers\Backend\AdminProductReviewController;
 use App\Http\Controllers\Backend\AdminVendorProfileController;
 use App\Http\Controllers\Backend\AdvertisementController;
 use App\Http\Controllers\Backend\BrandController;
@@ -147,6 +148,12 @@ Route::controller(ProductVariantItemController::class)->group(function () {
     Route::put('products-variant-item-update/{variantItemId}', 'update')->name('products-variant-item.update');
     Route::delete('products-variant-item/{variantItemId}', 'destroy')->name('products-variant-item.destroy');
     Route::put('products-variant-item-change-status', 'changeStatus')->name('products-variant-item.change-status');
+});
+
+/** Reviews Route */
+Route::controller(AdminProductReviewController::class)->group(function () {
+    Route::get('reviews', 'index')->name('review.index');
+    Route::put('reviews/change-status', 'changeStatus')->name('reviews.change-status');
 });
 
 /** Seller Product Routs */

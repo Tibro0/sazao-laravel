@@ -73,6 +73,8 @@
                 <li class="{{ adminSidebarActive(['admin.seller-pending-products.index']) }}"><a
                         href="{{ route('admin.seller-pending-products.index') }}">Seller Pending Products</a></li>
 
+                <li class="{{ adminSidebarActive(['admin.review.index']) }}"><a
+                        href="{{ route('admin.review.index') }}">Product Reviews</a></li>
             </ul>
         </li>
 
