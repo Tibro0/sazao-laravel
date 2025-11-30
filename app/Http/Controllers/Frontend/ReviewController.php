@@ -14,7 +14,7 @@ class ReviewController extends Controller
     use ImageUploadTrait;
     public function index()
     {
-        $reviews = ProductReview::with(['product'])->orderby('id', 'DESC')->get();
+        $reviews = ProductReview::with(['product'])->where(['user_id' => Auth::user()->id])->orderby('id', 'DESC')->get();
         return view('frontend.dashboard.review.index', compact('reviews'));
     }
 
