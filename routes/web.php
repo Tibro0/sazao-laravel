@@ -79,6 +79,13 @@ Route::controller(NewsletterController::class)->group(function () {
     Route::get('newsletter-verify/{token}',  'newsLetterEmailVerify')->name('newsletter-verify');
 });
 
+/** Vendor Page Route */
+Route::controller(HomeController::class)->group(function(){
+    Route::get('vendor', 'vendorPage')->name('vendor.index');
+    Route::get('vendor-product/{id}', 'vendorProductsPage')->name('vendor.products');
+    Route::get('change-vendor-product-list-view', 'changeVendorProductListView')->name('change-vendor-product-list-view');
+});
+
 Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'user', 'as' => 'user.'], function () {
     Route::controller(UserDashboardController::class)->group(function () {
         Route::get('dashboard', 'index')->name('dashboard');
