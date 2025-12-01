@@ -13,6 +13,7 @@ use App\Http\Controllers\Frontend\UserAddressController;
 use App\Http\Controllers\Frontend\UserDashboardController;
 use App\Http\Controllers\Frontend\UserOrderController;
 use App\Http\Controllers\Frontend\UserProfileController;
+use App\Http\Controllers\Frontend\UserVendorRequestController;
 use App\Http\Controllers\Frontend\WishlistController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -80,7 +81,7 @@ Route::controller(NewsletterController::class)->group(function () {
 });
 
 /** Vendor Page Route */
-Route::controller(HomeController::class)->group(function(){
+Route::controller(HomeController::class)->group(function () {
     Route::get('vendor', 'vendorPage')->name('vendor.index');
     Route::get('vendor-product/{id}', 'vendorProductsPage')->name('vendor.products');
     Route::get('change-vendor-product-list-view', 'changeVendorProductListView')->name('change-vendor-product-list-view');
@@ -119,6 +120,12 @@ Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'user', 'as' => 
         Route::get('wishlist', 'index')->name('wishlist.index');
         Route::get('wishlist/add-product', 'addToWishlist')->name('wishlist.store');
         Route::get('wishlist/remove-product/{id}', 'destroy')->name('wishlist.destroy');
+    });
+
+    /** vendor request route */
+    Route::controller(UserVendorRequestController::class)->group(function () {
+        Route::get('vendor-request',  'index')->name('vendor-request.index');
+        Route::post('vendor-request',  'create')->name('vendor-request.create');
     });
 
     /** Product Review Route */
