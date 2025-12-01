@@ -54,8 +54,9 @@ class DatabaseSeeder extends Seeder
             NewsletterSubscribeSeeder::class,
             AdvertisementSeeder::class,
 
-            ProductReviewSeeder::class,
-            ProductReviewGallerySeeder::class,
+            // ProductReviewSeeder::class,
+            // ProductReviewGallerySeeder::class,
+
         ]);
     }
 }
