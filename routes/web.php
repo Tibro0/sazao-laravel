@@ -7,6 +7,7 @@ use App\Http\Controllers\Frontend\FlashSaleController;
 use App\Http\Controllers\Frontend\FrontendProductController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\NewsletterController;
+use App\Http\Controllers\Frontend\PageController;
 use App\Http\Controllers\Frontend\PaymentController;
 use App\Http\Controllers\Frontend\ReviewController;
 use App\Http\Controllers\Frontend\UserAddressController;
@@ -85,6 +86,11 @@ Route::controller(HomeController::class)->group(function () {
     Route::get('vendor', 'vendorPage')->name('vendor.index');
     Route::get('vendor-product/{id}', 'vendorProductsPage')->name('vendor.products');
     Route::get('change-vendor-product-list-view', 'changeVendorProductListView')->name('change-vendor-product-list-view');
+});
+
+/** About Page pages */
+Route::controller(PageController::class)->group(function () {
+    Route::get('about', 'about')->name('about');
 });
 
 Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'user', 'as' => 'user.'], function () {

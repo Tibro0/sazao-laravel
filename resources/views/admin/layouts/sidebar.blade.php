@@ -108,6 +108,9 @@
                         href="{{ route('admin.home-page-setting') }}">Home Page Setting</a></li>
                 <li class="{{ adminSidebarActive(['admin.vendor-condition.index']) }}"><a
                         href="{{ route('admin.vendor-condition.index') }}">Vendor Condition</a></li>
+
+                <li class="{{ adminSidebarActive(['admin.about.index']) }}"><a
+                        href="{{ route('admin.about.index') }}">About Page</a></li>
             </ul>
         </li>
 
@@ -135,12 +138,15 @@
             </a>
 
             <ul class="sub-menu" aria-expanded="false">
-                <li class="{{ adminSidebarActive(['admin.customer.index']) }}"><a href="{{route('admin.customer.index')}}">Customer List</a></li>
-                <li class="{{ adminSidebarActive(['admin.vendor-list.index']) }}"><a href="{{route('admin.vendor-list.index')}}">Vendor List</a></li>
+                <li class="{{ adminSidebarActive(['admin.customer.index']) }}"><a
+                        href="{{ route('admin.customer.index') }}">Customer List</a></li>
+                <li class="{{ adminSidebarActive(['admin.vendor-list.index']) }}"><a
+                        href="{{ route('admin.vendor-list.index') }}">Vendor List</a></li>
             </ul>
 
             <ul class="sub-menu" aria-expanded="false">
-                <li class="{{ adminSidebarActive(['admin.vendor-request.*']) }}"><a href="{{route('admin.vendor-request.index')}}">Pending Vendor</a></li>
+                <li class="{{ adminSidebarActive(['admin.vendor-request.*']) }}"><a
+                        href="{{ route('admin.vendor-request.index') }}">Pending Vendor</a></li>
             </ul>
         </li>
 

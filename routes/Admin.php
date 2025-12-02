@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Backend\AboutController;
 use App\Http\Controllers\Backend\AdminController;
 use App\Http\Controllers\Backend\AdminProductReviewController;
 use App\Http\Controllers\Backend\AdminVendorProfileController;
@@ -280,6 +281,12 @@ Route::controller(VendorListController::class)->group(function () {
 Route::controller(VendorConditionController::class)->group(function () {
     Route::get('vendor-condition', 'index')->name('vendor-condition.index');
     Route::put('vendor-condition/update', 'update')->name('vendor-condition.update');
+});
+
+/** About page route */
+Route::controller(AboutController::class)->group(function () {
+    Route::get('about', 'index')->name('about.index');
+    Route::put('about/update', 'update')->name('about.update');
 });
 
 /** Footer Route */
