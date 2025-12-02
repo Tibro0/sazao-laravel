@@ -127,6 +127,16 @@
             </ul>
         </li>
 
+        <li>
+            <a href="javascript: void(0);" class="has-arrow waves-effect">
+                <i class="ri-mail-send-line"></i>
+                <span>Users</span>
+            </a>
+            <ul class="sub-menu" aria-expanded="false">
+                <li class="{{ adminSidebarActive(['admin.vendor-request.*']) }}"><a href="{{route('admin.vendor-request.index')}}">Pending Vendor</a></li>
+            </ul>
+        </li>
+
         <li class="{{ adminSidebarActive(['admin.advertisement.index']) }}">
             <a href="{{ route('admin.advertisement.index') }}" class="waves-effect">
                 <i class="ri-dashboard-line"></i>

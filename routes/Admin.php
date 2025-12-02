@@ -31,6 +31,7 @@ use App\Http\Controllers\Backend\StripeSettingController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Backend\SubscribersController;
 use App\Http\Controllers\Backend\TransactionController;
+use App\Http\Controllers\Backend\VendorRequestController;
 use Illuminate\Support\Facades\Route;
 
 // Admin Route
@@ -251,6 +252,13 @@ Route::controller(AdvertisementController::class)->group(function () {
     Route::put('advertisement/product-page-banner', 'productPageBanner')->name('product-page-banner');
     Route::put('advertisement/cart-page-banner', 'cartPageBanner')->name('cart-page-banner');
     Route::get('admin-advertisement-list-style', 'adminAdvertisementListStyle')->name('admin-advertisement-list-style');
+});
+
+/** Vendor Request Route */
+Route::controller(VendorRequestController::class)->group(function () {
+    Route::get('vendor-request', 'index')->name('vendor-request.index');
+    Route::get('vendor-request/show/{id}', 'show')->name('vendor-request.show');
+    Route::put('vendor-request/change-status/{id}', 'changeStatus')->name('vendor-request.change-status');
 });
 
 /** Footer Route */
