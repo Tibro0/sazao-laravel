@@ -72,7 +72,6 @@
                         href="{{ route('admin.seller-products.index') }}">Seller Products</a></li>
                 <li class="{{ adminSidebarActive(['admin.seller-pending-products.index']) }}"><a
                         href="{{ route('admin.seller-pending-products.index') }}">Seller Pending Products</a></li>
-
                 <li class="{{ adminSidebarActive(['admin.review.index']) }}"><a
                         href="{{ route('admin.review.index') }}">Product Reviews</a></li>
             </ul>
@@ -107,6 +106,8 @@
                         href="{{ route('admin.slider.index') }}">Slider</a></li>
                 <li class="{{ adminSidebarActive(['admin.home-page-setting']) }}"><a
                         href="{{ route('admin.home-page-setting') }}">Home Page Setting</a></li>
+                <li class="{{ adminSidebarActive(['admin.vendor-condition.index']) }}"><a
+                        href="{{ route('admin.vendor-condition.index') }}">Vendor Condition</a></li>
             </ul>
         </li>
 
