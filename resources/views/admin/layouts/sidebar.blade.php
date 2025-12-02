@@ -134,7 +134,8 @@
             </a>
 
             <ul class="sub-menu" aria-expanded="false">
-                <li class="{{ adminSidebarActive(['admin.customer.index']) }}"><a href="{{route('admin.customer.index')}}">Customer</a></li>
+                <li class="{{ adminSidebarActive(['admin.customer.index']) }}"><a href="{{route('admin.customer.index')}}">Customer List</a></li>
+                <li class="{{ adminSidebarActive(['admin.vendor-list.index']) }}"><a href="{{route('admin.vendor-list.index')}}">Vendor List</a></li>
             </ul>
 
             <ul class="sub-menu" aria-expanded="false">

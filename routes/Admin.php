@@ -32,6 +32,7 @@ use App\Http\Controllers\Backend\StripeSettingController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Backend\SubscribersController;
 use App\Http\Controllers\Backend\TransactionController;
+use App\Http\Controllers\Backend\VendorListController;
 use App\Http\Controllers\Backend\VendorRequestController;
 use Illuminate\Support\Facades\Route;
 
@@ -266,6 +267,12 @@ Route::controller(VendorRequestController::class)->group(function () {
 Route::controller(CustomerListController::class)->group(function () {
     Route::get('customer', 'index')->name('customer.index');
     Route::put('customer/status-change', 'StatusChange')->name('customer.status-change');
+});
+
+/** Vendor List Route */
+Route::controller(VendorListController::class)->group(function () {
+    Route::get('vendor-list', 'index')->name('vendor-list.index');
+    Route::put('vendor-list/status-change', 'StatusChange')->name('vendor-list.status-change');
 });
 
 /** Footer Route */
