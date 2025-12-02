@@ -1,7 +1,7 @@
 @extends('admin.layouts.master')
 
 @section('page-title')
-    {{ $settings->site_name }} | All Pending Vendor Request
+    {{ $settings->site_name }} | All Customers
 @endsection
 
 @push('css-link')
@@ -18,7 +18,7 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between align-items-center">
-                        <h4 class="mb-0">All Pending Vendor Request</h4>
+                        <h4 class="mb-0">All Customers</h4>
                     </div>
                 </div>
                 <div class="card-body">
@@ -27,30 +27,27 @@
                         <thead>
                             <tr>
                                 <th>SL</th>
-                                <th>User Name</th>
-                                <th>Shop Name</th>
-                                <th>Shop Email</th>
+                                <th>Name</th>
+                                <th>Email</th>
                                 <th>Status</th>
-                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($vendorRequests as $item)
+                            @foreach ($customers as $item)
                                 <tr>
                                     <td width="50">{{ $loop->iteration }}</td>
-                                    <td>{{ $item->user->name }}</td>
-                                    <td>{{ $item->shop_name }}</td>
+                                    <td>{{ $item->name }}</td>
                                     <td>{{ $item->email }}</td>
                                     <td>
-                                        @if ($item->status === 1)
-                                            <span class="badge bg-primary">Active</span>
-                                        @elseif ($item->status === 0)
-                                            <span class="badge bg-danger">Pending</span>
+                                        @if ($item->status === 'active')
+                                            <div class="form-check form-switch mb-3">
+                                                <input type="checkbox" class="form-check-input change-status" data-id="{{ $item->id }}" checked>
+                                            </div>
+                                        @elseif ($item->status === 'inactive')
+                                            <div class="form-check form-switch mb-3">
+                                                <input type="checkbox" class="form-check-input change-status" data-id="{{ $item->id }}">
+                                            </div>
                                         @endif
-                                    </td>
-                                    <td width="100">
-                                        <a href="{{ route('admin.vendor-request.show', $item->id) }}" class="btn btn-primary"><i
-                                                class="fas fa-eye"></i></a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -69,5 +66,30 @@
     <script src="{{ asset('backend/assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
     <script>
         $('#datatable').DataTable();
+    </script>
+    <!--Toggle Button script -->
+    <script>
+        $(document).ready(function() {
+            $('body').on('click', '.change-status', function() {
+                let isChecked = $(this).is(':checked');
+                let id = $(this).data('id');
+
+                $.ajax({
+                    url: "{{ route('admin.customer.status-change') }}",
+                    method: 'PUT',
+                    data: {
+                        status: isChecked,
+                        id: id
+                    },
+                    success: function(data) {
+                        toastr.success(data.message)
+                    },
+                    error: function(xhr, status, error) {
+                        console.log(error);
+                    }
+                })
+
+            })
+        })
     </script>
 @endpush

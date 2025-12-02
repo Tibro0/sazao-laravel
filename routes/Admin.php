@@ -8,6 +8,7 @@ use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\ChildCategoryController;
 use App\Http\Controllers\Backend\CouponController;
+use App\Http\Controllers\Backend\CustomerListController;
 use App\Http\Controllers\Backend\FlashSaleController;
 use App\Http\Controllers\Backend\FooterGridThreeController;
 use App\Http\Controllers\Backend\FooterGridTwoController;
@@ -259,6 +260,12 @@ Route::controller(VendorRequestController::class)->group(function () {
     Route::get('vendor-request', 'index')->name('vendor-request.index');
     Route::get('vendor-request/show/{id}', 'show')->name('vendor-request.show');
     Route::put('vendor-request/change-status/{id}', 'changeStatus')->name('vendor-request.change-status');
+});
+
+/** Customer List Route */
+Route::controller(CustomerListController::class)->group(function () {
+    Route::get('customer', 'index')->name('customer.index');
+    Route::put('customer/status-change', 'StatusChange')->name('customer.status-change');
 });
 
 /** Footer Route */
