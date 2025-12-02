@@ -28,6 +28,19 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
+        if ($request->user()->status === 'inactive') {
+            Auth::guard('web')->logout();
+            $request->session()->regenerateToken();
+
+            return redirect('/')->with('toast', [
+                'type' => 'error',
+                'title' => 'Account Banned',
+                'message' => 'Account Has Been Banned From The Website. Please Contact With Support.'
+            ]);
+
+            return redirect('/');
+        }
+
         if ($request->user()->role === 'admin') {
             return redirect()->intended(route('admin.dashboard', absolute: false));
         } elseif ($request->user()->role === 'vendor') {
