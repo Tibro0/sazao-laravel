@@ -59,6 +59,7 @@ class DatabaseSeeder extends Seeder
 
             VendorConditionSeeder::class,
             AboutSeeder::class,
+            TermsAndConditionSeeder::class,
         ]);
     }
 }

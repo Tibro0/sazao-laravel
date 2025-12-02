@@ -1,7 +1,7 @@
 @extends('frontend.layouts.master')
 
 @section('page-title')
-    {{ $settings->site_name }} | About
+    {{ $settings->site_name }} | Terms & Condition
 @endsection
 
 @section('content')
@@ -11,10 +11,10 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12">
-                        <h4>About</h4>
+                        <h4>terms and condition</h4>
                         <ul>
                             <li><a href="{{ route('home') }}">home</a></li>
-                            <li><a href="javascript:;">About</a></li>
+                            <li><a href="javascript:;">terms and condition</a></li>
                         </ul>
                     </div>
                 </div>
@@ -31,7 +31,7 @@
                 <div class="row">
                     <div class="card">
                         <div class="card-body p-5">
-                            {!! @$about->content !!}
+                            {!! @$terms->content !!}
                         </div>
                     </div>
                 </div>

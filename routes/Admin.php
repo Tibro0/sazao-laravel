@@ -32,6 +32,7 @@ use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\StripeSettingController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Backend\SubscribersController;
+use App\Http\Controllers\Backend\TermsAndConditionsController;
 use App\Http\Controllers\Backend\TransactionController;
 use App\Http\Controllers\Backend\VendorConditionController;
 use App\Http\Controllers\Backend\VendorListController;
@@ -287,6 +288,12 @@ Route::controller(VendorConditionController::class)->group(function () {
 Route::controller(AboutController::class)->group(function () {
     Route::get('about', 'index')->name('about.index');
     Route::put('about/update', 'update')->name('about.update');
+});
+
+/** Terms and Conditions page route */
+Route::controller(TermsAndConditionsController::class)->group(function () {
+    Route::get('terms-and-condition', 'index')->name('terms-and-condition.index');
+    Route::put('terms-and-condition/update', 'update')->name('terms-and-condition.update');
 });
 
 /** Footer Route */

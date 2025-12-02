@@ -91,6 +91,8 @@ Route::controller(HomeController::class)->group(function () {
 /** About Page pages */
 Route::controller(PageController::class)->group(function () {
     Route::get('about', 'about')->name('about');
+    /** Terms and Condition Page pages */
+    Route::get('terms-and-conditions', 'termsAndConditions')->name('terms-and-conditions');
 });
 
 Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'user', 'as' => 'user.'], function () {

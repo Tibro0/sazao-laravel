@@ -108,9 +108,10 @@
                         href="{{ route('admin.home-page-setting') }}">Home Page Setting</a></li>
                 <li class="{{ adminSidebarActive(['admin.vendor-condition.index']) }}"><a
                         href="{{ route('admin.vendor-condition.index') }}">Vendor Condition</a></li>
-
                 <li class="{{ adminSidebarActive(['admin.about.index']) }}"><a
                         href="{{ route('admin.about.index') }}">About Page</a></li>
+                <li class="{{ adminSidebarActive(['admin.terms-and-condition.index']) }}"><a
+                        href="{{ route('admin.terms-and-condition.index') }}">Terms And Condition</a></li>
             </ul>
         </li>
 
