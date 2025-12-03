@@ -19,6 +19,7 @@ use App\Http\Controllers\Backend\HomePageSettingController;
 use App\Http\Controllers\Backend\OrderController;
 use App\Http\Controllers\Backend\PaymentSettingController;
 use App\Http\Controllers\Backend\PaypalSettingController;
+use App\Http\Controllers\Backend\PrivacyPolicyController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\ProductImageGalleryController;
 use App\Http\Controllers\Backend\ProductVariantController;
@@ -284,16 +285,22 @@ Route::controller(VendorConditionController::class)->group(function () {
     Route::put('vendor-condition/update', 'update')->name('vendor-condition.update');
 });
 
-/** About page route */
+/** About Page Route */
 Route::controller(AboutController::class)->group(function () {
     Route::get('about', 'index')->name('about.index');
     Route::put('about/update', 'update')->name('about.update');
 });
 
-/** Terms and Conditions page route */
+/** Terms and Conditions Page Route */
 Route::controller(TermsAndConditionsController::class)->group(function () {
     Route::get('terms-and-condition', 'index')->name('terms-and-condition.index');
     Route::put('terms-and-condition/update', 'update')->name('terms-and-condition.update');
+});
+
+/** PrivacyPolicy Page Route */
+Route::controller(PrivacyPolicyController::class)->group(function () {
+    Route::get('privacy-policy', 'index')->name('privacy-policy.index');
+    Route::put('privacy-policy/update', 'update')->name('privacy-policy.update');
 });
 
 /** Footer Route */

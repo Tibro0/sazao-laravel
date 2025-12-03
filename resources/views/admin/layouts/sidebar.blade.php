@@ -112,6 +112,8 @@
                         href="{{ route('admin.about.index') }}">About Page</a></li>
                 <li class="{{ adminSidebarActive(['admin.terms-and-condition.index']) }}"><a
                         href="{{ route('admin.terms-and-condition.index') }}">Terms And Condition</a></li>
+                <li class="{{ adminSidebarActive(['admin.privacy-policy.index']) }}"><a
+                        href="{{ route('admin.privacy-policy.index') }}">Privacy Policy</a></li>
             </ul>
         </li>
 

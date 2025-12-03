@@ -93,6 +93,8 @@ Route::controller(PageController::class)->group(function () {
     Route::get('about', 'about')->name('about');
     /** Terms and Condition Page pages */
     Route::get('terms-and-conditions', 'termsAndConditions')->name('terms-and-conditions');
+    /** Privacy Policy Page pages */
+    Route::get('privacy-policy', 'privacyPolicy')->name('privacy-policy');
 });
 
 Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'user', 'as' => 'user.'], function () {

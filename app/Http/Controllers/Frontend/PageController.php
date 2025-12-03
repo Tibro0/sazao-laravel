@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\About;
+use App\Models\PrivacyPolicy;
 use App\Models\TermsAndCondition;
 use Illuminate\Http\Request;
 
@@ -15,8 +16,15 @@ class PageController extends Controller
         return view('frontend.pages.about', compact('about'));
     }
 
-    public function termsAndConditions(){
+    public function termsAndConditions()
+    {
         $terms = TermsAndCondition::first();
         return view('frontend.pages.terms-and-condition', compact('terms'));
+    }
+
+    public function privacyPolicy()
+    {
+        $privacyPolicys = PrivacyPolicy::first();
+        return view('frontend.pages.privacy-policy', compact('privacyPolicys'));
     }
 }
