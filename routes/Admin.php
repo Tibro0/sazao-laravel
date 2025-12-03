@@ -16,6 +16,7 @@ use App\Http\Controllers\Backend\FooterGridTwoController;
 use App\Http\Controllers\Backend\FooterInfoController;
 use App\Http\Controllers\Backend\FooterSocialController;
 use App\Http\Controllers\Backend\HomePageSettingController;
+use App\Http\Controllers\Backend\ManageUserController;
 use App\Http\Controllers\Backend\OrderController;
 use App\Http\Controllers\Backend\PaymentSettingController;
 use App\Http\Controllers\Backend\PaypalSettingController;
@@ -283,6 +284,12 @@ Route::controller(VendorListController::class)->group(function () {
 Route::controller(VendorConditionController::class)->group(function () {
     Route::get('vendor-condition', 'index')->name('vendor-condition.index');
     Route::put('vendor-condition/update', 'update')->name('vendor-condition.update');
+});
+
+/** manage user list */
+Route::controller(ManageUserController::class)->group(function () {
+    Route::get('manage-user', 'index')->name('manage-user.index');
+    Route::post('manage-user', 'create')->name('manage-user.create');
 });
 
 /** About Page Route */

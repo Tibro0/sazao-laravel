@@ -139,17 +139,15 @@
                 <i class="ri-mail-send-line"></i>
                 <span>Users</span>
             </a>
-
             <ul class="sub-menu" aria-expanded="false">
                 <li class="{{ adminSidebarActive(['admin.customer.index']) }}"><a
                         href="{{ route('admin.customer.index') }}">Customer List</a></li>
                 <li class="{{ adminSidebarActive(['admin.vendor-list.index']) }}"><a
                         href="{{ route('admin.vendor-list.index') }}">Vendor List</a></li>
-            </ul>
-
-            <ul class="sub-menu" aria-expanded="false">
                 <li class="{{ adminSidebarActive(['admin.vendor-request.*']) }}"><a
                         href="{{ route('admin.vendor-request.index') }}">Pending Vendor</a></li>
+                <li class="{{ adminSidebarActive(['admin.manage-user.index']) }}"><a
+                        href="{{ route('admin.manage-user.index') }}">Manage User</a></li>
             </ul>
         </li>
 
