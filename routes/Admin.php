@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Backend\AboutController;
 use App\Http\Controllers\Backend\AdminController;
+use App\Http\Controllers\Backend\AdminListController;
 use App\Http\Controllers\Backend\AdminProductReviewController;
 use App\Http\Controllers\Backend\AdminVendorProfileController;
 use App\Http\Controllers\Backend\AdvertisementController;
@@ -274,6 +275,13 @@ Route::controller(CustomerListController::class)->group(function () {
     Route::put('customer/status-change', 'StatusChange')->name('customer.status-change');
 });
 
+/** admin list Route */
+Route::controller(AdminListController::class)->group(function () {
+    Route::get('admin-list', 'index')->name('admin-list.index');
+    Route::put('admin-list/status-change', 'statusChange')->name('admin-list.status-change');
+    Route::delete('admin-list/{id}', 'destroy')->name('admin-list.destroy');
+});
+
 /** Vendor List Route */
 Route::controller(VendorListController::class)->group(function () {
     Route::get('vendor-list', 'index')->name('vendor-list.index');
@@ -286,7 +294,7 @@ Route::controller(VendorConditionController::class)->group(function () {
     Route::put('vendor-condition/update', 'update')->name('vendor-condition.update');
 });
 
-/** manage user list */
+/** Manage User List */
 Route::controller(ManageUserController::class)->group(function () {
     Route::get('manage-user', 'index')->name('manage-user.index');
     Route::post('manage-user', 'create')->name('manage-user.create');

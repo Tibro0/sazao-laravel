@@ -148,6 +148,8 @@
                         href="{{ route('admin.vendor-request.index') }}">Pending Vendor</a></li>
                 <li class="{{ adminSidebarActive(['admin.manage-user.index']) }}"><a
                         href="{{ route('admin.manage-user.index') }}">Manage User</a></li>
+                <li class="{{ adminSidebarActive(['admin.admin-list.index']) }}"><a
+                        href="{{ route('admin.admin-list.index') }}">Admin List</a></li>
             </ul>
         </li>
 

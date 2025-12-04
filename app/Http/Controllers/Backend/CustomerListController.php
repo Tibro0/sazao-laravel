@@ -13,7 +13,7 @@ class CustomerListController extends Controller
         return view('admin.customer-list.index', compact('customers'));
     }
 
-    public function StatusChange(Request $request){
+    public function statusChange(Request $request){
         $customer = User::findOrFail($request->id);
         $customer->status = $request->status == 'true' ? 'active' : 'inactive';
         $customer->save();

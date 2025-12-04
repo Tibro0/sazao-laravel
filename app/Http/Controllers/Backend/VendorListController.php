@@ -13,7 +13,7 @@ class VendorListController extends Controller
         return view('admin.vendor-list.index', compact('vendors'));
     }
 
-    public function StatusChange(Request $request){
+    public function statusChange(Request $request){
         $vendor = User::findOrFail($request->id);
         $vendor->status = $request->status == 'true' ? 'active' : 'inactive';
         $vendor->save();
