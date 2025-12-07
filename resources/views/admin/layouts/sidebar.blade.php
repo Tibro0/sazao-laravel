@@ -137,6 +137,17 @@
         <li>
             <a href="javascript: void(0);" class="has-arrow waves-effect">
                 <i class="ri-mail-send-line"></i>
+                <span>Manage Blog</span>
+            </a>
+            <ul class="sub-menu" aria-expanded="false">
+                <li class="{{ adminSidebarActive(['admin.blog-category.*']) }}"><a
+                        href="{{ route('admin.blog-category.index') }}">Categories</a></li>
+            </ul>
+        </li>
+
+        <li>
+            <a href="javascript: void(0);" class="has-arrow waves-effect">
+                <i class="ri-mail-send-line"></i>
                 <span>Users</span>
             </a>
             <ul class="sub-menu" aria-expanded="false">

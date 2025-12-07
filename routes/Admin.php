@@ -6,6 +6,7 @@ use App\Http\Controllers\Backend\AdminListController;
 use App\Http\Controllers\Backend\AdminProductReviewController;
 use App\Http\Controllers\Backend\AdminVendorProfileController;
 use App\Http\Controllers\Backend\AdvertisementController;
+use App\Http\Controllers\Backend\BlogCategoryController;
 use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\ChildCategoryController;
@@ -241,6 +242,17 @@ Route::controller(HomePageSettingController::class)->group(function () {
     Route::put('product-slider-section-two', 'updateProductSliderSectionTwo')->name('product-slider-section-two');
     Route::put('product-slider-section-three', 'updateProductSliderSectionThree')->name('product-slider-section-three');
     Route::get('admin-home-page-setting-list-style', 'adminHomePageSettingListStyle')->name('admin-home-page-setting-list-style');
+});
+
+/** Blog Category Routes */
+Route::controller(BlogCategoryController::class)->group(function () {
+    Route::get('blog-category', 'index')->name('blog-category.index');
+    Route::get('blog-category/create', 'create')->name('blog-category.create');
+    Route::post('blog-category/store', 'store')->name('blog-category.store');
+    Route::get('blog-category/edit/{id}', 'edit')->name('blog-category.edit');
+    Route::put('blog-category/{id}', 'update')->name('blog-category.update');
+    Route::delete('blog-category/{id}', 'destroy')->name('blog-category.destroy');
+    Route::put('blog-category-change-status', 'changeStatus')->name('blog-category.change-status');
 });
 
 /** Subscriber Route */
