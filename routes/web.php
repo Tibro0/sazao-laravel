@@ -9,6 +9,7 @@ use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\NewsletterController;
 use App\Http\Controllers\Frontend\PageController;
 use App\Http\Controllers\Frontend\PaymentController;
+use App\Http\Controllers\Frontend\ProductTrackController;
 use App\Http\Controllers\Frontend\ReviewController;
 use App\Http\Controllers\Frontend\UserAddressController;
 use App\Http\Controllers\Frontend\UserDashboardController;
@@ -88,8 +89,8 @@ Route::controller(HomeController::class)->group(function () {
     Route::get('change-vendor-product-list-view', 'changeVendorProductListView')->name('change-vendor-product-list-view');
 });
 
-/** About Page pages */
 Route::controller(PageController::class)->group(function () {
+    /** About Page pages */
     Route::get('about', 'about')->name('about');
     /** Terms and Condition Page pages */
     Route::get('terms-and-conditions', 'termsAndConditions')->name('terms-and-conditions');
@@ -98,6 +99,11 @@ Route::controller(PageController::class)->group(function () {
     /** Contact Pages */
     Route::get('contact', 'contact')->name('contact');
     Route::post('contact', 'handleContactForm')->name('handle-contact-form');
+});
+
+/** Product Track Route */
+Route::controller(ProductTrackController::class)->group(function () {
+    Route::get('product-tracking', 'index')->name('product-tracking.index');
 });
 
 Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'user', 'as' => 'user.'], function () {

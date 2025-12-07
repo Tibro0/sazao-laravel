@@ -55,13 +55,17 @@
 
                     <ul class="wsus__menu_item">
                         <li><a class="{{ setActive(['home']) }}" href="{{ route('home') }}">home</a></li>
-                        <li><a class="{{ setActive(['vendor.index']) }}" href="{{route('vendor.index')}}">vendors</a></li>
-                        <li><a class="{{ setActive(['flash-sale']) }}" href="{{route('flash-sale')}}">Flash Sale</a></li>
+                        <li><a class="{{ setActive(['vendor.index']) }}"
+                                href="{{ route('vendor.index') }}">vendors</a></li>
+                        <li><a class="{{ setActive(['flash-sale']) }}" href="{{ route('flash-sale') }}">Flash Sale</a>
+                        </li>
                         <li><a href="blog.html">blog</a></li>
-                        <li><a class="{{ setActive(['about']) }}" href="{{route('about')}}">About</a></li>
-                        <li><a class="{{ setActive(['contact']) }}" href="{{route('contact')}}">Contact</a></li>
+                        <li><a class="{{ setActive(['about']) }}" href="{{ route('about') }}">About</a></li>
+                        <li><a class="{{ setActive(['contact']) }}" href="{{ route('contact') }}">Contact</a></li>
                     </ul>
                     <ul class="wsus__menu_item wsus__menu_item_right">
+                        <li><a class="{{ setActive(['product-tracking.index']) }}"
+                                href="{{ route('product-tracking.index') }}">track order</a></li>
                         <li><a href="dsahboard.html">my account</a></li>
                         <li><a href="{{ route('login') }}">login</a></li>
                     </ul>
