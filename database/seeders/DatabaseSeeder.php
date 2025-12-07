@@ -62,6 +62,7 @@ class DatabaseSeeder extends Seeder
             TermsAndConditionSeeder::class,
             PrivacyPolicySeeder::class,
             BlogCategorySeeder::class,
+            BlogSeeder::class,
         ]);
     }
 }

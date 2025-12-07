@@ -7,6 +7,7 @@ use App\Http\Controllers\Backend\AdminProductReviewController;
 use App\Http\Controllers\Backend\AdminVendorProfileController;
 use App\Http\Controllers\Backend\AdvertisementController;
 use App\Http\Controllers\Backend\BlogCategoryController;
+use App\Http\Controllers\Backend\BlogController;
 use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\ChildCategoryController;
@@ -253,6 +254,17 @@ Route::controller(BlogCategoryController::class)->group(function () {
     Route::put('blog-category/{id}', 'update')->name('blog-category.update');
     Route::delete('blog-category/{id}', 'destroy')->name('blog-category.destroy');
     Route::put('blog-category-change-status', 'changeStatus')->name('blog-category.change-status');
+});
+
+/** Blog Routes */
+Route::controller(BlogController::class)->group(function () {
+    Route::get('blog', 'index')->name('blog.index');
+    Route::get('blog/create', 'create')->name('blog.create');
+    Route::post('blog/store', 'store')->name('blog.store');
+    Route::get('blog/edit/{id}', 'edit')->name('blog.edit');
+    Route::put('blog/{id}', 'update')->name('blog.update');
+    Route::delete('blog/{id}', 'destroy')->name('blog.destroy');
+    Route::put('blog-change-status', 'changeStatus')->name('blog.change-status');
 });
 
 /** Subscriber Route */

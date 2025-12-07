@@ -4,11 +4,13 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\BlogCategory;
+use App\Traits\ImageUploadTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 class BlogCategoryController extends Controller
 {
+    use ImageUploadTrait;
     /**
      * Display a listing of the resource.
      */
@@ -66,7 +68,7 @@ class BlogCategoryController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'name' => ['required', 'max:200', 'unique:blog_categories,name,' . $id],
+            'name' => ['required', 'max:255', 'unique:blog_categories,name,' . $id],
             'status' => ['required', 'boolean']
         ], [
             'name.unique' => 'Category Already Exist.'
@@ -90,9 +92,14 @@ class BlogCategoryController extends Controller
      */
     public function destroy(string $id)
     {
-        $blogCategory = BlogCategory::findOrFail($id);
-        $blogCategory->delete();
+        $blogCategory = BlogCategory::with(['blogs'])->findOrFail($id);
 
+        foreach ($blogCategory->blogs as $blog) {
+            $this->deleteImage($blog->image);
+        }
+        $blogCategory->blogs()->delete();
+
+        $blogCategory->delete();
         return response(['status' => 'success', 'message' => 'Deleted Successfully!']);
     }
 

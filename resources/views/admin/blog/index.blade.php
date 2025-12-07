@@ -1,7 +1,7 @@
 @extends('admin.layouts.master')
 
 @section('page-title')
-    {{ $settings->site_name }} | Blog Categories
+    {{ $settings->site_name }} | All Blogs
 @endsection
 
 @push('css-link')
@@ -18,10 +18,9 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between align-items-center">
-                        <h4 class="mb-0">All Blog Categories</h4>
+                        <h4 class="mb-0">All Blogs</h4>
                         <div>
-                            <a href="{{ route('admin.blog-category.create') }}" class="btn btn-primary px-5 rounded">Create
-                                New</a>
+                            <a href="{{ route('admin.blog.create') }}" class="btn btn-primary px-5 rounded">Create New</a>
                         </div>
                     </div>
                 </div>
@@ -31,18 +30,21 @@
                         <thead>
                             <tr>
                                 <th>SL</th>
-                                <th>Name</th>
-                                <th>Slug</th>
+                                <th>Image</th>
+                                <th>Title</th>
+                                <th>Category</th>
                                 <th>Status</th>
+                                <th>Publish Data</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($blogCategories as $item)
+                            @foreach ($blogs as $item)
                                 <tr>
                                     <td width="50">{{ $loop->iteration }}</td>
-                                    <td>{{ $item->name }}</td>
-                                    <td>{{ $item->slug }}</td>
+                                    <td><img src="{{ asset($item->image) }}" width="100"></td>
+                                    <td>{{ $item->title }}</td>
+                                    <td>{{ $item->category->name }}</td>
                                     <td>
                                         @if ($item->status === 1)
                                             <div class="form-check form-switch mb-3">
@@ -56,10 +58,11 @@
                                             </div>
                                         @endif
                                     </td>
+                                    <td>{{ date('d-m-Y', strtotime($item->created_at)) }}</td>
                                     <td width="100">
-                                        <a href="{{ route('admin.blog-category.edit', $item->id) }}"
-                                            class="btn btn-primary"><i class="fas fa-pencil-alt"></i></a>
-                                        <a href="{{ route('admin.blog-category.destroy', $item->id) }}" id="delete"
+                                        <a href="{{ route('admin.blog.edit', $item->id) }}" class="btn btn-primary"><i
+                                                class="fas fa-pencil-alt"></i></a>
+                                        <a href="{{ route('admin.blog.destroy', $item->id) }}" id="delete"
                                             class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
                                     </td>
                                 </tr>
@@ -139,7 +142,7 @@
                 let id = $(this).data('id');
 
                 $.ajax({
-                    url: "{{ route('admin.blog-category.change-status') }}",
+                    url: "{{ route('admin.blog.change-status') }}",
                     method: 'PUT',
                     data: {
                         status: isChecked,
