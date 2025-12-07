@@ -78,4 +78,9 @@ class HomeController extends Controller
     {
         Session::put('vendor_product_list_style', $request->style);
     }
+
+    public function frontendAuthListStyle(Request $request)
+    {
+        Session::put('frontend_auth_list_style', $request->style);
+    }
 }

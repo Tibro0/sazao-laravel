@@ -32,20 +32,24 @@
                     <div class="wsus__login_reg_area">
                         <ul class="nav nav-pills mb-3" id="pills-tab2" role="tablist">
                             <li class="nav-item" role="presentation">
-                                <button class="nav-link active" id="pills-home-tab2" data-bs-toggle="pill"
-                                    data-bs-target="#pills-homes" type="button" role="tab" aria-controls="pills-homes"
+                                <button
+                                    class="nav-link {{ Session::has('frontend_auth_list_style') && Session::get('frontend_auth_list_style') == 'login' ? 'active' : '' }} {{ !Session::has('frontend_auth_list_style') ? 'active' : '' }} list-view"
+                                    data-id="login" id="pills-home-tab2" data-bs-toggle="pill" data-bs-target="#pills-homes"
+                                    type="button" role="tab" aria-controls="pills-homes"
                                     aria-selected="true">login</button>
                             </li>
                             <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="pills-profile-tab2" data-bs-toggle="pill"
+                                <button
+                                    class="nav-link {{ Session::has('frontend_auth_list_style') && Session::get('frontend_auth_list_style') == 'register' ? 'active' : '' }} list-view"
+                                    data-id="register" id="pills-profile-tab2" data-bs-toggle="pill"
                                     data-bs-target="#pills-profiles" type="button" role="tab"
                                     aria-controls="pills-profiles" aria-selected="true">signup</button>
                             </li>
                         </ul>
                         <div class="tab-content" id="pills-tabContent2">
                             {{-- Login Start --}}
-                            <div class="tab-pane fade show active" id="pills-homes" role="tabpanel"
-                                aria-labelledby="pills-home-tab2">
+                            <div class="tab-pane fade {{ Session::has('frontend_auth_list_style') && Session::get('frontend_auth_list_style') == 'login' ? 'show active' : '' }} {{ !Session::has('frontend_auth_list_style') ? 'show active' : '' }}"
+                                id="pills-homes" role="tabpanel" aria-labelledby="pills-home-tab2">
                                 <div class="wsus__login">
                                     <form method="POST" action="{{ route('login') }}">
                                         @csrf
@@ -72,7 +76,8 @@
                                                 <label class="form-check-label" for="remember">Remember
                                                     me</label>
                                             </div>
-                                            <a class="forget_p" href="{{ route('password.request') }}">forget password ?</a>
+                                            <a class="forget_p" href="{{ route('password.request') }}">forget password
+                                                ?</a>
                                         </div>
                                         <button class="common_btn" type="submit">login</button>
                                         {{-- <p class="social_text">Sign in with social account</p>
@@ -87,8 +92,8 @@
                             </div>
                             {{-- Login End --}}
                             {{-- Register Start --}}
-                            <div class="tab-pane fade" id="pills-profiles" role="tabpanel"
-                                aria-labelledby="pills-profile-tab2">
+                            <div class="tab-pane fade {{ Session::has('frontend_auth_list_style') && Session::get('frontend_auth_list_style') == 'register' ? 'show active' : '' }}"
+                                id="pills-profiles" role="tabpanel" aria-labelledby="pills-profile-tab2">
                                 <div class="wsus__login">
                                     <form method="POST" action="{{ route('register') }}">
                                         @csrf
@@ -119,7 +124,8 @@
                                         <div class="wsus__login_input">
                                             <i class="fas fa-key"></i>
                                             <input type="password" name="password_confirmation"
-                                                placeholder="Confirm Password" class="@error('password_confirmation') border border-danger @enderror">
+                                                placeholder="Confirm Password"
+                                                class="@error('password_confirmation') border border-danger @enderror">
                                         </div>
                                         @error('password_confirmation')
                                             <div class="text-danger ms-5 ps-4">{{ $message }}</div>
@@ -145,3 +151,24 @@
     </section>
     <!--============================LOGIN/REGISTER PAGE END==============================-->
 @endsection
+
+@push('js-link')
+    <script>
+        $(document).ready(function() {
+            $('.list-view').on('click', function() {
+                let style = $(this).data('id');
+
+                $.ajax({
+                    method: "GET",
+                    url: "{{ route('frontend-auth-list-style') }}",
+                    data: {
+                        style: style
+                    },
+                    success: function(data) {
+
+                    }
+                });
+            })
+        });
+    </script>
+@endpush

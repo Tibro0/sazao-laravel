@@ -87,6 +87,7 @@ Route::controller(HomeController::class)->group(function () {
     Route::get('vendor', 'vendorPage')->name('vendor.index');
     Route::get('vendor-product/{id}', 'vendorProductsPage')->name('vendor.products');
     Route::get('change-vendor-product-list-view', 'changeVendorProductListView')->name('change-vendor-product-list-view');
+    Route::get('frontend-auth-list-style', 'frontendAuthListStyle')->name('frontend-auth-list-style');
 });
 
 Route::controller(PageController::class)->group(function () {
