@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('image');
             $table->string('title');
             $table->string('slug');
-            $table->text('description');
+            $table->longText('description');
             $table->string('seo_title')->nullable();
             $table->string('seo_description')->nullable();
             $table->boolean('status')->comment('1=Active, 0=Inactive');
