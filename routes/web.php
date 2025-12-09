@@ -160,6 +160,11 @@ Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'user', 'as' => 
         Route::post('review', 'create')->name('review.create');
     });
 
+    /** Blog Comment Route */
+    Route::controller(BlogController::class)->group(function(){
+        Route::post('blog-comment', 'comment')->name('blog-comment');
+    });
+
     /** Checkout Route */
     Route::controller(CheckOutController::class)->group(function () {
         Route::get('checkout', 'index')->name('checkout');

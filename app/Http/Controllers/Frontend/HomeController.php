@@ -42,7 +42,7 @@ class HomeController extends Controller
         $homepage_section_banner_four = Advertisement::where('key', 'homepage_section_banner_four')->first();
         $homepage_section_banner_four = json_decode($homepage_section_banner_four?->value);
 
-        $recentBlogs = Blog::with('category')->where('status', 1)->orderBy('id', 'DESC')->take(8)->get();
+        $recentBlogs = Blog::with('category')->where(['status' => 1])->orderBy('id', 'DESC')->take(8)->get();
         return view('frontend.home.home', compact('sliders', 'flashSaleDate', 'flashSaleItems', 'popularCategorySection', 'brands', 'typeBaseProducts', 'categoryProductSliderSectionOne', 'categoryProductSliderSectionTwo', 'categoryProductSliderSectionThree', 'homepage_section_banner_one', 'homepage_section_banner_two', 'homepage_section_banner_three', 'homepage_section_banner_four', 'recentBlogs'));
     }
 
