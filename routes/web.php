@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Backend\AdminController;
+use App\Http\Controllers\Frontend\BlogController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\CheckOutController;
 use App\Http\Controllers\Frontend\FlashSaleController;
@@ -105,6 +106,11 @@ Route::controller(PageController::class)->group(function () {
 /** Product Track Route */
 Route::controller(ProductTrackController::class)->group(function () {
     Route::get('product-tracking', 'index')->name('product-tracking.index');
+});
+
+/** Blog Routes */
+Route::controller(BlogController::class)->group(function () {
+    Route::get('blog-details/{slug}',  'blogDetails')->name('blog-details');
 });
 
 Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'user', 'as' => 'user.'], function () {
