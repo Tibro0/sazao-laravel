@@ -92,10 +92,11 @@ class BlogCategoryController extends Controller
      */
     public function destroy(string $id)
     {
-        $blogCategory = BlogCategory::with(['blogs'])->findOrFail($id);
+        $blogCategory = BlogCategory::with(['blogs.comments'])->findOrFail($id);
 
         foreach ($blogCategory->blogs as $blog) {
             $this->deleteImage($blog->image);
+            $blog->comments()->delete();
         }
         $blogCategory->blogs()->delete();
 

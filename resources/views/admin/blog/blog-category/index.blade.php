@@ -56,6 +56,12 @@
                                             </div>
                                         @endif
                                     </td>
+                                    {{-- @php
+                                        $tibro = App\Models\BlogCategory::with(['blogs.comments'])->find(7);
+                                        foreach ($tibro->blogs as $blog) {
+                                            dd($blog->comments);
+                                        }
+                                    @endphp --}}
                                     <td width="100">
                                         <a href="{{ route('admin.blog-category.edit', $item->id) }}"
                                             class="btn btn-primary"><i class="fas fa-pencil-alt"></i></a>
