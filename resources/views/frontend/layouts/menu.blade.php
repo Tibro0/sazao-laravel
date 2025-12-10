@@ -59,7 +59,7 @@
                                 href="{{ route('vendor.index') }}">vendors</a></li>
                         <li><a class="{{ setActive(['flash-sale']) }}" href="{{ route('flash-sale') }}">Flash Sale</a>
                         </li>
-                        <li><a href="blog.html">blog</a></li>
+                        <li><a class="{{ setActive(['blog']) }}" href="{{ route('blog') }}">blog</a></li>
                         <li><a class="{{ setActive(['about']) }}" href="{{ route('about') }}">About</a></li>
                         <li><a class="{{ setActive(['contact']) }}" href="{{ route('contact') }}">Contact</a></li>
                     </ul>

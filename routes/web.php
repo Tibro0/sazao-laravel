@@ -111,6 +111,7 @@ Route::controller(ProductTrackController::class)->group(function () {
 /** Blog Routes */
 Route::controller(BlogController::class)->group(function () {
     Route::get('blog-details/{slug}',  'blogDetails')->name('blog-details');
+    Route::get('blog', 'blog')->name('blog');
 });
 
 Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'user', 'as' => 'user.'], function () {
@@ -161,7 +162,7 @@ Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'user', 'as' => 
     });
 
     /** Blog Comment Route */
-    Route::controller(BlogController::class)->group(function(){
+    Route::controller(BlogController::class)->group(function () {
         Route::post('blog-comment', 'comment')->name('blog-comment');
     });
 

@@ -4,7 +4,7 @@
             <div class="col-xl-12">
                 <div class="wsus__section_header">
                     <h3>recent blogs</h3>
-                    <a class="see_btn" href="#">see more <i class="fas fa-caret-right"></i></a>
+                    <a class="see_btn" href="{{route('blog')}}">see more <i class="fas fa-caret-right"></i></a>
                 </div>
             </div>
         </div>
@@ -16,7 +16,7 @@
                             <img src="{{ asset($blog->image) }}" alt="blog" class="img-fluid w-100">
                         </a>
                         <div class="wsus__blog_text">
-                            <a class="blog_top red" href="#">{{ $blog->category->name }}</a>
+                            <a class="blog_top red" href="{{ route('blog', ['category' => $blog->category->slug]) }}">{{ $blog->category->name }}</a>
                             <div class="wsus__blog_text_center">
                                 <a href="{{ route('blog-details', $blog->slug) }}">{{ limitText($blog->title, 20) }}</a>
                                 <p class="date">{{ date('M D Y', strtotime($blog->created_at)) }}</p>
