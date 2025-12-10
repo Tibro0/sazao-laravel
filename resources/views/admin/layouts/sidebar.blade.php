@@ -144,6 +144,8 @@
                         href="{{ route('admin.blog-category.index') }}">Categories</a></li>
                 <li class="{{ adminSidebarActive(['admin.blog.*']) }}"><a
                         href="{{ route('admin.blog.index') }}">Blog</a></li>
+                <li class="{{ adminSidebarActive(['admin.blog-comments.index']) }}"><a
+                        href="{{ route('admin.blog-comments.index') }}">Blog Comments</a></li>
             </ul>
         </li>
 

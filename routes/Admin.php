@@ -7,6 +7,7 @@ use App\Http\Controllers\Backend\AdminProductReviewController;
 use App\Http\Controllers\Backend\AdminVendorProfileController;
 use App\Http\Controllers\Backend\AdvertisementController;
 use App\Http\Controllers\Backend\BlogCategoryController;
+use App\Http\Controllers\Backend\BlogCommentController;
 use App\Http\Controllers\Backend\BlogController;
 use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\CategoryController;
@@ -265,6 +266,12 @@ Route::controller(BlogController::class)->group(function () {
     Route::put('blog/{id}', 'update')->name('blog.update');
     Route::delete('blog/{id}', 'destroy')->name('blog.destroy');
     Route::put('blog-change-status', 'changeStatus')->name('blog.change-status');
+});
+
+/** Blog comment Routes */
+Route::controller(BlogCommentController::class)->group(function () {
+    Route::get('blog-comments', 'index')->name('blog-comments.index');
+    Route::delete('blog-comments/destroy/{id}', 'destroy')->name('blog-comments.destroy');
 });
 
 /** Subscriber Route */
