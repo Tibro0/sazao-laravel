@@ -30,12 +30,18 @@
                                     data-id="section_two" id="v-pills-profile-tab" data-bs-toggle="pill"
                                     href="#email-configuration" role="tab" aria-controls="v-pills-profile"
                                     aria-selected="false">Email Configuration</a>
+
+                                <a class="nav-link mb-2 list-view {{ Session::has('admin_general_setting_list_style') && Session::get('admin_general_setting_list_style') == 'section_three' ? 'active' : '' }}"
+                                    data-id="section_three" id="v-pills-profile-tab" data-bs-toggle="pill"
+                                    href="#logo-and-favicon" role="tab" aria-controls="v-pills-profile"
+                                    aria-selected="false">Logo And Favicon</a>
                             </div>
                         </div>
                         <div class="col-md-10">
                             <div class="tab-content text-muted mt-4 mt-md-0" id="v-pills-tabContent">
                                 @include('admin.setting.section.general-setting')
                                 @include('admin.setting.section.email-configuration')
+                                @include('admin.setting.section.logo-setting')
                             </div>
                         </div>
                     </div>

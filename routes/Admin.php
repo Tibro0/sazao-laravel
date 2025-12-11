@@ -234,6 +234,7 @@ Route::controller(SettingController::class)->group(function () {
     Route::get('admin-general-setting-list-style', 'adminGeneralSettingListStyle')->name('admin-general-setting-list-style');
     Route::put('general-setting-update', 'generalSettingUpdate')->name('general-setting-update');
     Route::put('email-setting-update', 'emailConfigSettingUpdate')->name('email-setting-update');
+    Route::put('logo-setting-update', 'logoSettingUpdate')->name('logo-setting-update');
 });
 
 /** Home Page Setting Route */

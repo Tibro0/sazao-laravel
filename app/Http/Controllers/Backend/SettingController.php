@@ -5,16 +5,20 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Models\EmailConfiguration;
 use App\Models\GeneralSetting;
+use App\Models\LogoSetting;
+use App\Traits\ImageUploadTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
 class SettingController extends Controller
 {
+    use ImageUploadTrait;
     public function index()
     {
         $generalSettings = GeneralSetting::first();
         $emailSettings = EmailConfiguration::first();
-        return view('admin.setting.index', compact('generalSettings', 'emailSettings'));
+        $logoSettings = LogoSetting::first();
+        return view('admin.setting.index', compact('generalSettings', 'emailSettings', 'logoSettings'));
     }
 
     public function adminGeneralSettingListStyle(Request $request)
@@ -76,6 +80,30 @@ class SettingController extends Controller
                 'password' => $request->password,
                 'port' => $request->port,
                 'encryption' => $request->encryption,
+            ]
+        );
+
+        return redirect()->back()->with('toast', [
+            'type' => 'success',
+            'title' => 'Success',
+            'message' => 'Updated Successfully!'
+        ]);
+    }
+
+    public function logoSettingUpdate(Request $request){
+        $request->validate([
+            'logo' => ['nullable', 'image', 'max:2048', 'dimensions:width=249,height=87'],
+            'favicon' => ['nullable', 'image', 'max:2048', 'dimensions:width=112,height=112'],
+        ]);
+
+        $logoPath = $this->updateImage($request, 'logo', 'uploads/header_logo_image', $request->old_logo);
+        $favicon = $this->updateImage($request, 'favicon', 'uploads/header_favicon_image', $request->old_favicon);
+
+        LogoSetting::updateOrCreate(
+            ['id' => 1],
+            [
+                'logo' => !empty($logoPath) ? $logoPath : $request->old_logo,
+                'favicon' => !empty($favicon) ? $favicon : $request->old_favicon,
             ]
         );
 
