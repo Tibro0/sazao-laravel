@@ -1,7 +1,7 @@
-@extends('vendor.layouts.master')
+@extends('frontend.dashboard.layouts.master')
 
 @section('page-title')
-    {{ $settings->site_name }} | Vendor Profile
+    {{ $settings->site_name }} | User Profile
 @endsection
 
 @section('content')
@@ -9,7 +9,7 @@
     <section id="wsus__dashboard">
         <div class="container-fluid">
 
-            @include('vendor.layouts.sidebar')
+            @include('frontend.dashboard.layouts.sidebar')
 
             <div class="row">
                 <div class="col-xl-9 col-xxl-10 col-lg-9 ms-auto">
@@ -18,11 +18,12 @@
                         <div class="wsus__dashboard_profile">
                             <div class="wsus__dash_pro_area">
                                 <h4>basic information</h4>
-                                <form action="{{ route('vendor.profile.update') }}" method="POST"
+                                <form action="{{ route('user.profile.update') }}" method="POST"
                                     enctype="multipart/form-data">
                                     @csrf
                                     @method('PUT')
                                     <div class="col-md-12">
+                                        <span class="text-danger">(width:252px, height:270px) 2MB Maximum</span>
                                         <div class="col-md-2">
                                             <div class="wsus__dash_pro_img">
                                                 <img src="{{ Auth::user()->image ? asset(Auth::user()->image) : asset('frontend/images/ts-2.jpg') }}"
@@ -59,12 +60,12 @@
                                     </div>
 
                                     <div class="col-xl-12">
-                                        <button class="common_btn mb-4 mt-2" type="submit">upload</button>
+                                        <button class="common_btn mb-4 mt-2" type="submit">Save Changes</button>
                                     </div>
                                 </form>
 
                                 <div class="wsus__dash_pass_change mt-2">
-                                    <form action="{{ route('vendor.profile.update.password') }}" method="POST">
+                                    <form action="{{ route('user.profile.update.password') }}" method="POST">
                                         @csrf
                                         <div class="row">
                                             <h4 class="mb-3">Update Password</h4>
@@ -103,7 +104,7 @@
                                                 @enderror
                                             </div>
                                             <div class="col-xl-12">
-                                                <button class="common_btn" type="submit">upload</button>
+                                                <button class="common_btn" type="submit">Save Changes</button>
                                             </div>
                                         </div>
                                     </form>

@@ -31,6 +31,7 @@ class UserSeeder extends Seeder
             [
                 'name' => 'Vendor user',
                 'username' => 'vendoruser',
+                'image' => 'frontend/images/main-image/vendor_profile/vendor.jpg',
                 'email' => 'vendor@gmail.com',
                 'role' => 'vendor',
                 'status' => 'active',
@@ -43,6 +44,7 @@ class UserSeeder extends Seeder
             [
                 'name' => 'user',
                 'username' => 'user',
+                'image' => 'frontend/images/main-image/user_profile/user.jpg',
                 'email' => 'user@gmail.com',
                 'role' => 'user',
                 'status' => 'active',

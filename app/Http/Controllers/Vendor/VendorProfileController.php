@@ -11,7 +11,7 @@ class VendorProfileController extends Controller
 {
     public function index()
     {
-        return view('vendor.dashboard.profile');
+        return view('vendor.profile.index');
     }
 
     public function updateProfile(Request $request)
@@ -19,7 +19,7 @@ class VendorProfileController extends Controller
         $request->validate([
             'name' => ['required', 'max:100'],
             'email' => ['required', 'email', 'unique:users,email,' . Auth::user()->id],
-            'image' => ['image', 'max:2048'],
+            'image' => ['nullable', 'image', 'max:2048', 'dimensions:width=252,height=270'],
         ]);
 
         $user = Auth::user();
