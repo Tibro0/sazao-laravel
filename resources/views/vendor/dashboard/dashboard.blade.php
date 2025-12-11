@@ -16,39 +16,91 @@
                         <div class="wsus__dashboard">
                             <div class="row">
                                 <div class="col-xl-2 col-6 col-md-4">
-                                    <a class="wsus__dashboard_item red" href="dsahboard_order.html">
-                                        <i class="far fa-address-book"></i>
-                                        <p>order</p>
+                                    <a class="wsus__dashboard_item red" href="{{ route('vendor.orders.index') }}">
+                                        <i class="fas fa-shopping-cart"></i>
+                                        <p>Today's Orders</p>
+                                        <h4 class="text-white">{{ $todaysOrder }}</h4>
                                     </a>
                                 </div>
                                 <div class="col-xl-2 col-6 col-md-4">
-                                    <a class="wsus__dashboard_item green" href="dsahboard_download.html">
-                                        <i class="fal fa-cloud-download"></i>
-                                        <p>download</p>
+                                    <a class="wsus__dashboard_item green" href="{{ route('vendor.orders.index') }}">
+                                        <i class="fas fa-shopping-cart"></i>
+                                        <p>Today's Pending Order</p>
+                                        <h4 class="text-white">{{ $todaysPendingOrder }}</h4>
                                     </a>
                                 </div>
                                 <div class="col-xl-2 col-6 col-md-4">
-                                    <a class="wsus__dashboard_item sky" href="dsahboard_review.html">
+                                    <a class="wsus__dashboard_item sky" href="{{ route('vendor.orders.index') }}">
+                                        <i class="fas fa-shopping-cart"></i>
+                                        <p>Total Order</p>
+                                        <h4 class="text-white">{{ $totalOrder }}</h4>
+                                    </a>
+                                </div>
+                                <div class="col-xl-2 col-6 col-md-4">
+                                    <a class="wsus__dashboard_item blue" href="{{ route('vendor.orders.index') }}">
                                         <i class="fas fa-star"></i>
-                                        <p>review</p>
+                                        <p>Total Pending Order</p>
+                                        <h4 class="text-white">{{ $totalPendingOrder }}</h4>
                                     </a>
                                 </div>
                                 <div class="col-xl-2 col-6 col-md-4">
-                                    <a class="wsus__dashboard_item blue" href="dsahboard_wishlist.html">
-                                        <i class="far fa-heart"></i>
-                                        <p>wishlist</p>
+                                    <a class="wsus__dashboard_item purple" href="{{ route('vendor.orders.index') }}">
+                                        <i class="fas fa-star"></i>
+                                        <p>Total Complete Order</p>
+                                        <h4 class="text-white">{{ $totalCompleteOrder }}</h4>
                                     </a>
                                 </div>
                                 <div class="col-xl-2 col-6 col-md-4">
-                                    <a class="wsus__dashboard_item orange" href="dsahboard_profile.html">
+                                    <a class="wsus__dashboard_item orange" href="{{ route('vendor.products.index') }}">
                                         <i class="fas fa-user-shield"></i>
-                                        <p>profile</p>
+                                        <p>Total Products</p>
+                                        <h4 class="text-white">{{ $totalProducts }}</h4>
+                                    </a>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col-xl-2 col-6 col-md-4">
+                                    <a class="wsus__dashboard_item red" href="javascript:;">
+                                        <i class="fas fa-shopping-cart"></i>
+                                        <p>Today's Earings</p>
+                                        <h4 class="text-white">{{ $settings->currency_icon }}{{ $todaysEarnings }}</h4>
                                     </a>
                                 </div>
                                 <div class="col-xl-2 col-6 col-md-4">
-                                    <a class="wsus__dashboard_item purple" href="dsahboard_address.html">
-                                        <i class="fal fa-map-marker-alt"></i>
-                                        <p>address</p>
+                                    <a class="wsus__dashboard_item green" href="javascript:;">
+                                        <i class="fas fa-shopping-cart"></i>
+                                        <p>This Months Earings</p>
+                                        <h4 class="text-white">{{ $settings->currency_icon }}{{ $monthEarnings }}</h4>
+                                    </a>
+                                </div>
+                                <div class="col-xl-2 col-6 col-md-4">
+                                    <a class="wsus__dashboard_item sky" href="javascript:;">
+                                        <i class="fas fa-shopping-cart"></i>
+                                        <p>This Year Earings</p>
+                                        <h4 class="text-white">{{ $settings->currency_icon }}{{ $yearEarnings }}</h4>
+                                    </a>
+                                </div>
+                                <div class="col-xl-2 col-6 col-md-4">
+                                    <a class="wsus__dashboard_item blue" href="javascript:;">
+                                        <i class="fas fa-star"></i>
+                                        <p>Total Earings</p>
+                                        <h4 class="text-white">{{ $settings->currency_icon }}{{ $totalEarnings }}</h4>
+                                    </a>
+                                </div>
+                                <div class="col-xl-2 col-6 col-md-4">
+                                    <a class="wsus__dashboard_item purple" href="{{ route('vendor.reviews.index') }}">
+                                        <i class="fas fa-star"></i>
+                                        <p>Total Reviews</p>
+                                        <h4 class="text-white">{{ $totalReviews }}</h4>
+                                    </a>
+                                </div>
+                                <div class="col-xl-2 col-6 col-md-4">
+                                    <a class="wsus__dashboard_item orange" href="{{ route('vendor.shop-profile.index') }}">
+                                        <i class="fas fa-user-shield"></i>
+                                        <p>Shop Profile</p>
+                                        <h4 class="text-white">-</h4>
                                     </a>
                                 </div>
                             </div>
@@ -56,6 +108,5 @@
                     </div>
                 </div>
             </div>
-        </div>
     </section>
 @endsection
