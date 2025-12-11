@@ -8,6 +8,8 @@
     <ul class="dashboard_link">
         <li><a class="{{ setActive(['user.dashboard']) }}" href="{{ route('user.dashboard') }}"><i
                     class="fas fa-tachometer"></i>Dashboard</a></li>
+        <li><a class="{{ setActive(['home']) }}" href="{{ route('home') }}"><i class="fas fa-home"></i>Go To Home
+                Page</a></li>
         @if (Auth::user()->role === 'vendor')
             <li><a class="{{ setActive(['vendor.dashboard']) }}" href="{{ route('vendor.dashboard') }}"><i
                         class="fas fa-tachometer"></i>Go To Vendor Dashboard</a></li>
@@ -20,8 +22,7 @@
                     class="far fa-user"></i>
                 My Profile</a></li>
 
-        <li><a class="{{ setActive(['user.address.*']) }}" href="{{ route('user.address.index') }}"><i
-                    class="fal fa-gift-card"></i> Addresses</a></li>
+        <li><a class="{{ setActive(['user.address.*']) }}" href="{{ route('user.address.index') }}"><i class="far fa-address-card"></i> Addresses</a></li>
         @if (Auth::user()->role !== 'vendor')
             <li><a class="{{ setActive(['user.vendor-request.index']) }}"
                     href="{{ route('user.vendor-request.index') }}"><i class="far fa-user"></i> Request to be

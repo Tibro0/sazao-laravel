@@ -370,83 +370,85 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-xl-4 col-lg-5 mt-4 mt-lg-0">
-                                                    @php
-                                                        $isBrought = false;
-                                                        $orders = App\Models\Order::with(['orderProducts'])
-                                                            ->where([
-                                                                'user_id' => @Auth::user()->id,
-                                                                'order_status' => 'delivered',
-                                                            ])
-                                                            ->get();
-                                                        foreach ($orders as $key => $order) {
-                                                            $existItem = $order
-                                                                ->orderProducts()
-                                                                ->where(['product_id' => $product->id])
-                                                                ->first();
-                                                            if ($existItem) {
-                                                                $isBrought = true;
+                                                    @auth
+                                                        @php
+                                                            $isBrought = false;
+                                                            $orders = App\Models\Order::with(['orderProducts'])
+                                                                ->where([
+                                                                    'user_id' => Auth::user()->id,
+                                                                    'order_status' => 'delivered',
+                                                                ])
+                                                                ->get();
+                                                            foreach ($orders as $key => $order) {
+                                                                $existItem = $order
+                                                                    ->orderProducts()
+                                                                    ->where(['product_id' => $product->id])
+                                                                    ->first();
+                                                                if ($existItem) {
+                                                                    $isBrought = true;
+                                                                }
                                                             }
-                                                        }
-                                                    @endphp
-                                                    @if ($isBrought === true)
-                                                        <div class="wsus__post_comment rev_mar" id="sticky_sidebar3">
-                                                            <h4>write a Review</h4>
-                                                            <form action="{{ route('user.review.create') }}"
-                                                                method="POST" enctype="multipart/form-data">
-                                                                @csrf
-                                                                <p class="rating">
-                                                                    <span>select your rating : </span>
-                                                                </p>
-                                                                <div class="row">
-                                                                    <div class="col-xl-12 mb-4">
-                                                                        <div class="wsus__single_com">
-                                                                            <select name="rating"
-                                                                                class="form-select @error('rating') is-invalid @enderror">
-                                                                                <option value="">Select</option>
-                                                                                <option value="1">1</option>
-                                                                                <option value="2">2</option>
-                                                                                <option value="3">3</option>
-                                                                                <option value="4">4</option>
-                                                                                <option value="5">5</option>
-                                                                            </select>
-                                                                            @error('rating')
-                                                                                <div class="invalid-feedback">
-                                                                                    {{ $message }}
-                                                                                </div>
-                                                                            @enderror
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-xl-12">
-                                                                        <div class="col-xl-12">
+                                                        @endphp
+                                                        @if ($isBrought === true)
+                                                            <div class="wsus__post_comment rev_mar" id="sticky_sidebar3">
+                                                                <h4>write a Review</h4>
+                                                                <form action="{{ route('user.review.create') }}"
+                                                                    method="POST" enctype="multipart/form-data">
+                                                                    @csrf
+                                                                    <p class="rating">
+                                                                        <span>select your rating : </span>
+                                                                    </p>
+                                                                    <div class="row">
+                                                                        <div class="col-xl-12 mb-4">
                                                                             <div class="wsus__single_com">
-                                                                                <textarea name="review" cols="3" rows="3" placeholder="Write your review"
-                                                                                    class="mb-0 @error('review') border border-danger @enderror"></textarea>
-                                                                                @error('review')
-                                                                                    <div class="text-danger mb-3">
+                                                                                <select name="rating"
+                                                                                    class="form-select @error('rating') is-invalid @enderror">
+                                                                                    <option value="">Select</option>
+                                                                                    <option value="1">1</option>
+                                                                                    <option value="2">2</option>
+                                                                                    <option value="3">3</option>
+                                                                                    <option value="4">4</option>
+                                                                                    <option value="5">5</option>
+                                                                                </select>
+                                                                                @error('rating')
+                                                                                    <div class="invalid-feedback">
                                                                                         {{ $message }}
                                                                                     </div>
                                                                                 @enderror
                                                                             </div>
                                                                         </div>
-                                                                    </div>
-                                                                    <span class="text-danger mt-3 mb-2">(width:380px,
-                                                                        height:356px) 2MB Maximum</span>
-                                                                    <div class="img_upload">
-                                                                        <div class="">
-                                                                            <input type="file" name="images[]"
-                                                                                class="form-control" multiple>
+                                                                        <div class="col-xl-12">
+                                                                            <div class="col-xl-12">
+                                                                                <div class="wsus__single_com">
+                                                                                    <textarea name="review" cols="3" rows="3" placeholder="Write your review"
+                                                                                        class="mb-0 @error('review') border border-danger @enderror"></textarea>
+                                                                                    @error('review')
+                                                                                        <div class="text-danger mb-3">
+                                                                                            {{ $message }}
+                                                                                        </div>
+                                                                                    @enderror
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <span class="text-danger mt-3 mb-2">(width:380px,
+                                                                            height:356px) 2MB Maximum</span>
+                                                                        <div class="img_upload">
+                                                                            <div class="">
+                                                                                <input type="file" name="images[]"
+                                                                                    class="form-control" multiple>
+                                                                            </div>
                                                                         </div>
                                                                     </div>
-                                                                </div>
-                                                                <input type="hidden" name="product_id"
-                                                                    value="{{ $product->id }}">
-                                                                <input type="hidden" name="vendor_id"
-                                                                    value="{{ $product->vendor_id }}">
-                                                                <button class="common_btn" type="submit">submit
-                                                                    review</button>
-                                                            </form>
-                                                        </div>
-                                                    @endif
+                                                                    <input type="hidden" name="product_id"
+                                                                        value="{{ $product->id }}">
+                                                                    <input type="hidden" name="vendor_id"
+                                                                        value="{{ $product->vendor_id }}">
+                                                                    <button class="common_btn" type="submit">submit
+                                                                        review</button>
+                                                                </form>
+                                                            </div>
+                                                        @endif
+                                                    @endauth
                                                 </div>
                                             </div>
                                         </div>

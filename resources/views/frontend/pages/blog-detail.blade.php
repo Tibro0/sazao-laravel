@@ -298,6 +298,11 @@
                         $('#form-submit').text('Post Comment');
                         $('#form-submit').attr('disabled', false);
                     },
+                    complete: function() {
+                        setTimeout(function() {
+                            window.location.reload();
+                        }, 3000);
+                    }
                 });
             })
         });
