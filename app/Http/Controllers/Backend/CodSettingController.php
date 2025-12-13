@@ -11,7 +11,7 @@ class CodSettingController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'status' => ['required', 'integer'],
+            'status' => ['required', 'boolean'],
         ]);
 
         CodSetting::updateOrCreate(

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\CodSetting;
 use App\Models\GeneralSetting;
 use App\Models\Order;
 use App\Models\OrderProduct;
@@ -15,6 +16,7 @@ use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Str;
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
 use Stripe\Charge;
 use Stripe\Stripe;
@@ -256,5 +258,25 @@ class PaymentController extends Controller
 
             return redirect()->route('user.payment.success');
         }
+    }
+
+    /** COD Payment */
+    public function payWithCod(Request $request)
+    {
+        $codSetting = CodSetting::first();
+        $setting = GeneralSetting::first();
+        if ($codSetting->status === 0) {
+            return redirect()->back();
+        }
+
+        // amount calculation
+        $total = getFinalPayableAmount();
+        $payableAmount = round($total, 2);
+
+
+        $this->storeOrder('COD', 0, Str::random(10), $payableAmount, $setting->currency_name);
+        // clear session
+        $this->clearSession();
+        return redirect()->route('user.payment.success');
     }
 }

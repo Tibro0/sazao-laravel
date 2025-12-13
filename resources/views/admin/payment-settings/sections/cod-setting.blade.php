@@ -7,10 +7,13 @@
             <div class="row g-3">
                 <div class="col-md-12">
                     <label>COD Status</label>
-                    <select name="status" class="form-control">
+                    <select name="status" class="form-control @error('status') is-invalid @enderror">
                         <option @selected(@$codSetting->status === 1) value="1">Enable</option>
                         <option @selected(@$codSetting->status === 0) value="0">Disable</option>
                     </select>
+                    @error('status')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                 </div>
                 <div class="col-md-12">
                     <button type="submit" class="btn btn-primary px-5">Save Changes</button>
