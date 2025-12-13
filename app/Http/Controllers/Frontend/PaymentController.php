@@ -279,4 +279,9 @@ class PaymentController extends Controller
         $this->clearSession();
         return redirect()->route('user.payment.success');
     }
+
+    public function frontendPaymentTabListStyle(Request $request)
+    {
+        Session::put('frontend_payment_tab_list_style', $request->style);
+    }
 }

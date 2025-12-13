@@ -187,5 +187,7 @@ Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'user', 'as' => 
         Route::post('razorpay/payment', 'payWithRazorpay')->name('razorpay.payment');
         /** Cod Route */
         Route::get('cod/payment', 'payWithCod')->name('cod.payment');
+        /** Tab Active Ajax */
+        Route::get('frontend-payment-tab-list-style', 'frontendPaymentTabListStyle')->name('frontend-payment-tab-list-style');
     });
 });

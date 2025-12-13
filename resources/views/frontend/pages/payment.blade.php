@@ -33,18 +33,26 @@
                         <div class="wsus__payment_menu" id="sticky_sidebar">
                             <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist"
                                 aria-orientation="vertical">
-                                <button class="nav-link common_btn active" id="v-pills-home-tab" data-bs-toggle="pill"
+                                <button
+                                    class="nav-link common_btn {{ Session::has('frontend_payment_tab_list_style') && Session::get('frontend_payment_tab_list_style') == 'paypal' ? 'active' : '' }} {{ !Session::has('frontend_payment_tab_list_style') ? 'active' : '' }} list-view"
+                                    data-id="paypal" id="v-pills-home-tab" data-bs-toggle="pill"
                                     data-bs-target="#v-pills-paypal" type="button" role="tab"
                                     aria-controls="v-pills-paypal" aria-selected="true">PayPal</button>
-                                <button class="nav-link common_btn" id="v-pills-profile-tab" data-bs-toggle="pill"
+                                <button
+                                    class="nav-link common_btn {{ Session::has('frontend_payment_tab_list_style') && Session::get('frontend_payment_tab_list_style') == 'stripe' ? 'active' : '' }} list-view"
+                                    data-id="stripe" id="v-pills-profile-tab" data-bs-toggle="pill"
                                     data-bs-target="#v-pills-stripe" type="button" role="tab"
                                     aria-controls="v-pills-stripe" aria-selected="false">Stripe</button>
 
-                                <button class="nav-link common_btn" id="v-pills-profile-tab" data-bs-toggle="pill"
+                                <button
+                                    class="nav-link common_btn {{ Session::has('frontend_payment_tab_list_style') && Session::get('frontend_payment_tab_list_style') == 'razorpay' ? 'active' : '' }} list-view"
+                                    data-id="razorpay" id="v-pills-profile-tab" data-bs-toggle="pill"
                                     data-bs-target="#v-pills-razorpay" type="button" role="tab"
                                     aria-controls="v-pills-razorpay" aria-selected="false">Razorpay</button>
 
-                                <button class="nav-link common_btn" id="v-pills-profile-tab" data-bs-toggle="pill"
+                                <button
+                                    class="nav-link common_btn {{ Session::has('frontend_payment_tab_list_style') && Session::get('frontend_payment_tab_list_style') == 'cod' ? 'active' : '' }} list-view"
+                                    data-id="cod" id="v-pills-profile-tab" data-bs-toggle="pill"
                                     data-bs-target="#v-pills-cod" type="button" role="tab" aria-controls="v-pills-cod"
                                     aria-selected="false">COD</button>
                             </div>
@@ -76,3 +84,24 @@
     </section>
     <!--============================PAYMENT PAGE END==============================-->
 @endsection
+
+@push('js-link')
+    <script>
+        $(document).ready(function() {
+            $('.list-view').on('click', function() {
+                let style = $(this).data('id');
+
+                $.ajax({
+                    method: "GET",
+                    url: "{{ route('user.frontend-payment-tab-list-style') }}",
+                    data: {
+                        style: style
+                    },
+                    success: function(data) {
+
+                    }
+                });
+            })
+        });
+    </script>
+@endpush
