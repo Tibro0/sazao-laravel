@@ -31,6 +31,9 @@
                                 <a class="nav-link mb-2 list-view {{ Session::has('admin_payment_setting_list_style') && Session::get('admin_payment_setting_list_style') == 'razorpay' ? 'active' : '' }}"
                                     data-id="razorpay" id="v-pills-home-tab" data-bs-toggle="pill" href="#razorpay-setting"
                                     role="tab" aria-controls="v-pills-home" aria-selected="true">Razorpay</a>
+                                <a class="nav-link mb-2 list-view {{ Session::has('admin_payment_setting_list_style') && Session::get('admin_payment_setting_list_style') == 'cod' ? 'active' : '' }}"
+                                    data-id="cod" id="v-pills-home-tab" data-bs-toggle="pill" href="#cod-setting"
+                                    role="tab" aria-controls="v-pills-home" aria-selected="true">COD</a>
                             </div>
                         </div>
                         <div class="col-md-10">
@@ -38,6 +41,7 @@
                                 @include('admin.payment-settings.sections.paypal-setting')
                                 @include('admin.payment-settings.sections.stripe-setting')
                                 @include('admin.payment-settings.sections.razorpay-setting')
+                                @include('admin.payment-settings.sections.cod-setting')
                             </div>
                         </div>
                     </div>

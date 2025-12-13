@@ -12,6 +12,7 @@ use App\Http\Controllers\Backend\BlogController;
 use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\ChildCategoryController;
+use App\Http\Controllers\Backend\CodSettingController;
 use App\Http\Controllers\Backend\CouponController;
 use App\Http\Controllers\Backend\CustomerListController;
 use App\Http\Controllers\Backend\FlashSaleController;
@@ -401,4 +402,8 @@ Route::controller(StripeSettingController::class)->group(function () {
 });
 Route::controller(RazorPaySettingController::class)->group(function () {
     Route::put('razorpay-setting/{id}', 'update')->name('razorpay-setting.update');
+});
+
+Route::controller(CodSettingController::class)->group(function () {
+    Route::put('cod-setting/{id}', 'update')->name('cod-setting.update');
 });
