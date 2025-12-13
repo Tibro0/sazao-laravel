@@ -123,7 +123,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-5 col-md-7 col-lg-7">
+                    <div class="col-xl-8 col-md-7 col-lg-7">
                         <div class="wsus__pro_details_text">
                             <a class="title" href="javascript:;">{{ $product->name }}</a>
                             @if ($product->qty > 0)
@@ -199,7 +199,7 @@
 
                                 <ul class="wsus__button_area">
                                     <li><button type="submit" class="add_cart">add to cart</button></li>
-                                    <li><a class="buy_now" href="#">buy now</a></li>
+                                    <li><a class="buy_now d-none" href="#">buy now</a></li>
                                     <li><a href="javascript:;" class="add_to_wishlist" data-id="{{ $product->id }}"><i
                                                 class="fal fa-heart"></i></a></li>
                                     {{-- <li><a href="#"><i class="far fa-random"></i></a></li> --}}
@@ -208,7 +208,7 @@
                             <p class="brand_model"><span>brand :</span> {{ $product->brand->name }}</p>
                         </div>
                     </div>
-                    <div class="col-xl-3 col-md-12 mt-md-5 mt-lg-0">
+                    {{-- <div class="col-xl-3 col-md-12 mt-md-5 mt-lg-0">
                         <div class="wsus_pro_det_sidebar" id="sticky_sidebar">
                             <ul>
                                 <li>
@@ -245,7 +245,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
 

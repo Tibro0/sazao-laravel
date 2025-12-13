@@ -1,14 +1,14 @@
 <div id="sidebar-menu">
     <!-- Left Menu Start -->
     <ul class="metismenu list-unstyled" id="side-menu">
-        <li class="menu-title">Menu</li>
+        <li class="menu-title">Dashboard</li>
         <li>
             <a href="{{ route('admin.dashboard') }}" class="waves-effect">
                 <i class="ri-dashboard-line"></i>
                 <span>Dashboard</span>
             </a>
         </li>
-
+        <li class="menu-title">Ecommerce</li>
         <li>
             <a href="javascript: void(0);" class="has-arrow waves-effect">
                 <i class="ri-mail-send-line"></i>
@@ -27,7 +27,28 @@
         <li>
             <a href="javascript: void(0);" class="has-arrow waves-effect">
                 <i class="ri-mail-send-line"></i>
-                <span>Orders</span>
+                <span>Manage Products</span>
+            </a>
+            <ul class="sub-menu" aria-expanded="false">
+                <li class="{{ adminSidebarActive(['admin.brand.*']) }}"><a
+                        href="{{ route('admin.brand.index') }}">Brand</a></li>
+                <li
+                    class="{{ adminSidebarActive(['admin.products.*', 'admin.products-image-gallery.*', 'admin.products-variant.*', 'admin.products-variant-item.*']) }}">
+                    <a href="{{ route('admin.products.index') }}">Products</a>
+                </li>
+                <li class="{{ adminSidebarActive(['admin.seller-products.index']) }}"><a
+                        href="{{ route('admin.seller-products.index') }}">Seller Products</a></li>
+                <li class="{{ adminSidebarActive(['admin.seller-pending-products.index']) }}"><a
+                        href="{{ route('admin.seller-pending-products.index') }}">Seller Pending Products</a></li>
+                <li class="{{ adminSidebarActive(['admin.review.index']) }}"><a
+                        href="{{ route('admin.review.index') }}">Product Reviews</a></li>
+            </ul>
+        </li>
+
+        <li>
+            <a href="javascript: void(0);" class="has-arrow waves-effect">
+                <i class="ri-mail-send-line"></i>
+                <span>Manage Orders</span>
             </a>
             <ul class="sub-menu" aria-expanded="false">
                 <li class="{{ adminSidebarActive(['admin.order.index', 'admin.order.show']) }}"><a
@@ -54,27 +75,6 @@
                 <i class="ri-dashboard-line"></i>
                 <span>Transaction</span>
             </a>
-        </li>
-
-        <li>
-            <a href="javascript: void(0);" class="has-arrow waves-effect">
-                <i class="ri-mail-send-line"></i>
-                <span>Manage Products</span>
-            </a>
-            <ul class="sub-menu" aria-expanded="false">
-                <li class="{{ adminSidebarActive(['admin.brand.*']) }}"><a
-                        href="{{ route('admin.brand.index') }}">Brand</a></li>
-                <li
-                    class="{{ adminSidebarActive(['admin.products.*', 'admin.products-image-gallery.*', 'admin.products-variant.*', 'admin.products-variant-item.*']) }}">
-                    <a href="{{ route('admin.products.index') }}">Products</a>
-                </li>
-                <li class="{{ adminSidebarActive(['admin.seller-products.index']) }}"><a
-                        href="{{ route('admin.seller-products.index') }}">Seller Products</a></li>
-                <li class="{{ adminSidebarActive(['admin.seller-pending-products.index']) }}"><a
-                        href="{{ route('admin.seller-pending-products.index') }}">Seller Pending Products</a></li>
-                <li class="{{ adminSidebarActive(['admin.review.index']) }}"><a
-                        href="{{ route('admin.review.index') }}">Product Reviews</a></li>
-            </ul>
         </li>
 
         <li>
@@ -117,6 +117,30 @@
             </ul>
         </li>
 
+        <li class="{{ adminSidebarActive(['admin.advertisement.index']) }}">
+            <a href="{{ route('admin.advertisement.index') }}" class="waves-effect">
+                <i class="ri-dashboard-line"></i>
+                <span>Advertisement</span>
+            </a>
+        </li>
+
+        <li>
+            <a href="javascript: void(0);" class="has-arrow waves-effect">
+                <i class="ri-mail-send-line"></i>
+                <span>Manage Blog</span>
+            </a>
+            <ul class="sub-menu" aria-expanded="false">
+                <li class="{{ adminSidebarActive(['admin.blog-category.*']) }}"><a
+                        href="{{ route('admin.blog-category.index') }}">Categories</a></li>
+                <li class="{{ adminSidebarActive(['admin.blog.*']) }}"><a
+                        href="{{ route('admin.blog.index') }}">Blog</a></li>
+                <li class="{{ adminSidebarActive(['admin.blog-comments.index']) }}"><a
+                        href="{{ route('admin.blog-comments.index') }}">Blog Comments</a></li>
+            </ul>
+        </li>
+
+        <li class="menu-title">Setting & More</li>
+
         <li>
             <a href="javascript: void(0);" class="has-arrow waves-effect">
                 <i class="ri-mail-send-line"></i>
@@ -137,21 +161,6 @@
         <li>
             <a href="javascript: void(0);" class="has-arrow waves-effect">
                 <i class="ri-mail-send-line"></i>
-                <span>Manage Blog</span>
-            </a>
-            <ul class="sub-menu" aria-expanded="false">
-                <li class="{{ adminSidebarActive(['admin.blog-category.*']) }}"><a
-                        href="{{ route('admin.blog-category.index') }}">Categories</a></li>
-                <li class="{{ adminSidebarActive(['admin.blog.*']) }}"><a
-                        href="{{ route('admin.blog.index') }}">Blog</a></li>
-                <li class="{{ adminSidebarActive(['admin.blog-comments.index']) }}"><a
-                        href="{{ route('admin.blog-comments.index') }}">Blog Comments</a></li>
-            </ul>
-        </li>
-
-        <li>
-            <a href="javascript: void(0);" class="has-arrow waves-effect">
-                <i class="ri-mail-send-line"></i>
                 <span>Users</span>
             </a>
             <ul class="sub-menu" aria-expanded="false">
@@ -166,13 +175,6 @@
                 <li class="{{ adminSidebarActive(['admin.admin-list.index']) }}"><a
                         href="{{ route('admin.admin-list.index') }}">Admin List</a></li>
             </ul>
-        </li>
-
-        <li class="{{ adminSidebarActive(['admin.advertisement.index']) }}">
-            <a href="{{ route('admin.advertisement.index') }}" class="waves-effect">
-                <i class="ri-dashboard-line"></i>
-                <span>Advertisement</span>
-            </a>
         </li>
 
         <li class="{{ adminSidebarActive(['admin.subscribers.*']) }}">
