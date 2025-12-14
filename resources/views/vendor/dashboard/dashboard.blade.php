@@ -12,6 +12,7 @@
             {{-- Sidebar End --}}
             <div class="row">
                 <div class="col-xl-9 col-xxl-10 col-lg-9 ms-auto">
+                    <h3 class="mb-3">Vendor Dashboard</h3>
                     <div class="dashboard_content">
                         <div class="wsus__dashboard">
                             <div class="row">

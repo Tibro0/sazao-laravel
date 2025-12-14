@@ -57,7 +57,9 @@
                             <div class="form-group mb-3 row">
                                 <div class="col-12">
                                     <label for="password">Password <span class="text-danger"></span></label>
-                                    <input type="password" id="password" name="password" class="form-control @error('email') is-invalid @enderror" placeholder="Password">
+                                    <input type="password" id="password" name="password"
+                                        class="form-control @error('email') is-invalid @enderror"
+                                        placeholder="Password">
                                     @error('password')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
@@ -83,12 +85,13 @@
 
                             <div class="form-group mb-0 row mt-2">
                                 <div class="col-sm-7 mt-3">
-                                    <a href="auth-recoverpw.html" class="text-muted"><i class="mdi mdi-lock"></i> Forgot
+                                    <a href="{{ route('password.request') }}" class="text-muted"><i
+                                            class="mdi mdi-lock"></i> Forgot
                                         your password?</a>
                                 </div>
                                 <div class="col-sm-5 mt-3">
-                                    <a href="auth-register.html" class="text-muted"><i
-                                            class="mdi mdi-account-circle"></i> Create an account</a>
+                                    {{-- <a href="auth-register.html" class="text-muted"><i
+                                            class="mdi mdi-account-circle"></i> Create an account</a> --}}
                                 </div>
                             </div>
                         </form>

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\ChildCategory;
+use App\Models\OrderProduct;
 use App\Models\Product;
 use App\Models\ProductImageGallery;
 use App\Models\ProductVariant;
@@ -190,19 +191,22 @@ class ProductController extends Controller
     public function destroy(string $id)
     {
         $product = Product::findOrFail($id);
+        if (OrderProduct::where(['product_id' => $product->id])->count() > 0) {
+            return response(['status' => 'error', 'message' => 'This Products Have Orders you cant Delete It.']);
+        }
 
         /** Delete Product Thumb Image */
         $this->deleteImage($product->thumb_image);
 
         /** Delete Product Gallery Image */
-        $galleryImages = ProductImageGallery::where('product_id', $product->id)->get();
+        $galleryImages = ProductImageGallery::where(['product_id' => $product->id])->get();
         foreach ($galleryImages as $image) {
             $this->deleteImage($image->image);
             $image->delete();
         }
 
         /** Delete Product variant if exist */
-        $variants = ProductVariant::where('product_id', $product->id)->get();
+        $variants = ProductVariant::where(['product_id' => $product->id])->get();
 
         foreach ($variants as $variant) {
             $variant->productVariantItems()->delete();

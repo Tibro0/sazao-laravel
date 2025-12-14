@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\ChildCategory;
+use App\Models\HomePageSetting;
+use App\Models\Product;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -131,6 +133,18 @@ class ChildCategoryController extends Controller
     public function destroy(string $id)
     {
         $ChildCategory = ChildCategory::findOrFail($id);
+        if (Product::where(['child_category_id' => $ChildCategory->id])->count() > 0) {
+            return response(['status' => 'error', 'message' => 'This Item Content Relation cant Delete It.']);
+        }
+
+        $homeSettings = HomePageSetting::all();
+        foreach ($homeSettings as $item) {
+            $array = json_decode($item->value, true);
+            $collection = collect($array);
+            if ($collection->contains('child_category', $ChildCategory->id)) {
+                return response(['status' => 'error', 'message' => 'This Item Content Relation cant Delete It.']);
+            }
+        }
         $ChildCategory->delete();
         return response(['status' => 'success', 'message' => 'Deleted Successfully!']);
     }

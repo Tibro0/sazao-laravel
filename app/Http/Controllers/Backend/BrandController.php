@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Brand;
+use App\Models\Product;
 use App\Traits\ImageUploadTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -34,11 +35,11 @@ class BrandController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'logo'=> ['required', 'image', 'max:2048', 'dimensions:width=1280,height=640'],
-            'name'=> ['required', 'max:255'],
-            'is_featured'=> ['required', 'boolean'],
-            'status'=> ['required', 'boolean'],
-        ],[
+            'logo' => ['required', 'image', 'max:2048', 'dimensions:width=1280,height=640'],
+            'name' => ['required', 'max:255'],
+            'is_featured' => ['required', 'boolean'],
+            'status' => ['required', 'boolean'],
+        ], [
             'is_featured.required' => 'Please Select a is Featured'
         ]);
 
@@ -72,7 +73,7 @@ class BrandController extends Controller
     public function edit(string $id)
     {
         $brand = Brand::findOrFail($id);
-        return view('admin.brand.edit',compact('brand'));
+        return view('admin.brand.edit', compact('brand'));
     }
 
     /**
@@ -81,11 +82,11 @@ class BrandController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'logo'=> ['nullable', 'image', 'max:2048', 'dimensions:width=1280,height=640'],
-            'name'=> ['required', 'max:255'],
-            'is_featured'=> ['required', 'boolean'],
-            'status'=> ['required', 'boolean'],
-        ],[
+            'logo' => ['nullable', 'image', 'max:2048', 'dimensions:width=1280,height=640'],
+            'name' => ['required', 'max:255'],
+            'is_featured' => ['required', 'boolean'],
+            'status' => ['required', 'boolean'],
+        ], [
             'is_featured.required' => 'Please Select a is Featured'
         ]);
 
@@ -111,12 +112,16 @@ class BrandController extends Controller
     public function destroy(string $id)
     {
         $brand = Brand::findOrFail($id);
+        if (Product::where(['brand_id' => $brand->id])->count() > 0) {
+            return response(['status' => 'error', 'message' => 'This Brand Have Products you cant Delete It.']);
+        }
         $this->deleteImage($brand->logo);
         $brand->delete();
         return response(['status' => 'success', 'message' => 'Deleted Successfully!']);
     }
 
-    public function changeStatus(Request $request){
+    public function changeStatus(Request $request)
+    {
         $brand = Brand::findOrFail($request->id);
         $brand->status = $request->status == 'true' ? 1 : 0;
         $brand->save();

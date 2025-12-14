@@ -71,7 +71,7 @@ class PaymentController extends Controller
             $orderProduct->qty = $item->qty;
             $orderProduct->save();
 
-            // update Product qty
+            // Update Product Qty
             $updatedQty = ($product->qty - $item->qty);
             $product->qty = $updatedQty;
             $product->save();

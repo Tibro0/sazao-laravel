@@ -4,6 +4,15 @@
     {{ $settings->site_name }} | {{ $product->name }}
 @endsection
 
+@section('meta')
+    <meta name="title" content="{{ $product->seo_title }}" />
+    <meta name="description" content="{{ $product->seo_description }}" />
+    <meta property="og:title" content="{{ $product->seo_title }}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="{{ url()->current() }}" />
+    <meta property="og:image" content="{{ asset($product->thumb_image) }}" />
+@endsection
+
 @push('css-link')
     <style>
         /* Pagination Css Start */

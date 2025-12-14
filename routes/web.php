@@ -114,6 +114,11 @@ Route::controller(BlogController::class)->group(function () {
     Route::get('blog', 'blog')->name('blog');
 });
 
+/** Wishlist Route */
+Route::controller(WishlistController::class)->group(function () {
+    Route::get('wishlist/add-product', 'addToWishlist')->name('wishlist.store');
+});
+
 Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'user', 'as' => 'user.'], function () {
     Route::controller(UserDashboardController::class)->group(function () {
         Route::get('dashboard', 'index')->name('dashboard');
