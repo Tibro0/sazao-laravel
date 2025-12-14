@@ -65,6 +65,7 @@ class DatabaseSeeder extends Seeder
             BlogSeeder::class,
             BlogCommentSeeder::class,
             CodSettingSeeder::class,
+            WithdrawMethodSeeder::class,
         ]);
     }
 }

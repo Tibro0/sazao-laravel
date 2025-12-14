@@ -44,6 +44,7 @@ use App\Http\Controllers\Backend\TransactionController;
 use App\Http\Controllers\Backend\VendorConditionController;
 use App\Http\Controllers\Backend\VendorListController;
 use App\Http\Controllers\Backend\VendorRequestController;
+use App\Http\Controllers\Backend\WithdrawMethodController;
 use Illuminate\Support\Facades\Route;
 
 // Admin Route
@@ -224,9 +225,19 @@ Route::controller(OrderController::class)->group(function () {
     Route::get('order-status', 'changeOrderStatus')->name('order.status');
 });
 
-/**Order Transaction Route */
+/** Order Transaction Route */
 Route::controller(TransactionController::class)->group(function () {
     Route::get('transaction', 'index')->name('transaction');
+});
+
+/** Withdraw Payments Route */
+Route::controller(WithdrawMethodController::class)->group(function () {
+    Route::get('withdraw-method', 'index')->name('withdraw-method.index');
+    Route::get('withdraw-method/create', 'create')->name('withdraw-method.create');
+    Route::post('withdraw-method/store', 'store')->name('withdraw-method.store');
+    Route::get('withdraw-method/edit/{id}', 'edit')->name('withdraw-method.edit');
+    Route::put('withdraw-method/{id}', 'update')->name('withdraw-method.update');
+    Route::delete('withdraw-method/{id}', 'destroy')->name('withdraw-method.destroy');
 });
 
 /** Setting Route */
@@ -308,7 +319,7 @@ Route::controller(CustomerListController::class)->group(function () {
     Route::put('customer/status-change', 'StatusChange')->name('customer.status-change');
 });
 
-/** admin list Route */
+/** Admin List Route */
 Route::controller(AdminListController::class)->group(function () {
     Route::get('admin-list', 'index')->name('admin-list.index');
     Route::put('admin-list/status-change', 'statusChange')->name('admin-list.status-change');

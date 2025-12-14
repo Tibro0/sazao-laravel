@@ -99,6 +99,16 @@
         <li>
             <a href="javascript: void(0);" class="has-arrow waves-effect">
                 <i class="ri-mail-send-line"></i>
+                <span>Withdraw Payments</span>
+            </a>
+            <ul class="sub-menu" aria-expanded="false">
+                <li class="{{ adminSidebarActive(['admin.withdraw-method.*']) }}"><a href="{{route('admin.withdraw-method.index')}}">Withdraw Method</a></li>
+            </ul>
+        </li>
+
+        <li>
+            <a href="javascript: void(0);" class="has-arrow waves-effect">
+                <i class="ri-mail-send-line"></i>
                 <span>Manage Website</span>
             </a>
             <ul class="sub-menu" aria-expanded="false">
