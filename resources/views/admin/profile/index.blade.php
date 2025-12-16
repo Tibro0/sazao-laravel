@@ -32,7 +32,7 @@
                                 <img src="{{ asset(auth()->user()->image) }}" width="100">
                             </div>
                             <div class="col-md-12">
-                                <label>Image <span class="text-danger">(Max 2MB)</span></label>
+                                <label>Image <span class="text-danger">(width:256px, height:256px) 2MB Maximum</span></label>
                                 <input type="file" name="image"
                                     class="form-control @error('image')is-invalid @enderror">
                                 @error('image')

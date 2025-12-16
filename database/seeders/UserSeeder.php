@@ -19,6 +19,7 @@ class UserSeeder extends Seeder
             [
                 'name' => 'Admin user',
                 'username' => 'adminuser',
+                'image' => 'frontend/images/main-image/admin_profile/admin.jpg',
                 'email' => 'admin@gmail.com',
                 'role' => 'admin',
                 'status' => 'active',
