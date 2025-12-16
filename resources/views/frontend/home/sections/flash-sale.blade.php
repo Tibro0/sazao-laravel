@@ -15,9 +15,12 @@
         <div class="row flash_sell_slider">
             @foreach ($flashSaleItems as $item)
                 @php
-                    $product = App\Models\Product::with(['category', 'productImageGalleries', 'reviews'])->find(
-                        $item->product_id,
-                    );
+                    $product = App\Models\Product::with([
+                        'category',
+                        'variants',
+                        'productImageGalleries',
+                        'reviews',
+                    ])->find($item->product_id);
                 @endphp
                 <div class="col-xl-3 col-sm-6 col-lg-4">
                     <div class="wsus__product_item">
@@ -45,7 +48,9 @@
                             {{-- <li><a href="#"><i class="far fa-random"></i></a></li> --}}
                         </ul>
                         <div class="wsus__product_details">
-                            <a class="wsus__category" href="#">{{ $product->category->name }} </a>
+                            <a class="wsus__category"
+                                href="{{ route('products.index', ['category' => $product->category->slug]) }}">{{ $product->category->name }}
+                            </a>
                             <p class="wsus__pro_rating">
                                 @php
                                     $avgRating = $product->reviews()->avg('rating');
@@ -97,7 +102,9 @@
     <!--==========================PRODUCT MODAL VIEW START===========================-->
     @foreach ($flashSaleItems as $item)
         @php
-            $product = App\Models\Product::with(['category', 'productImageGalleries', 'reviews'])->find($item->product_id);
+            $product = App\Models\Product::with(['category', 'variants', 'productImageGalleries', 'reviews'])->find(
+                $item->product_id,
+            );
         @endphp
         <section class="product_popup_modal">
             <div class="modal fade" id="exampleModal-{{ $product->id }}" tabindex="-1" aria-hidden="true">

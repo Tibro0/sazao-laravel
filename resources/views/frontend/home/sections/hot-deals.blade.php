@@ -173,7 +173,9 @@
                                     {{-- <li><a href="#"><i class="far fa-random"></i></a></li> --}}
                                 </ul>
                                 <div class="wsus__product_details">
-                                    <a class="wsus__category" href="#">{{ $product->category->name }} </a>
+                                    <a class="wsus__category"
+                                        href="{{ route('products.index', ['category' => $product->category->slug]) }}">{{ $product->category->name }}
+                                    </a>
                                     <p class="wsus__pro_rating">
                                         @php
                                             $avgRating = $product->reviews()->avg('rating');
