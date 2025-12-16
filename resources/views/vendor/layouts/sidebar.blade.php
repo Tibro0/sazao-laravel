@@ -15,6 +15,8 @@
                     class="fas fa-cart-plus"></i> Products</a></li>
         <li><a class="{{ setActive(['vendor.reviews.*']) }}" href="{{ route('vendor.reviews.index') }}"><i
                     class="fas fa-star"></i> Review</a></li>
+        <li><a class="{{ setActive(['vendor.withdraw.*', 'vendor.withdraw-request.show']) }}" href="{{ route('vendor.withdraw.index') }}"><i
+                    class="fas fa-money-bill-alt"></i> My Withdraw</a></li>
         <li><a class="{{ setActive(['vendor.shop-profile.index']) }}"
                 href="{{ route('vendor.shop-profile.index') }}"><i class="fas fa-store"></i> Shop Profile</a></li>
         <li><a class="{{ setActive(['vendor.profile']) }}" href="{{ route('vendor.profile') }}"><i

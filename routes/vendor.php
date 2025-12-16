@@ -9,6 +9,7 @@ use App\Http\Controllers\Vendor\VendorProductVariantController;
 use App\Http\Controllers\Vendor\VendorProductVariantItemController;
 use App\Http\Controllers\Vendor\VendorProfileController;
 use App\Http\Controllers\Vendor\VendorShopProfileController;
+use App\Http\Controllers\Vendor\VendorWithdrawController;
 use Illuminate\Support\Facades\Route;
 
 // Vendor Dashboard Route
@@ -81,4 +82,14 @@ Route::controller(VendorOrderController::class)->group(function () {
 /** Reviews Route */
 Route::controller(VendorProductReviewController::class)->group(function () {
     Route::get('reviews', 'index')->name('reviews.index');
+});
+
+/** withdraw Route */
+Route::controller(VendorWithdrawController::class)->group(function () {
+    Route::get('withdraw', 'index')->name('withdraw.index');
+    Route::get('withdraw/create', 'create')->name('withdraw.create');
+    Route::post('withdraw/store', 'store')->name('withdraw.store');
+    Route::get('withdraw/{id}', 'show')->name('withdraw.show');
+
+    Route::get('withdraw-request/{id}', 'showRequest')->name('withdraw-request.show');
 });
