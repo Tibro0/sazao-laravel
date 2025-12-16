@@ -274,8 +274,19 @@
                                 </div>
                                 <div class="col-xl-6 col-12 col-sm-12 col-md-12 col-lg-6">
                                     <div class="wsus__pro_details_text">
-                                        <a class="title" href="#">{{ $product->name }}</a>
-                                        <p class="wsus__stock_area"><span class="in_stock">in stock</span> (167 item)</p>
+                                        <a class="title"
+                                            href="{{ route('product-detail', $product->slug) }}">{{ $product->name }}</a>
+                                            @if ($product->qty > 0)
+                                            <p class="wsus__stock_area"><span class="in_stock">in stock</span>
+                                                ({{ $product->qty }}
+                                                item)
+                                            </p>
+                                        @elseif ($product->qty === 0)
+                                            <p class="wsus__stock_area"><span class="in_stock bg-danger">stock out</span>
+                                                ({{ $product->qty }}
+                                                item)
+                                            </p>
+                                        @endif
                                         @if (checkDiscount($product))
                                             <h4>{{ $settings->currency_icon }}{{ $product->offer_price }}
                                                 <del>{{ $settings->currency_icon }}{{ $product->price }}</del>
@@ -341,7 +352,7 @@
 
                                             <ul class="wsus__button_area">
                                                 <li><button type="submit" class="add_cart">add to cart</button></li>
-                                                <li><a class="buy_now" href="#">buy now</a></li>
+                                                <li><a class="buy_now d-none" href="#">buy now</a></li>
                                                 <li><a href="javascript:;" class="add_to_wishlist"
                                                         data-id="{{ $product->id }}"><i class="fal fa-heart"></i></a>
                                                 </li>
