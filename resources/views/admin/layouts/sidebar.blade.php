@@ -102,7 +102,10 @@
                 <span>Withdraw Payments</span>
             </a>
             <ul class="sub-menu" aria-expanded="false">
-                <li class="{{ adminSidebarActive(['admin.withdraw-method.*']) }}"><a href="{{route('admin.withdraw-method.index')}}">Withdraw Method</a></li>
+                <li class="{{ adminSidebarActive(['admin.withdraw-method.*']) }}"><a
+                        href="{{ route('admin.withdraw-method.index') }}">Withdraw Method</a></li>
+                <li class="{{ adminSidebarActive(['admin.withdraw.*']) }}"><a
+                        href="{{ route('admin.withdraw.index') }}">Withdraw List</a></li>
             </ul>
         </li>
 

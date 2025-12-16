@@ -44,6 +44,7 @@ use App\Http\Controllers\Backend\TransactionController;
 use App\Http\Controllers\Backend\VendorConditionController;
 use App\Http\Controllers\Backend\VendorListController;
 use App\Http\Controllers\Backend\VendorRequestController;
+use App\Http\Controllers\Backend\WithdrawController;
 use App\Http\Controllers\Backend\WithdrawMethodController;
 use Illuminate\Support\Facades\Route;
 
@@ -238,6 +239,13 @@ Route::controller(WithdrawMethodController::class)->group(function () {
     Route::get('withdraw-method/edit/{id}', 'edit')->name('withdraw-method.edit');
     Route::put('withdraw-method/{id}', 'update')->name('withdraw-method.update');
     Route::delete('withdraw-method/{id}', 'destroy')->name('withdraw-method.destroy');
+});
+
+/** Withdraw Routes */
+Route::controller(WithdrawController::class)->group(function () {
+    Route::get('withdraw', 'index')->name('withdraw.index');
+    Route::get('withdraw/{id}', 'show')->name('withdraw.show');
+    Route::put('withdraw/{id}', 'update')->name('withdraw.update');
 });
 
 /** Setting Route */
