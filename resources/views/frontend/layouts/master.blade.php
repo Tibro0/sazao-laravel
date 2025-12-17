@@ -27,7 +27,7 @@
     <link rel="stylesheet" href="{{ asset('frontend/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/css/responsive.css') }}">
     {{-- toastr Css --}}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+    <link rel="stylesheet" href="{{ asset('frontend/css/toastr.min.css') }}" />
     @if ($settings->layout === 'RTL')
         <link rel="stylesheet" href="{{ asset('frontend/css/rtl.css') }}">
     @endif
@@ -126,7 +126,7 @@
     <!--main/custom js-->
     <script src="{{ asset('frontend/js/main.js') }}"></script>
     {{-- toastr js --}}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="{{asset('frontend/js/toastr.min.js')}}"></script>
     <script>
         // Display toast messages from session with nullable titles
         @if (Session::has('toast'))
