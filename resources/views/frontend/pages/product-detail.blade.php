@@ -208,7 +208,7 @@
 
                                 <ul class="wsus__button_area">
                                     <li><button type="submit" class="add_cart">add to cart</button></li>
-                                    <li><a class="buy_now d-none" href="#">buy now</a></li>
+                                    <li><a class="buy_now d-none" href="javascript:;">buy now</a></li>
                                     <li><a href="javascript:;" class="add_to_wishlist" data-id="{{ $product->id }}"><i
                                                 class="fal fa-heart"></i></a></li>
                                     {{-- <li><a href="#"><i class="far fa-random"></i></a></li> --}}
@@ -323,7 +323,8 @@
                                                     <p><span>Address:</span> {{ $product->vendor->address }}</p>
                                                     <p><span>Phone:</span> {{ $product->vendor->phone }}</p>
                                                     <p><span>mail:</span> {{ $product->vendor->email }}</p>
-                                                    <a href="vendor_details.html" class="see_btn">visit store</a>
+                                                    <a href="{{ route('vendor.products', $product->vendor->id) }}"
+                                                        class="see_btn">visit store</a>
                                                 </div>
                                             </div>
                                             <div class="col-xl-12">

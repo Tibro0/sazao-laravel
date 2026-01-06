@@ -95,8 +95,7 @@
             <div class="row">
                 <div class="col-xl-12">
                     <div class="wsus__pro_page_bammer vendor_det_banner">
-                        <img src="{{ asset($vendor->banner) }}" alt="banner"
-                            class="img-fluid w-100">
+                        <img src="{{ asset($vendor->banner) }}" alt="banner" class="img-fluid w-100">
                         <div class="wsus__pro_page_bammer_text wsus__vendor_det_banner_text">
                             <div class="wsus__vendor_text_center">
                                 <h4 class="mb-3">{{ $vendor->shop_name }}</h4>
@@ -171,15 +170,16 @@
                                                         alt="product" class="img-fluid w-100 img_2" />
                                                 </a>
                                                 <ul class="wsus__single_pro_icon">
-                                                    <li><a href="#" data-bs-toggle="modal"
+                                                    <li><a href="javascript:;" data-bs-toggle="modal"
                                                             data-bs-target="#exampleModal-{{ $product->id }}"><i
                                                                 class="far fa-eye"></i></a></li>
-                                                    <li><a href="" data-id="{{ $product->id }}"
+                                                    <li><a href="javascript:;" data-id="{{ $product->id }}"
                                                             class="add_to_wishlist"><i class="far fa-heart"></i></a></li>
                                                     {{-- <li><a href="#"><i class="far fa-random"></i></a> --}}
                                                 </ul>
                                                 <div class="wsus__product_details">
-                                                    <a class="wsus__category" href="#">{{ $product->category->name }}
+                                                    <a class="wsus__category"
+                                                        href="{{ route('products.index', ['category' => $product->category->slug]) }}">{{ $product->category->name }}
                                                     </a>
                                                     <p class="wsus__pro_rating">
                                                         @php
@@ -257,7 +257,8 @@
                                                 </a>
                                                 <div class="wsus__product_details">
                                                     <a class="wsus__category"
-                                                        href="#">{{ @$product->category->name }} </a>
+                                                        href="{{ route('products.index', ['category' => @$product->category->slug]) }}">{{ @$product->category->name }}
+                                                    </a>
                                                     <p class="wsus__pro_rating">
                                                         @php
                                                             $avgRating = $product->reviews()->avg('rating');
@@ -307,8 +308,8 @@
                                                                 cart</button>
                                                         </form>
 
-                                                        <li><a href="#"><i class="far fa-heart"></i></a></li>
-                                                        <li><a href="#"><i class="far fa-random"></i></a>
+                                                        <li><a href="javascript:;"><i class="far fa-heart"></i></a></li>
+                                                        <li><a href="javascript:;"><i class="far fa-random"></i></a>
                                                     </ul>
 
 
@@ -459,8 +460,8 @@
                                             <ul class="wsus__button_area">
                                                 <li><button type="submit" class="add_cart">add to cart</button>
                                                 </li>
-                                                <li><a class="buy_now" href="#">buy now</a></li>
-                                                <li><a href="" data-id="{{ $product->id }}"
+                                                <li><a class="buy_now" href="javascript:;">buy now</a></li>
+                                                <li><a href="javascript:;" data-id="{{ $product->id }}"
                                                         class="add_to_wishlist"><i class="fal fa-heart"></i></a></li>
                                                 {{-- <li><a href="#"><i class="far fa-random"></i></a></li> --}}
                                             </ul>

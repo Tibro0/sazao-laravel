@@ -371,8 +371,8 @@
                                                         <ul class="wsus__single_pro_icon">
                                                             <li><button type="submit" class="add_cart border-0 me-2">add
                                                                     to cart</button></li>
-                                                            <li><a href="#"><i class="far fa-heart"></i></a></li>
-                                                            <li><a href="#"><i class="far fa-random"></i></a>
+                                                            <li><a href="javascript:;"><i class="far fa-heart"></i></a></li>
+                                                            <li><a href="javascript:;"><i class="far fa-random"></i></a>
                                                         </ul>
                                                     </form>
 
@@ -528,7 +528,7 @@
 
                                             <ul class="wsus__button_area">
                                                 <li><button type="submit" class="add_cart">add to cart</button></li>
-                                                <li><a class="buy_now d-none" href="#">buy now</a></li>
+                                                <li><a class="buy_now d-none" href="javascript:;">buy now</a></li>
                                                 <li><a href="javascript:;" class="add_to_wishlist"
                                                         data-id="{{ $product->id }}"><i class="fal fa-heart"></i></a>
                                                 </li>

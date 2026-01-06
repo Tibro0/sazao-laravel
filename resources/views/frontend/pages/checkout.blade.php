@@ -109,7 +109,7 @@
                             <input type="hidden" name="shipping_method_id" value="">
                             <input type="hidden" name="shipping_address_id" value="">
                         </form>
-                        <a href="payment.html" id="submitCheckoutForm" class="common_btn">Place Order</a>
+                        <a href="javascript:;" id="submitCheckoutForm" class="common_btn">Place Order</a>
                     </div>
                 </div>
             </div>

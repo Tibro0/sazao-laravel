@@ -165,7 +165,9 @@
                                     {{-- <li><a href="#"><i class="far fa-random"></i></a></li> --}}
                                 </ul>
                                 <div class="wsus__product_details">
-                                    <a class="wsus__category" href="#">{{ $product->category->name }} </a>
+                                    <a class="wsus__category"
+                                        href="{{ route('products.index', ['category' => $product->category->slug]) }}">{{ $product->category->name }}
+                                    </a>
                                     <p class="wsus__pro_rating">
                                         @php
                                             $avgRating = $product->reviews()->avg('rating');
@@ -276,7 +278,7 @@
                                     <div class="wsus__pro_details_text">
                                         <a class="title"
                                             href="{{ route('product-detail', $product->slug) }}">{{ $product->name }}</a>
-                                            @if ($product->qty > 0)
+                                        @if ($product->qty > 0)
                                             <p class="wsus__stock_area"><span class="in_stock">in stock</span>
                                                 ({{ $product->qty }}
                                                 item)
@@ -352,7 +354,7 @@
 
                                             <ul class="wsus__button_area">
                                                 <li><button type="submit" class="add_cart">add to cart</button></li>
-                                                <li><a class="buy_now d-none" href="#">buy now</a></li>
+                                                <li><a class="buy_now d-none" href="javascript:;">buy now</a></li>
                                                 <li><a href="javascript:;" class="add_to_wishlist"
                                                         data-id="{{ $product->id }}"><i class="fal fa-heart"></i></a>
                                                 </li>
