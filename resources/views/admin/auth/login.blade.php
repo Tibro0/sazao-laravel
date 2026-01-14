@@ -17,7 +17,6 @@
     <link href="{{ asset('backend/assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
     <!-- App Css-->
     <link href="{{ asset('backend/assets/css/app.min.css') }}" id="app-style" rel="stylesheet" type="text/css" />
-
 </head>
 
 <body class="auth-body-bg">
@@ -26,7 +25,6 @@
         <div class="container-fluid p-0">
             <div class="card">
                 <div class="card-body">
-
                     <div class="text-center mt-4">
                         <div class="mb-3">
                             <a href="javascript:;" class="auth-logo">
@@ -37,9 +35,7 @@
                             </a>
                         </div>
                     </div>
-
                     <h4 class="text-muted text-center font-size-18"><b>Sign In</b></h4>
-
                     <div class="p-3">
                         <form action="{{ route('login') }}" method="POST" class="form-horizontal mt-3">
                             @csrf
@@ -53,7 +49,6 @@
                                     @enderror
                                 </div>
                             </div>
-
                             <div class="form-group mb-3 row">
                                 <div class="col-12">
                                     <label for="password">Password <span class="text-danger"></span></label>
@@ -65,7 +60,6 @@
                                     @enderror
                                 </div>
                             </div>
-
                             <div class="form-group mb-3 row">
                                 <div class="col-12">
                                     <div class="custom-control custom-checkbox">
@@ -75,14 +69,12 @@
                                     </div>
                                 </div>
                             </div>
-
                             <div class="form-group mb-3 text-center row mt-3 pt-1">
                                 <div class="col-12">
                                     <button class="btn btn-info w-100 waves-effect waves-light" type="submit">Log
                                         In</button>
                                 </div>
                             </div>
-
                             <div class="form-group mb-0 row mt-2">
                                 <div class="col-sm-7 mt-3">
                                     <a href="{{ route('password.request') }}" class="text-muted"><i
