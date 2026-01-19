@@ -6,6 +6,7 @@ use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\CheckOutController;
 use App\Http\Controllers\Frontend\FlashSaleController;
 use App\Http\Controllers\Frontend\FrontendProductController;
+use App\Http\Controllers\Frontend\GoogleLoginController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\NewsletterController;
 use App\Http\Controllers\Frontend\PageController;
@@ -195,4 +196,9 @@ Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'user', 'as' => 
         /** Tab Active Ajax */
         Route::get('frontend-payment-tab-list-style', 'frontendPaymentTabListStyle')->name('frontend-payment-tab-list-style');
     });
+});
+
+Route::controller(GoogleLoginController::class)->group(function () {
+    Route::get('/auth/google-redirect', 'googleLogin')->name('google.login');
+    Route::get('/auth/google-callback', 'googleCallback')->name('google.callback');
 });

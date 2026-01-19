@@ -67,6 +67,8 @@ class DatabaseSeeder extends Seeder
             CodSettingSeeder::class,
             WithdrawMethodSeeder::class,
             WithdrawRequestSeeder::class,
+
+            LogoSettingSeeder::class,
         ]);
     }
 }
