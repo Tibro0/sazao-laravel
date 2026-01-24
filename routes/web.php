@@ -4,6 +4,7 @@ use App\Http\Controllers\Backend\AdminController;
 use App\Http\Controllers\Frontend\BlogController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\CheckOutController;
+use App\Http\Controllers\Frontend\FacebookLoginController;
 use App\Http\Controllers\Frontend\FlashSaleController;
 use App\Http\Controllers\Frontend\FrontendProductController;
 use App\Http\Controllers\Frontend\GoogleLoginController;
@@ -201,4 +202,9 @@ Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'user', 'as' => 
 Route::controller(GoogleLoginController::class)->group(function () {
     Route::get('/auth/google-redirect', 'googleLogin')->name('google.login');
     Route::get('/auth/google-callback', 'googleCallback')->name('google.callback');
+});
+
+Route::controller(FacebookLoginController::class)->group(function () {
+    Route::get('/auth/facebook-redirect', 'facebookLogin')->name('facebook.login');
+    Route::get('/auth/facebook-callback', 'facebookCallback')->name('facebook.callback');
 });

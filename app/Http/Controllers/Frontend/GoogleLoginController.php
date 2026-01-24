@@ -11,7 +11,7 @@ use Laravel\Socialite\Socialite;
 
 class GoogleLoginController extends Controller
 {
-     public function googleLogin()
+    public function googleLogin()
     {
         return Socialite::driver('google')->redirect();
     }
