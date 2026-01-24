@@ -86,8 +86,8 @@
                                             </li>
                                             <li><a href="{{ route('facebook.login') }}"><i
                                                         class="fab fa-facebook-f"></i></a></li>
-                                            <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                            <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+                                            {{-- <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                                            <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li> --}}
                                         </ul>
                                     </form>
                                 </div>
