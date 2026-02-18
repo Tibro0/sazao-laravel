@@ -84,8 +84,8 @@
                                         <ul class="wsus__login_link">
                                             <li><a href="{{ route('google.login') }}"><i class="fab fa-google"></i></a>
                                             </li>
-                                            <li><a href="{{ route('facebook.login') }}"><i
-                                                        class="fab fa-facebook-f"></i></a></li>
+                                            {{-- <li><a href="{{ route('facebook.login') }}"><i
+                                                        class="fab fa-facebook-f"></i></a></li> --}}
                                             {{-- <li><a href="#"><i class="fab fa-twitter"></i></a></li>
                                             <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li> --}}
                                         </ul>
@@ -110,8 +110,7 @@
                                         <div class="wsus__login_input">
                                             <i class="far fa-envelope"></i>
                                             <input type="email" name="email" value="{{ old('email') }}"
-                                                placeholder="Email"
-                                                class="@error('email') border border-danger @enderror">
+                                                placeholder="Email" class="@error('email') border border-danger @enderror">
                                         </div>
                                         @error('email')
                                             <div class="text-danger ms-5 ps-4">{{ $message }}</div>
