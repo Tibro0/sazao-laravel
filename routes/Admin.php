@@ -255,6 +255,7 @@ Route::controller(SettingController::class)->group(function () {
     Route::put('general-setting-update', 'generalSettingUpdate')->name('general-setting-update');
     Route::put('email-setting-update', 'emailConfigSettingUpdate')->name('email-setting-update');
     Route::put('logo-setting-update', 'logoSettingUpdate')->name('logo-setting-update');
+    Route::put('google-setting-update', 'googleSettingUpdate')->name('google-setting-update');
 });
 
 /** Home Page Setting Route */

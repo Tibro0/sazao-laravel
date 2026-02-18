@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Models\EmailConfiguration;
 use App\Models\GeneralSetting;
+use App\Models\GoogleSetting;
 use App\Models\LogoSetting;
 use App\Traits\ImageUploadTrait;
 use Illuminate\Http\Request;
@@ -18,7 +19,8 @@ class SettingController extends Controller
         $generalSettings = GeneralSetting::first();
         $emailSettings = EmailConfiguration::first();
         $logoSettings = LogoSetting::first();
-        return view('admin.setting.index', compact('generalSettings', 'emailSettings', 'logoSettings'));
+        $googleSettings = GoogleSetting::first();
+        return view('admin.setting.index', compact('generalSettings', 'emailSettings', 'logoSettings', 'googleSettings'));
     }
 
     public function adminGeneralSettingListStyle(Request $request)
@@ -90,7 +92,8 @@ class SettingController extends Controller
         ]);
     }
 
-    public function logoSettingUpdate(Request $request){
+    public function logoSettingUpdate(Request $request)
+    {
         $request->validate([
             'logo' => ['nullable', 'image', 'max:2048', 'dimensions:width=249,height=87'],
             'favicon' => ['nullable', 'image', 'max:2048', 'dimensions:width=112,height=112'],
@@ -104,6 +107,30 @@ class SettingController extends Controller
             [
                 'logo' => !empty($logoPath) ? $logoPath : $request->old_logo,
                 'favicon' => !empty($favicon) ? $favicon : $request->old_favicon,
+            ]
+        );
+
+        return redirect()->back()->with('toast', [
+            'type' => 'success',
+            'title' => 'Success',
+            'message' => 'Updated Successfully!'
+        ]);
+    }
+
+    public function googleSettingUpdate(Request $request)
+    {
+        $request->validate([
+            'google_client_id' => ['required'],
+            'google_client_secret' => ['required'],
+            'google_redirect_url' => ['required'],
+        ]);
+
+        GoogleSetting::updateOrCreate(
+            ['id' => 1],
+            [
+                'google_client_id' => $request->google_client_id,
+                'google_client_secret' => $request->google_client_secret,
+                'google_redirect_url' => $request->google_redirect_url,
             ]
         );
 
