@@ -69,6 +69,8 @@ class DatabaseSeeder extends Seeder
             WithdrawRequestSeeder::class,
 
             LogoSettingSeeder::class,
+
+            GoogleSettingSeeder::class,
         ]);
     }
 }
