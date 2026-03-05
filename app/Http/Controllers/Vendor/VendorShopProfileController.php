@@ -45,9 +45,24 @@ class VendorShopProfileController extends Controller
 
         $vendor = Vendor::where(['user_id' => Auth::user()->id])->first();
 
-        $bannerPath = $this->updateImage($request, 'banner', 'uploads/vendor_profile_images', $vendor->banner);
+         $defaultImages = [
+            'frontend/images/main-image/vendor_profile_images/admin_banner.jpg',
+            'frontend/images/main-image/vendor_profile_images/vendor_banner.jpg',
+        ];
 
-        $vendor->banner = empty(!$bannerPath) ? $bannerPath : $vendor->banner;
+
+        if ($request->hasFile('banner')) {
+            $isDefaultImage = in_array($vendor->banner, $defaultImages);
+
+            if (!$isDefaultImage) {
+                $imagePath = $this->updateImage($request, 'banner', 'uploads/vendor_profile_images', $vendor->banner);
+            } else {
+                $imagePath = $this->uploadImage($request, 'banner', 'uploads/vendor_profile_images');
+            }
+
+            $vendor->banner = $imagePath;
+        }
+
         $vendor->shop_name = $request->shop_name;
         $vendor->phone = $request->phone;
         $vendor->email = $request->email;

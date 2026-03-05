@@ -34,6 +34,9 @@
                         <div class="mb-3">
                             <label>Banner <span class="text-danger">(width:1630px, height:429px) Maximum 2MB</span></label>
                             <input type="file" name="banner" class="form-control @error('banner') is-invalid @enderror">
+                            @error('banner')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="mb-3">
                             <label>Shop Name <span class="text-danger">*</span></label>
@@ -115,5 +118,5 @@
 @push('js-link')
     <!--tinymce js-->
     <script src="{{ asset('backend/assets/libs/tinymce/tinymce.min.js') }}"></script>
-    <script src="{{asset('backend/assets/js/pages/form-editor.init.js')}}"></script>
+    <script src="{{ asset('backend/assets/js/pages/form-editor.init.js') }}"></script>
 @endpush

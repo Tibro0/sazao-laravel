@@ -25,29 +25,45 @@ class AdminVendorProfileController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'banner' => ['nullable', 'image', 'max:2048', 'dimensions:width=1630,height=429'],
-            'shop_name' => ['required', 'max:255'],
-            'phone' => ['required', 'max:250'],
-            'email' => ['required', 'email', 'max:255'],
-            'address' => ['required', 'max:255'],
-            'description' => ['required'],
-            'fb_link' => ['nullable', 'url'],
-            'tw_link' => ['nullable', 'url'],
-            'insta_link' => ['nullable', 'url'],
-        ],
-        [
-            'fb_link.url' => 'The Facebook Link link field must be a valid URL.',
-            'tw_link.url' => 'The Twitter Link link field must be a valid URL.',
-            'insta_link.url' => 'The Instagram Link link field must be a valid URL.'
-        ]
-    );
+        $request->validate(
+            [
+                'banner' => ['nullable', 'image', 'max:2048', 'dimensions:width=1630,height=429'],
+                'shop_name' => ['required', 'max:255'],
+                'phone' => ['required', 'max:250'],
+                'email' => ['required', 'email', 'max:255'],
+                'address' => ['required', 'max:255'],
+                'description' => ['required'],
+                'fb_link' => ['nullable', 'url'],
+                'tw_link' => ['nullable', 'url'],
+                'insta_link' => ['nullable', 'url'],
+            ],
+            [
+                'fb_link.url' => 'The Facebook Link link field must be a valid URL.',
+                'tw_link.url' => 'The Twitter Link link field must be a valid URL.',
+                'insta_link.url' => 'The Instagram Link link field must be a valid URL.'
+            ]
+        );
 
         $vendor = Vendor::where('user_id', Auth::user()->id)->first();
 
-        $bannerPath = $this->updateImage($request, 'banner', 'uploads/vendor_profile_images', $vendor->banner);
+        $defaultImages = [
+            'frontend/images/main-image/vendor_profile_images/admin_banner.jpg',
+            'frontend/images/main-image/vendor_profile_images/vendor_banner.jpg',
+        ];
 
-        $vendor->banner = empty(!$bannerPath) ? $bannerPath : $vendor->banner;
+
+        if ($request->hasFile('banner')) {
+            $isDefaultImage = in_array($vendor->banner, $defaultImages);
+
+            if (!$isDefaultImage) {
+                $imagePath = $this->updateImage($request, 'banner', 'uploads/vendor_profile_images', $vendor->banner);
+            } else {
+                $imagePath = $this->uploadImage($request, 'banner', 'uploads/vendor_profile_images');
+            }
+
+            $vendor->banner = $imagePath;
+        }
+
         $vendor->shop_name = $request->shop_name;
         $vendor->phone = $request->phone;
         $vendor->email = $request->email;
