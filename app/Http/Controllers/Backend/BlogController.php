@@ -93,11 +93,28 @@ class BlogController extends Controller
         ]);
 
         $blog = Blog::findOrFail($id);
-        $imagePath = $this->updateImage($request, 'image', 'uploads/blogs_images', $blog->image);
+
+        $defaultImages = [
+            'frontend/images/main-image/blogs_images/one.jpg',
+            'frontend/images/main-image/blogs_images/two.jpg',
+            'frontend/images/main-image/blogs_images/three.jpg',
+            'frontend/images/main-image/blogs_images/four.jpg',
+        ];
+
+        if ($request->hasFile('image')) {
+            $isDefaultImage = in_array($blog->image, $defaultImages);
+
+            if (!$isDefaultImage) {
+                $imagePath = $this->updateImage($request, 'image', 'uploads/blogs_images', $blog->image);
+            } else {
+                $imagePath = $this->uploadImage($request, 'image', 'uploads/blogs_images');
+            }
+
+            $blog->image = $imagePath;
+        }
 
         $blog->user_id = Auth::user()->id;
         $blog->category_id = $request->category;
-        $blog->image = empty(!$imagePath) ? $imagePath : $blog->image;
         $blog->title = $request->title;
         $blog->slug = Str::slug($request->title);
         $blog->description = $request->description;
@@ -119,10 +136,21 @@ class BlogController extends Controller
     public function destroy(string $id)
     {
         $blog = Blog::findOrFail($id);
-        $this->deleteImage($blog->image);
-        $blog->comments()->delete();
-        $blog->delete();
 
+        $defaultImages = [
+            'frontend/images/main-image/blogs_images/one.jpg',
+            'frontend/images/main-image/blogs_images/two.jpg',
+            'frontend/images/main-image/blogs_images/three.jpg',
+            'frontend/images/main-image/blogs_images/four.jpg',
+        ];
+
+        if ($blog->image && !in_array($blog->image, $defaultImages)) {
+            $this->deleteImage($blog->image);
+        }
+
+        $blog->comments()->delete();
+
+        $blog->delete();
         return response(['status' => 'success', 'message' => 'Deleted Successfully!']);
     }
 
