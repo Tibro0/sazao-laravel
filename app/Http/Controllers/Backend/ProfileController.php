@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Traits\ImageUploadTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
@@ -10,6 +11,7 @@ use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
 {
+    use ImageUploadTrait;
     public function index()
     {
         return view('admin.profile.index');
@@ -25,16 +27,20 @@ class ProfileController extends Controller
 
         $user = Auth::user();
 
-        if ($request->hasFile('image')) {
-            if (File::exists(public_path($user->image))) {
-                File::delete(public_path($user->image));
-            }
-            $image = $request->image;
-            $imageName = rand() . '-' . $image->getClientOriginalName();
-            $image->move(public_path('uploads/admin_profile'), $imageName);
-            $path = "/uploads/admin_profile/" . $imageName;
+        $defaultImages = [
+            'frontend/images/main-image/admin_profile/admin.jpg',
+        ];
 
-            $user->image = $path;
+        if ($request->hasFile('image')) {
+            $isDefaultImage = in_array($user->image, $defaultImages);
+
+            if (!$isDefaultImage) {
+                $imagePath = $this->updateImage($request, 'image', 'uploads/admin_profile', $user->image);
+            } else {
+                $imagePath = $this->uploadImage($request, 'image', 'uploads/admin_profile');
+            }
+
+            $user->image = $imagePath;
         }
 
         $user->name = $request->name;
