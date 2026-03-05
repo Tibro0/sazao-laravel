@@ -98,9 +98,24 @@ class SliderController extends Controller
         $slider = Slider::findOrFail($id);
 
         /** Handle file upload */
-        $imagePath = $this->updateImage($request, 'banner', 'uploads/banner_images', $slider->banner);
+        $defaultImages = [
+            'frontend/images/main-image/slider/slider_1.jpg',
+            'frontend/images/main-image/slider/slider_2.jpg',
+            'frontend/images/main-image/slider/slider_3.jpg',
+        ];
 
-        $slider->banner = empty(!$imagePath) ? $imagePath : $slider->banner;
+        if ($request->hasFile('banner')) {
+            $isDefaultImage = in_array($slider->banner, $defaultImages);
+
+            if (!$isDefaultImage) {
+                $imagePath = $this->updateImage($request, 'banner', 'uploads/banner_images', $slider->banner);
+            } else {
+                $imagePath = $this->uploadImage($request, 'banner', 'uploads/banner_images');
+            }
+
+            $slider->banner = $imagePath;
+        }
+
         $slider->type = $request->type;
         $slider->title = $request->title;
         $slider->starting_price = $request->starting_price;
@@ -122,7 +137,17 @@ class SliderController extends Controller
     public function destroy(string $id)
     {
         $slider = Slider::findOrFail($id);
-        $this->deleteImage($slider->banner);
+
+        $defaultImages = [
+            'frontend/images/main-image/slider/slider_1.jpg',
+            'frontend/images/main-image/slider/slider_2.jpg',
+            'frontend/images/main-image/slider/slider_3.jpg',
+        ];
+
+        if ($slider->banner && !in_array($slider->banner, $defaultImages)) {
+            $this->deleteImage($slider->banner);
+        }
+
         $slider->delete();
         return response(['status' => 'success', 'message' => 'Deleted Successfully!']);
     }
