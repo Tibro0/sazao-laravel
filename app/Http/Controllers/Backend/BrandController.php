@@ -91,8 +91,29 @@ class BrandController extends Controller
         ]);
 
         $brand = Brand::findOrFail($id);
-        $logoPath = $this->updateImage($request, 'logo', 'uploads/brand_images', $brand->logo);
-        $brand->logo = empty(!$logoPath) ? $logoPath : $brand->logo;
+
+        $defaultImages = [
+            'frontend/images/main-image/brand/apple.png',
+            'frontend/images/main-image/brand/google.png',
+            'frontend/images/main-image/brand/JBL.png',
+            'frontend/images/main-image/brand/onePlus.png',
+            'frontend/images/main-image/brand/oppo.png',
+            'frontend/images/main-image/brand/realme.jpg',
+            'frontend/images/main-image/brand/samsung.png',
+        ];
+
+        if ($request->hasFile('logo')) {
+            $isDefaultImage = in_array($brand->logo, $defaultImages);
+
+            if (!$isDefaultImage) {
+                $imagePath = $this->updateImage($request, 'logo', 'uploads/brand_images', $brand->logo);
+            } else {
+                $imagePath = $this->uploadImage($request, 'logo', 'uploads/brand_images');
+            }
+
+            $brand->logo = $imagePath;
+        }
+
         $brand->name = $request->name;
         $brand->slug = Str::slug($request->name);
         $brand->is_featured = $request->is_featured;
@@ -115,7 +136,21 @@ class BrandController extends Controller
         if (Product::where(['brand_id' => $brand->id])->count() > 0) {
             return response(['status' => 'error', 'message' => 'This Brand Have Products you cant Delete It.']);
         }
-        $this->deleteImage($brand->logo);
+
+        $defaultImages = [
+            'frontend/images/main-image/brand/apple.png',
+            'frontend/images/main-image/brand/google.png',
+            'frontend/images/main-image/brand/JBL.png',
+            'frontend/images/main-image/brand/onePlus.png',
+            'frontend/images/main-image/brand/oppo.png',
+            'frontend/images/main-image/brand/realme.jpg',
+            'frontend/images/main-image/brand/samsung.png',
+        ];
+
+        if ($brand->logo && !in_array($brand->logo, $defaultImages)) {
+            $this->deleteImage($brand->logo);
+        }
+
         $brand->delete();
         return response(['status' => 'success', 'message' => 'Deleted Successfully!']);
     }
