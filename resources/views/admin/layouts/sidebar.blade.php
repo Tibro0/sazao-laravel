@@ -4,14 +4,14 @@
         <li class="menu-title">Dashboard</li>
         <li>
             <a href="{{ route('admin.dashboard') }}" class="waves-effect">
-                <i class="ri-dashboard-line"></i>
+                <i class="ri-home-4-line"></i>
                 <span>Dashboard</span>
             </a>
         </li>
         <li class="menu-title">Ecommerce</li>
         <li>
             <a href="javascript: void(0);" class="has-arrow waves-effect">
-                <i class="ri-mail-send-line"></i>
+                <i class="ri-align-justify"></i>
                 <span>Manage Categories</span>
             </a>
             <ul class="sub-menu" aria-expanded="false">
@@ -26,7 +26,7 @@
 
         <li>
             <a href="javascript: void(0);" class="has-arrow waves-effect">
-                <i class="ri-mail-send-line"></i>
+                <i class="ri-product-hunt-line"></i>
                 <span>Manage Products</span>
             </a>
             <ul class="sub-menu" aria-expanded="false">
@@ -47,7 +47,7 @@
 
         <li>
             <a href="javascript: void(0);" class="has-arrow waves-effect">
-                <i class="ri-mail-send-line"></i>
+                <i class="ri-list-unordered"></i>
                 <span>Manage Orders</span>
             </a>
             <ul class="sub-menu" aria-expanded="false">
@@ -72,14 +72,14 @@
 
         <li class="{{ adminSidebarActive(['admin.transaction']) }}">
             <a href="{{ route('admin.transaction') }}" class="waves-effect">
-                <i class="ri-dashboard-line"></i>
+                <i class="ri-file-transfer-line"></i>
                 <span>Transaction</span>
             </a>
         </li>
 
         <li>
             <a href="javascript: void(0);" class="has-arrow waves-effect">
-                <i class="ri-mail-send-line"></i>
+                <i class="ri-command-line"></i>
                 <span>E-commerce</span>
             </a>
             <ul class="sub-menu" aria-expanded="false">
@@ -98,7 +98,7 @@
 
         <li>
             <a href="javascript: void(0);" class="has-arrow waves-effect">
-                <i class="ri-mail-send-line"></i>
+                <i class="ri-bank-card-fill"></i>
                 <span>Withdraw Payments</span>
             </a>
             <ul class="sub-menu" aria-expanded="false">
@@ -111,7 +111,7 @@
 
         <li>
             <a href="javascript: void(0);" class="has-arrow waves-effect">
-                <i class="ri-mail-send-line"></i>
+                <i class="ri-earth-fill"></i>
                 <span>Manage Website</span>
             </a>
             <ul class="sub-menu" aria-expanded="false">
@@ -132,14 +132,14 @@
 
         <li class="{{ adminSidebarActive(['admin.advertisement.index']) }}">
             <a href="{{ route('admin.advertisement.index') }}" class="waves-effect">
-                <i class="ri-dashboard-line"></i>
+                <i class="ri-advertisement-line"></i>
                 <span>Advertisement</span>
             </a>
         </li>
 
         <li>
             <a href="javascript: void(0);" class="has-arrow waves-effect">
-                <i class="ri-mail-send-line"></i>
+                <i class="ri-newspaper-line"></i>
                 <span>Manage Blog</span>
             </a>
             <ul class="sub-menu" aria-expanded="false">
@@ -156,7 +156,7 @@
 
         <li>
             <a href="javascript: void(0);" class="has-arrow waves-effect">
-                <i class="ri-mail-send-line"></i>
+                <i class="ri-footprint-fill"></i>
                 <span>Footer</span>
             </a>
             <ul class="sub-menu" aria-expanded="false">
@@ -173,7 +173,7 @@
 
         <li>
             <a href="javascript: void(0);" class="has-arrow waves-effect">
-                <i class="ri-mail-send-line"></i>
+                <i class="ri-user-3-line"></i>
                 <span>Users</span>
             </a>
             <ul class="sub-menu" aria-expanded="false">
@@ -192,14 +192,14 @@
 
         <li class="{{ adminSidebarActive(['admin.subscribers.*']) }}">
             <a href="{{ route('admin.subscribers.index') }}" class="waves-effect">
-                <i class="ri-dashboard-line"></i>
+                <i class="ri-thumb-up-fill"></i>
                 <span>Subscribers</span>
             </a>
         </li>
 
         <li class="{{ adminSidebarActive(['admin.settings.*']) }}">
             <a href="{{ route('admin.settings.index') }}" class="waves-effect">
-                <i class="ri-dashboard-line"></i>
+                <i class="ri-settings-2-line"></i>
                 <span>Settings</span>
             </a>
         </li>
