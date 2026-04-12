@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Backend;
+namespace App\Http\Controllers\Api\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Brand;
 use App\Models\Product;
 use App\Traits\ImageUploadTrait;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
 class BrandController extends Controller
@@ -18,7 +19,10 @@ class BrandController extends Controller
     public function index()
     {
         $brands = Brand::orderBy('id', 'DESC')->get();
-        return view('admin.brand.index', compact('brands'));
+        return response()->json([
+            'status' => 200,
+            'data' => $brands
+        ], 200);
     }
 
     /**
@@ -26,7 +30,7 @@ class BrandController extends Controller
      */
     public function create()
     {
-        return view('admin.brand.create');
+        //
     }
 
     /**
@@ -34,15 +38,22 @@ class BrandController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'logo' => ['required', 'image', 'max:2048', 'dimensions:width=1280,height=640'],
-            'name' => ['required', 'max:255'],
-            'is_featured' => ['required', 'boolean'],
-            'status' => ['required', 'boolean'],
+        $validator = Validator::make($request->all(), [
+            'logo' => 'required|image|max:2048|dimensions:width=1280,height=640',
+            'name' => 'required|max:255',
+            'is_featured' => 'required|boolean',
+            'status' => 'required|boolean',
         ], [
             'is_featured.required' => 'Please Select a is Featured',
             'status.required' => 'Please Select a Status'
         ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 400,
+                'errors' => $validator->errors(),
+            ], 400);
+        }
 
         $logoPath = $this->uploadImage($request, 'logo', 'uploads/brand_images');
         $brand = new Brand();
@@ -53,11 +64,10 @@ class BrandController extends Controller
         $brand->status = $request->status;
         $brand->save();
 
-        return redirect()->route('admin.brand.index')->with('toast', [
-            'type' => 'success',
-            'title' => 'Success',
-            'message' => 'Created Successfully!'
-        ]);
+        return response()->json([
+            'status' => 200,
+            'message' => 'Created Successfully!',
+        ], 200);
     }
 
     /**
@@ -65,7 +75,19 @@ class BrandController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $brand = Brand::find($id);
+
+        if ($brand == null) {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Brand Not Found!',
+            ], 404);
+        }
+
+        return response()->json([
+            'status' => 200,
+            'data' => $brand,
+        ], 200);
     }
 
     /**
@@ -73,8 +95,7 @@ class BrandController extends Controller
      */
     public function edit(string $id)
     {
-        $brand = Brand::findOrFail($id);
-        return view('admin.brand.edit', compact('brand'));
+        //
     }
 
     /**
@@ -82,17 +103,31 @@ class BrandController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $request->validate([
-            'logo' => ['nullable', 'image', 'max:2048', 'dimensions:width=1280,height=640'],
-            'name' => ['required', 'max:255'],
-            'is_featured' => ['required', 'boolean'],
-            'status' => ['required', 'boolean'],
+        $brand = Brand::find($id);
+
+        if ($brand == null) {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Brand Not Found!',
+            ], 404);
+        }
+
+        $validator = Validator::make($request->all(), [
+            'logo' => 'nullable|image|max:2048|dimensions:width=1280,height=640',
+            'name' => 'required|max:255',
+            'is_featured' => 'required|boolean',
+            'status' => 'required|boolean',
         ], [
             'is_featured.required' => 'Please Select a is Featured',
             'status.required' => 'Please Select a Status'
         ]);
 
-        $brand = Brand::findOrFail($id);
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 400,
+                'errors' => $validator->errors(),
+            ], 400);
+        }
 
         $defaultImages = [
             'frontend/images/main-image/brand/apple.png',
@@ -122,11 +157,10 @@ class BrandController extends Controller
         $brand->status = $request->status;
         $brand->save();
 
-        return redirect()->route('admin.brand.index')->with('toast', [
-            'type' => 'success',
-            'title' => 'Success',
-            'message' => 'Updated Successfully!'
-        ]);;
+        return response()->json([
+            'status' => 200,
+            'message' => 'Updated Successfully!',
+        ], 200);
     }
 
     /**
@@ -134,9 +168,20 @@ class BrandController extends Controller
      */
     public function destroy(string $id)
     {
-        $brand = Brand::findOrFail($id);
+        $brand = Brand::find($id);
+
+        if ($brand == null) {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Brand Not Found!',
+            ], 404);
+        }
+
         if (Product::where(['brand_id' => $brand->id])->count() > 0) {
-            return response(['status' => 'error', 'message' => 'This Brand Have Products you cant Delete It.']);
+            return response()->json([
+                'status' => 403,
+                'message' => 'This Brand Have Products you cant Delete It.',
+            ], 403);
         }
 
         $defaultImages = [
@@ -154,14 +199,10 @@ class BrandController extends Controller
         }
 
         $brand->delete();
-        return response(['status' => 'success', 'message' => 'Deleted Successfully!']);
-    }
 
-    public function changeStatus(Request $request)
-    {
-        $brand = Brand::findOrFail($request->id);
-        $brand->status = $request->status == 'true' ? 1 : 0;
-        $brand->save();
-        return response(['status' => 'success', 'message' => 'Status has been Updated!']);
+        return response()->json([
+            'status' => 200,
+            'message' => 'Deleted Successfully!',
+        ], 200);
     }
 }
