@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Product;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -144,11 +145,18 @@ class CategoryController extends Controller
         }
 
         $subCategory = SubCategory::where('category_id', $category->id)->count();
-        
+
         if ($subCategory > 0) {
             return response()->json([
                 'status' => 403,
                 'message' => 'This Items Contain, Sub Items For Delete This you Have to Delete the Sub Item First!',
+            ], 403);
+        }
+
+        if (Product::where(['category_id' => $category->id])->count() > 0) {
+            return response()->json([
+                'status' => 403,
+                'message' => 'This Item Content Relation Some Products. You cant Delete It.',
             ], 403);
         }
 

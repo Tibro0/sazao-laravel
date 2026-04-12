@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\ChildCategory;
+use App\Models\Product;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -113,11 +114,19 @@ class SubCategoryController extends Controller
     public function destroy(string $id)
     {
         $subCategory = SubCategory::findOrFail($id);
+
         $childCategory = ChildCategory::where('sub_category_id', $subCategory->id)->count();
+
         if ($childCategory > 0) {
             return response(['status' => 'error', 'message' => 'This Items Contain, Sub Items For Delete This you Have to Delete the Sub Item First!']);
         }
+
+        if (Product::where(['sub_category_id' => $subCategory->id])->count() > 0) {
+            return response(['status' => 'error', 'message' => 'This Item Content Relation Some Products. You cant Delete It.']);
+        }
+
         $subCategory->delete();
+
         return response(['status' => 'success', 'message' => 'Deleted Successfully!']);
     }
 
