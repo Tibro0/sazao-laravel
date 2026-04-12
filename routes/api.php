@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\Auth\AuthController;
 use App\Http\Controllers\Api\Backend\CategoryController;
+use App\Http\Controllers\Api\Backend\SubCategoryController;
 use Illuminate\Support\Facades\Route;
 
 // Route::get('/user', function (Request $request) {
@@ -13,18 +14,27 @@ Route::controller(AuthController::class)->group(function () {
 });
 
 Route::group(['middleware' => ['auth:sanctum', 'apiRole:admin'], 'prefix' => 'admin'], function () {
-    // Admin Logout Route
+    // Logout Route
     Route::controller(AuthController::class)->group(function () {
         Route::post('logout', 'logout');
     });
 
-    // Admin Category Routes
+    // Categories Routes
     Route::controller(CategoryController::class)->group(function () {
         Route::get('categories', 'index');
         Route::post('categories', 'store');
         Route::get('categories/{id}', 'show');
         Route::put('categories/{id}', 'update');
         Route::delete('categories/{id}', 'destroy');
+    });
+
+    // Sub Categories Routes
+    Route::controller(SubCategoryController::class)->group(function () {
+        Route::get('sub-categories', 'index');
+        Route::post('sub-categories', 'store');
+        Route::get('sub-categories/{id}', 'show');
+        Route::put('sub-categories/{id}', 'update');
+        Route::delete('sub-categories/{id}', 'destroy');
     });
 });
 
