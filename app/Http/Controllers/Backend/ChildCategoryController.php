@@ -134,7 +134,7 @@ class ChildCategoryController extends Controller
     {
         $ChildCategory = ChildCategory::findOrFail($id);
         if (Product::where(['child_category_id' => $ChildCategory->id])->count() > 0) {
-            return response(['status' => 'error', 'message' => 'This Item Content Relation cant Delete It.']);
+            return response(['status' => 'error', 'message' => 'This Item Content Relation Some Products. You cant Delete It.']);
         }
 
         $homeSettings = HomePageSetting::all();
@@ -142,7 +142,7 @@ class ChildCategoryController extends Controller
             $array = json_decode($item->value, true);
             $collection = collect($array);
             if ($collection->contains('child_category', $ChildCategory->id)) {
-                return response(['status' => 'error', 'message' => 'This Item Content Relation cant Delete It.']);
+                return response(['status' => 'error', 'message' => 'This Item Content Relation Home Page Content. You cant Delete It.']);
             }
         }
         $ChildCategory->delete();

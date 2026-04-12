@@ -4,22 +4,24 @@ namespace App\Http\Controllers\Api\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\ChildCategory;
+use App\Models\HomePageSetting;
+use App\Models\Product;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
-class SubCategoryController extends Controller
+class ChildCategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $subCategories = SubCategory::with(['category:id,name'])->orderBy('id', 'DESC')->get();
+        $childCategories = ChildCategory::with(['category:id,name', 'subCategory:id,name'])->orderBy('id', 'DESC')->get();
         return response()->json([
             'status' => 200,
-            'data' => $subCategories
+            'data' => $childCategories
         ], 200);
     }
 
@@ -38,10 +40,12 @@ class SubCategoryController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'category' => 'required|integer',
-            'name' => 'required|max:200|unique:sub_categories,name',
+            'sub_category' => 'required|integer',
+            'name' => 'required|max:200|unique:child_categories,name',
             'status' => 'required|boolean',
         ], [
             'category.required' => 'Please Select a Category',
+            'sub_category.required' => 'Please Select a Sub Category'
         ]);
 
         if ($validator->fails()) {
@@ -51,12 +55,13 @@ class SubCategoryController extends Controller
             ], 400);
         }
 
-        $subCategory = new SubCategory();
-        $subCategory->category_id = $request->category;
-        $subCategory->name = $request->name;
-        $subCategory->slug = Str::slug($request->name);
-        $subCategory->status = $request->status;
-        $subCategory->save();
+        $childCategory = new ChildCategory();
+        $childCategory->category_id = $request->category;
+        $childCategory->sub_category_id = $request->sub_category;
+        $childCategory->name = $request->name;
+        $childCategory->slug = Str::slug($request->name);
+        $childCategory->status = $request->status;
+        $childCategory->save();
 
         return response()->json([
             'status' => 200,
@@ -69,18 +74,18 @@ class SubCategoryController extends Controller
      */
     public function show(string $id)
     {
-        $subCategory = SubCategory::with(['category:id,name'])->find($id);
+        $childCategory = ChildCategory::with(['category:id,name', 'subCategory:id,name'])->find($id);
 
-        if ($subCategory === null) {
+        if ($childCategory == null) {
             return response()->json([
                 'status' => 404,
-                'message' => 'Sub Category Not Found!',
+                'message' => 'Child Category Not Found!'
             ], 404);
         }
 
         return response()->json([
             'status' => 200,
-            'data' => $subCategory
+            'data' => $childCategory
         ], 200);
     }
 
@@ -97,21 +102,23 @@ class SubCategoryController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $subCategory = SubCategory::with(['category'])->find($id);
+        $childCategory = ChildCategory::with(['category:id,name', 'subCategory:id,name'])->find($id);
 
-        if ($subCategory === null) {
+        if ($childCategory == null) {
             return response()->json([
                 'status' => 404,
-                'message' => 'Sub Category Not Found!',
+                'message' => 'Child Category Not Found!'
             ], 404);
         }
 
         $validator = Validator::make($request->all(), [
             'category' => 'required|integer',
-            'name' => 'required|max:200|unique:sub_categories,name,' . $id,
+            'sub_category' => 'required|integer',
+            'name' => 'required|max:200|unique:child_categories,name,' . $id,
             'status' => 'required|boolean',
         ], [
             'category.required' => 'Please Select a Category',
+            'sub_category.required' => 'Please Select a Sub Category'
         ]);
 
         if ($validator->fails()) {
@@ -121,11 +128,12 @@ class SubCategoryController extends Controller
             ], 400);
         }
 
-        $subCategory->category_id = $request->category;
-        $subCategory->name = $request->name;
-        $subCategory->slug = Str::slug($request->name);
-        $subCategory->status = $request->status;
-        $subCategory->save();
+        $childCategory->category_id = $request->category;
+        $childCategory->sub_category_id = $request->sub_category;
+        $childCategory->name = $request->name;
+        $childCategory->slug = Str::slug($request->name);
+        $childCategory->status = $request->status;
+        $childCategory->save();
 
         return response()->json([
             'status' => 200,
@@ -138,29 +146,49 @@ class SubCategoryController extends Controller
      */
     public function destroy(string $id)
     {
-        $subCategory = SubCategory::find($id);
+        $ChildCategory = ChildCategory::find($id);
 
-        if ($subCategory === null) {
+        if ($ChildCategory == null) {
             return response()->json([
                 'status' => 404,
-                'message' => 'Sub Category Not Found!',
+                'message' => 'Child Category Not Found!'
             ], 404);
         }
 
-        $childCategory = ChildCategory::where('sub_category_id', $subCategory->id)->count();
-
-        if ($childCategory > 0) {
+        if (Product::where(['child_category_id' => $ChildCategory->id])->count() > 0) {
             return response()->json([
                 'status' => 403,
-                'message' => 'This Items Contain, Sub Items For Delete This you Have to Delete the Sub Item First!',
+                'message' => 'This Item Content Relation Some Products. You cant Delete It.'
             ], 403);
         }
 
-        $subCategory->delete();
+        $homeSettings = HomePageSetting::all();
+        foreach ($homeSettings as $item) {
+            $array = json_decode($item->value, true);
+            $collection = collect($array);
+            if ($collection->contains('child_category', $ChildCategory->id)) {
+                return response()->json([
+                    'status' => 403,
+                    'message' => 'This Item Content Relation Home Page Content. You cant Delete It.'
+                ], 403);
+            }
+        }
+
+        $ChildCategory->delete();
 
         return response()->json([
             'status' => 200,
             'message' => 'Deleted Successfully!',
+        ], 200);
+    }
+
+    public function getSubCategory(string $categoryId)
+    {
+        $subCategories = SubCategory::where(['category_id' => $categoryId])->get();
+
+        return response()->json([
+            'status' => 200,
+            'data' => $subCategories
         ], 200);
     }
 }

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\Auth\AuthController;
 use App\Http\Controllers\Api\Backend\CategoryController;
+use App\Http\Controllers\Api\Backend\ChildCategoryController;
 use App\Http\Controllers\Api\Backend\SubCategoryController;
 use Illuminate\Support\Facades\Route;
 
@@ -36,6 +37,17 @@ Route::group(['middleware' => ['auth:sanctum', 'apiRole:admin'], 'prefix' => 'ad
         Route::put('sub-categories/{id}', 'update');
         Route::delete('sub-categories/{id}', 'destroy');
     });
+
+    // Child Categories Routes
+    Route::controller(ChildCategoryController::class)->group(function () {
+        Route::get('child-categories', 'index');
+        Route::post('child-categories', 'store');
+        Route::get('child-categories/{id}', 'show');
+        Route::put('child-categories/{id}', 'update');
+        Route::delete('child-categories/{id}', 'destroy');
+        Route::get('get-sub-categories/{categoryId}', 'getSubCategory');
+    });
+
 });
 
 Route::group(['middleware' => ['auth:sanctum', 'apiRole:vendor'], 'prefix' => 'vendor'], function () {
