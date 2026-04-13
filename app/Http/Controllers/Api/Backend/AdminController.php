@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Backend;
+namespace App\Http\Controllers\Api\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Order;
 use App\Models\Blog;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\NewsletterSubscribe;
-use App\Models\Order;
 use App\Models\ProductReview;
 use App\Models\User;
 use Carbon\Carbon;
@@ -34,11 +34,26 @@ class AdminController extends Controller
         $totalVendors = User::where(['role' => 'vendor'])->count();
         $totalUsers = User::where(['role' => 'user'])->count();
 
-        return view('admin.dashboard', compact('todaysOrder', 'todaysPendingOrder', 'totalOrders', 'totalPendingOrders', 'totalCanceledOrders', 'totalCompleteOrders', 'todaysEarnings', 'monthEarnings', 'yearEarnings', 'totalReview', 'totalBrands', 'totalCategories', 'totalBlogs', 'totalSubscribers', 'totalVendors', 'totalUsers'));
-    }
-
-    public function login()
-    {
-        return view('admin.auth.login');
+        return response()->json([
+            'status' => 200,
+            'data' => [
+                'todaysOrder' => $todaysOrder,
+                'todaysPendingOrder' => $todaysPendingOrder,
+                'totalOrders' => $totalOrders,
+                'totalPendingOrders' => $totalPendingOrders,
+                'totalCanceledOrders' => $totalCanceledOrders,
+                'totalCompleteOrders' => $totalCompleteOrders,
+                'todaysEarnings' => $todaysEarnings,
+                'monthEarnings' => $monthEarnings,
+                'yearEarnings' => $yearEarnings,
+                'totalReview' => $totalReview,
+                'totalBrands' => $totalBrands,
+                'totalCategories' => $totalCategories,
+                'totalBlogs' => $totalBlogs,
+                'totalSubscribers' => $totalSubscribers,
+                'totalVendors' => $totalVendors,
+                'totalUsers' => $totalUsers,
+            ]
+        ], 200);
     }
 }

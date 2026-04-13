@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\Auth\AuthController;
+use App\Http\Controllers\Api\Backend\AdminController;
 use App\Http\Controllers\Api\Backend\BrandController;
 use App\Http\Controllers\Api\Backend\CategoryController;
 use App\Http\Controllers\Api\Backend\ChildCategoryController;
@@ -17,6 +18,12 @@ Route::controller(AuthController::class)->group(function () {
 });
 
 Route::group(['middleware' => ['auth:sanctum', 'apiRole:admin'], 'prefix' => 'admin'], function () {
+
+    // Dashboard Route
+    Route::controller(AdminController::class)->group(function () {
+        Route::get('dashboard', 'dashboard');
+    });
+
     // Profile Routes
     Route::controller(ProfileController::class)->group(function () {
         Route::get('profile', 'index');
