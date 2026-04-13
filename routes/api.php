@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\Auth\AuthController;
 use App\Http\Controllers\Api\Backend\BrandController;
 use App\Http\Controllers\Api\Backend\CategoryController;
 use App\Http\Controllers\Api\Backend\ChildCategoryController;
+use App\Http\Controllers\Api\Backend\ProfileController;
 use App\Http\Controllers\Api\Backend\SubCategoryController;
 use Illuminate\Support\Facades\Route;
 
@@ -16,6 +17,13 @@ Route::controller(AuthController::class)->group(function () {
 });
 
 Route::group(['middleware' => ['auth:sanctum', 'apiRole:admin'], 'prefix' => 'admin'], function () {
+    // Profile Routes
+    Route::controller(ProfileController::class)->group(function () {
+        Route::get('profile', 'index');
+        Route::post('profile/update', 'updateProfile');
+        Route::post('profile/update-password', 'updatePassword');
+    });
+
     // Logout Route
     Route::controller(AuthController::class)->group(function () {
         Route::post('logout', 'logout');
@@ -57,7 +65,6 @@ Route::group(['middleware' => ['auth:sanctum', 'apiRole:admin'], 'prefix' => 'ad
         Route::post('brands/{id}', 'update');
         Route::delete('brands/{id}', 'destroy');
     });
-
 });
 
 Route::group(['middleware' => ['auth:sanctum', 'apiRole:vendor'], 'prefix' => 'vendor'], function () {
