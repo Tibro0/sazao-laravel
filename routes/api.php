@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\Backend\AdminController;
 use App\Http\Controllers\Api\Backend\BrandController;
 use App\Http\Controllers\Api\Backend\CategoryController;
 use App\Http\Controllers\Api\Backend\ChildCategoryController;
+use App\Http\Controllers\Api\Backend\OrderController;
 use App\Http\Controllers\Api\Backend\ProfileController;
 use App\Http\Controllers\Api\Backend\SubCategoryController;
 use Illuminate\Support\Facades\Route;
@@ -71,6 +72,23 @@ Route::group(['middleware' => ['auth:sanctum', 'apiRole:admin'], 'prefix' => 'ad
         Route::get('brands/{id}', 'show');
         Route::post('brands/{id}', 'update');
         Route::delete('brands/{id}', 'destroy');
+    });
+
+    // Order Routes
+    Route::controller(OrderController::class)->group(function () {
+        Route::get('orders', 'index');
+        Route::get('orders/{id}', 'show');
+        Route::get('orders-pending', 'pendingOrders');
+        Route::get('orders-processed', 'processedOrders');
+        Route::get('orders-dropped-off', 'DroppedOffOrders');
+        Route::get('orders-shipped', 'shippedOrders');
+        Route::get('orders-out-for-delivery', 'outForDeliveryOrders');
+        Route::get('orders-delivered', 'deliveredOrders');
+        Route::get('orders-canceled', 'canceledOrders');
+        Route::delete('orders/{id}', 'destroy');
+
+        Route::post('change-order-status/{id}', 'changeOrderStatus');
+        Route::post('change-payment-status/{id}', 'changePaymentStatus');
     });
 });
 

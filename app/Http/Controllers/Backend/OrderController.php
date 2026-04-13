@@ -73,6 +73,11 @@ class OrderController extends Controller
     public function changeOrderStatus(Request $request)
     {
         $order = Order::findOrFail($request->id);
+
+        $request->validate([
+            'status' => ['required', 'in:pending,processed_and_ready_to_ship,dropped_off,shipped,out_for_delivery,delivered,canceled']
+        ]);
+
         $order->order_status = $request->status;
         $order->save();
 
@@ -82,6 +87,11 @@ class OrderController extends Controller
     public function changePaymentStatus(Request $request)
     {
         $paymentStatus = Order::findOrFail($request->id);
+
+        $request->validate([
+            'status' => ['required', 'boolean']
+        ]);
+
         $paymentStatus->payment_status = $request->status;
         $paymentStatus->save();
 
