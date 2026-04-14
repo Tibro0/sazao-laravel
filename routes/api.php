@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\Backend\AdminController;
 use App\Http\Controllers\Api\Backend\BrandController;
 use App\Http\Controllers\Api\Backend\CategoryController;
 use App\Http\Controllers\Api\Backend\ChildCategoryController;
+use App\Http\Controllers\Api\Backend\FlashSaleController;
 use App\Http\Controllers\Api\Backend\OrderController;
 use App\Http\Controllers\Api\Backend\ProfileController;
 use App\Http\Controllers\Api\Backend\SubCategoryController;
@@ -94,6 +95,13 @@ Route::group(['middleware' => ['auth:sanctum', 'apiRole:admin'], 'prefix' => 'ad
     // Transaction Routes
     Route::controller(TransactionController::class)->group(function () {
         Route::get('transactions', 'index');
+    });
+
+    // Flash Sale Routes
+    Route::controller(FlashSaleController::class)->group(function () {
+        Route::get('flash-sale', 'index');
+        Route::post('flash-sale-date/update', 'update');
+        Route::post('flash-sale/add-product', 'addProduct');
     });
 });
 
