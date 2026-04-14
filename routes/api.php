@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\Backend\ChildCategoryController;
 use App\Http\Controllers\Api\Backend\OrderController;
 use App\Http\Controllers\Api\Backend\ProfileController;
 use App\Http\Controllers\Api\Backend\SubCategoryController;
+use App\Http\Controllers\Api\Backend\TransactionController;
 use Illuminate\Support\Facades\Route;
 
 // Route::get('/user', function (Request $request) {
@@ -86,9 +87,13 @@ Route::group(['middleware' => ['auth:sanctum', 'apiRole:admin'], 'prefix' => 'ad
         Route::get('orders-delivered', 'deliveredOrders');
         Route::get('orders-canceled', 'canceledOrders');
         Route::delete('orders/{id}', 'destroy');
-
         Route::post('change-order-status/{id}', 'changeOrderStatus');
         Route::post('change-payment-status/{id}', 'changePaymentStatus');
+    });
+
+    // Transaction Routes
+    Route::controller(TransactionController::class)->group(function () {
+        Route::get('transactions', 'index');
     });
 });
 
