@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\Auth\AuthController;
 use App\Http\Controllers\Api\Backend\AdminController;
+use App\Http\Controllers\Api\Backend\AdminVendorProfileController;
 use App\Http\Controllers\Api\Backend\BrandController;
 use App\Http\Controllers\Api\Backend\CategoryController;
 use App\Http\Controllers\Api\Backend\ChildCategoryController;
@@ -122,6 +123,12 @@ Route::group(['middleware' => ['auth:sanctum', 'apiRole:admin'], 'prefix' => 'ad
         Route::get('shipping-rules/{id}', 'show');
         Route::put('shipping-rules/{id}', 'update');
         Route::delete('shipping-rules/{id}', 'destroy');
+    });
+
+    // Vendor Profile Route
+    Route::controller(AdminVendorProfileController::class)->group(function () {
+        Route::get('vendor-profile', 'index');
+        Route::post('vendor-profile', 'store');
     });
 });
 
