@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\Backend\AdminController;
 use App\Http\Controllers\Api\Backend\BrandController;
 use App\Http\Controllers\Api\Backend\CategoryController;
 use App\Http\Controllers\Api\Backend\ChildCategoryController;
+use App\Http\Controllers\Api\Backend\CouponController;
 use App\Http\Controllers\Api\Backend\FlashSaleController;
 use App\Http\Controllers\Api\Backend\OrderController;
 use App\Http\Controllers\Api\Backend\ProfileController;
@@ -102,6 +103,15 @@ Route::group(['middleware' => ['auth:sanctum', 'apiRole:admin'], 'prefix' => 'ad
         Route::get('flash-sale', 'index');
         Route::post('flash-sale-date/update', 'update');
         Route::post('flash-sale/add-product', 'addProduct');
+    });
+
+    // Coupon Routes
+    Route::controller(CouponController::class)->group(function () {
+        Route::get('coupons', 'index');
+        Route::post('coupons', 'store');
+        Route::get('coupons/{id}', 'show');
+        Route::put('coupons/{id}', 'update');
+        Route::delete('coupons/{id}', 'destroy');
     });
 });
 
