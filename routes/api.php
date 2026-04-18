@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\Backend\CouponController;
 use App\Http\Controllers\Api\Backend\FlashSaleController;
 use App\Http\Controllers\Api\Backend\OrderController;
 use App\Http\Controllers\Api\Backend\ProfileController;
+use App\Http\Controllers\Api\Backend\ShippingRuleController;
 use App\Http\Controllers\Api\Backend\SubCategoryController;
 use App\Http\Controllers\Api\Backend\TransactionController;
 use Illuminate\Support\Facades\Route;
@@ -112,6 +113,15 @@ Route::group(['middleware' => ['auth:sanctum', 'apiRole:admin'], 'prefix' => 'ad
         Route::get('coupons/{id}', 'show');
         Route::put('coupons/{id}', 'update');
         Route::delete('coupons/{id}', 'destroy');
+    });
+
+    // Shipping Rule Routes
+    Route::controller(ShippingRuleController::class)->group(function () {
+        Route::get('shipping-rules', 'index');
+        Route::post('shipping-rules', 'store');
+        Route::get('shipping-rules/{id}', 'show');
+        Route::put('shipping-rules/{id}', 'update');
+        Route::delete('shipping-rules/{id}', 'destroy');
     });
 });
 
