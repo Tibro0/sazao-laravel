@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\Backend\ChildCategoryController;
 use App\Http\Controllers\Api\Backend\CouponController;
 use App\Http\Controllers\Api\Backend\FlashSaleController;
 use App\Http\Controllers\Api\Backend\OrderController;
+use App\Http\Controllers\Api\Backend\PaymentSettingController;
 use App\Http\Controllers\Api\Backend\ProfileController;
 use App\Http\Controllers\Api\Backend\ShippingRuleController;
 use App\Http\Controllers\Api\Backend\SubCategoryController;
@@ -129,6 +130,11 @@ Route::group(['middleware' => ['auth:sanctum', 'apiRole:admin'], 'prefix' => 'ad
     Route::controller(AdminVendorProfileController::class)->group(function () {
         Route::get('vendor-profile', 'index');
         Route::post('vendor-profile', 'store');
+    });
+
+    // Payment Setting Route
+    Route::controller(PaymentSettingController::class)->group(function () {
+        Route::get('payment-setting', 'index');
     });
 });
 
