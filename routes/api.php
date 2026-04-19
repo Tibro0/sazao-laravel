@@ -10,6 +10,7 @@ use App\Http\Controllers\Api\Backend\CouponController;
 use App\Http\Controllers\Api\Backend\FlashSaleController;
 use App\Http\Controllers\Api\Backend\OrderController;
 use App\Http\Controllers\Api\Backend\PaymentSettingController;
+use App\Http\Controllers\Api\Backend\PaypalSettingController;
 use App\Http\Controllers\Api\Backend\ProfileController;
 use App\Http\Controllers\Api\Backend\ShippingRuleController;
 use App\Http\Controllers\Api\Backend\SubCategoryController;
@@ -136,6 +137,23 @@ Route::group(['middleware' => ['auth:sanctum', 'apiRole:admin'], 'prefix' => 'ad
     Route::controller(PaymentSettingController::class)->group(function () {
         Route::get('payment-setting', 'index');
     });
+
+    // PayPal Setting Routes
+    Route::controller(PaypalSettingController::class)->group(function () {
+        Route::put('paypal-setting', 'update');
+    });
+
+    // Route::controller(StripeSettingController::class)->group(function () {
+    //     Route::put('stripe-setting/{id}', 'update');
+    // });
+
+    // Route::controller(RazorPaySettingController::class)->group(function () {
+    //     Route::put('razorpay-setting/{id}', 'update');
+    // });
+
+    // Route::controller(CodSettingController::class)->group(function () {
+    //     Route::put('cod-setting/{id}', 'update');
+    // });
 });
 
 Route::group(['middleware' => ['auth:sanctum', 'apiRole:vendor'], 'prefix' => 'vendor'], function () {

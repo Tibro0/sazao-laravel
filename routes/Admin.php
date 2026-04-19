@@ -414,12 +414,15 @@ Route::controller(PaymentSettingController::class)->group(function () {
     Route::get('payment-settings', 'index')->name('payment-settings.index');
     Route::get('admin-payment-setting-list-style', 'adminPaymentSettingListStyle')->name('admin-payment-setting-list-style');
 });
+
 Route::controller(PaypalSettingController::class)->group(function () {
     Route::put('paypal-setting/{id}', 'update')->name('paypal-setting.update');
 });
+
 Route::controller(StripeSettingController::class)->group(function () {
     Route::put('stripe-setting/{id}', 'update')->name('stripe-setting.update');
 });
+
 Route::controller(RazorPaySettingController::class)->group(function () {
     Route::put('razorpay-setting/{id}', 'update')->name('razorpay-setting.update');
 });
