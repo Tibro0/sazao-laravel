@@ -12,6 +12,7 @@ use App\Http\Controllers\Api\Backend\OrderController;
 use App\Http\Controllers\Api\Backend\PaymentSettingController;
 use App\Http\Controllers\Api\Backend\PaypalSettingController;
 use App\Http\Controllers\Api\Backend\ProfileController;
+use App\Http\Controllers\Api\Backend\RazorPaySettingController;
 use App\Http\Controllers\Api\Backend\ShippingRuleController;
 use App\Http\Controllers\Api\Backend\StripeSettingController;
 use App\Http\Controllers\Api\Backend\SubCategoryController;
@@ -144,16 +145,18 @@ Route::group(['middleware' => ['auth:sanctum', 'apiRole:admin'], 'prefix' => 'ad
         Route::put('paypal-setting', 'update');
     });
 
+    // Stripe Setting Routes
     Route::controller(StripeSettingController::class)->group(function () {
         Route::put('stripe-setting', 'update');
     });
 
-    // Route::controller(RazorPaySettingController::class)->group(function () {
-    //     Route::put('razorpay-setting/{id}', 'update');
-    // });
+    // RazorPay Setting Routes
+    Route::controller(RazorPaySettingController::class)->group(function () {
+        Route::put('razorpay-setting', 'update');
+    });
 
     // Route::controller(CodSettingController::class)->group(function () {
-    //     Route::put('cod-setting/{id}', 'update');
+    //     Route::put('cod-setting', 'update');
     // });
 });
 
