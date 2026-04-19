@@ -22,7 +22,7 @@ class StripeSettingController extends Controller
             ],
             [
                 'client_id.required' => 'The Stripe Client Id Field is Required',
-                'client_id.required' => 'The Stripe Secret Key Field is Required',
+                'secret_key.required' => 'The Stripe Secret Key Field is Required',
             ]
         );
 

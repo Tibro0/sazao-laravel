@@ -13,6 +13,7 @@ use App\Http\Controllers\Api\Backend\PaymentSettingController;
 use App\Http\Controllers\Api\Backend\PaypalSettingController;
 use App\Http\Controllers\Api\Backend\ProfileController;
 use App\Http\Controllers\Api\Backend\ShippingRuleController;
+use App\Http\Controllers\Api\Backend\StripeSettingController;
 use App\Http\Controllers\Api\Backend\SubCategoryController;
 use App\Http\Controllers\Api\Backend\TransactionController;
 use Illuminate\Support\Facades\Route;
@@ -143,9 +144,9 @@ Route::group(['middleware' => ['auth:sanctum', 'apiRole:admin'], 'prefix' => 'ad
         Route::put('paypal-setting', 'update');
     });
 
-    // Route::controller(StripeSettingController::class)->group(function () {
-    //     Route::put('stripe-setting/{id}', 'update');
-    // });
+    Route::controller(StripeSettingController::class)->group(function () {
+        Route::put('stripe-setting', 'update');
+    });
 
     // Route::controller(RazorPaySettingController::class)->group(function () {
     //     Route::put('razorpay-setting/{id}', 'update');

@@ -22,7 +22,7 @@ class PaypalSettingController extends Controller
             ],
             [
                 'client_id.required' => 'The PayPal Client Id Field is Required',
-                'client_id.required' => 'The PayPal Secret Key Field is Required',
+                'secret_key.required' => 'The PayPal Secret Key Field is Required',
             ]
         );
 
