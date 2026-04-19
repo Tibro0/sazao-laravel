@@ -18,6 +18,7 @@ use App\Http\Controllers\Api\Backend\ShippingRuleController;
 use App\Http\Controllers\Api\Backend\StripeSettingController;
 use App\Http\Controllers\Api\Backend\SubCategoryController;
 use App\Http\Controllers\Api\Backend\TransactionController;
+use App\Http\Controllers\Api\Backend\WithdrawController;
 use App\Http\Controllers\Api\Backend\WithdrawMethodController;
 use Illuminate\Support\Facades\Route;
 
@@ -169,6 +170,13 @@ Route::group(['middleware' => ['auth:sanctum', 'apiRole:admin'], 'prefix' => 'ad
         Route::get('withdraw-methods/{id}', 'show');
         Route::put('withdraw-methods/{id}', 'update');
         Route::delete('withdraw-methods/{id}', 'destroy');
+    });
+
+    // Withdraw Request Routes
+    Route::controller(WithdrawController::class)->group(function () {
+        Route::get('withdraw-requests', 'index');
+        Route::get('withdraw-requests/{id}', 'show');
+        Route::put('withdraw-requests/{id}', 'update');
     });
 });
 
