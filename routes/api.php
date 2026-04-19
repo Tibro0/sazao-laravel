@@ -18,6 +18,7 @@ use App\Http\Controllers\Api\Backend\ShippingRuleController;
 use App\Http\Controllers\Api\Backend\StripeSettingController;
 use App\Http\Controllers\Api\Backend\SubCategoryController;
 use App\Http\Controllers\Api\Backend\TransactionController;
+use App\Http\Controllers\Api\Backend\WithdrawMethodController;
 use Illuminate\Support\Facades\Route;
 
 // Route::get('/user', function (Request $request) {
@@ -159,6 +160,15 @@ Route::group(['middleware' => ['auth:sanctum', 'apiRole:admin'], 'prefix' => 'ad
     // COD Setting Routes
     Route::controller(CodSettingController::class)->group(function () {
         Route::put('cod-setting', 'update');
+    });
+
+    // Withdraw Method Routes
+    Route::controller(WithdrawMethodController::class)->group(function () {
+        Route::get('withdraw-methods', 'index');
+        Route::post('withdraw-methods', 'store');
+        Route::get('withdraw-methods/{id}', 'show');
+        Route::put('withdraw-methods/{id}', 'update');
+        Route::delete('withdraw-methods/{id}', 'destroy');
     });
 });
 
