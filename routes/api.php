@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\Backend\AdminVendorProfileController;
 use App\Http\Controllers\Api\Backend\BrandController;
 use App\Http\Controllers\Api\Backend\CategoryController;
 use App\Http\Controllers\Api\Backend\ChildCategoryController;
+use App\Http\Controllers\Api\Backend\CodSettingController;
 use App\Http\Controllers\Api\Backend\CouponController;
 use App\Http\Controllers\Api\Backend\FlashSaleController;
 use App\Http\Controllers\Api\Backend\OrderController;
@@ -155,9 +156,10 @@ Route::group(['middleware' => ['auth:sanctum', 'apiRole:admin'], 'prefix' => 'ad
         Route::put('razorpay-setting', 'update');
     });
 
-    // Route::controller(CodSettingController::class)->group(function () {
-    //     Route::put('cod-setting', 'update');
-    // });
+    // COD Setting Routes
+    Route::controller(CodSettingController::class)->group(function () {
+        Route::put('cod-setting', 'update');
+    });
 });
 
 Route::group(['middleware' => ['auth:sanctum', 'apiRole:vendor'], 'prefix' => 'vendor'], function () {
