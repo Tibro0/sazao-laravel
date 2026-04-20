@@ -19,6 +19,7 @@ use App\Http\Controllers\Api\Backend\SliderController;
 use App\Http\Controllers\Api\Backend\StripeSettingController;
 use App\Http\Controllers\Api\Backend\SubCategoryController;
 use App\Http\Controllers\Api\Backend\TransactionController;
+use App\Http\Controllers\Api\Backend\VendorConditionController;
 use App\Http\Controllers\Api\Backend\WithdrawController;
 use App\Http\Controllers\Api\Backend\WithdrawMethodController;
 use Illuminate\Support\Facades\Route;
@@ -187,6 +188,12 @@ Route::group(['middleware' => ['auth:sanctum', 'apiRole:admin'], 'prefix' => 'ad
         Route::get('sliders/{id}', 'show');
         Route::post('sliders/{id}', 'update');
         Route::delete('sliders/{id}', 'destroy');
+    });
+
+    // vendor condition route
+    Route::controller(VendorConditionController::class)->group(function () {
+        Route::get('vendor-condition', 'index');
+        Route::post('vendor-condition', 'update');
     });
 });
 
