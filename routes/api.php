@@ -19,6 +19,7 @@ use App\Http\Controllers\Api\Backend\ShippingRuleController;
 use App\Http\Controllers\Api\Backend\SliderController;
 use App\Http\Controllers\Api\Backend\StripeSettingController;
 use App\Http\Controllers\Api\Backend\SubCategoryController;
+use App\Http\Controllers\Api\Backend\TermsAndConditionsController;
 use App\Http\Controllers\Api\Backend\TransactionController;
 use App\Http\Controllers\Api\Backend\VendorConditionController;
 use App\Http\Controllers\Api\Backend\WithdrawController;
@@ -201,6 +202,12 @@ Route::group(['middleware' => ['auth:sanctum', 'apiRole:admin'], 'prefix' => 'ad
     Route::controller(AboutController::class)->group(function () {
         Route::get('about', 'index');
         Route::post('about', 'update');
+    });
+
+    // Terms and Conditions Route
+    Route::controller(TermsAndConditionsController::class)->group(function () {
+        Route::get('terms-and-conditions', 'index');
+        Route::post('terms-and-conditions', 'update');
     });
 });
 
