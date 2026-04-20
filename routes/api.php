@@ -13,6 +13,7 @@ use App\Http\Controllers\Api\Backend\FlashSaleController;
 use App\Http\Controllers\Api\Backend\OrderController;
 use App\Http\Controllers\Api\Backend\PaymentSettingController;
 use App\Http\Controllers\Api\Backend\PaypalSettingController;
+use App\Http\Controllers\Api\Backend\PrivacyPolicyController;
 use App\Http\Controllers\Api\Backend\ProfileController;
 use App\Http\Controllers\Api\Backend\RazorPaySettingController;
 use App\Http\Controllers\Api\Backend\ShippingRuleController;
@@ -208,6 +209,12 @@ Route::group(['middleware' => ['auth:sanctum', 'apiRole:admin'], 'prefix' => 'ad
     Route::controller(TermsAndConditionsController::class)->group(function () {
         Route::get('terms-and-conditions', 'index');
         Route::post('terms-and-conditions', 'update');
+    });
+
+    // Privacy Policy Route
+    Route::controller(PrivacyPolicyController::class)->group(function () {
+        Route::get('privacy-policy', 'index');
+        Route::post('privacy-policy', 'update');
     });
 });
 
