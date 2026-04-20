@@ -15,6 +15,7 @@ use App\Http\Controllers\Api\Backend\PaypalSettingController;
 use App\Http\Controllers\Api\Backend\ProfileController;
 use App\Http\Controllers\Api\Backend\RazorPaySettingController;
 use App\Http\Controllers\Api\Backend\ShippingRuleController;
+use App\Http\Controllers\Api\Backend\SliderController;
 use App\Http\Controllers\Api\Backend\StripeSettingController;
 use App\Http\Controllers\Api\Backend\SubCategoryController;
 use App\Http\Controllers\Api\Backend\TransactionController;
@@ -177,6 +178,15 @@ Route::group(['middleware' => ['auth:sanctum', 'apiRole:admin'], 'prefix' => 'ad
         Route::get('withdraw-requests', 'index');
         Route::get('withdraw-requests/{id}', 'show');
         Route::put('withdraw-requests/{id}', 'update');
+    });
+
+    // Slider Routes
+    Route::controller(SliderController::class)->group(function () {
+        Route::get('sliders', 'index');
+        Route::post('sliders', 'store');
+        Route::get('sliders/{id}', 'show');
+        Route::post('sliders/{id}', 'update');
+        Route::delete('sliders/{id}', 'destroy');
     });
 });
 
