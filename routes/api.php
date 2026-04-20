@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\Auth\AuthController;
+use App\Http\Controllers\Api\Backend\AboutController;
 use App\Http\Controllers\Api\Backend\AdminController;
 use App\Http\Controllers\Api\Backend\AdminVendorProfileController;
 use App\Http\Controllers\Api\Backend\BrandController;
@@ -194,6 +195,12 @@ Route::group(['middleware' => ['auth:sanctum', 'apiRole:admin'], 'prefix' => 'ad
     Route::controller(VendorConditionController::class)->group(function () {
         Route::get('vendor-condition', 'index');
         Route::post('vendor-condition', 'update');
+    });
+
+    // About Route
+    Route::controller(AboutController::class)->group(function () {
+        Route::get('about', 'index');
+        Route::post('about', 'update');
     });
 });
 
