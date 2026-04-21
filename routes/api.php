@@ -14,6 +14,7 @@ use App\Http\Controllers\Api\Backend\CodSettingController;
 use App\Http\Controllers\Api\Backend\CouponController;
 use App\Http\Controllers\Api\Backend\FlashSaleController;
 use App\Http\Controllers\Api\Backend\FooterInfoController;
+use App\Http\Controllers\Api\Backend\FooterSocialController;
 use App\Http\Controllers\Api\Backend\OrderController;
 use App\Http\Controllers\Api\Backend\PaymentSettingController;
 use App\Http\Controllers\Api\Backend\PaypalSettingController;
@@ -249,6 +250,15 @@ Route::group(['middleware' => ['auth:sanctum', 'apiRole:admin'], 'prefix' => 'ad
     Route::controller(FooterInfoController::class)->group(function () {
         Route::get('footer-info', 'index');
         Route::post('footer-info', 'update');
+    });
+
+    // Footer Social Routes
+    Route::controller(FooterSocialController::class)->group(function () {
+        Route::get('footer-socials', 'index');
+        Route::post('footer-socials', 'store');
+        Route::get('footer-socials/{id}', 'show');
+        Route::put('footer-socials/{id}', 'update');
+        Route::delete('footer-socials/{id}', 'destroy');
     });
 });
 
