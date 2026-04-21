@@ -3,24 +3,22 @@
 namespace App\Http\Controllers\Api\Backend;
 
 use App\Http\Controllers\Controller;
-use App\Models\Category;
-use App\Models\Product;
-use App\Models\SubCategory;
+use App\Models\BlogCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
-class CategoryController extends Controller
+class BlogCategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $categories = Category::orderBy('id', 'DESC')->get();
+        $blogCategories = BlogCategory::orderBy('id', 'DESC')->get();
         return response()->json([
             'status' => 200,
-            'data' => $categories
+            'data' => $blogCategories
         ], 200);
     }
 
@@ -38,9 +36,10 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'icon' => 'required|max:255',
-            'name' => 'required|max:200|unique:categories,name',
-            'status' => 'required|boolean',
+            'name' => 'required|max:255|unique:blog_categories',
+            'status' => 'required|boolean'
+        ], [
+            'name.unique' => 'Category Already Exist.'
         ]);
 
         if ($validator->fails()) {
@@ -50,16 +49,15 @@ class CategoryController extends Controller
             ], 400);
         }
 
-        $category = new Category();
-        $category->icon = $request->icon;
-        $category->name = $request->name;
-        $category->slug = Str::slug($request->name);
-        $category->status = $request->status;
-        $category->save();
+        $blogCategory = new BlogCategory();
+        $blogCategory->name = $request->name;
+        $blogCategory->slug = Str::slug($request->name);
+        $blogCategory->status = $request->status;
+        $blogCategory->save();
 
         return response()->json([
             'status' => 200,
-            'message' => ' Created Successfully!',
+            'message' => 'Created Successfully!',
         ], 200);
     }
 
@@ -68,18 +66,18 @@ class CategoryController extends Controller
      */
     public function show(string $id)
     {
-        $category = Category::find($id);
+        $blogCategory = BlogCategory::find($id);
 
-        if ($category == null) {
+        if ($blogCategory == null) {
             return response()->json([
                 'status' => 404,
-                'message' => 'Category Not Found!',
+                'message' => 'Blog Category Not Found!',
             ], 404);
         }
 
         return response()->json([
             'status' => 200,
-            'data' => $category
+            'data' => $blogCategory
         ], 200);
     }
 
@@ -96,19 +94,20 @@ class CategoryController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $category = Category::find($id);
+        $blogCategory = BlogCategory::find($id);
 
-        if ($category == null) {
+        if ($blogCategory == null) {
             return response()->json([
                 'status' => 404,
-                'message' => 'Category Not Found!',
+                'message' => 'Blog Category Not Found!',
             ], 404);
         }
 
         $validator = Validator::make($request->all(), [
-            'icon' => 'required|max:255',
-            'name' => 'required|max:200|unique:categories,name,' . $id,
-            'status' => 'required|boolean',
+            'name' => 'required|max:255|unique:blog_categories,name,' . $id,
+            'status' => 'required|boolean'
+        ], [
+            'name.unique' => 'Category Already Exist.'
         ]);
 
         if ($validator->fails()) {
@@ -118,15 +117,14 @@ class CategoryController extends Controller
             ], 400);
         }
 
-        $category->icon = $request->icon;
-        $category->name = $request->name;
-        $category->slug = Str::slug($request->name);
-        $category->status = $request->status;
-        $category->save();
+        $blogCategory->name = $request->name;
+        $blogCategory->slug = Str::slug($request->name);
+        $blogCategory->status = $request->status;
+        $blogCategory->save();
 
         return response()->json([
             'status' => 200,
-            'message' => 'Updated Successfully!',
+            'message' => 'Update Successfully!',
         ], 200);
     }
 
@@ -135,32 +133,23 @@ class CategoryController extends Controller
      */
     public function destroy(string $id)
     {
-        $category = Category::find($id);
+        $blogCategory = BlogCategory::find($id);
 
-        if ($category == null) {
+        if ($blogCategory == null) {
             return response()->json([
                 'status' => 404,
-                'message' => 'Category Not Found!',
+                'message' => 'Blog Category Not Found!',
             ], 404);
         }
 
-        $subCategory = SubCategory::where('category_id', $category->id)->count();
-
-        if ($subCategory > 0) {
+        if ($blogCategory->blogs->count() > 0) {
             return response()->json([
                 'status' => 403,
-                'message' => 'This Item Content Relation Some Sub Categories. You cant Delete It.',
+                'message' => 'This Item Content Relation Some Blogs. You cant Delete It.',
             ], 403);
         }
 
-        if (Product::where(['category_id' => $category->id])->count() > 0) {
-            return response()->json([
-                'status' => 403,
-                'message' => 'This Item Content Relation Some Products. You cant Delete It.',
-            ], 403);
-        }
-
-        $category->delete();
+        $blogCategory->delete();
 
         return response()->json([
             'status' => 200,

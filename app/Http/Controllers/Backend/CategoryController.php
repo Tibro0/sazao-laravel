@@ -105,7 +105,7 @@ class CategoryController extends Controller
         $subCategory = SubCategory::where('category_id', $category->id)->count();
 
         if ($subCategory > 0) {
-            return response(['status' => 'error', 'message' => 'This Items Contain, Sub Items For Delete This you Have to Delete the Sub Item First!']);
+            return response(['status' => 'error', 'message' => 'This Item Content Relation Some Sub Categories. You cant Delete It.']);
         }
 
         if (Product::where(['category_id' => $category->id])->count() > 0) {

@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\Auth\AuthController;
 use App\Http\Controllers\Api\Backend\AboutController;
 use App\Http\Controllers\Api\Backend\AdminController;
 use App\Http\Controllers\Api\Backend\AdminVendorProfileController;
+use App\Http\Controllers\Api\Backend\BlogCategoryController;
 use App\Http\Controllers\Api\Backend\BrandController;
 use App\Http\Controllers\Api\Backend\CategoryController;
 use App\Http\Controllers\Api\Backend\ChildCategoryController;
@@ -215,6 +216,15 @@ Route::group(['middleware' => ['auth:sanctum', 'apiRole:admin'], 'prefix' => 'ad
     Route::controller(PrivacyPolicyController::class)->group(function () {
         Route::get('privacy-policy', 'index');
         Route::post('privacy-policy', 'update');
+    });
+
+    // Blog Category Routes
+    Route::controller(BlogCategoryController::class)->group(function () {
+        Route::get('blog-categories', 'index');
+        Route::post('blog-categories', 'store');
+        Route::get('blog-categories/{id}', 'show');
+        Route::put('blog-categories/{id}', 'update');
+        Route::delete('blog-categories/{id}', 'destroy');
     });
 });
 
