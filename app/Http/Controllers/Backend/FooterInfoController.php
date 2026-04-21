@@ -22,8 +22,8 @@ class FooterInfoController extends Controller
             'logo' => ['nullable', 'image', 'max:2048', 'dimensions:width=249,height=87'],
             'phone' => ['required', 'max:100'],
             'email' => ['required', 'email', 'max:100'],
-            'address' => ['required', 'max:300'],
-            'copyright' => ['required', 'max:300'],
+            'address' => ['required', 'max:255'],
+            'copyright' => ['required', 'max:255'],
         ]);
 
         $footerInfo = FooterInfo::find($id);

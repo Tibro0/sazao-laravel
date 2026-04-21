@@ -13,6 +13,7 @@ use App\Http\Controllers\Api\Backend\ChildCategoryController;
 use App\Http\Controllers\Api\Backend\CodSettingController;
 use App\Http\Controllers\Api\Backend\CouponController;
 use App\Http\Controllers\Api\Backend\FlashSaleController;
+use App\Http\Controllers\Api\Backend\FooterInfoController;
 use App\Http\Controllers\Api\Backend\OrderController;
 use App\Http\Controllers\Api\Backend\PaymentSettingController;
 use App\Http\Controllers\Api\Backend\PaypalSettingController;
@@ -242,6 +243,12 @@ Route::group(['middleware' => ['auth:sanctum', 'apiRole:admin'], 'prefix' => 'ad
     Route::controller(BlogCommentController::class)->group(function () {
         Route::get('blog-comments', 'index');
         Route::delete('blog-comments/{id}', 'destroy');
+    });
+
+    // Footer Info Routes
+    Route::controller(FooterInfoController::class)->group(function () {
+        Route::get('footer-info', 'index');
+        Route::post('footer-info', 'update');
     });
 });
 
