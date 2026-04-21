@@ -92,17 +92,30 @@ class BlogCategoryController extends Controller
      */
     public function destroy(string $id)
     {
-        $blogCategory = BlogCategory::with(['blogs.comments'])->findOrFail($id);
+        $blogCategory = BlogCategory::findOrFail($id);
 
-        foreach ($blogCategory->blogs as $blog) {
-            $this->deleteImage($blog->image);
-            $blog->comments()->delete();
+        if ($blogCategory->blogs()->count() > 0) {
+            return response(['status' => 'error', 'message' => 'This Item Content Relation Some Blogs. You cant Delete It.']);
         }
-        $blogCategory->blogs()->delete();
 
         $blogCategory->delete();
+
         return response(['status' => 'success', 'message' => 'Deleted Successfully!']);
     }
+
+    // public function destroy(string $id)
+    // {
+    //     $blogCategory = BlogCategory::with(['blogs.comments'])->findOrFail($id);
+
+    //     foreach ($blogCategory->blogs as $blog) {
+    //         $this->deleteImage($blog->image);
+    //         $blog->comments()->delete();
+    //     }
+    //     $blogCategory->blogs()->delete();
+
+    //     $blogCategory->delete();
+    //     return response(['status' => 'success', 'message' => 'Deleted Successfully!']);
+    // }
 
     public function changeStatus(Request $request)
     {
