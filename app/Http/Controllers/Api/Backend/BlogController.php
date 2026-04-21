@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Backend;
+namespace App\Http\Controllers\Api\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Blog;
-use App\Models\BlogCategory;
 use App\Traits\ImageUploadTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
 class BlogController extends Controller
@@ -18,8 +18,11 @@ class BlogController extends Controller
      */
     public function index()
     {
-        $blogs = Blog::with(['category'])->orderBy('id', 'DESC')->get();
-        return view('admin.blog.index', compact('blogs'));
+        $blogs = Blog::with(['category:id,name'])->orderBy('id', 'DESC')->get();
+        return response()->json([
+            'status' => 200,
+            'data' => $blogs
+        ], 200);
     }
 
     /**
@@ -27,8 +30,7 @@ class BlogController extends Controller
      */
     public function create()
     {
-        $blogCategories = BlogCategory::where(['status' => 1])->get();
-        return view('admin.blog.create', compact('blogCategories'));
+        //
     }
 
     /**
@@ -36,15 +38,24 @@ class BlogController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'image' => ['required', 'image', 'max:2048', 'dimensions:width=1210,height=637'],
-            'title' => ['required', 'max:255', 'unique:blogs,title'],
-            'category' => ['required', 'integer'],
-            'description' => ['required'],
-            'seo_title' => ['nullable', 'max:255'],
-            'seo_description' => ['nullable', 'max:255'],
-            'status' => ['required', 'boolean']
+        $validator = Validator::make($request->all(), [
+            'image' => 'required|image|max:2048|dimensions:width=1210,height=637',
+            'title' => 'required|max:255|unique:blogs,title',
+            'category' => 'required|integer',
+            'description' => 'required',
+            'seo_title' => 'nullable|max:255',
+            'seo_description' => 'nullable|max:255',
+            'status' => 'required|boolean',
+        ],[
+            'category.required' => 'Please Select a Category.',
         ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 400,
+                'errors' => $validator->errors(),
+            ], 400);
+        }
 
         $imagePath = $this->uploadImage($request, 'image', 'uploads/blogs_images');
 
@@ -60,11 +71,30 @@ class BlogController extends Controller
         $blog->status = $request->status;
         $blog->save();
 
-        return redirect()->route('admin.blog.index')->with('toast', [
-            'type' => 'success',
-            'title' => 'Success',
-            'message' => 'Created Successfully!'
-        ]);
+        return response()->json([
+            'status' => 200,
+            'message' => 'Created Successfully!',
+        ], 200);
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
+    {
+        $blog = Blog::with(['category'])->find($id);
+
+        if ($blog == null) {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Blog Not Found!'
+            ], 404);
+        }
+
+        return response()->json([
+            'status' => 200,
+            'data' => $blog
+        ], 200);
     }
 
     /**
@@ -72,9 +102,7 @@ class BlogController extends Controller
      */
     public function edit(string $id)
     {
-        $blog = Blog::findOrFail($id);
-        $blogCategories = BlogCategory::where(['status' => 1])->get();
-        return view('admin.blog.edit', compact('blog', 'blogCategories'));
+        //
     }
 
     /**
@@ -82,17 +110,31 @@ class BlogController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $request->validate([
-            'image' => ['nullable', 'image', 'max:2048', 'dimensions:width=1210,height=637'],
-            'title' => ['required', 'max:200', 'unique:blogs,title,' . $id],
-            'category' => ['required', 'integer'],
-            'description' => ['required'],
-            'seo_title' => ['nullable', 'max:200'],
-            'seo_description' => ['nullable', 'max:200'],
-            'status' => ['required', 'boolean']
+        $blog = Blog::with(['category'])->find($id);
+
+        if ($blog == null) {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Blog Not Found!'
+            ], 404);
+        }
+
+        $validator = Validator::make($request->all(), [
+            'image' => 'nullable|image|max:2048|dimensions:width=1210,height=637',
+            'title' => 'required|max:255|unique:blogs,title,' . $id,
+            'category' => 'required|integer',
+            'description' => 'required',
+            'seo_title' => 'nullable|max:255',
+            'seo_description' => 'nullable|max:255',
+            'status' => 'required|boolean',
         ]);
 
-        $blog = Blog::findOrFail($id);
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 400,
+                'errors' => $validator->errors(),
+            ], 400);
+        }
 
         $defaultImages = [
             'frontend/images/main-image/blogs_images/one.jpg',
@@ -123,11 +165,10 @@ class BlogController extends Controller
         $blog->status = $request->status;
         $blog->save();
 
-        return redirect()->route('admin.blog.index')->with('toast', [
-            'type' => 'success',
-            'title' => 'Success',
-            'message' => 'Update Successfully!'
-        ]);
+        return response()->json([
+            'status' => 200,
+            'message' => 'Updated Successfully!',
+        ], 200);
     }
 
     /**
@@ -135,7 +176,14 @@ class BlogController extends Controller
      */
     public function destroy(string $id)
     {
-        $blog = Blog::with(['comments'])->findOrFail($id);
+        $blog = Blog::with(['category', 'comments'])->find($id);
+
+        if ($blog == null) {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Blog Not Found!'
+            ], 404);
+        }
 
         $defaultImages = [
             'frontend/images/main-image/blogs_images/one.jpg',
@@ -149,40 +197,17 @@ class BlogController extends Controller
         }
 
         if ($blog->comments()->count() > 0) {
-            return response(['status' => 'error', 'message' => 'This Item Content Relation Some Blog Comments. You cant Delete It.']);
+            return response()->json([
+                'status' => 403,
+                'message' => 'This Item Content Relation Some Blog Comments. You cant Delete It.'
+            ], 403);
         }
 
         $blog->delete();
 
-        return response(['status' => 'success', 'message' => 'Deleted Successfully!']);
-    }
-
-    // public function destroy(string $id)
-    // {
-    //     $blog = Blog::findOrFail($id);
-
-    //     $defaultImages = [
-    //         'frontend/images/main-image/blogs_images/one.jpg',
-    //         'frontend/images/main-image/blogs_images/two.jpg',
-    //         'frontend/images/main-image/blogs_images/three.jpg',
-    //         'frontend/images/main-image/blogs_images/four.jpg',
-    //     ];
-
-    //     if ($blog->image && !in_array($blog->image, $defaultImages)) {
-    //         $this->deleteImage($blog->image);
-    //     }
-
-    //     $blog->comments()->delete();
-
-    //     $blog->delete();
-    //     return response(['status' => 'success', 'message' => 'Deleted Successfully!']);
-    // }
-
-    public function changeStatus(Request $request)
-    {
-        $blog = Blog::findOrFail($request->id);
-        $blog->status = $request->status == 'true' ? 1 : 0;
-        $blog->save();
-        return response(['status' => 'success', 'message' => 'Status Has Been Updated!']);
+        return response()->json([
+            'status' => 200,
+            'message' => 'Deleted Successfully!'
+        ], 200);
     }
 }

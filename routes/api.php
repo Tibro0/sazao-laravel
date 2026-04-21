@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\Backend\AboutController;
 use App\Http\Controllers\Api\Backend\AdminController;
 use App\Http\Controllers\Api\Backend\AdminVendorProfileController;
 use App\Http\Controllers\Api\Backend\BlogCategoryController;
+use App\Http\Controllers\Api\Backend\BlogController;
 use App\Http\Controllers\Api\Backend\BrandController;
 use App\Http\Controllers\Api\Backend\CategoryController;
 use App\Http\Controllers\Api\Backend\ChildCategoryController;
@@ -225,6 +226,15 @@ Route::group(['middleware' => ['auth:sanctum', 'apiRole:admin'], 'prefix' => 'ad
         Route::get('blog-categories/{id}', 'show');
         Route::put('blog-categories/{id}', 'update');
         Route::delete('blog-categories/{id}', 'destroy');
+    });
+
+    // Blog Routes
+    Route::controller(BlogController::class)->group(function () {
+        Route::get('blogs', 'index');
+        Route::post('blogs', 'store');
+        Route::get('blogs/{id}', 'show');
+        Route::post('blogs/{id}', 'update');
+        Route::delete('blogs/{id}', 'destroy');
     });
 });
 
