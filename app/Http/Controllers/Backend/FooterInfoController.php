@@ -27,19 +27,29 @@ class FooterInfoController extends Controller
         ]);
 
         $footerInfo = FooterInfo::find($id);
-        /** Handle file upload */
-        $imagePath = $this->updateImage($request, 'logo', 'uploads/footer_logo_image', $footerInfo?->logo);
 
-        FooterInfo::updateOrCreate(
-            ['id' => $id],
-            [
-                'logo' => empty(!$imagePath) ? $imagePath : $footerInfo->logo,
-                'phone' => $request->phone,
-                'email' => $request->email,
-                'address' => $request->address,
-                'copyright' => $request->copyright,
-            ]
-        );
+        $defaultImages = [
+            'frontend/images/main-image/footer_logo_image/logo.png',
+        ];
+
+
+        if ($request->hasFile('logo')) {
+            $isDefaultImage = in_array($footerInfo->logo, $defaultImages);
+
+            if (!$isDefaultImage) {
+                $imagePath = $this->updateImage($request, 'logo', 'uploads/footer_logo_image', $footerInfo->logo);
+            } else {
+                $imagePath = $this->uploadImage($request, 'logo', 'uploads/footer_logo_image');
+            }
+
+            $footerInfo->logo = $imagePath;
+        }
+
+        $footerInfo->phone = $request->phone;
+        $footerInfo->email = $request->email;
+        $footerInfo->address = $request->address;
+        $footerInfo->copyright = $request->copyright;
+        $footerInfo->save();
 
         return redirect()->back()->with('toast', [
             'type' => 'success',

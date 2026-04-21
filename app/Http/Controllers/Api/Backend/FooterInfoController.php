@@ -56,9 +56,9 @@ class FooterInfoController extends Controller
             $isDefaultImage = in_array($footerInfo->logo, $defaultImages);
 
             if (!$isDefaultImage) {
-                $imagePath = $this->updateImage($request, 'logo', 'uploads/vendor_profile_images', $footerInfo->logo);
+                $imagePath = $this->updateImage($request, 'logo', 'uploads/footer_logo_image', $footerInfo->logo);
             } else {
-                $imagePath = $this->uploadImage($request, 'logo', 'uploads/vendor_profile_images');
+                $imagePath = $this->uploadImage($request, 'logo', 'uploads/footer_logo_image');
             }
 
             $footerInfo->logo = $imagePath;
