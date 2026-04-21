@@ -13,6 +13,7 @@ use App\Http\Controllers\Api\Backend\ChildCategoryController;
 use App\Http\Controllers\Api\Backend\CodSettingController;
 use App\Http\Controllers\Api\Backend\CouponController;
 use App\Http\Controllers\Api\Backend\FlashSaleController;
+use App\Http\Controllers\Api\Backend\FooterGridThreeController;
 use App\Http\Controllers\Api\Backend\FooterGridTwoController;
 use App\Http\Controllers\Api\Backend\FooterInfoController;
 use App\Http\Controllers\Api\Backend\FooterSocialController;
@@ -40,6 +41,13 @@ use Illuminate\Support\Facades\Route;
 Route::controller(AuthController::class)->group(function () {
     Route::post('login', 'login');
 });
+
+/**
+ * ------------------------------------------------------------------------------------------------------------
+ * Admin All Routes Start
+ * -----------------------------------------------------------------------------------------------------------
+ *
+ */
 
 Route::group(['middleware' => ['auth:sanctum', 'apiRole:admin'], 'prefix' => 'admin'], function () {
 
@@ -271,7 +279,24 @@ Route::group(['middleware' => ['auth:sanctum', 'apiRole:admin'], 'prefix' => 'ad
         Route::delete('footer-grid-two/{id}', 'destroy');
         Route::post('footer-grid-two/change-title', 'changeTitle');
     });
+
+    // Footer Grid Three Routes
+    Route::controller(FooterGridThreeController::class)->group(function () {
+        Route::get('footer-grid-three', 'index');
+        Route::post('footer-grid-three', 'store');
+        Route::get('footer-grid-three/{id}', 'show');
+        Route::put('footer-grid-three/{id}', 'update');
+        Route::delete('footer-grid-three/{id}', 'destroy');
+        Route::post('footer-grid-three/change-title', 'changeTitle');
+    });
 });
+
+/**
+ * ------------------------------------------------------------------------------------------------------------
+ * Admin All Routes End
+ * -----------------------------------------------------------------------------------------------------------
+ *
+ */
 
 Route::group(['middleware' => ['auth:sanctum', 'apiRole:vendor'], 'prefix' => 'vendor'], function () {
     Route::controller(AuthController::class)->group(function () {

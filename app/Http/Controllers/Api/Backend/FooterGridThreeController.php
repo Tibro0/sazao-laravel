@@ -3,26 +3,24 @@
 namespace App\Http\Controllers\Api\Backend;
 
 use App\Http\Controllers\Controller;
-use App\Models\FooterGridTwo;
+use App\Models\FooterGridThree;
 use App\Models\FooterTitle;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class FooterGridTwoController extends Controller
+class FooterGridThreeController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $footerTitle = FooterTitle::first()->only('footer_grid_two_title');
-        $footerGridTwos = FooterGridTwo::orderBy('id', 'DESC')->get();
+        $footerTitle = FooterTitle::first()->only('footer_grid_three_title');
+        $footerGridThrees = FooterGridThree::orderBy('id', 'DESC')->get();
         return response()->json([
             'status' => 200,
-            'data' => [
-                'footerTitle' => $footerTitle,
-                'footerGridTwos' => $footerGridTwos
-            ]
+            'footerTitle' => $footerTitle,
+            'footerGridThrees' => $footerGridThrees
         ], 200);
     }
 
@@ -52,15 +50,15 @@ class FooterGridTwoController extends Controller
             ], 400);
         }
 
-        $footerGridTwo = new FooterGridTwo();
-        $footerGridTwo->name = $request->name;
-        $footerGridTwo->url = $request->url;
-        $footerGridTwo->status = $request->status;
-        $footerGridTwo->save();
+        $footerGridThree = new FooterGridThree();
+        $footerGridThree->name = $request->name;
+        $footerGridThree->url = $request->url;
+        $footerGridThree->status = $request->status;
+        $footerGridThree->save();
 
         return response()->json([
             'status' => 200,
-            'message' => 'Created Successfully!',
+            'message' => 'Created Successfully!'
         ], 200);
     }
 
@@ -69,18 +67,18 @@ class FooterGridTwoController extends Controller
      */
     public function show(string $id)
     {
-        $footer = FooterGridTwo::find($id);
+        $footerGridThree = FooterGridThree::find($id);
 
-        if ($footer == null) {
+        if ($footerGridThree == null) {
             return response()->json([
                 'status' => 404,
-                'message' => 'Footer Not Found!'
+                'message' => 'Footer Grid Three Not Found!',
             ], 404);
         }
 
         return response()->json([
             'status' => 200,
-            'data' => $footer
+            'footerGridThree' => $footerGridThree,
         ], 200);
     }
 
@@ -97,12 +95,12 @@ class FooterGridTwoController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $footerGridTwo = FooterGridTwo::find($id);
+        $footerGridThree = FooterGridThree::find($id);
 
-        if ($footerGridTwo == null) {
+        if ($footerGridThree == null) {
             return response()->json([
                 'status' => 404,
-                'message' => 'Footer Not Found!'
+                'message' => 'Footer Grid Three Not Found!',
             ], 404);
         }
 
@@ -119,14 +117,14 @@ class FooterGridTwoController extends Controller
             ], 400);
         }
 
-        $footerGridTwo->name = $request->name;
-        $footerGridTwo->url = $request->url;
-        $footerGridTwo->status = $request->status;
-        $footerGridTwo->save();
+        $footerGridThree->name = $request->name;
+        $footerGridThree->url = $request->url;
+        $footerGridThree->status = $request->status;
+        $footerGridThree->save();
 
         return response()->json([
             'status' => 200,
-            'message' => 'Updated Successfully!',
+            'message' => 'Updated Successfully!'
         ], 200);
     }
 
@@ -135,20 +133,20 @@ class FooterGridTwoController extends Controller
      */
     public function destroy(string $id)
     {
-        $footerGridTwo = FooterGridTwo::find($id);
+        $footerGridThree = FooterGridThree::find($id);
 
-        if ($footerGridTwo == null) {
+        if ($footerGridThree == null) {
             return response()->json([
                 'status' => 404,
-                'message' => 'Footer Not Found!'
+                'message' => 'Footer Grid Three Not Found!',
             ], 404);
         }
 
-        $footerGridTwo->delete();
+        $footerGridThree->delete();
 
         return response()->json([
             'status' => 200,
-            'message' => 'Deleted Successfully!',
+            'message' => 'Deleted Successfully!'
         ], 200);
     }
 
@@ -167,12 +165,12 @@ class FooterGridTwoController extends Controller
 
         FooterTitle::updateOrCreate(
             ['id' => 1],
-            ['footer_grid_two_title' => $request->title],
+            ['footer_grid_three_title' => $request->title],
         );
 
         return response()->json([
             'status' => 200,
-            'message' => 'Updated Successfully!',
+            'message' => 'Updated Successfully!'
         ], 200);
     }
 }
