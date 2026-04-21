@@ -13,6 +13,7 @@ use App\Http\Controllers\Api\Backend\ChildCategoryController;
 use App\Http\Controllers\Api\Backend\CodSettingController;
 use App\Http\Controllers\Api\Backend\CouponController;
 use App\Http\Controllers\Api\Backend\FlashSaleController;
+use App\Http\Controllers\Api\Backend\FooterGridTwoController;
 use App\Http\Controllers\Api\Backend\FooterInfoController;
 use App\Http\Controllers\Api\Backend\FooterSocialController;
 use App\Http\Controllers\Api\Backend\OrderController;
@@ -259,6 +260,16 @@ Route::group(['middleware' => ['auth:sanctum', 'apiRole:admin'], 'prefix' => 'ad
         Route::get('footer-socials/{id}', 'show');
         Route::put('footer-socials/{id}', 'update');
         Route::delete('footer-socials/{id}', 'destroy');
+    });
+
+    // Footer Grid Two Routes
+    Route::controller(FooterGridTwoController::class)->group(function () {
+        Route::get('footer-grid-two', 'index');
+        Route::post('footer-grid-two', 'store');
+        Route::get('footer-grid-two/{id}', 'show');
+        Route::put('footer-grid-two/{id}', 'update');
+        Route::delete('footer-grid-two/{id}', 'destroy');
+        Route::post('footer-grid-two/change-title', 'changeTitle');
     });
 });
 
