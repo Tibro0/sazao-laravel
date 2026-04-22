@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\Auth\AuthController;
 use App\Http\Controllers\Api\Backend\AboutController;
 use App\Http\Controllers\Api\Backend\AdminController;
+use App\Http\Controllers\Api\Backend\AdminListController;
 use App\Http\Controllers\Api\Backend\AdminVendorProfileController;
 use App\Http\Controllers\Api\Backend\BlogCategoryController;
 use App\Http\Controllers\Api\Backend\BlogCommentController;
@@ -316,6 +317,13 @@ Route::group(['middleware' => ['auth:sanctum', 'apiRole:admin'], 'prefix' => 'ad
     // Manage User Routes
     Route::controller(ManageUserController::class)->group(function () {
         Route::post('manage-user', 'store');
+    });
+
+    // Admin List Routes
+    Route::controller(AdminListController::class)->group(function () {
+        Route::get('admin-list', 'index');
+        Route::put('admin-list/status-change/{id}', 'statusChange');
+        Route::delete('admin-list/{id}', 'destroy');
     });
 });
 
