@@ -18,6 +18,7 @@ use App\Http\Controllers\Api\Backend\FooterGridThreeController;
 use App\Http\Controllers\Api\Backend\FooterGridTwoController;
 use App\Http\Controllers\Api\Backend\FooterInfoController;
 use App\Http\Controllers\Api\Backend\FooterSocialController;
+use App\Http\Controllers\Api\Backend\ManageUserController;
 use App\Http\Controllers\Api\Backend\OrderController;
 use App\Http\Controllers\Api\Backend\PaymentSettingController;
 use App\Http\Controllers\Api\Backend\PaypalSettingController;
@@ -310,6 +311,11 @@ Route::group(['middleware' => ['auth:sanctum', 'apiRole:admin'], 'prefix' => 'ad
         Route::get('vendor-request', 'index');
         Route::get('vendor-request/{id}', 'show');
         Route::post('vendor-request/change-status/{id}', 'changeStatus');
+    });
+
+    // Manage User Routes
+    Route::controller(ManageUserController::class)->group(function () {
+        Route::post('manage-user', 'store');
     });
 });
 
