@@ -32,6 +32,7 @@ use App\Http\Controllers\Api\Backend\TermsAndConditionsController;
 use App\Http\Controllers\Api\Backend\TransactionController;
 use App\Http\Controllers\Api\Backend\VendorConditionController;
 use App\Http\Controllers\Api\Backend\VendorListController;
+use App\Http\Controllers\Api\Backend\VendorRequestController;
 use App\Http\Controllers\Api\Backend\WithdrawController;
 use App\Http\Controllers\Api\Backend\WithdrawMethodController;
 use Illuminate\Support\Facades\Route;
@@ -302,6 +303,13 @@ Route::group(['middleware' => ['auth:sanctum', 'apiRole:admin'], 'prefix' => 'ad
     Route::controller(VendorListController::class)->group(function () {
         Route::get('vendor-list', 'index');
         Route::put('vendor-list/status-change/{id}', 'StatusChange');
+    });
+
+    // Vendor Request Routes
+    Route::controller(VendorRequestController::class)->group(function () {
+        Route::get('vendor-request', 'index');
+        Route::get('vendor-request/{id}', 'show');
+        Route::post('vendor-request/change-status/{id}', 'changeStatus');
     });
 });
 
