@@ -12,6 +12,7 @@ use App\Http\Controllers\Api\Backend\CategoryController;
 use App\Http\Controllers\Api\Backend\ChildCategoryController;
 use App\Http\Controllers\Api\Backend\CodSettingController;
 use App\Http\Controllers\Api\Backend\CouponController;
+use App\Http\Controllers\Api\Backend\CustomerListController;
 use App\Http\Controllers\Api\Backend\FlashSaleController;
 use App\Http\Controllers\Api\Backend\FooterGridThreeController;
 use App\Http\Controllers\Api\Backend\FooterGridTwoController;
@@ -288,6 +289,12 @@ Route::group(['middleware' => ['auth:sanctum', 'apiRole:admin'], 'prefix' => 'ad
         Route::put('footer-grid-three/{id}', 'update');
         Route::delete('footer-grid-three/{id}', 'destroy');
         Route::post('footer-grid-three/change-title', 'changeTitle');
+    });
+
+    // Customer List Routes
+    Route::controller(CustomerListController::class)->group(function () {
+        Route::get('customer', 'index');
+        Route::put('customer/status-change/{id}', 'StatusChange');
     });
 });
 
