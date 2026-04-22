@@ -30,6 +30,7 @@ use App\Http\Controllers\Api\Backend\ShippingRuleController;
 use App\Http\Controllers\Api\Backend\SliderController;
 use App\Http\Controllers\Api\Backend\StripeSettingController;
 use App\Http\Controllers\Api\Backend\SubCategoryController;
+use App\Http\Controllers\Api\Backend\SubscribersController;
 use App\Http\Controllers\Api\Backend\TermsAndConditionsController;
 use App\Http\Controllers\Api\Backend\TransactionController;
 use App\Http\Controllers\Api\Backend\VendorConditionController;
@@ -50,7 +51,7 @@ Route::controller(AuthController::class)->group(function () {
 /**
  * ------------------------------------------------------------------------------------------------------------
  * Admin All Routes Start
- * -----------------------------------------------------------------------------------------------------------
+ * ------------------------------------------------------------------------------------------------------------
  *
  */
 
@@ -325,23 +326,58 @@ Route::group(['middleware' => ['auth:sanctum', 'apiRole:admin'], 'prefix' => 'ad
         Route::put('admin-list/status-change/{id}', 'statusChange');
         Route::delete('admin-list/{id}', 'destroy');
     });
+
+    // Subscribers Routes
+    Route::controller(SubscribersController::class)->group(function () {
+        Route::get('subscribers', 'index');
+        Route::post('subscribers/send-mail', 'sendMail');
+        Route::delete('subscribers/{id}', 'destroy');
+    });
 });
 
 /**
  * ------------------------------------------------------------------------------------------------------------
  * Admin All Routes End
- * -----------------------------------------------------------------------------------------------------------
+ * ------------------------------------------------------------------------------------------------------------
  *
  */
 
+
+
+/**
+ * ------------------------------------------------------------------------------------------------------------
+ * Vendor All Routes Start
+ * ------------------------------------------------------------------------------------------------------------
+ *
+ */
 Route::group(['middleware' => ['auth:sanctum', 'apiRole:vendor'], 'prefix' => 'vendor'], function () {
     Route::controller(AuthController::class)->group(function () {
         Route::post('logout', 'logout');
     });
 });
+/**
+ * ------------------------------------------------------------------------------------------------------------
+ * Vendor All Routes End
+ * ------------------------------------------------------------------------------------------------------------
+ *
+ */
 
+
+
+/**
+ * ------------------------------------------------------------------------------------------------------------
+ * User All Routes Start
+ * ------------------------------------------------------------------------------------------------------------
+ *
+ */
 Route::group(['middleware' => ['auth:sanctum', 'apiRole:user'], 'prefix' => 'user'], function () {
     Route::controller(AuthController::class)->group(function () {
         Route::post('logout', 'logout');
     });
 });
+/**
+ * ------------------------------------------------------------------------------------------------------------
+ * User All Routes End
+ * ------------------------------------------------------------------------------------------------------------
+ *
+ */
