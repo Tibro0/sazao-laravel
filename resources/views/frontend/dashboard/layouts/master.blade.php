@@ -37,7 +37,8 @@
     <!--=============================DASHBOARD MENU START==============================-->
     <div class="wsus__dashboard_menu">
         <div class="wsusd__dashboard_user">
-            <img src="{{ asset(Auth::user()->image) }}" alt="img" class="img-fluid">
+            <img src="{{ asset(Auth::user()->image === null ? 'frontend/images/main-image/user_profile/user.jpg' : Auth::user()->image) }}"
+                alt="img" class="img-fluid">
             <p>{{ Auth::user()->name }}</p>
         </div>
     </div>
@@ -94,7 +95,7 @@
     <!--main/custom js-->
     <script src="{{ asset('frontend/js/main.js') }}"></script>
     {{-- toastr js --}}
-    <script src="{{asset('frontend/js/toastr.min.js')}}"></script>
+    <script src="{{ asset('frontend/js/toastr.min.js') }}"></script>
     <script>
         // Display toast messages from session with nullable titles
         @if (Session::has('toast'))

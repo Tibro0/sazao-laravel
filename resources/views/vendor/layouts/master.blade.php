@@ -37,7 +37,8 @@
     <!--=============================DASHBOARD MENU START==============================-->
     <div class="wsus__dashboard_menu">
         <div class="wsusd__dashboard_user">
-            <img src="{{ asset(auth()->user()->image) }}" alt="img" class="img-fluid">
+            <img src="{{ asset(auth()->user()->image === null ? 'frontend/images/main-image/vendor_profile/vendor.jpg' : auth()->user()->image) }}"
+                alt="img" class="img-fluid">
             <p>{{ auth()->user()->name }}</p>
         </div>
     </div>
