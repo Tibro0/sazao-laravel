@@ -26,6 +26,7 @@ use App\Http\Controllers\Api\Backend\PaypalSettingController;
 use App\Http\Controllers\Api\Backend\PrivacyPolicyController;
 use App\Http\Controllers\Api\Backend\ProfileController;
 use App\Http\Controllers\Api\Backend\RazorPaySettingController;
+use App\Http\Controllers\Api\Backend\SettingController;
 use App\Http\Controllers\Api\Backend\ShippingRuleController;
 use App\Http\Controllers\Api\Backend\SliderController;
 use App\Http\Controllers\Api\Backend\StripeSettingController;
@@ -332,6 +333,15 @@ Route::group(['middleware' => ['auth:sanctum', 'apiRole:admin'], 'prefix' => 'ad
         Route::get('subscribers', 'index');
         Route::post('subscribers/send-mail', 'sendMail');
         Route::delete('subscribers/{id}', 'destroy');
+    });
+
+    // Setting Routes
+    Route::controller(SettingController::class)->group(function () {
+        Route::get('settings', 'index');
+        Route::post('settings/general', 'generalSettingUpdate');
+        Route::post('settings/email-config', 'emailConfigSettingUpdate');
+        Route::post('settings/logo', 'logoSettingUpdate');
+        Route::post('settings/google', 'googleSettingUpdate');
     });
 });
 
