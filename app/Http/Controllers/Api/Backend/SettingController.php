@@ -112,21 +112,45 @@ class SettingController extends Controller
 
     public function logoSettingUpdate(Request $request)
     {
-        $request->validate([
-            'logo' => ['nullable', 'image', 'max:2048', 'dimensions:width=249,height=87'],
-            'favicon' => ['nullable', 'image', 'max:2048', 'dimensions:width=112,height=112'],
+        $validator = Validator::make($request->all(), [
+            'logo' => 'nullable|image|max:2048|dimensions:width=249,height=87',
+            'favicon' => 'nullable|image|max:2048|dimensions:width=112,height=112',
         ]);
 
-        $logoPath = $this->updateImage($request, 'logo', 'uploads/header_logo_image', $request->old_logo);
-        $favicon = $this->updateImage($request, 'favicon', 'uploads/header_favicon_image', $request->old_favicon);
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 400,
+                'errors' => $validator->errors(),
+            ], 400);
+        }
 
-        LogoSetting::updateOrCreate(
-            ['id' => 1],
-            [
-                'logo' => !empty($logoPath) ? $logoPath : $request->old_logo,
-                'favicon' => !empty($favicon) ? $favicon : $request->old_favicon,
-            ]
-        );
+        $logoSetting = LogoSetting::first();
+        if (!$logoSetting) {
+            $logoSetting = new LogoSetting();
+        }
+
+        $defaultLogo = 'frontend/images/main-image/logo/logo.png';
+        $defaultFavicon = 'frontend/images/main-image/logo/favicon.png';
+
+        if ($request->hasFile('logo')) {
+            $oldLogoPath = null;
+            if ($logoSetting->logo && $logoSetting->logo != $defaultLogo) {
+                $oldLogoPath = $logoSetting->logo;
+            }
+
+            $logoSetting->logo = $this->updateImage($request, 'logo', 'uploads/header_logo_image', $oldLogoPath);
+        }
+
+        if ($request->hasFile('favicon')) {
+            $oldFaviconPath = null;
+            if ($logoSetting->favicon && $logoSetting->favicon != $defaultFavicon) {
+                $oldFaviconPath = $logoSetting->favicon;
+            }
+
+            $logoSetting->favicon = $this->updateImage($request, 'favicon', 'uploads/header_favicon_image', $oldFaviconPath);
+        }
+
+        $logoSetting->save();
 
         return response()->json([
             'status' => 200,
